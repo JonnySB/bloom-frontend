@@ -1,8 +1,25 @@
 import React, { useState, useEffect } from 'react'
-
+import { getAllHelpRequests } from '../services/HelpRequests';
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 const HelpRequestList = () => {
     const [helpRequests, setHelpRequests] = useState([]);
+
+    // useEffect(() => {
+    //     const fetchAllHelpRequests = async () => {
+    //         try {
+    //             const allHelpRequests = await getAllHelpRequests();
+    //             console.log("TRY BLOCK: all help requests", allHelpRequests)
+    //             setHelpRequests(allHelpRequests);
+    //             console.log("my requests", allHelpRequests); 
+    //             console.log("set help requests => ", setHelpRequests)
+    //         } catch (error) {
+    //             console.error("Error", error);
+    //             console.log("CATCH BLOCK: error getting requests from help request services")
+    //         }
+    //     };
+    //     fetchAllHelpRequests();
+    // }, []);
 
     useEffect(() => {
         fetch(`${BACKEND_URL}/help_requests`)

@@ -1,13 +1,11 @@
 import React from 'react'
-import Button from './Button'
-import HelpRequestList from './HelpRequestList'
+import HelpRequestList from '../componenets/HelpRequestList'
 
 const Homepage = () => {
     return (
         <div>
             <h1>Homepage</h1>
             <HelpRequestList />
-            {/* <Button /> */}
         </div>
     )
 }
