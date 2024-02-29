@@ -7,7 +7,7 @@ const Homepage = () => {
         <div>
             <h1>Homepage</h1>
             <HelpRequestList />
-            <Button />
+            {/* <Button /> */}
         </div>
     )
 }
