@@ -19,9 +19,7 @@ function MessageContainer() {
     }, []);
 
     return (
-            <Container>
-              <Row>
-                <Col sm={8}>
+            <Container className="message">
                   <Card>
                     <Card.Header>Message from User 04</Card.Header>
                     <Card.Body>
@@ -39,9 +37,7 @@ function MessageContainer() {
                     <Button variant="primary" type="submit">
                       Send
                     </Button>
-                  </Form>
-                </Col>
-              </Row>        
+                  </Form>     
             </Container>
           );
         }

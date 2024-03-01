@@ -1,4 +1,11 @@
-.sideMessageComponent {
+.side-message {
     background-color: aqua;
-    position: relative;
+    flex: 0 0 30%; /* Do not grow or shrink, stay at 30% of the parent container */
+    height: 100%; /* Full height of parent container */
+}
+
+.message-container {
+    background-color: brown;
+    flex: 1; /* Grow to fill the remaining space */
+    height: 100%; /* Full height of parent container */
 }

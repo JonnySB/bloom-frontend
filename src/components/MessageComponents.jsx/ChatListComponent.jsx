@@ -21,8 +21,8 @@ function ChatListCompoenent() {
     }, []);
 
     return (
-        <Container className="sideMessageComponent">
-          <Card style={{ width: '20rem' }}>
+        <Container className="side-message">
+          <Card>
             <Card.Header>Messages</Card.Header>
             <ListGroup variant="flush">
               {messages.map((message, index) => (
