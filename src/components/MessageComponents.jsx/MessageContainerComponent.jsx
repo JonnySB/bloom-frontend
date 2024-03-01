@@ -3,20 +3,8 @@ import { Container, Navbar, Row, Col, ListGroup, Card, Form, Button } from 'reac
 import { getAllMessagesByUserId } from "../../services/messages";
 import "./MessageComponents.css"
 
-function MessageContainer() {
-    const [messages, setMessages] = useState([])
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                let messagesData = await getAllMessagesByUserId(2);
-                setMessages(messagesData);
-            } catch (err) {
-                console.error('Error fetching messages:', err);
-            }
-        };
-        fetchData();
-    }, []);
+function MessageContainer({ selectedChat }) {
+    console.log(selectedChat)
 
     return (
             <Container className="message">

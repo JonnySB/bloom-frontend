@@ -15,7 +15,7 @@ export const getAllMessagesByUserId = async (userId) => {
 
     if (response.status === 200) {
         const data = await response.json();
-        console.log("Messages loaded ");
+        // console.log("Messages loaded ");
         return data;
     } else {
         const errorResponse = await response.json();

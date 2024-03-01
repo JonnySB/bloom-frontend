@@ -5,34 +5,23 @@ import Container from 'react-bootstrap/Container';
 import { getAllMessagesByUserId } from "../../services/messages";
 import "./MessageComponents.css"
 
-function ChatListCompoenent() {
-    const [messages, setMessages] = useState([])
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                let messagesData = await getAllMessagesByUserId(2);
-                setMessages(messagesData);
-            } catch (err) {
-                console.error('Error fetching messages:', err);
-            }
-        };
-        fetchData();
-    }, []);
-
+function ChatListComponent({ message, onChatSelect }) {
+   
     return (
         <Container className="side-message">
-          <Card>
-            <Card.Header>Messages</Card.Header>
-            <ListGroup variant="flush">
-              {messages.map((message, index) => (
-                <ListGroup.Item key={index}> From user {message.sender_id}</ListGroup.Item>
-              ))}
-            </ListGroup>
-          </Card>
-        </Container>
+            <Card>
+              <Card.Header>Messages</Card.Header>
+              <ListGroup variant="flush">
+                {message.map((message) => (
+                  <ListGroup.Item key={message.id}  onClick={() => onChatSelect(message.id)} >
+                    From user {message.sender_id}: {message.message}
+                  </ListGroup.Item>
+                ))}
+              </ListGroup>
+            </Card>
+      </Container>
       );
       
 }
 
-export default ChatListCompoenent;
+export default ChatListComponent;
