@@ -1,6 +1,7 @@
 import React from 'react'
+import './HelpRequestDetailsPage.css'
 
-const HelpRequestDetailPage = () => {
+const HelpRequestDetailsPage = () => {
     return (
         <>
             <h2>Help request detail page</h2>
@@ -8,4 +9,4 @@ const HelpRequestDetailPage = () => {
     )
 }
 
-export default HelpRequestDetailPage
+export default HelpRequestDetailsPage
