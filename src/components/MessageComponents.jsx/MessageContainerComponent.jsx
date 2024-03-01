@@ -1,10 +1,26 @@
 import React, { useState, useEffect } from "react";
 import { Container, Navbar, Row, Col, ListGroup, Card, Form, Button } from 'react-bootstrap';
-import { getAllMessagesByUserId } from "../../services/messages";
+import { getMessagesById } from "../../services/messages";
 import "./MessageComponents.css"
 
 function MessageContainer({ selectedChat }) {
     console.log(selectedChat)
+
+    const [message, setMessage] = useState([])
+  
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                let messagesData = await getMessagesById(selectedChat);
+                setMessage(messagesData);
+            } catch (err) {
+                console.error('Error fetching messages:', err);
+            }
+        };
+        fetchData();
+    }, []);
+    console.log(message)
 
     return (
             <Container className="message">
