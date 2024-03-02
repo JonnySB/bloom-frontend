@@ -1,10 +1,48 @@
 .side-message {
     background-color: aqua;
     flex: 0 0 30%; /* Do not grow or shrink, stay at 30% of the parent container */
-    height: 100%; /* Full height of parent container */
+    height: 100%; /* Make them fill the height of their parent */
+    overflow-y: auto; /* Enable vertical scroll */
 }
 
+
 .message-container {
-    flex: 1; /* Grow to fill the remaining space */
-    height: 100%; /* Full height of parent container */
+    display: flex; /* Make it a flex container */
+    flex-direction: column; /* Align children vertically */
+    height: 100vh; /* Full height of the viewport */
+    overflow-y: auto; /* Enable vertical scroll */
+}
+
+.message {
+    flex: 1; /* This will make it fill the height of its flex container parent */
+    display: flex;
+    flex-direction: column;
+}
+
+.message-card {
+    flex-grow: 1; /* Grow to use available space */
+    display: flex;
+    flex-direction: column;
+}
+
+.message-card .card-body {
+    flex-grow: 1; /* Grow to use available space */
+    background-color: yellow; /* Set the background color */
+    overflow-y: auto; /* Scroll only when needed */
+}
+
+.input-group {
+    display: flex;
+  }
+  
+.message-input-field {
+    flex-grow: 1; /* Input field takes up the remaining space */
+    border-top-right-radius: 0; /* Aligns the radius with the button */
+    border-bottom-right-radius: 0; /* Aligns the radius with the button */
+}
+
+.send-button {
+    margin-left: -1px; /* Align the button with the input field */
+    border-top-left-radius: 0; /* Aligns the radius with the input field */
+    border-bottom-left-radius: 0; /* Aligns the radius with the input field */
 }

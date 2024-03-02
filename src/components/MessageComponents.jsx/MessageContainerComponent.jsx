@@ -44,8 +44,9 @@ function MessageContainer({ messageManager }) {
       }
     };
     return (
-            <Container className="message">
-                  <Card>
+            <Container className="message-container">
+              <div className="message">
+                  <Card className="message-card">
                     <Card.Header>Message from User 04</Card.Header>
                     <Card.Body>
                       {messages.map((messageObj, index) => (
@@ -58,19 +59,20 @@ function MessageContainer({ messageManager }) {
                     </Card.Body>
                   </Card>
                   <Form onSubmit={handleSendMessage}>
-                    <Form.Group className="mb-3" controlId="messageInput">
+                  <div className="input-group mb-3">
                     <Form.Control
-                        type="text"
-                        placeholder="Write a message..."
-                        value={newMessage}
-                        onChange={(e) => setNewMessage(e.target.value)}
-                      />
-                    </Form.Group>
-                    <Button variant="primary" type="submit">
+                      type="text"
+                      placeholder="Write a message..."
+                      value={newMessage}
+                      onChange={(e) => setNewMessage(e.target.value)}
+                      className="message-input-field"
+                    />
+                    <Button variant="primary" type="submit" className="send-button">
                       Send
                     </Button>
-                  </Form>
-                     
+                  </div>
+                </Form>
+              </div>        
             </Container>
           );
         }
