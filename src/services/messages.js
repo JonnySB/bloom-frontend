@@ -48,18 +48,22 @@ export const getMessagesById = async (chat_id) => {
     }
 }
 
-export const sendMessage = async (chatId, message) => {
+export const sendMessage = async (userId, receiverId, messageContent) => {
     const requestOptions = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcwOTM3OTA3MiwianRpIjoiODA1MzNkNjgtZWRhNS00YWVlLTgwYmMtNGQ4ZWJmYjZmYWVlIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNzA5Mzc5MDcyLCJjc3JmIjoiZWUxNjRkZDctYTU1OC00OGQ1LWIwODktNmExNWI2NWE5ZTdkIiwiZXhwIjoxNzA5NDY1NDcyfQ.dgwVVOUWGY555I7S8PcwRpRZ8i1udu8zORMhuS5gcVY`,
       },
-      body: JSON.stringify({ message: message }),
+      body: JSON.stringify({
+        userId: userId,
+        receiverId: receiverId,
+        content: messageContent,
+        }),
     };
   
     try {
-      const response = await fetch(`${BACKEND_URL}/messages/${chatId}/send`, requestOptions);
+      const response = await fetch(`${BACKEND_URL}/messages`, requestOptions);
   
       if (response.ok) {
         const data = await response.json();
