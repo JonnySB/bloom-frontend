@@ -7,7 +7,7 @@ export const getAllMessagesByUserId = async (userId) => {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcwOTMxMDQ0NSwianRpIjoiZTJlNjllYWUtYmMxOC00NzZlLWFkMmUtZTE0ODk2NWUwZDEyIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNzA5MzEwNDQ1LCJjc3JmIjoiMjA4MzkyZGQtNzQxZS00MmFlLThmODMtNGI1NGE4NjQyZGJmIiwiZXhwIjoxNzA5Mzk2ODQ1fQ.8CB3gQsS-UPEjnQH4I9lkkLuVDn-OnV5QKVXm-HTghY`,
+            "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcwOTM3OTA3MiwianRpIjoiODA1MzNkNjgtZWRhNS00YWVlLTgwYmMtNGQ4ZWJmYjZmYWVlIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNzA5Mzc5MDcyLCJjc3JmIjoiZWUxNjRkZDctYTU1OC00OGQ1LWIwODktNmExNWI2NWE5ZTdkIiwiZXhwIjoxNzA5NDY1NDcyfQ.dgwVVOUWGY555I7S8PcwRpRZ8i1udu8zORMhuS5gcVY`,
         },
     };
     
@@ -29,8 +29,10 @@ export const getMessagesById = async (chat_id) => {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcwOTMxMDQ0NSwianRpIjoiZTJlNjllYWUtYmMxOC00NzZlLWFkMmUtZTE0ODk2NWUwZDEyIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNzA5MzEwNDQ1LCJjc3JmIjoiMjA4MzkyZGQtNzQxZS00MmFlLThmODMtNGI1NGE4NjQyZGJmIiwiZXhwIjoxNzA5Mzk2ODQ1fQ.8CB3gQsS-UPEjnQH4I9lkkLuVDn-OnV5QKVXm-HTghY`,
+            "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcwOTM3OTA3MiwianRpIjoiODA1MzNkNjgtZWRhNS00YWVlLTgwYmMtNGQ4ZWJmYjZmYWVlIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNzA5Mzc5MDcyLCJjc3JmIjoiZWUxNjRkZDctYTU1OC00OGQ1LWIwODktNmExNWI2NWE5ZTdkIiwiZXhwIjoxNzA5NDY1NDcyfQ.dgwVVOUWGY555I7S8PcwRpRZ8i1udu8zORMhuS5gcVY`,
+          
         },
+
     };
     
     const response = await fetch(`${BACKEND_URL}/messages/${chat_id}`, requestOptions);

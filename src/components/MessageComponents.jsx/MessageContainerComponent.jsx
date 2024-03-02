@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Container, Navbar, Row, Col, ListGroup, Card, Form, Button } from 'react-bootstrap';
 import "./MessageComponents.css"
 import { getMessagesById } from "../../services/messages";
-
+<script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
 
 function MessageContainer({ messageId }) {
     const [singleMessage, setSingleMessage] = useState([])
@@ -30,7 +30,6 @@ function MessageContainer({ messageId }) {
                     {singleMessage.map((message, index) => (
                     <Card.Body index={index}>
                       <Card.Text>{message.message}</Card.Text>
-                 
                     </Card.Body>
                     ))}
                   </Card>
@@ -41,7 +40,8 @@ function MessageContainer({ messageId }) {
                     <Button variant="primary" type="submit">
                       Send
                     </Button>
-                  </Form>     
+                  </Form>
+                     
             </Container>
           );
         }
