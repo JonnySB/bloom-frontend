@@ -8,7 +8,6 @@ const socket = io("http://localhost:5001");
 function MessageContainer({ messageManager }) {
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState("");
- 
     
     useEffect(() => {
       const fetchData = async () => {
@@ -21,7 +20,6 @@ function MessageContainer({ messageManager }) {
       };
   
       fetchData();
-  
       socket.on('new_messages', (data) => {
         setMessages(data.messages);
       });
@@ -30,23 +28,32 @@ function MessageContainer({ messageManager }) {
   
     const handleSendMessage = async (e) => {
       e.preventDefault();
+      const messageToSend = {
+        message: newMessage,
+        chatId: messageManager.id,
+        sender: messageManager.sender_id,
+        receiver: messageManager.recipient_id
+      };
       try {
-        await sendMessage(messageManager.sender_id, messageManager.recipient_id, newMessage);
-        console.log("Message sent successfully");
-        socket.emit('data', { message: newMessage, chatId: messageManager.id, sender:messageManager.sender_id, receiver:messageManager.recipient_id });
+        await sendMessage(messageManager.sender_id, messageManager.recipient_id, messageManager.receiver_username, newMessage);
+        setMessages(prevMessages => [...prevMessages, messageToSend]);
+        socket.emit('data', messageToSend);
         setNewMessage(""); // Reset the input field
       } catch (error) {
         console.error('Error sending message:', error);
       }
     };
-
     return (
             <Container className="message">
                   <Card>
-                  <Card.Header >Message from User 04</Card.Header>
-                    <Card.Body >
-                    {messages.map((message, index) => (
-                      <Card.Text key={index}>{message.message}</Card.Text>
+                    <Card.Header>Message from User 04</Card.Header>
+                    <Card.Body>
+                      {messages.map((messageObj, index) => (
+                        <div key={index}>
+                          {Array.isArray(messageObj.message) ? messageObj.message.map((individualMessage, idx) => (
+                            <div key={idx}>{individualMessage}</div>
+                          )) : <div>{messageObj.message}</div>}
+                        </div>
                       ))}
                     </Card.Body>
                   </Card>

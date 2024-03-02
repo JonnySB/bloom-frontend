@@ -47,7 +47,7 @@ export const getMessagesById = async (chat_id) => {
     }
 }
 
-export const sendMessage = async (userId, receiverId, messageContent) => {
+export const sendMessage = async (userId, receiverId,receiver_username, messageContent) => {
     const requestOptions = {
       method: "POST",
       headers: {
@@ -57,6 +57,7 @@ export const sendMessage = async (userId, receiverId, messageContent) => {
       body: JSON.stringify({
         userId: userId,
         receiverId: receiverId,
+        receiver_username:receiver_username,
         content: messageContent,
         }),
     };

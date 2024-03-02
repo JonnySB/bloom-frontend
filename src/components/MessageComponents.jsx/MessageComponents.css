@@ -5,7 +5,6 @@
 }
 
 .message-container {
-    background-color: brown;
     flex: 1; /* Grow to fill the remaining space */
     height: 100%; /* Full height of parent container */
 }
