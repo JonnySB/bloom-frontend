@@ -27,7 +27,7 @@ function ChatListComponent({ onChatSelect }) {
               <ListGroup variant="flush">
                 {message.map((message) => (
                   <ListGroup.Item key={message.id}  onClick={() => onChatSelect(message)} >
-                    From user {message.sender_id}: {message.message}
+                    From user {message.recipient_id}
                   </ListGroup.Item>
                 ))}
               </ListGroup>
