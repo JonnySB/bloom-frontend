@@ -2,29 +2,20 @@ import ChatListComponent from "../components/MessageComponents.jsx/ChatListCompo
 import MessageContainer from "../components/MessageComponents.jsx/MessageContainerComponent"
 import { Container } from 'react-bootstrap';
 import './MessagePage.css'
+import Messages from "../components/MessageComponents.jsx/Message";
 import React, { useState, useEffect } from "react";
-import { getAllMessagesByUserId } from "../services/messages";
 
 export const MessagePage = () => {
-    const [messages, setMessages] = useState([])
-    const [selectedChat, setSelectedChat] = useState(null);
+    const [selectedMessageId, setSelectedMessageId] = useState(null);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                let messagesData = await getAllMessagesByUserId(1);
-                setMessages(messagesData);
-            } catch (err) {
-                console.error('Error fetching messages:', err);
-            }
-        };
-        fetchData();
-    }, []);
-
+    const handleChatSelect = (id) => {
+        setSelectedMessageId(id);
+      };
+     
     return (
         <Container className="message-page-container">
-             <ChatListComponent message={messages} onChatSelect={setSelectedChat} />
-            <MessageContainer selectedChat={selectedChat} />
-        </Container>
+            <ChatListComponent onChatSelect={handleChatSelect} />
+            {selectedMessageId && <MessageContainer messageId={selectedMessageId} />}
+      </Container>
     )
 }

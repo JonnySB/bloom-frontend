@@ -33,7 +33,7 @@ export const getMessagesById = async (chat_id) => {
         },
     };
     
-    const response = await fetch(`${BACKEND_URL}/messages/user/${chat_id}`, requestOptions);
+    const response = await fetch(`${BACKEND_URL}/messages/${chat_id}`, requestOptions);
 
     if (response.status === 200) {
         const data = await response.json();
