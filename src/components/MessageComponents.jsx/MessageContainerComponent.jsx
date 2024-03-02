@@ -1,37 +1,38 @@
 import React, { useState, useEffect } from "react";
 import { Container, Navbar, Row, Col, ListGroup, Card, Form, Button } from 'react-bootstrap';
 import "./MessageComponents.css"
-import { getMessagesById } from "../../services/messages";
-<script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+import { getMessagesById, sendMessage } from "../../services/messages";
+import io from "socket.io-client";
 
-function MessageContainer({ messageId }) {
+function MessageContainer({ messageManager }) {
     const [singleMessage, setSingleMessage] = useState([])
-
+    const [socketInstance, setSocketInstance] = useState("")
+    const [loading, setLoading] = useState("")
+    
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const messagesData = await getMessagesById(messageId);
+          const messagesData = await getMessagesById(messageManager.id);
           setSingleMessage(messagesData);
         } catch (err) {
           console.error('Error fetching messages:', err);
         }
       };
 
-      if (messageId) {
+      if (messageManager) {
         fetchData();
       }
-    }, [messageId]);
-
+    }, [messageManager]);
     if (!singleMessage) return null;
     return (
             <Container className="message">
                   <Card>
                   <Card.Header >Message from User 04</Card.Header>
+                    <Card.Body >
                     {singleMessage.map((message, index) => (
-                    <Card.Body index={index}>
-                      <Card.Text>{message.message}</Card.Text>
+                      <Card.Text key={index}>{message.message}</Card.Text>
+                      ))}
                     </Card.Body>
-                    ))}
                   </Card>
                   <Form>
                     <Form.Group className="mb-3" controlId="messageInput">
