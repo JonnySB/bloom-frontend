@@ -50,21 +50,36 @@ function MessageContainer({ messageManager }) {
       }
     };
 
+    const renderMessage = (messageObj, idx) => {
+      try {
+          const parsedMessage = JSON.parse(messageObj); // Parse the message string into an object
+          return (
+              <div key={idx} className="message-bubble">
+                  <strong>{parsedMessage.sender}:</strong> {parsedMessage.message}
+              </div>
+          );
+      } catch (e) {
+          console.error('Error parsing message:', e);
+          return (
+              <div key={idx} className="message-bubble">
+                  {messageObj}
+              </div>
+          );
+      }
+  };
+    
+
     return (
             <Container className="message-container">
               <div className="message">
-              {messages.map((messageObj, index) => (
-                  <Card key={index} className="message-card">
-                    <Card.Header>Messages from {messageObj.sender_username}</Card.Header>
-                    <Card.Body>
-                        <div >
-                          {Array.isArray(messageObj.message) ? messageObj.message.map((individualMessage, idx) => (
-                            <div key={idx}>{individualMessage}</div>
-                          )) : <div>{messageObj.message}</div>}
-                        </div>
-                    </Card.Body>
-                  </Card>
-                  ))}
+                  {messages.map((messageObj, index) => (
+                        <Card key={index} className="message-card">
+                            <Card.Header>Messages from {messageObj.sender_username}</Card.Header>
+                            <Card.Body>
+                                {Array.isArray(messageObj.message) ? messageObj.message.map(renderMessage) : renderMessage(messageObj.message)}
+                            </Card.Body>
+                        </Card>
+                    ))}
                   <Form onSubmit={handleSendMessage}>
                   <div className="input-group mb-3">
                     <Form.Control

@@ -11,7 +11,7 @@ function ChatListComponent({ onChatSelect }) {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                let messagesData = await getAllMessagesByUserId(2);
+                let messagesData = await getAllMessagesByUserId(1);
                 setMessages(messagesData);
             } catch (err) {
                 console.error('Error fetching messages:', err);
