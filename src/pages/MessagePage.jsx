@@ -32,7 +32,7 @@ export const MessagePage = () => {
       
     return (
         <Container className="message-page-container">
-            <ChatListComponent onChatSelect={handleChatSelect} defaultChatId={4} userDetails={userDetails}/> 
+            <ChatListComponent onChatSelect={handleChatSelect} defaultChatId={2} userDetails={userDetails}/> 
             {selectedMessageId && <MessageContainer messageManager={selectedMessageId} userDetails={userDetails} />}
       </Container>
     )
