@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Container, Navbar, Row, Col, ListGroup, Card, Form, Button } from 'react-bootstrap';
+import { Container, Card, Form, Button } from 'react-bootstrap';
 import "./MessageComponents.css"
 import { getMessagesById, sendMessage } from "../../services/messages";
 import io from "socket.io-client";
@@ -8,6 +8,7 @@ const socket = io("http://localhost:5001");
 function MessageContainer({ messageManager }) {
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState("");
+    const [roomInfo, setRoomInfo] = useState(""); 
     
     useEffect(() => {
       const fetchData = async () => {
@@ -20,29 +21,35 @@ function MessageContainer({ messageManager }) {
       };
   
       fetchData();
+      socket.emit('join', { user_id: messageManager.sender_id, receiver_id: messageManager.recipient_id });
+
       socket.on('new_messages', (data) => {
         setMessages(data.messages);
       });
+
+      socket.on('joined_room', (data) => {
+        setRoomInfo(data.message); 
+      });
+
       return () => socket.off('new_messages');
-    }, [messageManager.id]);
-  
+    }, [messageManager.id, messageManager.sender_id, messageManager.recipient_id]);
+
     const handleSendMessage = async (e) => {
       e.preventDefault();
-      const messageToSend = {
-        message: newMessage,
-        chatId: messageManager.id,
-        sender: messageManager.sender_id,
-        receiver: messageManager.recipient_id
-      };
       try {
         await sendMessage(messageManager.sender_id, messageManager.recipient_id, messageManager.receiver_username, newMessage);
-        setMessages(prevMessages => [...prevMessages, messageToSend]);
-        socket.emit('data', messageToSend);
+        socket.emit('data', { 
+          message: newMessage, 
+          chatId: messageManager.id, 
+          sender: messageManager.sender_id, 
+          receiver: messageManager.recipient_id 
+        });
         setNewMessage(""); // Reset the input field
       } catch (error) {
         console.error('Error sending message:', error);
       }
     };
+
     return (
             <Container className="message-container">
               <div className="message">

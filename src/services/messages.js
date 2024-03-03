@@ -67,7 +67,7 @@ export const sendMessage = async (userId, receiverId,receiver_username, messageC
   
       if (response.ok) {
         const data = await response.json();
-        console.log("Message sent: ", data);
+        // console.log("Message sent: ", data);
         return data;
       } else {
         const errorResponse = await response.json();
