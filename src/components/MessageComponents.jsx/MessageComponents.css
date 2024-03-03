@@ -46,3 +46,16 @@
     border-top-left-radius: 0; /* Aligns the radius with the input field */
     border-bottom-left-radius: 0; /* Aligns the radius with the input field */
 }
+
+
+.message-bubble {
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 10px;
+    background-color: #f4f4f4;
+}
+
+.message-bubble strong {
+    color: #333;
+    margin-right: 5px;
+}

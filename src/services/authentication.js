@@ -71,3 +71,24 @@ export const signup = async (
   }
 };
 
+
+export const getuserInformationById = async (userId) => {
+      const requestOptions = {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    };
+    const response = await fetch(`${BACKEND_URL}/user_details/${userId}`, requestOptions);
+    console.log(response)
+    if (response.status === 200) {
+      const data = await response.json();
+      // console.log("user details loaded loaded ");
+      return data;
+    } else {
+      const errorResponse = await response.json();
+      console.error('Full error response:', errorResponse);
+      throw new Error(`Error fetching userdetails : ${errorResponse}`);
+  }
+}
+

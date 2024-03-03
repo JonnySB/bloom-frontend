@@ -2,13 +2,15 @@ import React, { useState, useEffect } from "react";
 import { Container, Card, Form, Button } from 'react-bootstrap';
 import "./MessageComponents.css"
 import { getMessagesById, sendMessage } from "../../services/messages";
+import { getuserInformationById } from "../../services/authentication";
 import io from "socket.io-client";
 const socket = io("http://localhost:5001");
 
 function MessageContainer({ messageManager }) {
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState("");
-    const [roomInfo, setRoomInfo] = useState(""); 
+    const [roomInfo, setRoomInfo] = useState("");
+    const [userDetails, setUserDetails] = useState("")
     
     useEffect(() => {
       const fetchData = async () => {
@@ -17,6 +19,12 @@ function MessageContainer({ messageManager }) {
           setMessages(messagesData);
         } catch (err) {
           console.error('Error fetching messages:', err);
+        } 
+        try {
+          const userData = await getuserInformationById(2);
+          setUserDetails(userData)
+        } catch (err) {
+          console.error('Error fetching userDetails:', err);
         }
       };
   
@@ -37,11 +45,11 @@ function MessageContainer({ messageManager }) {
     const handleSendMessage = async (e) => {
       e.preventDefault();
       try {
-        await sendMessage(messageManager.sender_id, messageManager.recipient_id, messageManager.receiver_username, messageManager.sender_username, newMessage);
+        await sendMessage(messageManager.sender_id, messageManager.recipient_id, messageManager.receiver_username, userDetails.username, newMessage);
         socket.emit('data', { 
           message: newMessage, 
           chatId: messageManager.id, 
-          sender: messageManager.sender_id, 
+          sender: userDetails.username, 
           receiver: messageManager.recipient_id,
         });
         setNewMessage(""); // Reset the input field
@@ -49,7 +57,7 @@ function MessageContainer({ messageManager }) {
         console.error('Error sending message:', error);
       }
     };
-
+   
     const renderMessage = (messageObj, idx) => {
       try {
           const parsedMessage = JSON.parse(messageObj); // Parse the message string into an object
@@ -67,8 +75,8 @@ function MessageContainer({ messageManager }) {
           );
       }
   };
-    
 
+   
     return (
             <Container className="message-container">
               <div className="message">
