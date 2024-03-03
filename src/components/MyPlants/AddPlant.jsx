@@ -1,16 +1,20 @@
 import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
+import { updatePlantsQuantity } from '../../services/userPlants';
+import { fetchPlants } from '../../services/plants';
 import { updatePlantsQuantity } from '../../services/userPlants';
 import { fetchPlants } from '../../services/plants';
 
 function AddPlant() {
   const [show, setShow] = useState(false);
   const [plantList, setPlantList] = useState([]);
+  const [plantList, setPlantList] = useState([]);
   const [type, setType] = useState("");
   const [quantity, setQuantity] = useState(0)
-  const [token, setToken] = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcwOTUwMDk2OSwianRpIjoiZGM1MjE4NzItZDZmMS00NzEwLWI4NWItZjIyZGJhNGQ3ODhmIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNzA5NTAwOTY5LCJjc3JmIjoiZWIyZDJlN2ItOTljZi00ZGZkLTgyYTctM2ZkMWY0N2E3NDE3IiwiZXhwIjoxNzA5NTAxODY5fQ.al7s1rsbpd__sEehECcSXhNuJq0NO2XgD-ccQqOlvn0"
+  const [token, setToken] = window.localStorage.getItem("token")
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
