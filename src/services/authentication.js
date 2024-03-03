@@ -80,7 +80,7 @@ export const getuserInformationById = async (userId) => {
         },
     };
     const response = await fetch(`${BACKEND_URL}/user_details/${userId}`, requestOptions);
-    console.log(response)
+
     if (response.status === 200) {
       const data = await response.json();
       // console.log("user details loaded loaded ");

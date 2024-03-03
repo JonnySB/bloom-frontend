@@ -21,7 +21,7 @@ function MessageContainer({ messageManager }) {
           console.error('Error fetching messages:', err);
         } 
         try {
-          const userData = await getuserInformationById(2);
+          const userData = await getuserInformationById(1); /// NEED TO PASS THE USER ID HERE
           setUserDetails(userData)
         } catch (err) {
           console.error('Error fetching userDetails:', err);
@@ -63,20 +63,19 @@ function MessageContainer({ messageManager }) {
           const parsedMessage = JSON.parse(messageObj); // Parse the message string into an object
           return (
               <div key={idx} className="message-bubble">
-                  <strong>{parsedMessage.sender}:</strong> {parsedMessage.message}
+                  <strong>{parsedMessage.sender === userDetails?.username ? "You" : parsedMessage.sender}:</strong> {parsedMessage.message}
               </div>
           );
       } catch (e) {
           console.error('Error parsing message:', e);
           return (
               <div key={idx} className="message-bubble">
-                  {messageObj}
+                  {messageObj} 
               </div>
           );
       }
   };
 
-   
     return (
             <Container className="message-container">
               <div className="message">
