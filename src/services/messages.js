@@ -7,7 +7,7 @@ export const getAllMessagesByUserId = async (userId) => {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcwOTM3OTA3MiwianRpIjoiODA1MzNkNjgtZWRhNS00YWVlLTgwYmMtNGQ4ZWJmYjZmYWVlIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNzA5Mzc5MDcyLCJjc3JmIjoiZWUxNjRkZDctYTU1OC00OGQ1LWIwODktNmExNWI2NWE5ZTdkIiwiZXhwIjoxNzA5NDY1NDcyfQ.dgwVVOUWGY555I7S8PcwRpRZ8i1udu8zORMhuS5gcVY`,
+            "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcwOTQ2NTU0MCwianRpIjoiNjNmOTM0ZWUtNjIwNC00MTU5LWExZGMtZmQ4YTc2ZTQ3MGE1IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNzA5NDY1NTQwLCJjc3JmIjoiNTY4ZTM2MzktZjkxNC00MWI2LWE4YzctZThlZjUzNjNkNjIwIiwiZXhwIjoxNzA5NTUxOTQwfQ.dp3b-EfpiHyKBU7goLzusrsj-izldlaeVtc1iCKjjAw`,
         },
     };
     
@@ -29,7 +29,7 @@ export const getMessagesById = async (chat_id) => {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcwOTM3OTA3MiwianRpIjoiODA1MzNkNjgtZWRhNS00YWVlLTgwYmMtNGQ4ZWJmYjZmYWVlIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNzA5Mzc5MDcyLCJjc3JmIjoiZWUxNjRkZDctYTU1OC00OGQ1LWIwODktNmExNWI2NWE5ZTdkIiwiZXhwIjoxNzA5NDY1NDcyfQ.dgwVVOUWGY555I7S8PcwRpRZ8i1udu8zORMhuS5gcVY`,
+            "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcwOTQ2NTU0MCwianRpIjoiNjNmOTM0ZWUtNjIwNC00MTU5LWExZGMtZmQ4YTc2ZTQ3MGE1IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNzA5NDY1NTQwLCJjc3JmIjoiNTY4ZTM2MzktZjkxNC00MWI2LWE4YzctZThlZjUzNjNkNjIwIiwiZXhwIjoxNzA5NTUxOTQwfQ.dp3b-EfpiHyKBU7goLzusrsj-izldlaeVtc1iCKjjAw`,
           
         },
 
@@ -47,17 +47,18 @@ export const getMessagesById = async (chat_id) => {
     }
 }
 
-export const sendMessage = async (userId, receiverId,receiver_username, messageContent) => {
+export const sendMessage = async (userId, receiverId,receiver_username, sender_username, messageContent) => {
     const requestOptions = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcwOTM3OTA3MiwianRpIjoiODA1MzNkNjgtZWRhNS00YWVlLTgwYmMtNGQ4ZWJmYjZmYWVlIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNzA5Mzc5MDcyLCJjc3JmIjoiZWUxNjRkZDctYTU1OC00OGQ1LWIwODktNmExNWI2NWE5ZTdkIiwiZXhwIjoxNzA5NDY1NDcyfQ.dgwVVOUWGY555I7S8PcwRpRZ8i1udu8zORMhuS5gcVY`,
+        "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcwOTQ2NTU0MCwianRpIjoiNjNmOTM0ZWUtNjIwNC00MTU5LWExZGMtZmQ4YTc2ZTQ3MGE1IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNzA5NDY1NTQwLCJjc3JmIjoiNTY4ZTM2MzktZjkxNC00MWI2LWE4YzctZThlZjUzNjNkNjIwIiwiZXhwIjoxNzA5NTUxOTQwfQ.dp3b-EfpiHyKBU7goLzusrsj-izldlaeVtc1iCKjjAw`,
       },
       body: JSON.stringify({
         userId: userId,
         receiverId: receiverId,
         receiver_username:receiver_username,
+        sender_username:sender_username,
         content: messageContent,
         }),
     };

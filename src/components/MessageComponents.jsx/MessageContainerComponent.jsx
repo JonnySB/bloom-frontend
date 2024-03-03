@@ -37,12 +37,12 @@ function MessageContainer({ messageManager }) {
     const handleSendMessage = async (e) => {
       e.preventDefault();
       try {
-        await sendMessage(messageManager.sender_id, messageManager.recipient_id, messageManager.receiver_username, newMessage);
+        await sendMessage(messageManager.sender_id, messageManager.recipient_id, messageManager.receiver_username, messageManager.sender_username, newMessage);
         socket.emit('data', { 
           message: newMessage, 
           chatId: messageManager.id, 
           sender: messageManager.sender_id, 
-          receiver: messageManager.recipient_id 
+          receiver: messageManager.recipient_id,
         });
         setNewMessage(""); // Reset the input field
       } catch (error) {
@@ -53,18 +53,18 @@ function MessageContainer({ messageManager }) {
     return (
             <Container className="message-container">
               <div className="message">
-                  <Card className="message-card">
-                    <Card.Header>Message from User 04</Card.Header>
+              {messages.map((messageObj, index) => (
+                  <Card key={index} className="message-card">
+                    <Card.Header>Messages from {messageObj.sender_username}</Card.Header>
                     <Card.Body>
-                      {messages.map((messageObj, index) => (
-                        <div key={index}>
+                        <div >
                           {Array.isArray(messageObj.message) ? messageObj.message.map((individualMessage, idx) => (
                             <div key={idx}>{individualMessage}</div>
                           )) : <div>{messageObj.message}</div>}
                         </div>
-                      ))}
                     </Card.Body>
                   </Card>
+                  ))}
                   <Form onSubmit={handleSendMessage}>
                   <div className="input-group mb-3">
                     <Form.Control
