@@ -47,7 +47,7 @@ export const getMessagesById = async (chat_id) => {
     }
 }
 
-export const sendMessage = async (userId, receiverId,receiver_username, sender_username, messageContent) => {
+export const sendMessage = async (userId, receiverId, receiver_username, sender_username, messageContent) => {
     const requestOptions = {
       method: "POST",
       headers: {

@@ -4,21 +4,13 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import Container from 'react-bootstrap/Container';
 import "./MessageComponents.css"
 import { getAllMessagesByUserId } from "../../services/messages";
-import { getuserInformationById } from "../../services/authentication";
 
-function ChatListComponent({ onChatSelect, defaultChatId }) {
+function ChatListComponent({ onChatSelect, defaultChatId, userDetails }) {
   const [message, setMessages] = useState([])
   const [loading, setLoading] = useState(true);
-  const [userDetails, setUserDetails] = useState("")
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const userData = await getuserInformationById(1); // NEED TO PASS THE USER ID HERE
-        setUserDetails(userData)
-      } catch (err) {
-        console.error('Error fetching userDetails:', err);
-      }
       try {
         let messagesData = await getAllMessagesByUserId(1);
         setMessages(messagesData);
@@ -36,7 +28,7 @@ function ChatListComponent({ onChatSelect, defaultChatId }) {
         }
 
         setMessages(messagesData);
-
+   
       } catch (err) {
         console.error('Error fetching messages:', err);
       } finally {
@@ -44,14 +36,12 @@ function ChatListComponent({ onChatSelect, defaultChatId }) {
       } 
     };
     fetchData();
-  }, [defaultChatId]);
+  }, [defaultChatId, userDetails]);
 
   const handleConversationClick = (message) => {
     if (message.id === 'new') {
-      // If the user clicks the new chat placeholder, prepare to start a new conversation
-      onChatSelect({ recipient_id: defaultChatId, receiver_username: `user${defaultChatId}`, messages: [], sender_id: 1  }); // NEED TO PASS THE USER ID HERE
+      onChatSelect({ recipient_id: defaultChatId, receiver_username: `user${defaultChatId}`, messages: [], sender_id: 1,  }); // NEED TO PASS THE USER ID HERE
     } else {
-      // For existing conversations, just call onChatSelect normally
       onChatSelect(message);
     }
   };

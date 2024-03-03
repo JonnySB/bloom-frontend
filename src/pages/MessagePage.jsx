@@ -3,12 +3,25 @@ import MessageContainer from "../components/MessageComponents.jsx/MessageContain
 import { Container } from 'react-bootstrap';
 import './MessagePage.css'
 import React, { useState , useEffect} from "react";
+import { getuserInformationById } from "../services/authentication";
 
 export const MessagePage = () => {
     const [selectedMessageId, setSelectedMessageId] = useState(null);
+    const [userDetails, setUserDetails] = useState(null);
 
+    useEffect(() => {
+      const fetchUserDetails = async () => {
+        try {
+          const userData = await getuserInformationById(1); // WE WILL NEED TO LOAD THE USER DETAILS HERE
+          setUserDetails(userData);
+        } catch (err) {
+          console.error('Error fetching user details:', err);
+        }
+      };
+      
+      fetchUserDetails();
+    }, []);
   
-
     const handleChatSelect = (msg) => {
         setSelectedMessageId(msg);
       };
@@ -19,8 +32,8 @@ export const MessagePage = () => {
       
     return (
         <Container className="message-page-container">
-            <ChatListComponent onChatSelect={handleChatSelect} defaultChatId={4} /> 
-            {selectedMessageId && <MessageContainer messageManager={selectedMessageId} />}
+            <ChatListComponent onChatSelect={handleChatSelect} defaultChatId={4} userDetails={userDetails}/> 
+            {selectedMessageId && <MessageContainer messageManager={selectedMessageId} userDetails={userDetails} />}
       </Container>
     )
 }
