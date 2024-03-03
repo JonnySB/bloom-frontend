@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Container, Card, Form, Button } from 'react-bootstrap';
 import "./MessageComponents.css";
 import { getMessagesById, sendMessage } from "../../services/messages";
-import { getuserInformationById } from "../../services/authentication";
 import io from "socket.io-client";
 const socket = io("http://localhost:5001");
 

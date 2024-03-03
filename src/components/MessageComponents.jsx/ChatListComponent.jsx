@@ -5,23 +5,23 @@ import Container from 'react-bootstrap/Container';
 import "./MessageComponents.css";
 import { getAllMessagesByUserId } from "../../services/messages";
 
-function ChatListComponent({ onChatSelect, defaultChatId, userDetails }) {
+function ChatListComponent({ onChatSelect, senderUserID, userDetails }) {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
+  useEffect(() => { 
     const fetchData = async () => {
       try {
-        let messagesData = await getAllMessagesByUserId(1);
+        let messagesData = await getAllMessagesByUserId(1); // WILL NEED TO PASS THE USER ID HERE
         setMessages(messagesData);
-        let chatExists = messagesData.some(m => m.recipient_id === defaultChatId);
+        let chatExists = messagesData.some(m => m.recipient_id === senderUserID);
         
         // If there's no chat with the default recipient, create a placeholder to start a new chat
-        if (defaultChatId && !chatExists) {
+        if (senderUserID && !chatExists) {
           const newChatPlaceholder = {
             id: 'new', 
-            recipient_id: defaultChatId,
-            receiver_username: `user${defaultChatId}`, 
+            recipient_id: senderUserID,
+            receiver_username: `user${senderUserID}`, 
             messages: []
           };
           messagesData.unshift(newChatPlaceholder); 
@@ -36,17 +36,17 @@ function ChatListComponent({ onChatSelect, defaultChatId, userDetails }) {
       } 
     };
     fetchData();
-  }, [defaultChatId, userDetails]);
+  }, [senderUserID, userDetails]);
  
 
   const handleConversationClick = (message) => {
     if (message.id === 'new') {
       onChatSelect({ 
-        recipient_id: defaultChatId, 
-        receiver_username: `user${defaultChatId}`, 
+        recipient_id: senderUserID, 
+        receiver_username: `user${senderUserID}`, 
         messages: [], 
         sender_id: 1,  
-      }); // NEED TO PASS THE USER ID HERE
+      }); 
     } else {
       onChatSelect(message);
     }
@@ -55,6 +55,7 @@ function ChatListComponent({ onChatSelect, defaultChatId, userDetails }) {
   if (loading) {
     return <div>Loading...</div>; 
   }
+ 
   return (
     <Container className="side-message">
       <Card>

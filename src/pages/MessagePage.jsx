@@ -8,6 +8,7 @@ import { getuserInformationById } from "../services/authentication";
 export const MessagePage = () => {
     const [selectedMessageId, setSelectedMessageId] = useState(null);
     const [userDetails, setUserDetails] = useState(null);
+    const senderUserID = 4; 
 
     useEffect(() => {
       const fetchUserDetails = async () => {
@@ -21,18 +22,15 @@ export const MessagePage = () => {
       
       fetchUserDetails();
     }, []);
-  
+    
+    // WILL NEED TO GET THE ID FROM WHO WE ARE SENING THE MESSAGE TO FROM THE OFFERS PAGE HERE INSIDE OF THE DEFAULTCHATID
     const handleChatSelect = (msg) => {
-        setSelectedMessageId(msg);
-      };
-
-  
-      // WILL NEED TO GET THE ID FROM WHO WE ARE SENING THE MESSAGE TO FROM THE OFFERS PAGE HERE INSIDE OF THE DEFAULTCHATID
-
+      setSelectedMessageId(msg);
+    };
       
     return (
         <Container className="message-page-container">
-            <ChatListComponent onChatSelect={handleChatSelect} defaultChatId={2} userDetails={userDetails}/> 
+            <ChatListComponent onChatSelect={handleChatSelect} senderUserID={senderUserID} userDetails={userDetails}/> 
             {selectedMessageId && <MessageContainer messageManager={selectedMessageId} userDetails={userDetails} />}
       </Container>
     )
