@@ -41,10 +41,6 @@ function AddPlant() {
     setQuantity(Number(e.target.value))
   }
 
-  const createOption = (currentPlant) => {
-    return <option value={currentPlant}>{currentPlant}</option>
-  }
-
   return (
     <>
       <Button variant="primary" onClick={handleShow}>
