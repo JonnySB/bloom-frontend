@@ -1,18 +1,32 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
+import { updatePlantsQuantity } from '../../services/userPlants';
+import { fetchPlants } from '../../services/plants';
 
 function AddPlant() {
   const [show, setShow] = useState(false);
+  const [plantList, setPlantList] = useState([]);
   const [type, setType] = useState("");
   const [quantity, setQuantity] = useState(0)
+  const [token, setToken] = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcwOTUwMDk2OSwianRpIjoiZGM1MjE4NzItZDZmMS00NzEwLWI4NWItZjIyZGJhNGQ3ODhmIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNzA5NTAwOTY5LCJjc3JmIjoiZWIyZDJlN2ItOTljZi00ZGZkLTgyYTctM2ZkMWY0N2E3NDE3IiwiZXhwIjoxNzA5NTAxODY5fQ.al7s1rsbpd__sEehECcSXhNuJq0NO2XgD-ccQqOlvn0"
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  useEffect(() => {
+    fetchPlants(token)
+    .then((data) => {
+      setPlantList(data)
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+  }, [])
+
   const handleSubmit = () => {
-    //to call plant service and update userplant table with submitted values (type, quantity)
+    updatePlantsQuantity(user_id, type, quantity, token)
   };
 
   const onTypeChange = (e) => {
@@ -20,7 +34,11 @@ function AddPlant() {
   }
 
   const onQuantityChange = (e) => {
-    setQuantity(e.target.value)
+    setQuantity(Number(e.target.value))
+  }
+
+  const createOption = (currentPlant) => {
+    return <option value={currentPlant}>{currentPlant}</option>
   }
 
   return (
@@ -39,9 +57,9 @@ function AddPlant() {
             <Form.Label>Type</Form.Label>
             <Form.Select aria-label="Default select example" onChange={onTypeChange}>
                 <option>What type of plant are you adding?</option>
-                <option value="Violet">Violet</option>
-                <option value="Rose">Rose</option>
-                <option value="Orchid">Orchid</option>
+                {plantList.map((plant) => (
+                  <option value={plant.id} key={plant.id}>{plant.common_name}</option>
+                ))}
             </Form.Select>
             </Form.Group>
             <Form.Group
