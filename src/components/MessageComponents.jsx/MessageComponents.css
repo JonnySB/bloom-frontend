@@ -1,5 +1,4 @@
 .side-message {
-    background-color: aqua;
     flex: 0 0 30%; /* Do not grow or shrink, stay at 30% of the parent container */
     height: 100%; /* Make them fill the height of their parent */
     overflow-y: auto; /* Enable vertical scroll */
@@ -27,7 +26,6 @@
 
 .message-card .card-body {
     flex-grow: 1; /* Grow to use available space */
-    background-color: yellow; /* Set the background color */
     overflow-y: auto; /* Scroll only when needed */
 }
 

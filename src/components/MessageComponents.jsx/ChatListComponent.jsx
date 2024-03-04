@@ -9,35 +9,38 @@ function ChatListComponent({ onChatSelect, senderUserID, userDetails }) {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => { 
-    const fetchData = async () => {
-      try {
-        let messagesData = await getAllMessagesByUserId(1); // WILL NEED TO PASS THE USER ID HERE
-        setMessages(messagesData);
-        let chatExists = messagesData.some(m => m.recipient_id === senderUserID);
-        
-        // If there's no chat with the default recipient, create a placeholder to start a new chat
-        if (senderUserID && !chatExists) {
-          const newChatPlaceholder = {
-            id: 'new', 
-            recipient_id: senderUserID,
-            receiver_username: `user${senderUserID}`, 
-            messages: []
-          };
-          messagesData.unshift(newChatPlaceholder); 
+    useEffect(() => {
+      const fetchData = async () => {
+        if (userDetails && userDetails.id) {
+          try {
+            let messagesData = await getAllMessagesByUserId(userDetails.id);
+            setMessages(messagesData);
+            let chatExists = messagesData.some(m => m.recipient_id === senderUserID);
+            
+            if (senderUserID && !chatExists) {
+              const newChatPlaceholder = {
+                id: 'new',
+                recipient_id: senderUserID,
+                receiver_username: `user${senderUserID}`,
+                messages: []
+              };
+              messagesData.unshift(newChatPlaceholder);
+            }
+    
+            setMessages(messagesData);
+          } catch (err) {
+            console.error('Error fetching messages:', err);
+          } finally {
+            setLoading(false);
+          }
         }
-
-        setMessages(messagesData);
-   
-      } catch (err) {
-        console.error('Error fetching messages:', err);
-      } finally {
-        setLoading(false);
-      } 
-    };
-    fetchData();
-  }, [senderUserID, userDetails]);
- 
+      };
+  
+      if (userDetails && userDetails.id) {
+        fetchData();
+      }
+    }, [senderUserID, userDetails]);
+    
 
   const handleConversationClick = (message) => {
     if (message.id === 'new') {
@@ -45,7 +48,7 @@ function ChatListComponent({ onChatSelect, senderUserID, userDetails }) {
         recipient_id: senderUserID, 
         receiver_username: `user${senderUserID}`, 
         messages: [], 
-        sender_id: 1,  
+        sender_id: userDetails?.id,  
       }); 
     } else {
       onChatSelect(message);

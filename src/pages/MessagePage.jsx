@@ -8,7 +8,7 @@ import { getuserInformationById } from "../services/authentication";
 export const MessagePage = () => {
     const [selectedMessageId, setSelectedMessageId] = useState(null);
     const [userDetails, setUserDetails] = useState(null);
-    const senderUserID = 4; 
+    const senderUserID = 5; 
 
     useEffect(() => {
       const fetchUserDetails = async () => {
@@ -22,6 +22,19 @@ export const MessagePage = () => {
       
       fetchUserDetails();
     }, []);
+
+
+    // useEffect(() => {
+    //   // This will update the selected message whenever the defaultChatId changes
+    //   const defaultChatObject = {
+    //     id: defaultChatId,
+    //     recipient_id: defaultChatId,
+    //     // Add other properties as needed by MessageContainer
+    //   };
+    //   setSelectedMessageId(defaultChatObject);
+    // }, [defaultChatId]);
+    
+
     
     // WILL NEED TO GET THE ID FROM WHO WE ARE SENING THE MESSAGE TO FROM THE OFFERS PAGE HERE INSIDE OF THE DEFAULTCHATID
     const handleChatSelect = (msg) => {
