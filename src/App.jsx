@@ -11,7 +11,7 @@ const router = createBrowserRouter([
     element: <Homepage />,
   },
   {
-    path: "/help_request_details",
+    path: "/help_request_details/:requestId",
     element: <HelpRequestDetailPage />,
   },
 ])
