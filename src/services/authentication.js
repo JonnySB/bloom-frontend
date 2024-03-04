@@ -18,7 +18,7 @@ export const login = async (username_email, password) => {
   };
 
   // Get's tokens with above login details.
-  const response = await fetch(`${BACKEND_URL}/tokens`, requestOptions);
+  const response = await fetch(`${BACKEND_URL}/token`, requestOptions);
 
   // Returns token if response is 201 otherwise throws an error. 201 means succesful request that led to creation of a resource (In this case a "token")
   // docs: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/201
@@ -59,7 +59,7 @@ export const signup = async (
     body: JSON.stringify(payload),
   };
 
-  let response = await fetch(`${BACKEND_URL}/users`, requestOptions);
+  let response = await fetch(`${BACKEND_URL}/user/signup`, requestOptions);
 
   // docs: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/201
   if (response.status === 201) {
