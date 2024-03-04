@@ -21,7 +21,7 @@ export const Login = () => {
         try {
         const token = await login(username_email, password);
         window.localStorage.setItem("token", token);
-        navigate("/homepage");
+        navigate("/posts");
         } catch (err) {
         console.error(err);
         setError(err.cause)
