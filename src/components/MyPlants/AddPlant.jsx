@@ -6,6 +6,8 @@ import { updatePlantsQuantity, assignPlant } from '../../services/userPlants';
 import { fetchPlants } from '../../services/plants';
 
 const AddPlant = (props) => {
+  // Note: This component needs user_id and user_plants passed into it as props.
+  // user_plants should be an array of plant_id of plants belonging to user.
   const [show, setShow] = useState(false);
   const [userPlants, setUserPlants] = useState(props.user_plants)
   const [plantList, setPlantList] = useState([]);
