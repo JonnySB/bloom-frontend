@@ -1,21 +1,14 @@
-import Nav from "react-bootstrap/Nav";
+import Button from 'react-bootstrap/Button';
+import "./ManageHelpRequestsNavBar.css"
 
-function ManageHelpRequestsNavBar() {
-  return (
-    <div>
-      <Nav justify variant="tabs" defaultActiveKey="/home">
-        <Nav.Item>
-          <Nav.Link href="www.google.com">My Requests</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link href="www.google.com">Received Offers</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link href="www.google.com">My Offers</Nav.Link>
-        </Nav.Item>
-      </Nav>
-    </div>
-  );
+function TagTypesExample() {
+    return (
+        <div className='container'>
+            <Button type="submit">Create Help Request</Button>{' '}
+            <Button type="submit">Received Offers</Button>{' '}
+            <Button type="submit">Help Offers</Button>{' '}
+        </div>
+    );
 }
 
-export default ManageHelpRequestsNavBar;
+export default TagTypesExample;

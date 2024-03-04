@@ -1,12 +1,12 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import ReceivedOffers from "./pages/ManageHelpRequest/ReceivedOffers/ReceivedOffers";
+import ReceivedOffersPage from "./pages/ManageHelpRequestPages/ReceivedOffersPage/ReceivedOffersPage";
 
 const router = createBrowserRouter([
   {
     path: "/something",
-    element: <ReceivedOffers />,
+    element: <ReceivedOffersPage />,
   },
 ]);
 
