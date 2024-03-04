@@ -8,12 +8,12 @@ import { getuserInformationById } from "../services/authentication";
 export const MessagePage = () => {
     const [selectedMessageId, setSelectedMessageId] = useState(null);
     const [userDetails, setUserDetails] = useState(null);
-    const senderUserID = 5; 
+    const senderUserID = 4; 
 
     useEffect(() => {
       const fetchUserDetails = async () => {
         try {
-          const userData = await getuserInformationById(1); // WE WILL NEED TO LOAD THE USER DETAILS HERE
+          const userData = await getuserInformationById(3); // WE WILL NEED TO LOAD THE USER DETAILS HERE
           setUserDetails(userData);
         } catch (err) {
           console.error('Error fetching user details:', err);

@@ -6,10 +6,10 @@
 
 
 .message-container {
+
     display: flex; /* Make it a flex container */
     flex-direction: column; /* Align children vertically */
-    height: 100vh; /* Full height of the viewport */
-    overflow-y: auto; /* Enable vertical scroll */
+
 }
 
 .message {
@@ -27,6 +27,8 @@
 .message-card .card-body {
     flex-grow: 1; /* Grow to use available space */
     overflow-y: auto; /* Scroll only when needed */
+    height: 78vh; /* SIZE OF THE PAGE */
+    overflow-y: auto; /* Enable vertical scroll */
 }
 
 .input-group {
@@ -34,6 +36,7 @@
   }
   
 .message-input-field {
+    height: 60px;
     flex-grow: 1; /* Input field takes up the remaining space */
     border-top-right-radius: 0; /* Aligns the radius with the button */
     border-bottom-right-radius: 0; /* Aligns the radius with the button */
