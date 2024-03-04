@@ -19,9 +19,9 @@ vi.mock("react-router-dom", () => {
     const completeLoginForm = async () => {
     const user = userEvent.setup();
 
-    const username_emailInputEl = screen.getByPlaceholderText("Email or Username");
+    const username_emailInputEl = screen.getByPlaceholderText("Email or username");
     const passwordInputEl = screen.getByPlaceholderText("Password");
-    const submitButtonEl = screen.getByRole("submit-button");
+    const submitButtonEl = screen.getByRole("button", { name: "Login" });
 
     await user.type(username_emailInputEl, "test@email.com");
     await user.type(passwordInputEl, "1234");

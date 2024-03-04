@@ -2,7 +2,11 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
 import { login } from "../../services/authentication";
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
+import Col from 'react-bootstrap/Col';
+import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
+import Button from 'react-bootstrap/Button';
 
 
 
@@ -34,40 +38,22 @@ export const Login = () => {
     };
 
     return (
+        <Form className="Login" onSubmit={handleSubmit}>
+            <h1 className="h3 mb-3 font-weight-normal">Login</h1>
+        <Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
+            <Col sm="10">
+                <Form.Control type="email" placeholder="Email or username" value={username_email} onChange={handleUsernameEmailChange} />
+            </Col>
+        </Form.Group>
 
-<>
-        
-        <form className="Login" onSubmit={handleSubmit}>
-        <h1 className="h3 mb-3 font-weight-normal">Login</h1>
-            <div className="mb-3">
-                
-                <input
-                    className="form-control"
-                    id="username_email"
-                    placeholder="Email or Username"
-                    type="email"
-                    value={username_email}
-                    onChange={handleUsernameEmailChange}
-                    required autoFocus
-                />
-            </div>
-            <div className="mb-3">
-            
-                <input
-                    className="form-control"
-                    placeholder="Password"
-                    id="password"
-                    type="password"
-                    value={password}
-                    onChange={handlePasswordChange}
-                    required
-                />
-                {loginError && <div className="invalid-signup" role="invalid-signup">{loginError}</div>}
-            </div>
-            <button className="btn btn-lg btn-primary btn-block" role="submit-button" id="submit" type="submit">Login</button>
-        </form>
-</>
-        
+        <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
+            <Col sm="10">
+                <Form.Control type="password" placeholder="Password" value={password} onChange={handlePasswordChange} />
+            </Col>
+        </Form.Group>
+        <Button type="submit">Login</Button>
+        {loginError && <div>{loginError}</div>}
+    </Form>
 
-    );
-};
+        );
+    };
