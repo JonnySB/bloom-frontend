@@ -1,6 +1,5 @@
 import createFetchMock from "vitest-fetch-mock";
 import { describe, vi } from "vitest";
-
 import { login, signup } from "../../src/services/authentication";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
@@ -25,7 +24,7 @@ describe("authentication service", () => {
       const url = fetchArguments[0];
       const options = fetchArguments[1];
 
-      expect(url).toEqual(`${BACKEND_URL}/tokens`);
+      expect(url).toEqual(`${BACKEND_URL}/token`);
       expect(options.method).toEqual("POST");
       expect(options.body).toEqual(
         JSON.stringify({ username_email: testEmail, password: testPassword }),
@@ -95,7 +94,7 @@ describe("authentication service", () => {
       const url = fetchArguments[0];
       const options = fetchArguments[1];
 
-      expect(url).toEqual(`${BACKEND_URL}/users`);
+      expect(url).toEqual(`${BACKEND_URL}/user/signup`);
       expect(options.method).toEqual("POST");
       expect(options.body).toEqual(
         JSON.stringify({
