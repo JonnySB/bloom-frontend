@@ -13,9 +13,14 @@
   "dependencies": {
     "@testing-library/jest-dom": "^6.4.2",
     "@testing-library/react": "^14.2.1",
+    "bootstrap": "^5.3.3",
     "jsdom": "^24.0.0",
     "react": "^18.2.0",
+    "react-bootstrap": "^2.10.1",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^6.22.2",
+    "socket.io": "^4.7.4",
+    "socket.io-client": "^4.7.4",
     "vitest": "^1.3.1",
     "vitest-fetch-mock": "^0.2.2"
   },
