@@ -3,23 +3,24 @@ import './HelpRequestDetailsPage.css'
 import HelpRequest from '../../componenets/HelpRequest/HelpRequest';
 import { useParams } from 'react-router-dom';
 import { getOneHelpRequestById } from '../../services/HelpRequests';
-// import { getHelpRequestWithUserById } from '../../services/HelpRequests';
 
 const HelpRequestDetailsPage = () => {
-    const { requestId } = useParams(); // Get the request ID from the URL params
+    const { requestId } = useParams(); 
     const [helpRequest, setHelpRequest] = useState(null);
 
     useEffect(() => {
         const fetchHelpRequest = async () => {
             try {
-                const data = await getOneHelpRequestById(requestId); // Fetch the help request by ID
+                const data = await getOneHelpRequestById(requestId); 
                 setHelpRequest(data);
+                console.log("DATA in details page: ", data)
             } catch (error) {
                 console.error('Error fetching help request:', error);
+                console.log("requestId: ", requestId)
             }
         };
         fetchHelpRequest();
-    }, [requestId]); // Fetch help request when requestId changes
+    }, [requestId]); 
 
     if (!helpRequest) {
         return <div>Loading...</div>;
@@ -28,26 +29,31 @@ const HelpRequestDetailsPage = () => {
     return (
         <div>
             <div className='main-help-request-details-page-div'>
-            <div>
+            {/* <div>
                 <h1>{helpRequest.title}</h1>
-                {/* Render other details of the help request */}
-            </div>
-                {/* {helpRequestWithUser && (
+                <p>{helpRequest.date}</p>
+                <p>{helpRequest.message}</p>
+                <p>{helpRequest.start_date}</p>
+                <p>{helpRequest.end_date}</p>
+                <p>{helpRequest.maxprice}</p>
+                <p>{helpRequest.user_details.username}</p>
+                <p>{helpRequest.user_details.first_name}</p>
+                <p>{helpRequest.user_details.last_name}</p>
+                <p>{helpRequest.user_details.avatar_url_string}</p>
+            </div> */}
                     <HelpRequest
-                        key={helpRequestWithUser.id}
-                        title={helpRequestWithUser.title}
-                        date={helpRequestWithUser.date}
-                        message={helpRequestWithUser.message}
-                        start_date={helpRequestWithUser.start_date}
-                        end_date={helpRequestWithUser.end_date}
-                        maxprice={helpRequestWithUser.maxprice}
-                        username={helpRequestWithUser.username}
-                        first_name={helpRequestWithUser.first_name}
-                        last_name={helpRequestWithUser.last_name}
-                        avatar_url_string={helpRequestWithUser.avatar_url_string}
+                        key={helpRequest.id}
+                        title={helpRequest.title}
+                        date={helpRequest.date}
+                        message={helpRequest.message}
+                        start_date={helpRequest.start_date}
+                        end_date={helpRequest.end_date}
+                        maxprice={helpRequest.maxprice}
+                        username={helpRequest.user_details.username}
+                        first_name={helpRequest.user_details.first_name}
+                        last_name={helpRequest.user_details.last_name}
+                        avatar_url_string={helpRequest.user_details.avatar_url_string}
                     />
-
-                )} */}
             </div>
         </div>
     )

@@ -11,29 +11,29 @@ import { getAllHelpRequestsWithUserDetails } from '../../services/HelpRequests';
 const HelpRequest = (props) => {
     const navigate = useNavigate();
 
-    // const handleSubmit = (e) => {
-    //     navigate(`/help_request_details/${props.id}`);
-    // }
-
-    const handleSubmit = async (e) => {
-        try {
-            // Fetch all help requests with user details
-            const allHelpRequests = await getAllHelpRequestsWithUserDetails();
-    
-            // Check if the clicked help request ID exists in the fetched data
-            const clickedRequestId = props.id;
-            const exists = allHelpRequests.some(request => request.id === clickedRequestId);
-    
-            // If the clicked request ID exists, navigate to its details page
-            if (exists) {
-                navigate(`/help_requests/${clickedRequestId}`);
-            } else {
-                console.error(`Help request with ID ${clickedRequestId} not found.`);
-            }
-        } catch (error) {
-            console.error('Error fetching help requests with users:', error);
-        }
+    const handleSubmit = (e) => {
+        navigate(`/help_request_details/${props.id}`);
     }
+
+    // const handleSubmit = async (e) => {
+    //     try {
+    //         // Fetch all help requests with user details
+    //         const allHelpRequests = await getAllHelpRequestsWithUserDetails();
+    
+    //         // Check if the clicked help request ID exists in the fetched data
+    //         const clickedRequestId = props.id;
+    //         const exists = allHelpRequests.some(request => request.id === clickedRequestId);
+    
+    //         // If the clicked request ID exists, navigate to its details page
+    //         if (exists) {
+    //             navigate(`/help_requests/${clickedRequestId}`);
+    //         } else {
+    //             console.error(`Help request with ID ${clickedRequestId} not found.`);
+    //         }
+    //     } catch (error) {
+    //         console.error('Error fetching help requests with users:', error);
+    //     }
+    // }
     
     
     return (
@@ -48,7 +48,7 @@ const HelpRequest = (props) => {
                         <small className='text-muted'>&nbsp;{props.date}</small>
                         {/* {props.avatar_url_string && <Card.Text>Avatar: {props.avatar_url_string}</Card.Text>} */}
                         <Card.Text>{props.title}</Card.Text>
-                        <ViewButton onClick={handleSubmit} className="view-button">View</ViewButton>
+                        <ViewButton onClick={handleSubmit}>View</ViewButton>
                         {props.message && <Card.Text>{props.message}</Card.Text>}
                         {props.start_date && <Card.Text>Start Date: {props.start_date}</Card.Text>}
                         {props.end_date && <Card.Text>End Date: {props.end_date}</Card.Text>}
