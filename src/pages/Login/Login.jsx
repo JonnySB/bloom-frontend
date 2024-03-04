@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
 import { login } from "../../services/authentication";
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 
 export const Login = () => {
@@ -33,40 +35,39 @@ export const Login = () => {
 
     return (
 
-        <>
-
-        <div className="login-box">
-            <h2>Login</h2>
-            <form className="content-login" onSubmit={handleSubmit}>
+<>
+        
+        <form className="Login" onSubmit={handleSubmit}>
+        <h1 className="h3 mb-3 font-weight-normal">Login</h1>
+            <div className="mb-3">
                 
                 <input
-                    className="input"
+                    className="form-control"
                     id="username_email"
                     placeholder="Email or Username"
-                    type="text"
+                    type="email"
                     value={username_email}
                     onChange={handleUsernameEmailChange}
-                    />
-
-                <input 
-                    className="input" 
-                    placeholder="Password"  
-                    id="password" type="password"  
-                    value={password} 
+                    required autoFocus
+                />
+            </div>
+            <div className="mb-3">
+            
+                <input
+                    className="form-control"
+                    placeholder="Password"
+                    id="password"
+                    type="password"
+                    value={password}
                     onChange={handlePasswordChange}
-                    />
+                    required
+                />
+                {loginError && <div className="invalid-signup" role="invalid-signup">{loginError}</div>}
+            </div>
+            <button className="btn btn-lg btn-primary btn-block" role="submit-button" id="submit" type="submit">Login</button>
+        </form>
+</>
         
-                {loginError && <div className="invalid-signup" role="invalid-signup">{loginError} </div>}
-
-                <input className="btn btn-login" role="submit-button" id="submit" type="submit" value="Login" />
-
-            </form>
-    
-        </div>    
-
-        
-
-        </>
 
     );
 };
