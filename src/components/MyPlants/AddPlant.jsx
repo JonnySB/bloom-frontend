@@ -5,9 +5,9 @@ import Modal from 'react-bootstrap/Modal';
 import { updatePlantsQuantity, assignPlant } from '../../services/userPlants';
 import { fetchPlants } from '../../services/plants';
 
-function AddPlant() {
+const AddPlant = (props) => {
   const [show, setShow] = useState(false);
-  const [userPlants, setUserPlants] = useState(['1'])
+  const [userPlants, setUserPlants] = useState(props.user_plants)
   const [plantList, setPlantList] = useState([]);
   const [type, setType] = useState("");
   const [quantity, setQuantity] = useState(0)
@@ -29,7 +29,7 @@ function AddPlant() {
   const handleSubmit = () => {
     console.log(userPlants)
     if (userPlants.includes(type)) {
-    updatePlantsQuantity(1, type, quantity, token)
+    updatePlantsQuantity(props.user_id, type, quantity, token)
     .then((data) => {
       setToken(data.token)
       window.localStorage.setItem("token", data.token)
