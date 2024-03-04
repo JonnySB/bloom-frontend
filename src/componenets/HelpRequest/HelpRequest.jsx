@@ -4,14 +4,35 @@ import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import './HelpRequest.css'
 import { Image } from 'react-bootstrap';
+import { getAllHelpRequestsWithUserDetails } from '../../services/HelpRequests';
 
 
 
 const HelpRequest = (props) => {
     const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
-        navigate(`/help_request_details/${props.id}`);
+    // const handleSubmit = (e) => {
+    //     navigate(`/help_request_details/${props.id}`);
+    // }
+
+    const handleSubmit = async (e) => {
+        try {
+            // Fetch all help requests with user details
+            const allHelpRequests = await getAllHelpRequestsWithUserDetails();
+    
+            // Check if the clicked help request ID exists in the fetched data
+            const clickedRequestId = props.id;
+            const exists = allHelpRequests.some(request => request.id === clickedRequestId);
+    
+            // If the clicked request ID exists, navigate to its details page
+            if (exists) {
+                navigate(`/help_requests/${clickedRequestId}`);
+            } else {
+                console.error(`Help request with ID ${clickedRequestId} not found.`);
+            }
+        } catch (error) {
+            console.error('Error fetching help requests with users:', error);
+        }
     }
     
     

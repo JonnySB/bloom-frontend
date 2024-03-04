@@ -28,6 +28,7 @@ const Homepage = () => {
                     {helpRequestsWithUsers.map(helpRequest => (
                         <HelpRequest
                             key={helpRequest.id}
+                            id={helpRequest.id}
                             title={helpRequest.title}
                             date={helpRequest.date}
                             first_name={helpRequest.first_name}

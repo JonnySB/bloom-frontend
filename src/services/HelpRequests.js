@@ -45,6 +45,28 @@ export const getAllHelpRequestsWithUserDetails = async () => {
     }
 }
 
+export const getOneHelpRequestById = async (requestId) => {
+    try {
+        const requestOptions = {
+            method: "GET",
+            headers: {}
+        };
+
+        const response = await fetch(`${BACKEND_URL}/help_requests/${requestId}`, requestOptions);
+        if (!response.ok) {
+            throw new Error(`Failed to fetch help request with id ${requestId}`);
+        }
+
+        const data = await response.json();
+        console.log("DATA", data);
+        return data;
+        
+    } catch(error) {
+        console.error("API Error:", error);
+        throw error;
+    }
+}
+
 // export const getAllHelpRequestsWithUsers = async () => {
 //     try {
 //         const requestOptions = {
@@ -80,54 +102,54 @@ export const getAllHelpRequestsWithUserDetails = async () => {
 // }
 
 
-export const getHelpRequestById = async (id) => {
-    try{
-        const requestOptions = {
-            method: "GET",
-            headers:{}
-        };
+// export const getHelpRequestById = async (id) => {
+//     try{
+//         const requestOptions = {
+//             method: "GET",
+//             headers:{}
+//         };
 
-        const response = await fetch(`${BACKEND_URL}/help_requests/${id}`, requestOptions);
-        if (response.status !== 200){
-            throw new Error("Failed to fetch help request")
-        }
+//         const response = await fetch(`${BACKEND_URL}/help_requests/${id}`, requestOptions);
+//         if (response.status !== 200){
+//             throw new Error("Failed to fetch help request")
+//         }
 
-        const data = await response.json()
-        console.log("API response: ", data)
-        return data
-    } catch(error){
-        console.error("API Error: ", error)
-    }
-}
+//         const data = await response.json()
+//         console.log("API response: ", data)
+//         return data
+//     } catch(error){
+//         console.error("API Error: ", error)
+//     }
+// }
 
 
-export const getHelpRequestWithUserById = async (requestId) => {
-    try {
-        // Fetch help request by ID
-        const helpRequest = await getHelpRequestById(requestId);
-        console.log("getHelpRequestById", helpRequest)
+// export const getHelpRequestWithUserById = async (requestId) => {
+//     try {
+//         // Fetch help request by ID
+//         const helpRequest = await getHelpRequestById(requestId);
+//         console.log("getHelpRequestById", helpRequest)
 
-        // Fetch user details using the user_id from the help request
-        const user = await getUserById(helpRequest.user_id);
+//         // Fetch user details using the user_id from the help request
+//         const user = await getUserById(helpRequest.user_id);
 
-        // Combine help request and user data
-        const helpRequestWithUser = {
-            ...helpRequest,
-            user: {
-                id: user.id,
-                first_name: user.first_name,
-                last_name: user.last_name,
-                username: user.username,
-                email: user.email,
-                avatar_url_string: user.avatar_url_string,
-                address: user.address,
-            }
-        };
+//         // Combine help request and user data
+//         const helpRequestWithUser = {
+//             ...helpRequest,
+//             user: {
+//                 id: user.id,
+//                 first_name: user.first_name,
+//                 last_name: user.last_name,
+//                 username: user.username,
+//                 email: user.email,
+//                 avatar_url_string: user.avatar_url_string,
+//                 address: user.address,
+//             }
+//         };
 
-        return helpRequestWithUser;
-    } catch (error) {
-        console.error('Error fetching help request with user:', error);
-        throw error;
-    }
-}
+//         return helpRequestWithUser;
+//     } catch (error) {
+//         console.error('Error fetching help request with user:', error);
+//         throw error;
+//     }
+// }
 
