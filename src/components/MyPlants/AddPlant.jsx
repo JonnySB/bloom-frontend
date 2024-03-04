@@ -1,20 +1,17 @@
 import { useState, useEffect } from 'react';
-import { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
-import { updatePlantsQuantity } from '../../services/userPlants';
-import { fetchPlants } from '../../services/plants';
-import { updatePlantsQuantity } from '../../services/userPlants';
+import { updatePlantsQuantity, assignPlant } from '../../services/userPlants';
 import { fetchPlants } from '../../services/plants';
 
 function AddPlant() {
   const [show, setShow] = useState(false);
-  const [plantList, setPlantList] = useState([]);
+  const [userPlants, setUserPlants] = useState(['1'])
   const [plantList, setPlantList] = useState([]);
   const [type, setType] = useState("");
   const [quantity, setQuantity] = useState(0)
-  const [token, setToken] = window.localStorage.getItem("token")
+  const [token, setToken] = useState(window.localStorage.getItem("token"))
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -30,7 +27,17 @@ function AddPlant() {
   }, [])
 
   const handleSubmit = () => {
-    updatePlantsQuantity(user_id, type, quantity, token)
+    if (userPlants.includes(type)) {
+    updatePlantsQuantity(1, type, quantity, token)
+    .then((data) => {
+      console.log(data)
+    });
+    } else {
+      assignPlant(1, type, quantity, token)
+      .then((data) => {
+        console.log(data)
+      });
+    }
   };
 
   const onTypeChange = (e) => {
