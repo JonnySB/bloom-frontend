@@ -27,15 +27,20 @@ function AddPlant() {
   }, [])
 
   const handleSubmit = () => {
+    console.log(userPlants)
     if (userPlants.includes(type)) {
     updatePlantsQuantity(1, type, quantity, token)
     .then((data) => {
-      console.log(data)
+      setToken(data.token)
+      window.localStorage.setItem("token", data.token)
     });
     } else {
       assignPlant(1, type, quantity, token)
       .then((data) => {
-        console.log(data)
+        userPlants.push(type)
+        setToken(data.token)
+        window.localStorage.setItem("token", data.token)
+
       });
     }
   };
