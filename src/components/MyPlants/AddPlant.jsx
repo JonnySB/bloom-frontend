@@ -22,6 +22,7 @@ const AddPlant = (props) => {
     fetchPlants(token)
     .then((data) => {
       setPlantList(data)
+      console.log(data)
     })
     .catch((err) => {
       console.error(err);
@@ -72,7 +73,7 @@ const AddPlant = (props) => {
             <Form.Select aria-label="Default select example" onChange={onTypeChange}>
                 <option>What type of plant are you adding?</option>
                 {plantList.map((plant) => (
-                  <option value={plant.id} key={plant.id}>{plant.common_name}</option>
+                  <option value={plant.id} key={plant.id} label={plant.id}>{plant.common_name}</option>
                 ))}
             </Form.Select>
             </Form.Group>
