@@ -25,7 +25,7 @@ describe("authentication service", () => {
       const url = fetchArguments[0];
       const options = fetchArguments[1];
 
-      expect(url).toEqual(`${BACKEND_URL}/tokens`);
+      expect(url).toEqual(`${BACKEND_URL}/token`);
       expect(options.method).toEqual("POST");
       expect(options.body).toEqual(
         JSON.stringify({ username_email: testEmail, password: testPassword }),
