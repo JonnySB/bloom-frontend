@@ -1,18 +1,32 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import AddPlant from './components/MyPlants/AddPlant'
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { MessagePage } from "./pages/MessagePage";
+import { Login } from "./pages/Login/Login";
+import { Signup } from "./pages/Signup/Signup";
+
+
 import './App.css'
 
-function App() {
-  const [count, setCount] = useState(0)
+const router = createBrowserRouter([
+  {
+    path: "/messages",
+    element: <MessagePage />,
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/signup",
+    element: <Signup />,
+  },
+]);
 
+const App = () => {
   return (
     <>
-      <AddPlant user_id={1} user_plants={['1']} />
+      <RouterProvider router={router} />
     </>
-  )
-}
+  );
+};
 
 export default App
