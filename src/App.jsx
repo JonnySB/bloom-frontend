@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { MessagePage } from "./pages/Message/MessagePage";
 import { Login } from "./pages/Login/LoginPage";
-import { Signup } from "./pages/Signup/Signup";
+import { Signup } from "./pages/Signup/SignupPage";
 import { Profile } from "./pages/Profile/ProfilePage";
 
 import './App.css'

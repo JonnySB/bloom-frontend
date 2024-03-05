@@ -1,0 +1,35 @@
+
+
+.profileEdit {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    gap: 1rem;
+    width: 100%; /* Full width */
+
+}
+
+
+.profileEdit img {
+    width: 100%; /* Full width of the parent */
+    height: 100%; /* Full height of the parent */
+    object-fit: cover; /* Cover the area, may clip the image */
+}
+
+/* Responsive styles for smaller screens */
+@media (max-width: 767px) {
+    .profileEdit {
+        flex-direction: column; /* Stack the cards on smaller screens */
+    }
+
+    .third-menu-card {
+        width: 100%; /* Full width on smaller screens */
+        height: auto; /* Height based on content */
+    }
+
+    .profileEdit img {
+        width: 100%; /* Full width of the parent */
+        /* Remove the 'height: auto;' to ensure the image covers the div */
+        object-fit: cover; /* Keep 'cover' to ensure the image fills the div */
+    }
+}
