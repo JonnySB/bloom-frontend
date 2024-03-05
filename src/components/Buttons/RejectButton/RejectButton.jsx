@@ -1,6 +1,6 @@
 import Button from "react-bootstrap/Button";
 
-import { rejectHelpOffer } from '../../../services/ReceivedOffersService'
+import { rejectHelpOffer } from '../../../services/helpOffers'
 
 const RejectOffer = ({ help_offer_id, triggerReload, setTriggerReload }) => {
 
@@ -13,7 +13,7 @@ const RejectOffer = ({ help_offer_id, triggerReload, setTriggerReload }) => {
 
     return (
         <Button vaient="success" size="sm" active onClick={handleClick}>
-             Reject Offer
+            Reject Offer
         </Button>
     );
 };

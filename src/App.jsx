@@ -6,32 +6,37 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 
 import ReceivedOffersPage from "./pages/ManageHelpRequestPages/ReceivedOffersPage/ReceivedOffersPage";
+import MyOffersPage from "./pages/ManageHelpRequestPages/MyOffersPage/MyOffersPage";
 
 const router = createBrowserRouter([
-  {
-    path: "/messages",
-    element: <MessagePage />,
-  },
-  {
-    path: "/something",
-    element: <ReceivedOffersPage />,
-  },
-  {
-    path: "/login",
-    element: <Login />,
-  },
-  {
-    path: "/signup",
-    element: <Signup />,
-  },
+    {
+        path: "/messages",
+        element: <MessagePage />,
+    },
+    {
+        path: "/request_management/received_offers",
+        element: <ReceivedOffersPage />,
+    },
+    {
+        path: "/request_management/my_offers",
+        element: <MyOffersPage />,
+    },
+    {
+        path: "/login",
+        element: <Login />,
+    },
+    {
+        path: "/signup",
+        element: <Signup />,
+    },
 ]);
 
 const App = () => {
-  return (
-    <>
-      <RouterProvider router={router} />
-    </>
-  );
+    return (
+        <>
+            <RouterProvider router={router} />
+        </>
+    );
 };
 
 export default App;
