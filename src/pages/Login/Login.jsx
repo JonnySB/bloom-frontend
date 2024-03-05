@@ -12,7 +12,6 @@ export const Login = () => {
     const [username_email, setUsername_email] = useState("");
     const [password, setPassword] = useState("");
     const [loginError, setError] = useState()
-    const [userId, setUserId] = useState(window.localStorage.getItem("user_id"))
     const navigate = useNavigate();
     
     const handleSubmit = async (event) => {
