@@ -4,52 +4,27 @@ import { useNavigate } from "react-router-dom";
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
-import { getUserInformationById } from "../../services/authentication";
+// import { getUserInformationById } from "../../services/authentication";
 
 const NavbarComponent = () => {
     // const [isOpen, setIsOpen] = useState(false);
-    const [user, setUser] = useState(null);
-    const [token, setToken] = useState(localStorage.getItem("token"));
+    // const [user, setUser] = useState(null);
+    // const [token, setToken] = useState(localStorage.getItem("token"));
+    const id = window.localStorage.getItem("user_id")
+    const token = window.localStorage.getItem("token")
     const navigate = useNavigate();
 
-    useEffect(() => {
-        const verifyTokenValidity = async () => {
-            try {
-                if (token) {
-                    const userData = await getUserInformationById(token); 
-                    setUser(userData);
-                    setToken(userData.token);
-                    localStorage.setItem("token", userData.token);
-                }
-            } catch (error) {
-                console.error("Error verifying token validity:", error);
-                localStorage.removeItem("token");
-                setUser(null);
-                setToken(null);
-            }
-        };
-
-        verifyTokenValidity();
-    }, [token]);
-
-    // const toggleNavbar = () => {
-    //     setIsOpen(!isOpen);
-    // };
 
     const home = () => {
         navigate("/posts")
     }
 
-    const profilePage = () => {
-        if (user && user.id) {
-            navigate(`/profile/${user.id}`);
-        } else {
-            navigate("/login");
-        }
+    const profilePage = (id) => {
+        navigate(`/profile/${id}`);
     };
 
-    const myplants = () => {
-        navigate(`/plants/user/${user.id}`);
+    const myplants = (id) => {
+        navigate(`/plants/user/${id}`);
     }
 
     const messages = () => {
