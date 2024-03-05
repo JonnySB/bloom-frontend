@@ -1,0 +1,16 @@
+.container {
+    padding-bottom: 50px;
+}
+
+.message-page-container {
+    background-color: #333;
+    display: flex; /* Use flex to layout children */
+    justify-content: center; /* Center children horizontally in the container */
+    align-items: flex-start; /* Align children to the start of the container vertically */
+    min-height: 90vh; /* Full height of viewport minus margins */
+    width: 90vw; /* Full width of viewport minus margins */
+    margin: 1rem auto; /* Spacing around the container */
+    padding: 0; /* Reset padding */
+        
+}
+

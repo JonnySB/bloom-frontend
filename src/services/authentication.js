@@ -18,7 +18,7 @@ export const login = async (username_email, password) => {
   };
 
   // Get's tokens with above login details.
-  const response = await fetch(`${BACKEND_URL}/tokens`, requestOptions);
+  const response = await fetch(`${BACKEND_URL}/token`, requestOptions);
 
   // Returns token if response is 201 otherwise throws an error. 201 means succesful request that led to creation of a resource (In this case a "token")
   // docs: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/201
@@ -59,7 +59,7 @@ export const signup = async (
     body: JSON.stringify(payload),
   };
 
-  let response = await fetch(`${BACKEND_URL}/users`, requestOptions);
+  let response = await fetch(`${BACKEND_URL}/user/signup`, requestOptions);
 
   // docs: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/201
   if (response.status === 201) {
@@ -70,3 +70,25 @@ export const signup = async (
     );
   }
 };
+
+
+export const getuserInformationById = async (userId) => {
+      const requestOptions = {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    };
+    const response = await fetch(`${BACKEND_URL}/user_details/${userId}`, requestOptions);
+
+    if (response.status === 200) {
+      const data = await response.json();
+      // console.log("user details loaded loaded ");
+      return data;
+    } else {
+      const errorResponse = await response.json();
+      console.error('Full error response:', errorResponse);
+      throw new Error(`Error fetching userdetails : ${errorResponse}`);
+  }
+}
+

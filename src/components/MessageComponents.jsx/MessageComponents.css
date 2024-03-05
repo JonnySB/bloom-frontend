@@ -1,0 +1,62 @@
+.side-message {
+    flex: 0 0 30%; /* Do not grow or shrink, stay at 30% of the parent container */
+    height: 100%; /* Make them fill the height of their parent */
+    overflow-y: auto; /* Enable vertical scroll */
+}
+
+
+.message-container {
+
+    display: flex; /* Make it a flex container */
+    flex-direction: column; /* Align children vertically */
+
+}
+
+.message {
+    flex: 1; /* This will make it fill the height of its flex container parent */
+    display: flex;
+    flex-direction: column;
+}
+
+.message-card {
+    flex-grow: 1; /* Grow to use available space */
+    display: flex;
+    flex-direction: column;
+}
+
+.message-card .card-body {
+    flex-grow: 1; /* Grow to use available space */
+    overflow-y: auto; /* Scroll only when needed */
+    height: 78vh; /* SIZE OF THE PAGE */
+    overflow-y: auto; /* Enable vertical scroll */
+}
+
+.input-group {
+    display: flex;
+  }
+  
+.message-input-field {
+    height: 60px;
+    flex-grow: 1; /* Input field takes up the remaining space */
+    border-top-right-radius: 0; /* Aligns the radius with the button */
+    border-bottom-right-radius: 0; /* Aligns the radius with the button */
+}
+
+.send-button {
+    margin-left: -1px; /* Align the button with the input field */
+    border-top-left-radius: 0; /* Aligns the radius with the input field */
+    border-bottom-left-radius: 0; /* Aligns the radius with the input field */
+}
+
+
+.message-bubble {
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 10px;
+    background-color: #f4f4f4;
+}
+
+.message-bubble strong {
+    color: #333;
+    margin-right: 5px;
+}
