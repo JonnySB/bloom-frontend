@@ -14,10 +14,6 @@ export const Login = () => {
     const [loginError, setError] = useState()
     const [userId, setUserId] = useState(window.localStorage.getItem("user_id"))
     const navigate = useNavigate();
-
-    useEffect(() => {
-        console.log(userId)
-    }, [])
     
     const handleSubmit = async (event) => {
         event.preventDefault();
