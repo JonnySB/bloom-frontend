@@ -8,7 +8,8 @@ import ReceivedOffersTable from "../../../components/ReceivedOffersTable/Receive
 
 const ReceivedOffersPage = () => {
 
-    const [receivedOffers, setReceivedOffers] = useState(null)
+    const [receivedOffers, setReceivedOffers] = useState(null);
+    const [triggerReload, setTriggerReload] = useState(false);
     
     useEffect(() => {
         const fetchReceivedOffers = async () => {
@@ -20,7 +21,7 @@ const ReceivedOffersPage = () => {
             }
         };
         fetchReceivedOffers();
-    }, [])
+    }, [triggerReload])
     
     return (
         <div className="page-container">
@@ -29,7 +30,11 @@ const ReceivedOffersPage = () => {
             </div>
             <div>
                 {receivedOffers != null && (
-                    <ReceivedOffersTable receivedOffers={receivedOffers}/>
+                    <ReceivedOffersTable 
+                        receivedOffers={receivedOffers}
+                        triggerReload={triggerReload}
+                        setTriggerReload={setTriggerReload}
+                    />
                 )}
             </div>
         </div>
