@@ -1,20 +1,29 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { MessagePage } from "./pages/MessagePage";
-import { Login } from "./pages/Login/Login";
-import { Signup } from "./pages/Signup/Signup";
+<<<<<<< HEAD
 import "bootstrap/dist/css/bootstrap.min.css";
-
 
 import ReceivedOffersPage from "./pages/ManageHelpRequestPages/ReceivedOffersPage/ReceivedOffersPage";
 
 const router = createBrowserRouter([
   {
-    path: "/messages",
-    element: <MessagePage />,
-  },
-  {
     path: "/something",
     element: <ReceivedOffersPage />,
+  },
+]);
+
+function App() {
+=======
+import { MessagePage } from "./pages/MessagePage";
+import { Login } from "./pages/Login/Login";
+import { Signup } from "./pages/Signup/Signup";
+
+
+import './App.css'
+
+const router = createBrowserRouter([
+  {
+    path: "/messages",
+    element: <MessagePage />,
   },
   {
     path: "/login",
@@ -27,11 +36,18 @@ const router = createBrowserRouter([
 ]);
 
 const App = () => {
+>>>>>>> main
   return (
     <>
       <RouterProvider router={router} />
     </>
   );
-};
+<<<<<<< HEAD
+}
 
 export default App;
+=======
+};
+
+export default App
+>>>>>>> main
