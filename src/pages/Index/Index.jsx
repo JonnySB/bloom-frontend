@@ -1,7 +1,10 @@
+import PlantCards from "../../components/MyPlants/PlantCards"
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 
 export const Index = () => {
     return (
-        <div>hello, this is the index page</div>
+        <PlantCards user_id={1} />
         );
     };
