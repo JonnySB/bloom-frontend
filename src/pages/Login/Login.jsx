@@ -36,9 +36,6 @@ export const Login = () => {
     };
 
     return (
-        <>
-
-
         <Form className="Login" onSubmit={handleSubmit}>
             <h1 className="h3 mb-3 font-weight-normal">Login</h1>
         <Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
@@ -54,9 +51,7 @@ export const Login = () => {
         </Form.Group>
         <Button type="submit">Login</Button>
         {loginError && <div>{loginError}</div>}
-        </Form>
-
-        </>
+    </Form>
 
         );
     };
