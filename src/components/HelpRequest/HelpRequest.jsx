@@ -35,7 +35,6 @@ const HelpRequest = (props) => {
                         {props.maxprice && <Card.Text>Max Price: {props.maxprice}</Card.Text>}
                         {props.username && <Card.Text>Username: {props.username}</Card.Text>}
                         {props.showButtonView && <ViewButton onClick={handleSubmitView}>View</ViewButton>}
-                        {props.showButtonOffer && <ViewButton onClick={handleSubmitOffer}>Make offer</ViewButton>}
                     </Card.Body>
                 </Card>
             </Col>

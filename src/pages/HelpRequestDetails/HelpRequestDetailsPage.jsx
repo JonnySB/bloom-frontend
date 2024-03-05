@@ -3,6 +3,7 @@ import './HelpRequestDetailsPage.css'
 import HelpRequest from '../../components/HelpRequest/HelpRequest';
 import { useParams } from 'react-router-dom';
 import { getOneHelpRequestById } from '../../services/HelpRequests';
+import CreateOfferForm from '../../components/CreateOfferForm/CreateOfferForm';
 
 const HelpRequestDetailsPage = () => {
     const { requestId } = useParams(); 
@@ -54,8 +55,8 @@ const HelpRequestDetailsPage = () => {
                         last_name={helpRequest.user_details.last_name}
                         avatar_url_string={helpRequest.user_details.avatar_url_string}
                         showButtonView={false}
-                        showButtonOffer={true}
                     />
+                    <CreateOfferForm  id={helpRequest.id} />
             </div>
         </div>
     )

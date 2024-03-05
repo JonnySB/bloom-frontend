@@ -1,8 +1,18 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import CreateHelpRequestForm from '../../components/CreateRequestForm/CreateHelpRequestForm'
 
 const CreateRequestPage = () => {
+
+    useEffect(() => {
+
+    })
+
+
     return (
-        <div>CreateRequestPage</div>
+        <>
+            <h1>Create help request page</h1>
+            <CreateHelpRequestForm />
+        </>
     )
 }
 

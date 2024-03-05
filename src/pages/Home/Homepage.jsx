@@ -34,7 +34,6 @@ const Homepage = () => {
                             first_name={helpRequest.first_name}
                             last_name={helpRequest.last_name}
                             showButtonView={true}
-                            showButtonOffer={false}
                         />
                     ))}
                 </div>

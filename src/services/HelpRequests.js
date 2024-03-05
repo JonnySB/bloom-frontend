@@ -69,6 +69,7 @@ export const createHelpRequest = async (title, message, start_date, end_date, ma
         }
 
         const data = await response.json();
+        console.log("DATA", data);
         return data;
 
     } catch(error) {
