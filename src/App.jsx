@@ -10,7 +10,7 @@ function App() {
 
   return (
     <>
-      <AddPlant />
+      <AddPlant user_id={1} user_plants={['1']} />
     </>
   )
 }
