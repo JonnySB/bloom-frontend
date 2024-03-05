@@ -3,7 +3,7 @@ import MessageContainer from "../../components/MessageComponents.jsx/MessageCont
 import { Container } from 'react-bootstrap';
 import './MessagePage.css'
 import React, { useState , useEffect} from "react";
-import { getuserInformationById } from "../../services/authentication";
+import { getuserInformationById } from "../../services/users";
 
 export const MessagePage = () => {
     const [selectedMessageId, setSelectedMessageId] = useState(null);

@@ -1,7 +1,7 @@
 import Container from 'react-bootstrap/Container';
 import UserNavbar from '../../components/EditComponents.jsx/UserDetailsComponent';
 import React, { useState , useEffect} from "react";
-import { getuserInformationById } from '../../services/authentication';
+import { getuserInformationById } from '../../services/users';
 
 export const Profile = () => {
     const [userDetails, setUserDetails] = useState(null);
