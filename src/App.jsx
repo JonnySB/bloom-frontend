@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { MessagePage } from "./pages/MessagePage";
+import { MessagePage } from "./pages/Message/MessagePage";
 import { Login } from "./pages/Login/Login";
 import { Signup } from "./pages/Signup/Signup";
 
