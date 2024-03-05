@@ -1,20 +1,20 @@
 import React, { useState } from 'react'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import Modal from 'react-bootstrap/Modal';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { createHelpRequest } from '../../services/HelpRequests';
 
-const CreateHelpRequestForm = () => {
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+const CreateHelpRequestForm = (props) => {
 
     const [title, setTitle] = useState("");
     const [message, setMessage] = useState("");
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
     const [maxprice, setMaxprice] = useState(0);
+
+    const token = window.localStorage.getItem("token");
+    const userID = window.localStorage.getItem("user_id");
 
     const handleTitleChange = (title) => {
         setTitle(title.target.value);
@@ -37,7 +37,21 @@ const CreateHelpRequestForm = () => {
         const regex = /^[0-9]+(\.[0-9]{0,2})?$/;
         if (regex.test(value) || value === '') {
         setMaxprice(value);
+        } else {
+            console.log("Make sure you enter in the following format: 00.00")
         }
+    }
+
+    const handleSubmitOffer = () => {
+        createHelpRequest(title, message, startDate, endDate, maxprice, userID, token)
+        .then((data) => {
+            console.log("Data -> ", data)
+            console.log("Successfully created a help request")
+            alert("Help offer submission successful")
+        })
+        .catch((error) => {
+            console.error("Error fetching create request: ", error)
+        })
     }
     return (
         <>
@@ -48,6 +62,7 @@ const CreateHelpRequestForm = () => {
                     <Form.Control
                     type="text"
                     placeholder="Title"
+                    value={title}
                     autoFocus
                     onChange={handleTitleChange}
                     />
@@ -60,6 +75,7 @@ const CreateHelpRequestForm = () => {
                     <Form.Control 
                     as="textarea" 
                     placeholder="Details of your request here" 
+                    value={message}
                     onChange={handleMessageChange}
                     rows={3} />
                 </Form.Group>
@@ -89,7 +105,10 @@ const CreateHelpRequestForm = () => {
                         onChange={handleMaxpriceChange}
                         placeholder="0.00"
                     />
-                    </Form.Group>
+                </Form.Group>
+                <Button variant="primary" onClick={handleSubmitOffer}>
+                    Submit Request
+                </Button>
             </Form>
     </>
     )

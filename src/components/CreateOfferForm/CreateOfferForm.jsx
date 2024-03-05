@@ -4,15 +4,21 @@ import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import 'react-datepicker/dist/react-datepicker.css';
 import { createHelpOffer } from '../../services/HelpOffers';
+import { useNavigate } from 'react-router-dom';
 
 const CreateOfferForm = (props) => {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+    const token  = window.localStorage.getItem("token");
+    const user_id = window.localStorage.getItem("user_id");
+    const navigate = useNavigate()
+
     const [message, setMessage] = useState("");
     const [status, setStatus] = useState("");
     const [bid, setBid] = useState(0);
+    
 
 
     const handleMessageChange = (event) => {
@@ -26,15 +32,17 @@ const CreateOfferForm = (props) => {
     const handleStatusChange = (event) => {
         setStatus(event.target.value);
     }
-
+// submit offer not working
     const handleSubmitOffer = () => {
         try {
-            createHelpOffer(props.id, message, status, user_id, bid, props.token)
+            createHelpOffer(props.id, message, status, user_id, bid, token)
             .then((data) => {
-                props.setToken(data.token)
+                console.log("Data -> ", data)
+                console.log("Successfully created a help offer")
+                navigate("/")
             })
         } catch(error) {
-            console.error("Error fetching from form component", error)
+            console.error("Error fetching help offer form", error)
         }
     }
 
@@ -78,7 +86,7 @@ const CreateOfferForm = (props) => {
                 </Form>
             </Modal.Body>
             <Modal.Footer>
-                <Button variant="primary" onClick={handleClose}>
+                <Button variant="primary" onClick={handleSubmitOffer}>
                 Submit Offer
                 </Button>
             </Modal.Footer>

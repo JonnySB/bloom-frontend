@@ -64,7 +64,7 @@ export const createHelpRequest = async (title, message, start_date, end_date, ma
         }
 
         const response =  await fetch(`${BACKEND_URL}/help_requests/create/${userId}`, requestOptions)
-        if (response.status !== 201) {
+        if (response.status !== 200) {
             throw new Error("Unable to make POST request for create request");
         }
 
@@ -74,5 +74,30 @@ export const createHelpRequest = async (title, message, start_date, end_date, ma
 
     } catch(error) {
         console.error("API error", error)
+    }
+}
+
+export const getAllRequestsByOneUser = async (userId, token) => {
+    try {
+        const requestOptions = {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
+        };
+
+        const response = await fetch(`${BACKEND_URL}/help_requests/user/${userId}`, requestOptions)
+        console.log("The response from service", response)
+        if (response.status !== 200) {
+            throw new Error("Unable to make GET request for get all requests by one user");
+        }
+
+        const data = await response.json();
+        console.log("DATA", data);
+        return data;
+
+    } catch(error) {
+        console.error("API Error", error)
     }
 }

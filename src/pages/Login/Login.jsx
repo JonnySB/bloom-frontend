@@ -20,7 +20,7 @@ export const Login = () => {
         const response = await login(username_email, password);
         window.localStorage.setItem("token", response.token);
         window.localStorage.setItem("user_id", response.user_id)
-        navigate("/posts");
+        navigate("/");
         } catch (err) {
         console.error(err);
         setError(err.cause)

@@ -9,6 +9,7 @@ const HelpRequestDetailsPage = () => {
     const { requestId } = useParams(); 
     const [helpRequest, setHelpRequest] = useState(null);
 
+
     useEffect(() => {
         const fetchHelpRequest = async () => {
             try {
@@ -56,7 +57,7 @@ const HelpRequestDetailsPage = () => {
                         avatar_url_string={helpRequest.user_details.avatar_url_string}
                         showButtonView={false}
                     />
-                    <CreateOfferForm  id={helpRequest.id} />
+                    <CreateOfferForm  id={requestId} />
             </div>
         </div>
     )
