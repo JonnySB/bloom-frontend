@@ -14,9 +14,9 @@ describe("AddPlant component", () => {
 
         const userId = 1
         const userPlantList = ['1']
-        fetch.mockResponseOnce(JSON.stringify([{id: 1, common_name:"A houseplant"}, {id: 2, common_name: "Another houseplant"}]), {
+        fetch.mockResponseOnce(JSON.stringify([{ id: 1, common_name: "A houseplant" }, { id: 2, common_name: "Another houseplant" }]), {
             status: 200,
-          });
+        });
 
 
         render(<AddPlant user_id={userId} user_plants={userPlantList} />);
@@ -38,8 +38,8 @@ describe("AddPlant component", () => {
         const userPlantList = [1]
 
         fetch.mockResponses(
-            [JSON.stringify([{id: 1, common_name:"A houseplant"}, {id: 2, common_name: "Another houseplant"}]), { status: 200 }],
-            [JSON.stringify({message: 'ok', token: 'testToken'}), { status: 200 }]
+            [JSON.stringify([{ id: 1, common_name: "A houseplant" }, { id: 2, common_name: "Another houseplant" }]), { status: 200 }],
+            [JSON.stringify({ message: 'ok', token: 'testToken' }), { status: 200 }]
         )
 
 
@@ -61,8 +61,8 @@ describe("AddPlant component", () => {
         // await user.click(submitButton)
 
         // This is an array of the arguments that were last passed to fetch
-      const fetchArguments = fetch.mock.lastCall;
-      const url = fetchArguments[0];
-      const options = fetchArguments[1];
+        const fetchArguments = fetch.mock.lastCall;
+        const url = fetchArguments[0];
+        const options = fetchArguments[1];
     });
 });
