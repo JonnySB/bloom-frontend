@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../services/authentication";
 import Col from 'react-bootstrap/Col';
@@ -13,12 +13,13 @@ export const Login = () => {
     const [password, setPassword] = useState("");
     const [loginError, setError] = useState()
     const navigate = useNavigate();
-
+    
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-        const token = await login(username_email, password);
-        window.localStorage.setItem("token", token);
+        const response = await login(username_email, password);
+        window.localStorage.setItem("token", response.token);
+        window.localStorage.setItem("user_id", response.user_id)
         navigate("/posts");
         } catch (err) {
         console.error(err);

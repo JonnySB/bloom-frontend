@@ -1,11 +1,24 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+<<<<<<< HEAD
+import "bootstrap/dist/css/bootstrap.min.css";
+
+import ReceivedOffersPage from "./pages/ManageHelpRequestPages/ReceivedOffersPage/ReceivedOffersPage";
+
+const router = createBrowserRouter([
+  {
+    path: "/something",
+    element: <ReceivedOffersPage />,
+  },
+]);
+
+function App() {
+=======
 import { MessagePage } from "./pages/MessagePage";
 import { Login } from "./pages/Login/Login";
 import { Signup } from "./pages/Signup/Signup";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { Index } from "./pages/Index/Index";
-import ReceivedOffersPage from "./pages/ManageHelpRequestPages/ReceivedOffersPage/ReceivedOffersPage";
-import 'bootstrap/dist/css/bootstrap.min.css';
+
+
+import './App.css'
 
 const router = createBrowserRouter([
   {
@@ -13,16 +26,8 @@ const router = createBrowserRouter([
     element: <MessagePage />,
   },
   {
-    path: "/something",
-    element: <ReceivedOffersPage />,
-  },
-  {
     path: "/login",
     element: <Login />,
-  },
-  {
-    path: "/",
-    element: <Index />
   },
   {
     path: "/signup",
@@ -31,11 +36,18 @@ const router = createBrowserRouter([
 ]);
 
 const App = () => {
+>>>>>>> main
   return (
     <>
       <RouterProvider router={router} />
     </>
   );
-};
+<<<<<<< HEAD
+}
 
 export default App;
+=======
+};
+
+export default App
+>>>>>>> main
