@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import './HelpRequestDetailsPage.css'
-import HelpRequest from '../../componenets/HelpRequest/HelpRequest';
+import HelpRequest from '../../components/HelpRequest/HelpRequest';
 import { useParams } from 'react-router-dom';
 import { getOneHelpRequestById } from '../../services/HelpRequests';
 
@@ -28,7 +28,7 @@ const HelpRequestDetailsPage = () => {
 
     return (
         <div>
-            <div className='main-help-request-details-page-div'>
+            <div>
             {/* <div>
                 <h1>{helpRequest.title}</h1>
                 <p>{helpRequest.date}</p>
@@ -53,6 +53,8 @@ const HelpRequestDetailsPage = () => {
                         first_name={helpRequest.user_details.first_name}
                         last_name={helpRequest.user_details.last_name}
                         avatar_url_string={helpRequest.user_details.avatar_url_string}
+                        showButtonView={false}
+                        showButtonOffer={true}
                     />
             </div>
         </div>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { getAllHelpRequestsWithUserDetails } from '../../services/HelpRequests'
-import HelpRequest from '../../componenets/HelpRequest/HelpRequest';
+import HelpRequest from '../../components/HelpRequest/HelpRequest'
 import './HomePage.css'
 
 
@@ -21,8 +21,8 @@ const Homepage = () => {
     }, []); 
 
     return (
-        <div className='main_homepage_div'>
-            <h1 className='homepage-title'>BLOOM</h1>
+        <div>
+            <h1>BLOOM</h1>
             <div>
                 <div role='feed'>
                     {helpRequestsWithUsers.map(helpRequest => (
@@ -33,6 +33,8 @@ const Homepage = () => {
                             date={helpRequest.date}
                             first_name={helpRequest.first_name}
                             last_name={helpRequest.last_name}
+                            showButtonView={true}
+                            showButtonOffer={false}
                         />
                     ))}
                 </div>
