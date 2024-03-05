@@ -7,7 +7,6 @@ import { editUsersInformation } from '../../services/users';
 function UserNavbar({ userDetails }) {
     const [show, setShow] = useState(false);
     const [formDetails, setFormDetails] = useState({});
-    const [newFormDetails, setNewFormDetails] = useState({});
     const [inputVisibility, setInputVisibility] = useState({
         firstName: false,
         lastName: false,
@@ -43,8 +42,6 @@ function UserNavbar({ userDetails }) {
  
     const handleFormSubmit = async (event) => {
         event.preventDefault();
-        
-        // Prepare newFormDetails with either new data or fallback to original data
         const updatedFormDetails = {
             userId: userDetails.id,
             firstName: formDetails.firstName || userDetails.first_name,
@@ -57,7 +54,7 @@ function UserNavbar({ userDetails }) {
         try {
             await editUsersInformation(updatedFormDetails);
             console.log("form submited")
-            // Optionally, trigger a refresh of userDetails from the parent component or context
+            window.location.reload();
         } catch (err) {
             console.log('Edit not completed',err);
         }
@@ -76,11 +73,11 @@ function UserNavbar({ userDetails }) {
                     </ListGroup>
                 </Card>
             </div>
-            <div className="navbar-container"> {/* Adjust this wrapper as needed */}
+            <div className="navbar-container"> 
                 <Navbar expand="lg" className="bg-body-tertiary">
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
                         <Navbar.Collapse id="basic-navbar-nav">
-                        <Nav className="me-auto">
+                        <Nav className="mr-auto">
                             <Nav.Link href="#home">Manage Request</Nav.Link>
                             <Button variant="primary" onClick={handleShow}>Edit Profile</Button>
                             <Nav.Link href="#link">Settings</Nav.Link>
@@ -105,9 +102,9 @@ function UserNavbar({ userDetails }) {
                         <>{userDetails?.last_name}<Button variant="primary" onClick={() => toggleInputVisibility('lastName')}>🖊️</Button></>}
                 </Modal.Body>
                 <Modal.Body>
-                    {inputVisibility.username ? 
-                        <input type="text" value={formDetails.username} onChange={e => handleChange(e, 'username')} /> : 
-                        <>{userDetails?.username}<Button variant="primary" onClick={() => toggleInputVisibility('username')}>🖊️</Button></>}
+                    {inputVisibility.userName ? 
+                        <input type="text" value={formDetails.userName} onChange={e => handleChange(e, 'userName')} /> : 
+                        <>{userDetails?.username}<Button variant="primary" onClick={() => toggleInputVisibility('userName')}>🖊️</Button></>}
                 </Modal.Body>
                 <Modal.Body>
                     {inputVisibility.email ? 
@@ -122,7 +119,7 @@ function UserNavbar({ userDetails }) {
             </Form>
             <Modal.Footer>
              <Button variant="secondary" onClick={() => setShow(false)}>Close</Button>
-             <Button variant="primary" type="submit" form="userEditForm">Save Changes</Button>
+             <Button variant="primary" type="submit" form="userEditForm" onClick={() => setShow(false)}>Save Changes</Button>
             </Modal.Footer>
         </Modal>
     </>
