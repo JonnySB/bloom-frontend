@@ -44,28 +44,34 @@ export const getOneHelpRequestById = async (requestId) => {
     }
 }
 
-export const createHelpOffer = async (helpRequestId, offerData, token) => {
+export const createHelpRequest = async (title, message, start_date, end_date, maxprice, userId, token) => {
     try {
+        const payload = {
+            title: title,
+            message: message,
+            start_date: start_date,
+            end_date: end_date,
+            maxprice: maxprice
+        }
+
         const requestOptions = {
             method: "POST",
             headers: {
+                Authorization: `Bearer ${token}`,
                 "Content-Type": "application/json",
-                'Authorization': `Bearer ${token}`
             },
-            body: JSON.stringify(offerData)
-        };
+            body: JSON.stringify(payload),
+        }
 
-        const response = await fetch(`${BACKEND_URL}/help_offers/${helpRequestId}`, requestOptions);
-        if (!response.ok) {
-            throw new Error(`Failed to create help offer for help request with ID ${helpRequestId}`);
+        const response =  await fetch(`${BACKEND_URL}/help_requests/create/${userId}`, requestOptions)
+        if (response.status !== 201) {
+            throw new Error("Unable to make POST request for create request");
         }
 
         const data = await response.json();
-        console.log("DATA", data);
         return data;
-        
+
     } catch(error) {
-        console.error("API Error:", error);
-        throw error;
+        console.error("API error", error)
     }
 }
