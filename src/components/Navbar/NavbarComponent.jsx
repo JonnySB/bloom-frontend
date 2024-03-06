@@ -15,7 +15,7 @@ const NavbarComponent = () => {
 
     const profilePage = () => {
         if (id) {
-        navigate(`/profile`);
+            navigate(`/profile`);
         } else {
             navigate('/login')
         }
@@ -24,7 +24,7 @@ const NavbarComponent = () => {
 
     const requestManagement = (id) => {
         if (id) {
-            navigate(`/request_management/received_offers`);
+            navigate(`/create_request`);
         } else {
             navigate('/login')
         }
@@ -39,8 +39,8 @@ const NavbarComponent = () => {
         }
     }
     const messages = (id) => {
-        if (id) { 
-        navigate(`/messages`);
+        if (id) {
+            navigate(`/messages`);
         } else {
             navigate('/login')
         }
@@ -55,26 +55,26 @@ const NavbarComponent = () => {
 
     return (
         <Navbar expand="lg" className="bg-body-tertiary">
-        <Container>
-            <Navbar.Brand onClick={home}>BLOOM</Navbar.Brand>
-            <Nav className="me-auto">
-                {token && (
-                    <>
-                        <Nav.Link onClick={profilePage}>Profile</Nav.Link>
-                        <Nav.Link onClick={requestManagement}>Request Management</Nav.Link>
-                        <Nav.Link onClick={myplants}>My Plants</Nav.Link>
-                        <Nav.Link onClick={messages}>Chat</Nav.Link>
-                        <Nav.Link onClick={logout}>Logout</Nav.Link>
-                    </>
-                )}
-                {!token && (
-                    <>
-                        <Nav.Link onClick={() => navigate('/login')}>Login</Nav.Link>
-                    </>
-                )}
-            </Nav>
-        </Container>
-    </Navbar>
+            <Container>
+                <Navbar.Brand onClick={home}>BLOOM</Navbar.Brand>
+                <Nav className="me-auto">
+                    {token && (
+                        <>
+                            <Nav.Link onClick={profilePage}>Profile</Nav.Link>
+                            <Nav.Link onClick={requestManagement}>Request Management</Nav.Link>
+                            <Nav.Link onClick={myplants}>My Plants</Nav.Link>
+                            <Nav.Link onClick={messages}>Chat</Nav.Link>
+                            <Nav.Link onClick={logout}>Logout</Nav.Link>
+                        </>
+                    )}
+                    {!token && (
+                        <>
+                            <Nav.Link onClick={() => navigate('/login')}>Login</Nav.Link>
+                        </>
+                    )}
+                </Nav>
+            </Container>
+        </Navbar>
     );
 };
 
