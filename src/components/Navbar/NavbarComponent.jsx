@@ -10,12 +10,12 @@ const NavbarComponent = () => {
     const token = window.localStorage.getItem("token")
     
     const home = () => {
-        navigate("/posts")
+        navigate("/")
     }
 
-    const profilePage = (id) => {
+    const profilePage = () => {
         if (id) {
-        navigate(`/profile/${id}`);
+        navigate(`/profile`);
         } else {
         navigate('/login')
         }
@@ -31,7 +31,7 @@ const NavbarComponent = () => {
     }
     const messages = (id) => {
         if (id) { 
-        navigate(`/messages/${id}`);
+        navigate(`/messages`);
         } else {
         navigate('/login')
         }
@@ -40,24 +40,31 @@ const NavbarComponent = () => {
     const logout = () => {
         window.localStorage.removeItem("token");
         window.localStorage.removeItem("id");
-        navigate("/login");
+        navigate("/");
     };
 
 
     return (
         <Navbar expand="lg" className="bg-body-tertiary">
-            <Container>
-                <Navbar.Brand onClick={home}>BLOOM</Navbar.Brand>
-
-                    <Nav className="me-auto">
+        <Container>
+            <Navbar.Brand onClick={home}>BLOOM</Navbar.Brand>
+            <Nav className="me-auto">
+                {token && (
+                    <>
                         <Nav.Link onClick={profilePage}>Profile</Nav.Link>
-                        <Nav.Link onClick={myplants}>My Plants</Nav.Link>  
-                        <Nav.Link onClick={messages}>Chat</Nav.Link>  
+                        <Nav.Link onClick={myplants}>My Plants</Nav.Link>
+                        <Nav.Link onClick={messages}>Chat</Nav.Link>
                         <Nav.Link onClick={logout}>Logout</Nav.Link>
-                    </Nav>
-            
-            </Container>
-        </Navbar>
+                    </>
+                )}
+                {!token && (
+                    <>
+                        <Nav.Link onClick={() => navigate('/login')}>Login</Nav.Link>
+                    </>
+                )}
+            </Nav>
+        </Container>
+    </Navbar>
     );
 };
 

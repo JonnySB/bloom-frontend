@@ -9,12 +9,14 @@ function MessageContainer({ messageManager, userDetails }) {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const [roomInfo, setRoomInfo] = useState("");
+  const [token, setToken] = useState(window.localStorage.getItem("token"));
+
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         if (messageManager.id) {
-          const messagesData = await getMessagesById(messageManager.id);
+          const messagesData = await getMessagesById(messageManager.id, token);
           setMessages(messagesData);
         } 
       } catch (err) {
@@ -48,7 +50,7 @@ function MessageContainer({ messageManager, userDetails }) {
     if (!messageManager.id) {
       // Call the API to create a new chat, then send the message
       try {
-        const newChat = await sendMessage(messageManager.sender_id, messageManager.recipient_id, messageManager.receiver_username, userDetails.username, newMessage);
+        const newChat = await sendMessage(messageManager.sender_id, messageManager.recipient_id, messageManager.receiver_username, userDetails.username, newMessage, token);
         socket.emit('message', { 
           message: newMessage, 
           chatId: newChat.id,
@@ -67,7 +69,8 @@ function MessageContainer({ messageManager, userDetails }) {
           messageManager.recipient_id,
           messageManager.receiver_username,
           userDetails.username,
-          newMessage
+          newMessage,
+          token
         );
         socket.emit('message', { 
           message: newMessage, 

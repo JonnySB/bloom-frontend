@@ -72,3 +72,23 @@ export const updatePlantsQuantity = async (user_id, plant_id, new_quantity, toke
     console.error('Error updating quantity:', error);
   }
 }
+
+
+export const getUserPlants = async (user_id, token) => {
+  try {
+    const response = await fetch(`${BACKEND_URL}/plants/user/${user_id}`, {
+      method: "GET",
+      headers: { "Authorization": `Bearer ${token}` },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return "User plants list:", data;
+
+  } catch (error) {
+    console.error("Error getting user plants:", error);
+  }
+};
