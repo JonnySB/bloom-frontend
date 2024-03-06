@@ -64,19 +64,19 @@ function UserNavbar({ userDetails }) {
     return (
         <>
         <Container className='user-details'>
-            <div className="profileEdit">
+        <div className="profileEdit">
                 <Card>
-                    <Card.Img variant="top" src={userDetails?.avatar_url_string} className='profileAvatar'/>
-                    <ListGroup className="list-group-flush">
-                        <ListGroup.Item>{userDetails?.first_name} {userDetails?.last_name}</ListGroup.Item>
-                        <ListGroup.Item>{userDetails?.email}</ListGroup.Item>
-                        <ListGroup.Item>{userDetails?.address}</ListGroup.Item>
-                    </ListGroup>
+                <Card.Img variant="top" src={userDetails?.avatar_url_string} className='profileAvatar'/>
+                <ListGroup className="list-group-flush">
+                    <ListGroup.Item>{userDetails?.first_name} {userDetails?.last_name}</ListGroup.Item>
+                    <ListGroup.Item>{userDetails?.email}</ListGroup.Item>
+                    <ListGroup.Item>{userDetails?.address}</ListGroup.Item>
+                </ListGroup>
                 </Card>
             </div>
             <div className="navbar-container"> 
             <div className='potted-image'>
-                <img src='https://res.cloudinary.com/dououppib/image/upload/v1709756999/PLANTS/plant_banner.png'></img>
+                <img src='https://res.cloudinary.com/dououppib/image/upload/v1709758337/PLANTS/pb_yxwurp.png'></img>
             </div>
                 <Navbar expand="lg" className="bg-body-tertiary">
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />

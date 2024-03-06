@@ -8,8 +8,24 @@
 }
 
 .profileEdit {
-    max-width: 20%;
+    width: 30%;
+
 }
+.profileEdit .card {
+    border: none; 
+}
+
+
+.profileAvatar {
+    width: 168px; /* Fixed width */
+    height: 168px; /* Fixed height to match width */
+    border-radius: 50%; /* Make the image circular */
+    object-fit: cover; /* Ensures the content is not stretched */
+    display: block; /* Changes the display to block */
+    margin: 0 auto; /* Centers the image horizontally within its container */
+}
+
+
 .potted-image {
     justify-content: center;
 }
@@ -21,6 +37,7 @@
 
 .navbar-container {
     flex: 2; /* Allows the navbar to grow and take up necessary space */
+    width: 70%;
 }
 
 .card-img-top {
@@ -28,6 +45,7 @@
     align-items: center; /* Centers the content vertically */
     justify-content: center; /* Centers the content horizontally */
     height: 320px; /* Fixed height, adjust based on your design needs */
+    
 }
 
 
