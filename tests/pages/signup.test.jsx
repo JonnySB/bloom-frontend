@@ -3,7 +3,7 @@ import userEvent from "@testing-library/user-event";
 import { vi } from "vitest";
 import { useNavigate } from "react-router-dom";
 import { signup } from "../../src/services/authentication";
-import { Signup } from "../../src/pages/Signup/Signup";
+import { Signup } from "../../src/pages/Signup/SignupPage";
 
 
 vi.mock("react-router-dom", () => {
