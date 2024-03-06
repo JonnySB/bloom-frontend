@@ -6,7 +6,6 @@ const StartChatButton = ({ help_offer_user_id }) => {
     const navigate = useNavigate()
 
     const handleClick = async () => {
-        console.log(help_offer_user_id)
         navigate("/messages", { state: { help_offer_user_id: help_offer_user_id } })
     }
 
