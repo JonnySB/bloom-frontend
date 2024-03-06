@@ -3,6 +3,7 @@ import CreateHelpRequestForm from '../../components/CreateRequestForm/CreateHelp
 import HelpRequest from '../../components/HelpRequest/HelpRequest'
 import { getAllRequestsByOneUser } from '../../services/HelpRequests'
 import NavbarComponent from '../../components/Navbar/NavbarComponent'
+import ManageHelpRequestsNavBar from '../../components/ManageHelpRequestsNavBar/ManageHelpRequestsNavBar'
 
 
 const CreateRequestPage = () => {
@@ -13,11 +14,11 @@ const CreateRequestPage = () => {
 
     useEffect(() => {
         const fetchAllRequestsByOneUser = async () => {
-            try{
+            try {
                 const data = await getAllRequestsByOneUser(userID, token);
                 console.log("data for all requests by current user", data);
                 setAllRequests(data)
-            } catch(error){
+            } catch (error) {
                 console.error(`Error fetching GET all requests made by current user with user_id: ${userID}`, error)
             }
         }
@@ -26,12 +27,13 @@ const CreateRequestPage = () => {
 
     return (
         <>
-        <NavbarComponent />
+            <NavbarComponent />
             <h1>Create help request page</h1>
+            <ManageHelpRequestsNavBar />
             <CreateHelpRequestForm />
             <div role='all-requests-by-user'>
                 {allRequests.map(request => (
-                    <HelpRequest 
+                    <HelpRequest
                         key={request.id}
                         title={request.title}
                         message={request.message}

@@ -14,42 +14,42 @@ import CreateRequestPage from './pages/CreateRequestPage/CreateRequestPage';
 import MyOffersPage from "./pages/ManageHelpRequestPages/MyOffersPage/MyOffersPage";
 
 const router = createBrowserRouter([
-  {
-    path: "/messages",
-    element: <MessagePage />,
-  },
-  {
-    path: "/Profile",
-    element: <Profile />,
-  },
-  {
-    path: "/request_management/received_offers",
-    element: <ReceivedOffersPage />,
-  },
-  {
-    path: "/request_management/my_offers",
-    element: <MyOffersPage />,
-  },
-  {
-    path: "/login",
-    element: <Login />,
-  },
-  {
-    path: "/signup",
-    element: <Signup />,
-  },
-  {
-    path: "/",
-    element: <Homepage />,
-  },
-  {
-    path: "/help_request_details/:requestId",
-    element: <HelpRequestDetailPage />,
-  },
-  {
-    path: "create_request",
-    element: <CreateRequestPage />,
-  },
+    {
+        path: "/messages",
+        element: <MessagePage />,
+    },
+    {
+        path: "/Profile",
+        element: <Profile />,
+    },
+    {
+        path: "/request_management/received_offers",
+        element: <ReceivedOffersPage />,
+    },
+    {
+        path: "/request_management/my_offers",
+        element: <MyOffersPage />,
+    },
+    {
+        path: "/login",
+        element: <Login />,
+    },
+    {
+        path: "/signup",
+        element: <Signup />,
+    },
+    {
+        path: "/",
+        element: <Homepage />,
+    },
+    {
+        path: "/help_request_details/:requestId",
+        element: <HelpRequestDetailPage />,
+    },
+    {
+        path: "/create_request",
+        element: <CreateRequestPage />,
+    },
 ])
 
 

@@ -5,6 +5,7 @@ import { getOutgoingHelpOffersByUserId } from '../../../services/helpOffers'
 
 import ManageHelpRequestsNavBar from "../../../components/ManageHelpRequestsNavBar/ManageHelpRequestsNavBar";
 import MyOffersTable from "../../../components/MyOffersTable/MyOffersTable";
+import NavbarComponent from "../../../components/Navbar/NavbarComponent";
 
 const MyOffersPage = () => {
 
@@ -30,6 +31,9 @@ const MyOffersPage = () => {
 
     return (
         <div className="page-container">
+            <div>
+                <NavbarComponent />
+            </div>
             <div>
                 <ManageHelpRequestsNavBar />
             </div>

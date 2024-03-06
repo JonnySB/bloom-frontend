@@ -10,7 +10,7 @@ function LeftTabsExample() {
                 <Col sm={3}>
                     <Nav variant="pills" className="flex-column">
                         <Nav.Item>
-                            <Nav.Link eventKey="first" href="">My Requests</Nav.Link>
+                            <Nav.Link eventKey="first" href="/create_request">My Requests</Nav.Link>
                         </Nav.Item>
                     </Nav>
                 </Col>
