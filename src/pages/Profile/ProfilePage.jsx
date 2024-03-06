@@ -2,10 +2,12 @@ import Container from 'react-bootstrap/Container';
 import UserNavbar from '../../components/EditComponents.jsx/UserDetailsComponent';
 import React, { useState , useEffect} from "react";
 import { getuserInformationById } from '../../services/users';
+import AddPlant from "../../components/MyPlants/AddPlant.jsx"
+
 
 export const Profile = () => {
     const [userDetails, setUserDetails] = useState(null);
-
+    
      useEffect(() => {
         const fetchData = async () => {
         try {

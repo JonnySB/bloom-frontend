@@ -7,6 +7,7 @@ import { editUsersInformation } from '../../services/users';
 function UserNavbar({ userDetails }) {
     const [show, setShow] = useState(false);
     const [formDetails, setFormDetails] = useState({});
+    
     const [inputVisibility, setInputVisibility] = useState({
         firstName: false,
         lastName: false,
@@ -80,7 +81,6 @@ function UserNavbar({ userDetails }) {
                         <Nav className="mr-auto">
                             <Nav.Link href="#home">Manage Request</Nav.Link>
                             <Button variant="primary" onClick={handleShow}>Edit Profile</Button>
-                            <Nav.Link href="#link">Settings</Nav.Link>
                         </Nav>
                         </Navbar.Collapse>
                 </Navbar>

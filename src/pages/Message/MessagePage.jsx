@@ -13,7 +13,7 @@ export const MessagePage = () => {
     useEffect(() => {
       const fetchUserDetails = async () => {
         try {
-          const userData = await getuserInformationById(3); // WE WILL NEED TO LOAD THE USER DETAILS HERE
+          const userData = await getuserInformationById(1); // WE WILL NEED TO LOAD THE USER DETAILS HERE
           setUserDetails(userData);
         } catch (err) {
           console.error('Error fetching user details:', err);
@@ -22,7 +22,6 @@ export const MessagePage = () => {
       
       fetchUserDetails();
     }, []);
-
 
     // useEffect(() => {
     //   // This will update the selected message whenever the defaultChatId changes
