@@ -2,12 +2,17 @@ import Container from 'react-bootstrap/Container';
 import UserNavbar from '../../components/EditComponents.jsx/UserDetailsComponent';
 import React, { useState , useEffect} from "react";
 import { getuserInformationById } from '../../services/users';
-import PlantsProfilePage from "../../components/MyPlants/ShowPlantsProfilePage.jsx"
 import { getUserPlants } from "../../services/userPlants.js"
+import { getAllRequestsByOneUser } from "../../services/RequestedOffersService.js"
+import PlantCards from "../../components/MyPlants/ShowPlantsProfilePage.jsx"
+import RequiredOffers from "../../components/MyPlants/ShowOffersRequiredProfilePage.jsx"
+
+
 
 export const Profile = () => {
     const [userDetails, setUserDetails] = useState(null);
     const [userPlants, setUserPlants] = useState(null)
+    const [userOffers, setUserOffers] = useState(null)
     const [user_id, setuserID] = useState(window.localStorage.getItem("user_id"));
     const [token, setToken] = useState(window.localStorage.getItem("token"));
 
@@ -25,6 +30,12 @@ export const Profile = () => {
         } catch (err) {
             console.error('Error fetching userPlants details:', err);
         } 
+        try {
+            const getuserRequestOffers = await getAllRequestsByOneUser(user_id, token)
+            setUserOffers(getuserRequestOffers)
+        } catch (err) {
+            console.error('Error fetching userPlants details:', err);
+        } 
     }    
     fetchData()
 }, [])
@@ -34,7 +45,8 @@ return (
         <Container>
             <h1>Welcome to the profile page</h1>
             <UserNavbar userDetails={userDetails}/>
-            <PlantsProfilePage userPlants={userPlants}/>
+            <PlantCards userPlants={userPlants}/>
+            <RequiredOffers userOffers={userOffers}/>
         </Container>
     )
 }
