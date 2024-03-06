@@ -22,3 +22,13 @@ body, .app-container {
 .white-text {
   color: white; 
 }
+
+.green-text {
+  color: #2E9C45; 
+}
+
+.white-line {
+  border-top: 1px solid #ffffff; 
+  width: 100%;
+}
+
