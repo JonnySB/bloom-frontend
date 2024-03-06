@@ -1,0 +1,108 @@
+import { useNavigate } from "react-router-dom";
+import Navbar from 'react-bootstrap/Navbar';
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+
+
+const NavbarComponent = () => {
+    const navigate = useNavigate();
+    const id = window.localStorage.getItem("user_id")
+    const token = window.localStorage.getItem("token")
+
+    const home = () => {
+        navigate("/")
+    }
+
+    const profilePage = () => {
+        if (id) {
+<<<<<<< HEAD
+            navigate(`/profile/${id}`);
+=======
+        navigate(`/profile`);
+>>>>>>> main
+        } else {
+            navigate('/login')
+        }
+
+    };
+
+    const requestManagement = (id) => {
+        if (id) {
+            navigate(`/request_management/received_offers`);
+        } else {
+            navigate('/login')
+        }
+
+    };
+
+    const myplants = (id) => {
+        if (id) {
+            navigate("/plants");
+        } else {
+            navigate('/login')
+        }
+    }
+    const messages = (id) => {
+<<<<<<< HEAD
+        if (id) {
+            navigate(`/messages/${id}`);
+=======
+        if (id) { 
+        navigate(`/messages`);
+>>>>>>> main
+        } else {
+            navigate('/login')
+        }
+    };
+
+    const logout = () => {
+        window.localStorage.removeItem("token");
+        window.localStorage.removeItem("id");
+        navigate("/");
+    };
+
+
+    return (
+        <Navbar expand="lg" className="bg-body-tertiary">
+<<<<<<< HEAD
+            <Container>
+                <Navbar.Brand onClick={home}>BLOOM</Navbar.Brand>
+
+                <Nav className="me-auto">
+                    <Nav.Link onClick={profilePage}>Profile</Nav.Link>
+                    <Nav.Link onClick={requestManagement}>Request Management</Nav.Link>
+                    <Nav.Link onClick={myplants}>My Plants</Nav.Link>
+                    <Nav.Link onClick={messages}>Chat</Nav.Link>
+                    <Nav.Link onClick={logout}>Logout</Nav.Link>
+                </Nav>
+
+            </Container>
+        </Navbar>
+=======
+        <Container>
+            <Navbar.Brand onClick={home}>BLOOM</Navbar.Brand>
+            <Nav className="me-auto">
+                {token && (
+                    <>
+                        <Nav.Link onClick={profilePage}>Profile</Nav.Link>
+                        <Nav.Link onClick={myplants}>My Plants</Nav.Link>
+                        <Nav.Link onClick={messages}>Chat</Nav.Link>
+                        <Nav.Link onClick={logout}>Logout</Nav.Link>
+                    </>
+                )}
+                {!token && (
+                    <>
+                        <Nav.Link onClick={() => navigate('/login')}>Login</Nav.Link>
+                    </>
+                )}
+            </Nav>
+        </Container>
+    </Navbar>
+>>>>>>> main
+    );
+};
+
+export default NavbarComponent;
+
+
+
