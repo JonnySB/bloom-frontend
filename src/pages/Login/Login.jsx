@@ -7,6 +7,7 @@ import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import "./Login.css"
+import Nav from 'react-bootstrap/Nav';
 
 
 
@@ -59,6 +60,10 @@ export const Login = () => {
                         <Button variant="success" type="submit">Login</Button>
                         {loginError && <div>{loginError}</div>}
                     </Form>
+                    <hr className="white-line" />
+                    <div className="green-text text-center font-weight-bold">
+                    <Nav.Link href="/signup" className="nav-link">Create Account</Nav.Link>
+                    </div>
                 </div>
             </Container>
         </div>
