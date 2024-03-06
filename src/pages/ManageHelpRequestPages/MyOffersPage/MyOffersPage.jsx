@@ -11,11 +11,14 @@ const MyOffersPage = () => {
     const [myOffers, setMyOffers] = useState(null);
     const [triggerReload, setTriggerReload] = useState(false);
 
+    const [user_id, setuserID] = useState(window.localStorage.getItem("user_id"));
+    const [token, setToken] = useState(window.localStorage.getItem("token"));
+
     useEffect(() => {
         const fetchMyHelpOffers = async () => {
             try {
                 // TODO - add dynamic user
-                const data = await getOutgoingHelpOffersByUserId(1);
+                const data = await getOutgoingHelpOffersByUserId(user_id, token);
                 setMyOffers(data);
                 console.log(data);
             } catch (error) {

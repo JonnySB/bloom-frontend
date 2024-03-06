@@ -11,11 +11,14 @@ const ReceivedOffersPage = () => {
     const [receivedOffers, setReceivedOffers] = useState(null);
     const [triggerReload, setTriggerReload] = useState(false);
 
+    const [user_id, setuserID] = useState(window.localStorage.getItem("user_id"));
+    const [token, setToken] = useState(window.localStorage.getItem("token"));
+
     useEffect(() => {
         const fetchReceivedHelpOffers = async () => {
             try {
                 // TODO - add dynamic user
-                const data = await getReceivedHelpOffersByUserId(1);
+                const data = await getReceivedHelpOffersByUserId(user_id, token);
                 setReceivedOffers(data);
             } catch (error) {
                 console.error("Error fetching received offers: ", error)

@@ -1,12 +1,14 @@
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
-export const getReceivedHelpOffersByUserId = async (user_id) => {
+export const getReceivedHelpOffersByUserId = async (user_id, token) => {
   try {
     const requestOptions = {
       method: "GET",
-      headers: {},
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
     };
-
     const response = await fetch(
       `${BACKEND_URL}/help_offers/help_requests/${user_id}`,
       requestOptions,
@@ -23,13 +25,15 @@ export const getReceivedHelpOffersByUserId = async (user_id) => {
   }
 };
 
-export const acceptHelpOffer = async (help_offer_id) => {
+export const acceptHelpOffer = async (help_offer_id, token) => {
   try {
     const requestOptions = {
       method: "PUT",
-      headers: {},
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
     };
-
     const response = await fetch(
       `${BACKEND_URL}/help_offers/accept_offer/${help_offer_id}`,
       requestOptions,
@@ -45,13 +49,15 @@ export const acceptHelpOffer = async (help_offer_id) => {
   }
 };
 
-export const rejectHelpOffer = async (help_offer_id) => {
+export const rejectHelpOffer = async (help_offer_id, token) => {
   try {
     const requestOptions = {
       method: "PUT",
-      headers: {},
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
     };
-
     const response = await fetch(
       `${BACKEND_URL}/help_offers/reject_offer/${help_offer_id}`,
       requestOptions,
@@ -67,13 +73,15 @@ export const rejectHelpOffer = async (help_offer_id) => {
   }
 };
 
-export const getOutgoingHelpOffersByUserId = async (user_id) => {
+export const getOutgoingHelpOffersByUserId = async (user_id, token) => {
   try {
     const requestOptions = {
       method: "GET",
-      headers: {},
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
     };
-
     const response = await fetch(
       `${BACKEND_URL}/help_offers/${user_id}`,
       requestOptions,
@@ -90,13 +98,15 @@ export const getOutgoingHelpOffersByUserId = async (user_id) => {
   }
 };
 
-export const recindHelpOffer = async (help_offer_id) => {
+export const recindHelpOffer = async (help_offer_id, token) => {
   try {
     const requestOptions = {
       method: "PUT",
-      headers: {},
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
     };
-
     const response = await fetch(
       `${BACKEND_URL}/help_offers/recind_offer/${help_offer_id}`,
       requestOptions,

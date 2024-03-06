@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
@@ -8,32 +8,41 @@ const NavbarComponent = () => {
     const navigate = useNavigate();
     const id = window.localStorage.getItem("user_id")
     const token = window.localStorage.getItem("token")
-    
+
     const home = () => {
         navigate("/posts")
     }
 
     const profilePage = (id) => {
         if (id) {
-        navigate(`/profile/${id}`);
+            navigate(`/profile/${id}`);
         } else {
-        navigate('/login')
+            navigate('/login')
+        }
+
+    };
+
+    const requestManagement = (id) => {
+        if (id) {
+            navigate(`/request_management/received_offers`);
+        } else {
+            navigate('/login')
         }
 
     };
 
     const myplants = (id) => {
         if (id) {
-        navigate("/plants");
+            navigate("/plants");
         } else {
-        navigate('/login')
+            navigate('/login')
         }
     }
     const messages = (id) => {
-        if (id) { 
-        navigate(`/messages/${id}`);
+        if (id) {
+            navigate(`/messages/${id}`);
         } else {
-        navigate('/login')
+            navigate('/login')
         }
     };
 
@@ -49,13 +58,14 @@ const NavbarComponent = () => {
             <Container>
                 <Navbar.Brand onClick={home}>BLOOM</Navbar.Brand>
 
-                    <Nav className="me-auto">
-                        <Nav.Link onClick={profilePage}>Profile</Nav.Link>
-                        <Nav.Link onClick={myplants}>My Plants</Nav.Link>  
-                        <Nav.Link onClick={messages}>Chat</Nav.Link>  
-                        <Nav.Link onClick={logout}>Logout</Nav.Link>
-                    </Nav>
-            
+                <Nav className="me-auto">
+                    <Nav.Link onClick={profilePage}>Profile</Nav.Link>
+                    <Nav.Link onClick={requestManagement}>Request Management</Nav.Link>
+                    <Nav.Link onClick={myplants}>My Plants</Nav.Link>
+                    <Nav.Link onClick={messages}>Chat</Nav.Link>
+                    <Nav.Link onClick={logout}>Logout</Nav.Link>
+                </Nav>
+
             </Container>
         </Navbar>
     );
