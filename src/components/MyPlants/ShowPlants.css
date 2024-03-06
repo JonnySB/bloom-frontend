@@ -38,6 +38,12 @@
     padding-left: 5px;
     padding-top: 5px;
 }
+.card-text {
+    padding-left: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
 
 .plantcard img {
     object-fit: cover;
