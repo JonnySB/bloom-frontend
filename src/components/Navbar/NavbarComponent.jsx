@@ -29,8 +29,12 @@ const NavbarComponent = () => {
         navigate('/login')
         }
     }
-    const messages = () => {
-        navigate("/messages");
+    const messages = (id) => {
+        if (id) {
+        navigate(`/messages/${id}`);
+        } else {
+        navigate('/login')
+        }
     };
 
     const logout = () => {
