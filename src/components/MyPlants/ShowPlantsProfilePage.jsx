@@ -1,51 +1,37 @@
-import Card from 'react-bootstrap/Card';
-import CardGroup from 'react-bootstrap/CardGroup';
+import "bootstrap/dist/css/bootstrap.min.css";
+import {Card, Col, Row, Button} from "react-bootstrap";
 
-function PlantsProfilePage() {
+const PlantCards = ({userPlants}) => {
   return (
-    <CardGroup>
-      <Card>
-        <Card.Img variant="top" src="holder.js/100px160" />
-        <Card.Body>
-          <Card.Title>Card title</Card.Title>
-          <Card.Text>
-            This is a wider card with supporting text below as a natural lead-in
-            to additional content. This content is a little bit longer.
-          </Card.Text>
-        </Card.Body>
-        <Card.Footer>
-          <small className="text-muted">Last updated 3 mins ago</small>
-        </Card.Footer>
-      </Card>
-      <Card>
-        <Card.Img variant="top" src="holder.js/100px160" />
-        <Card.Body>
-          <Card.Title>Card title</Card.Title>
-          <Card.Text>
-            This card has supporting text below as a natural lead-in to
-            additional content.{' '}
-          </Card.Text>
-        </Card.Body>
-        <Card.Footer>
-          <small className="text-muted">Last updated 3 mins ago</small>
-        </Card.Footer>
-      </Card>
-      <Card>
-        <Card.Img variant="top" src="holder.js/100px160" />
-        <Card.Body>
-          <Card.Title>Card title</Card.Title>
-          <Card.Text>
-            This is a wider card with supporting text below as a natural lead-in
-            to additional content. This card has even longer content than the
-            first to show that equal height action.
-          </Card.Text>
-        </Card.Body>
-        <Card.Footer>
-          <small className="text-muted">Last updated 3 mins ago</small>
-        </Card.Footer>
-      </Card>
-    </CardGroup>
+    <Row
+      xs={1}
+      md={5}
+      className="g-4"
+      style={{
+        minWidth: "20rem",
+        padding: "10px",
+        marginLeft: "auto",
+        marginRight: "auto",
+      }}
+    >
+      {userPlants?.slice(0, 5).reverse().map((plant, index) => (
+        <Col key={index}>
+          <Card>
+            <Card.Body style={{ minHeight: "10rem" }}>
+              <Card.Title>
+                {plant.common_name} (<em>{plant.latin_name}</em>)
+              </Card.Title>
+              <Card.Text>{plant.description}</Card.Text>
+              <Card.Text>
+                Watering Frequency: Approximately every{" "}
+                {plant.watering_frequency} days
+              </Card.Text>
+            </Card.Body>
+          </Card>
+        </Col>
+      ))}
+    </Row>
   );
-}
+};
 
-export default PlantsProfilePage;
+export default PlantCards;
