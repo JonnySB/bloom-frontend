@@ -8,7 +8,7 @@ const PlantCards = ({userPlants}) => {
     <>
     <Container className="title">
         <h1>Plants owned</h1>
-        <Link>Expand</Link>
+        <Link to="" className="link-button">Expand</Link>
     </Container>
     <Row xs={1} md={5} >
       {userPlants?.slice(0, 5).reverse().map((plant, index) => (
