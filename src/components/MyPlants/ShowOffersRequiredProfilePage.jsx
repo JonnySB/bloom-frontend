@@ -3,17 +3,14 @@ import {Card, Col, Row, Container} from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./ShowPlants.css"
 
-const PlantCards = ({userPlants}) => {
+const RequiredOffersCard = ({ userOffers }) => {
   return (
     <>
     <Container className="title">
-    <h1>Plants owned</h1>
-    <Link>Expand</Link>
-</Container>
-    <Row
-      xs={1}
-      md={5}
-      className="g-4"
+        <h1>Requests for help</h1>
+        <Link>Expand</Link>
+    </Container>
+    <Row xs={1} md={5} className="g-4"
       style={{
         minWidth: "20rem",
         padding: "10px",
@@ -21,17 +18,19 @@ const PlantCards = ({userPlants}) => {
         marginRight: "auto",
       }}
     >
-      {userPlants?.slice(0, 5).reverse().map((plant, index) => (
+
+      {userOffers?.slice(0, 5).reverse().map((offer, index) => (
         <Col key={index}>
           <Card>
             <Card.Body style={{ minHeight: "10rem" }}>
               <Card.Title>
-                {plant.common_name} (<em>{plant.latin_name}</em>)
+                {offer.title} 
               </Card.Title>
-              <Card.Text>{plant.description}</Card.Text>
+              <Card.Text>{offer.description}</Card.Text>
               <Card.Text>
-                Watering Frequency: Approximately every{" "}
-                {plant.watering_frequency} days
+                {offer.message}
+                {offer.start_date}  {offer.end_date}
+                {offer.maxprice}
               </Card.Text>
             </Card.Body>
           </Card>
@@ -42,4 +41,4 @@ const PlantCards = ({userPlants}) => {
   );
 };
 
-export default PlantCards;
+export default RequiredOffersCard;

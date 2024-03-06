@@ -2,6 +2,7 @@
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 export const getAllMessagesByUserId = async (userId, token) => {
+
     const requestOptions = {
         method: "GET",
         headers: {
@@ -59,10 +60,9 @@ export const sendMessage = async (userId, receiverId, receiver_username, sender_
         content: messageContent,
         }),
     };
-  
+
     try {
       const response = await fetch(`${BACKEND_URL}/messages`, requestOptions);
-  
       if (response.ok) {
         const data = await response.json();
         // console.log("Message sent: ", data);

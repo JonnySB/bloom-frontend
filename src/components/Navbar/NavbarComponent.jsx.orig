@@ -15,7 +15,11 @@ const NavbarComponent = () => {
 
     const profilePage = () => {
         if (id) {
+<<<<<<< HEAD
+            navigate(`/profile/${id}`);
+=======
         navigate(`/profile`);
+>>>>>>> main
         } else {
             navigate('/login')
         }
@@ -39,8 +43,13 @@ const NavbarComponent = () => {
         }
     }
     const messages = (id) => {
+<<<<<<< HEAD
+        if (id) {
+            navigate(`/messages/${id}`);
+=======
         if (id) { 
         navigate(`/messages`);
+>>>>>>> main
         } else {
             navigate('/login')
         }
@@ -55,13 +64,27 @@ const NavbarComponent = () => {
 
     return (
         <Navbar expand="lg" className="bg-body-tertiary">
+<<<<<<< HEAD
+            <Container>
+                <Navbar.Brand onClick={home}>BLOOM</Navbar.Brand>
+
+                <Nav className="me-auto">
+                    <Nav.Link onClick={profilePage}>Profile</Nav.Link>
+                    <Nav.Link onClick={requestManagement}>Request Management</Nav.Link>
+                    <Nav.Link onClick={myplants}>My Plants</Nav.Link>
+                    <Nav.Link onClick={messages}>Chat</Nav.Link>
+                    <Nav.Link onClick={logout}>Logout</Nav.Link>
+                </Nav>
+
+            </Container>
+        </Navbar>
+=======
         <Container>
             <Navbar.Brand onClick={home}>BLOOM</Navbar.Brand>
             <Nav className="me-auto">
                 {token && (
                     <>
                         <Nav.Link onClick={profilePage}>Profile</Nav.Link>
-                        <Nav.Link onClick={requestManagement}>Request Management</Nav.Link>
                         <Nav.Link onClick={myplants}>My Plants</Nav.Link>
                         <Nav.Link onClick={messages}>Chat</Nav.Link>
                         <Nav.Link onClick={logout}>Logout</Nav.Link>
@@ -75,6 +98,7 @@ const NavbarComponent = () => {
             </Nav>
         </Container>
     </Navbar>
+>>>>>>> main
     );
 };
 
