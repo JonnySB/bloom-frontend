@@ -1,11 +1,13 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { MessagePage } from "./pages/MessagePage";
-import { Login } from "./pages/Login/Login";
-import { Signup } from "./pages/Signup/Signup";
+import { MessagePage } from "./pages/Message/MessagePage";
+import { Login } from "./pages/Login/LoginPage";
+import { Signup } from "./pages/Signup/SignupPage";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Profile } from "./pages/Profile/ProfilePage";
+
 import ReceivedOffersPage from "./pages/ManageHelpRequestPages/ReceivedOffersPage/ReceivedOffersPage";
 import './App.css'
 import Homepage from './pages/Home/Homepage';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import HelpRequestDetailPage from './pages/HelpRequestDetails/HelpRequestDetailsPage';
 import CreateRequestPage from './pages/CreateRequestPage/CreateRequestPage';
 
@@ -14,6 +16,10 @@ const router = createBrowserRouter([
   {
     path: "/messages",
     element: <MessagePage />,
+  },
+  {
+    path: "/Profile",
+    element: <Profile />,
   },
   {
     path: "/something",

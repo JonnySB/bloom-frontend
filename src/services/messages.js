@@ -7,7 +7,7 @@ export const getAllMessagesByUserId = async (userId) => {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcwOTQ2NTU0MCwianRpIjoiNjNmOTM0ZWUtNjIwNC00MTU5LWExZGMtZmQ4YTc2ZTQ3MGE1IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNzA5NDY1NTQwLCJjc3JmIjoiNTY4ZTM2MzktZjkxNC00MWI2LWE4YzctZThlZjUzNjNkNjIwIiwiZXhwIjoxNzA5NTUxOTQwfQ.dp3b-EfpiHyKBU7goLzusrsj-izldlaeVtc1iCKjjAw`,
+            "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcwOTYzMTA0MiwianRpIjoiYTE2OGFiMjEtNjY1OS00ODYwLTlhYzItYWIwMTcyN2IxNmRlIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNzA5NjMxMDQyLCJjc3JmIjoiZDg5MGUxZGUtNjE1NS00NDQzLTg2OWMtMzE1NGQyMWQ3ZWZkIiwiZXhwIjoxNzA5NzE3NDQyfQ.xM1DsphGgXDa-3L8G-1BZBhhtah1L933upizto-j3v8`,
         },
     };
     
@@ -29,7 +29,7 @@ export const getMessagesById = async (chat_id) => {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcwOTQ2NTU0MCwianRpIjoiNjNmOTM0ZWUtNjIwNC00MTU5LWExZGMtZmQ4YTc2ZTQ3MGE1IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNzA5NDY1NTQwLCJjc3JmIjoiNTY4ZTM2MzktZjkxNC00MWI2LWE4YzctZThlZjUzNjNkNjIwIiwiZXhwIjoxNzA5NTUxOTQwfQ.dp3b-EfpiHyKBU7goLzusrsj-izldlaeVtc1iCKjjAw`,
+            "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcwOTYzMTA0MiwianRpIjoiYTE2OGFiMjEtNjY1OS00ODYwLTlhYzItYWIwMTcyN2IxNmRlIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNzA5NjMxMDQyLCJjc3JmIjoiZDg5MGUxZGUtNjE1NS00NDQzLTg2OWMtMzE1NGQyMWQ3ZWZkIiwiZXhwIjoxNzA5NzE3NDQyfQ.xM1DsphGgXDa-3L8G-1BZBhhtah1L933upizto-j3v8`,
           
         },
 
@@ -52,7 +52,7 @@ export const sendMessage = async (userId, receiverId, receiver_username, sender_
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcwOTQ2NTU0MCwianRpIjoiNjNmOTM0ZWUtNjIwNC00MTU5LWExZGMtZmQ4YTc2ZTQ3MGE1IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNzA5NDY1NTQwLCJjc3JmIjoiNTY4ZTM2MzktZjkxNC00MWI2LWE4YzctZThlZjUzNjNkNjIwIiwiZXhwIjoxNzA5NTUxOTQwfQ.dp3b-EfpiHyKBU7goLzusrsj-izldlaeVtc1iCKjjAw`,
+        "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcwOTYzMTA0MiwianRpIjoiYTE2OGFiMjEtNjY1OS00ODYwLTlhYzItYWIwMTcyN2IxNmRlIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNzA5NjMxMDQyLCJjc3JmIjoiZDg5MGUxZGUtNjE1NS00NDQzLTg2OWMtMzE1NGQyMWQ3ZWZkIiwiZXhwIjoxNzA5NzE3NDQyfQ.xM1DsphGgXDa-3L8G-1BZBhhtah1L933upizto-j3v8`,
       },
       body: JSON.stringify({
         userId: userId,

@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Card from 'react-bootstrap/Card';
-import ListGroup from 'react-bootstrap/ListGroup';
-import Container from 'react-bootstrap/Container';
+import { Card, ListGroup, Container } from 'react-bootstrap'
 import "./MessageComponents.css";
 import { getAllMessagesByUserId } from "../../services/messages";
 
