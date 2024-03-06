@@ -7,6 +7,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./pages/MyPlants/MyPlants.css"
 import { Profile } from "./pages/Profile/ProfilePage";import { Index } from "./pages/Index/Index";
 import ReceivedOffersPage from "./pages/ManageHelpRequestPages/ReceivedOffersPage/ReceivedOffersPage";
+import './App.css'
+import Homepage from './pages/Home/Homepage';
+import HelpRequestDetailPage from './pages/HelpRequestDetails/HelpRequestDetailsPage';
+import CreateRequestPage from './pages/CreateRequestPage/CreateRequestPage';
+
+
 const router = createBrowserRouter([
   {
     path: "/messages",
@@ -36,9 +42,23 @@ const router = createBrowserRouter([
     path: "/signup",
     element: <Signup />,
   },
-]);
+  {
+    path: "/",
+    element: <Homepage />,
+  },
+  {
+    path: "/help_request_details/:requestId",
+    element: <HelpRequestDetailPage />,
+  },
+  {
+    path: "create_request",
+    element: <CreateRequestPage />,
+  },
+])
 
-const App = () => {
+
+function App() {
+
   return (
     <>
       <RouterProvider router={router} />

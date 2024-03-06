@@ -41,12 +41,12 @@ vi.mock("react-router-dom", () => {
     });
     
 
-    test("navigates to /posts on successful login", async () => {
+    test("navigates to / on successful login", async () => {
         render(<Login />);
         login.mockResolvedValue("secrettoken123");
         const navigateMock = useNavigate();
         await completeLoginForm();
-        expect(navigateMock).toHaveBeenCalledWith("/posts");
+        expect(navigateMock).toHaveBeenCalledWith("/");
     });
 
 
