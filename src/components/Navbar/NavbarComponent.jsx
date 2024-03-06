@@ -24,13 +24,13 @@ const NavbarComponent = () => {
 
     const myplants = (id) => {
         if (id) {
-        navigate(`/plants/user/${id}`);
+        navigate("/plants");
         } else {
         navigate('/login')
         }
     }
     const messages = (id) => {
-        if (id) {
+        if (id) { 
         navigate(`/messages/${id}`);
         } else {
         navigate('/login')
