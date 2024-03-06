@@ -2,8 +2,8 @@ import Container from 'react-bootstrap/Container';
 import UserNavbar from '../../components/EditComponents.jsx/UserDetailsComponent';
 import React, { useState , useEffect} from "react";
 import { getuserInformationById } from '../../services/users';
-import AddPlant from "../../components/MyPlants/AddPlant.jsx"
-
+import PlantsProfilePage from "../../components/MyPlants/ShowPlantsProfilePage.jsx"
+import { getUserPlants } from "../../services/plants.js"
 
 export const Profile = () => {
     const [userDetails, setUserDetails] = useState(null);
@@ -16,7 +16,8 @@ export const Profile = () => {
             setUserDetails(userData)
         } catch (err) {
             console.error('Error fetching user details:', err);
-        }
+        } 
+    
     }    
     fetchData()
 }, [])
@@ -26,6 +27,7 @@ return (
         <Container>
             <h1>Welcome to the profile page</h1>
             <UserNavbar userDetails={userDetails}/>
+            <PlantsProfilePage />
         </Container>
     )
 }
