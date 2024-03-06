@@ -2,11 +2,10 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { MessagePage } from "./pages/MessagePage";
 import { Login } from "./pages/Login/Login";
 import { Signup } from "./pages/Signup/Signup";
+import { MyPlants } from "./pages/MyPlants/MyPlants"
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Index } from "./pages/Index/Index";
 import ReceivedOffersPage from "./pages/ManageHelpRequestPages/ReceivedOffersPage/ReceivedOffersPage";
-import 'bootstrap/dist/css/bootstrap.min.css';
-
 const router = createBrowserRouter([
   {
     path: "/messages",
@@ -15,6 +14,10 @@ const router = createBrowserRouter([
   {
     path: "/something",
     element: <ReceivedOffersPage />,
+  },
+  {
+    path: "/myplants",
+    element: <MyPlants />
   },
   {
     path: "/login",

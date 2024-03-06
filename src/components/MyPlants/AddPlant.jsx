@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
@@ -6,19 +7,22 @@ import { updatePlantsQuantity, assignPlant } from '../../services/userPlants';
 import { fetchPlants } from '../../services/plants';
 
 const AddPlant = (props) => {
-    // Note: This component needs user_id and user_plants passed into it as props.
+    // Note: This component needs user_plants passed into it as props.
     // user_plants should be an array of plant_id of plants belonging to user.
     const [show, setShow] = useState(false);
     const [userPlants, setUserPlants] = useState(props.user_plants)
-    const [plantList, setPlantList] = useState([]);
+    const [plantList, setPlantList] = useState([{id: 1, common_name: "Placeholder plant"}]);
     const [type, setType] = useState("");
     const [quantity, setQuantity] = useState(0)
     const [token, setToken] = useState(window.localStorage.getItem("token"))
+    const [userId, setUserId] = useState(window.localStorage.getItem("user_id"))
+    const navigate = useNavigate()
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
     useEffect(() => {
+      if(token) {
         fetchPlants(token)
             .then((data) => {
                 setPlantList(data)
@@ -27,12 +31,13 @@ const AddPlant = (props) => {
             .catch((err) => {
                 console.error(err);
             });
-    }, [])
+          }
+    }, [userPlants])
 
     const handleSubmit = () => {
         console.log(userPlants)
         if (userPlants.includes(type)) {
-            updatePlantsQuantity(props.user_id, type, quantity, token)
+            updatePlantsQuantity(userId, type, quantity, token)
                 .then((data) => {
                     setToken(data.token)
                     window.localStorage.setItem("token", data.token)
@@ -46,7 +51,9 @@ const AddPlant = (props) => {
 
                 });
         }
-    };
+        handleClose()
+        window.location.reload();
+      };
 
     const onTypeChange = (e) => {
         setType(e.target.value)

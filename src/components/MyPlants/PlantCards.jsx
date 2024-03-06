@@ -8,8 +8,10 @@ import { getUserPlants } from "../../services/userPlants";
 
 const PlantCards = (props) => {
   const [userPlantList, setUserPlantList] = useState(
-    [{common_name: "Placeholder plant", latin_name: "Plantus placeholderious", watering_frequency: 7}]);
-  const [userId, setUserId] = useState(props.user_id);
+    [{id: 0, common_name: "Placeholder plant", latin_name: "Plantus placeholderious", watering_frequency: 7}]);
+  const [userId, setUserId] = useState(
+    window.localStorage.getItem("user_id")
+  );
   const [token, setToken] = useState(
     window.localStorage.getItem("token")
   );
@@ -39,7 +41,6 @@ const PlantCards = (props) => {
       {userPlantList.map((plant) => (
         <Col>
           <Card>
-            <Card.Img variant="top" src="http://placehold.co/40x30" />
             <Card.Body style={{ minHeight: "10rem" }}>
               <Card.Title>
                 {plant.common_name} (<em>{plant.latin_name}</em>)
