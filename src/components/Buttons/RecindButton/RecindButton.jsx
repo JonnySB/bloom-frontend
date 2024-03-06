@@ -16,7 +16,7 @@ const RecindButton = ({ help_offer_id, triggerReload, setTriggerReload }) => {
     }
 
     return (
-        <Button vaient="success" size="sm" active onClick={handleClick}>
+        <Button variant="danger" size="sm" active onClick={handleClick}>
             Recind Offer
         </Button>
     );

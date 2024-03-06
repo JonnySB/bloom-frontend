@@ -2,3 +2,17 @@
     display: flex;
     flex-direction: column;
 }
+
+body,
+.app-container {
+    background-color: #FFF2D1;
+    min-height: 100vh;
+}
+
+.white-text {
+    color: white;
+}
+
+.green-text {
+    color: #2E9C45;
+}

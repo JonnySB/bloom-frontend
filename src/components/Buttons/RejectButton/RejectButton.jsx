@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCircleXmark } from '@fortawesome/free-solid-svg-icons'
+
 import { rejectHelpOffer } from '../../../services/helpOffers'
 
 const RejectOffer = ({ help_offer_id, triggerReload, setTriggerReload }) => {
@@ -15,8 +18,8 @@ const RejectOffer = ({ help_offer_id, triggerReload, setTriggerReload }) => {
     }
 
     return (
-        <Button vaient="success" size="sm" active onClick={handleClick}>
-            Reject Offer
+        <Button variant="danger" size="sm" active onClick={handleClick}>
+            <FontAwesomeIcon icon={faCircleXmark} />
         </Button>
     );
 };
