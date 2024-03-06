@@ -76,13 +76,12 @@ function UserNavbar({ userDetails }) {
             </div>
             <div className="navbar-container"> 
             <div className='potted-image'>
-                <img src='https://res.cloudinary.com/dououppib/image/upload/v1709755697/PLANTS/Screenshot_2024-03-06_at_8.00.14_PM_a7p84x.png'></img>
+                <img src='https://res.cloudinary.com/dououppib/image/upload/v1709756999/PLANTS/plant_banner.png'></img>
             </div>
                 <Navbar expand="lg" className="bg-body-tertiary">
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
                         <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="mr-auto">
-                            <Nav.Link href="#home">Manage Request</Nav.Link>
                             <Button variant="primary" onClick={handleShow}>Edit Profile</Button>
                         </Nav>
                         </Navbar.Collapse>
