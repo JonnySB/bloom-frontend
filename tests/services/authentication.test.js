@@ -40,8 +40,10 @@ describe("authentication service", () => {
         status: 201,
       });
 
-      const data = await login(testEmail, testPassword);
-      expect(data.token).toEqual("testToken");
+      const response = await login(testEmail, testPassword);
+      const token = response.token
+      expect(token).toEqual("testToken");
+
     });
 
     test("throws an error if the request failed", async () => {
