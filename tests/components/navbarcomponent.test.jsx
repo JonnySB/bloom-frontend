@@ -1,26 +1,75 @@
-// import { vi, describe, test, beforeEach, screen } from "vitest";
-// import userEvent from '@testing-library/user-event';
-// import { NavbarComponent } from "../../src/components/NavbarComponent";
-// import { useNavigate } from "react-router-dom";
-// import { getUserInformationById } from "../../services/authentication";
-
-// vi.mock("react-router-dom", () => {
-//     const navigateMock = vi.fn();
-//     const useNavigateMock = () => navigateMock; 
-//     return { useNavigate: useNavigateMock };
-// });
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { vi } from "vitest";
+import { useNavigate } from "react-router-dom";
+import NavbarComponent from "../../src/components/Navbar/NavbarComponent";
 
 
-// vi.mock("../../src/services/authentication", () => {
-//     const getUserInformationByIdMock = vi.fn();
-//     return { getUserInformationById: getUserInformationByIdMock };
-// });
 
-// describe("NavbarComponent", () => {
-//     beforeEach(() => {
-//         vi.resetAllMocks();
-//         localStorage.clear();
+vi.mock("react-router-dom", () => ({
+    useNavigate: vi.fn(),
+}));
+
+vi.mock("../../src/services/authentication", () => ({
+    login: async () => {
+        return { id: "mockedUserId" };
+    },
+}));
+
+describe("NavbarComponent", () => {
+    beforeEach(() => {
+        vi.resetAllMocks();
+    });
+
+    test("navigates to posts page when BLOOM is clicked", async () => {
+        render(<NavbarComponent />);
+        const bloomButton = screen.getByText("BLOOM");
+        userEvent.click(bloomButton);
+        const navigateMock = useNavigate();
+        expect(navigateMock).toHaveBeenCalledWith("/posts");
+    });
+
+});
+
+
+
+
+
+
+
+
+
+
+//     test("navigates to profile page when Profile link is clicked", async () => {
+//         // Mock do ID do usuário
+//         const mockUserId = "mockUserId";
+//         window.localStorage.setItem("user_id", mockUserId);
+
+//         // Renderiza o componente
+//         render(<NavbarComponent />);
+
+//         // Encontra e clica no link de perfil
+//         const profileLink = screen.getByText("Profile");
+//         userEvent.click(profileLink);
+
+//         // Verifica se a navegação para a página de perfil foi chamada com o ID correto
+//         const navigateMock = vi.useNavigate();
+//         expect(navigateMock).toHaveBeenCalledWith(`/profile/${mockUserId}`);
 //     });
+
+//     test("navigates to login page when Logout link is clicked", async () => {
+//         // Renderiza o componente
+//         render(<NavbarComponent />);
+
+//         // Encontra e clica no link de logout
+//         const logoutLink = screen.getByText("Logout");
+//         userEvent.click(logoutLink);
+
+//         // Verifica se a navegação para a página de login foi chamada
+//         const navigateMock = vi.useNavigate();
+//         expect(navigateMock).toHaveBeenCalledWith("/login");
+//     });
+// });
 
 
 
@@ -34,5 +83,4 @@
 //         expect(localStorage.getItem("id")).toBeNull();
 //         const navigateMock = useNavigate();
 //         expect(navigateMock).toHaveBeenCalledWith("/login");
-//     });
-// });
+    // });

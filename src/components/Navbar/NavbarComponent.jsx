@@ -1,17 +1,14 @@
-
-import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"; 
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
-// import { getUserInformationById } from "../../services/authentication";
+
 
 const NavbarComponent = () => {
     const navigate = useNavigate();
     const id = window.localStorage.getItem("user_id")
     const token = window.localStorage.getItem("token")
     
-
     const home = () => {
         navigate("/posts")
     }
