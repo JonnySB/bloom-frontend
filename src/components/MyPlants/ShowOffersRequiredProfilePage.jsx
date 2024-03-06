@@ -5,7 +5,7 @@ import "./ShowPlants.css"
 
 const RequiredOffersCard = ({ userOffers }) => {
   return (
-    <div class="profile-items">
+    <>
     <Container className="title">
         <h1>Requests for help</h1>
         <Link>Expand</Link>
@@ -37,7 +37,7 @@ const RequiredOffersCard = ({ userOffers }) => {
         </Col>
       ))}
     </Row>
-    </div>
+    </>
   );
 };
 

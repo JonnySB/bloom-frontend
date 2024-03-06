@@ -6,7 +6,7 @@ import { getUserPlants } from "../../services/userPlants.js"
 import { getAllRequestsByOneUser } from "../../services/RequestedOffersService.js"
 import PlantCards from "../../components/MyPlants/ShowPlantsProfilePage.jsx"
 import RequiredOffers from "../../components/MyPlants/ShowOffersRequiredProfilePage.jsx"
-
+import NavbarComponent from '../../components/Navbar/NavbarComponent.jsx';
 
 
 export const Profile = () => {
@@ -42,10 +42,15 @@ export const Profile = () => {
 
 
 return (
+    <>
+         <NavbarComponent />
         <Container className='profile-container'>
             <UserNavbar userDetails={userDetails}/>
+        <Container className='Items'>
             <PlantCards userPlants={userPlants}/>
             <RequiredOffers userOffers={userOffers}/>
         </Container>
+        </Container>
+    </>
     )
 }

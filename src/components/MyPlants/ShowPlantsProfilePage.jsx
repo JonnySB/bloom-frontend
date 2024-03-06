@@ -6,7 +6,7 @@ import "./ShowPlants.css"
 const PlantCards = ({userPlants}) => {
   return (
     <>
-    <Container>
+    <Container className="title">
     <h1>Plants owned</h1>
     <Link>Expand</Link>
 </Container>
