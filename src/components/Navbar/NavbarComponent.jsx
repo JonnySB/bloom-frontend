@@ -33,7 +33,7 @@ const NavbarComponent = () => {
 
     const myplants = (id) => {
         if (id) {
-            navigate("/plants");
+            navigate("/myplants");
         } else {
             navigate('/login')
         }
