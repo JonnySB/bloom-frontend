@@ -2,25 +2,30 @@ import ChatListComponent from "../components/MessageComponents.jsx/ChatListCompo
 import MessageContainer from "../components/MessageComponents.jsx/MessageContainerComponent"
 import { Container } from 'react-bootstrap';
 import './MessagePage.css'
-import React, { useState , useEffect} from "react";
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { getuserInformationById } from "../services/authentication";
 
 export const MessagePage = () => {
     const [selectedMessageId, setSelectedMessageId] = useState(null);
     const [userDetails, setUserDetails] = useState(null);
-    const senderUserID = 4; 
+    const senderUserID = 4;
+
+    // help_offer_user_id passed from StartChatButton
+    const state = useLocation();
+    const { help_offer_user_id } = state;
 
     useEffect(() => {
-      const fetchUserDetails = async () => {
-        try {
-          const userData = await getuserInformationById(3); // WE WILL NEED TO LOAD THE USER DETAILS HERE
-          setUserDetails(userData);
-        } catch (err) {
-          console.error('Error fetching user details:', err);
-        }
-      };
-      
-      fetchUserDetails();
+        const fetchUserDetails = async () => {
+            try {
+                const userData = await getuserInformationById(3); // WE WILL NEED TO LOAD THE USER DETAILS HERE
+                setUserDetails(userData);
+            } catch (err) {
+                console.error('Error fetching user details:', err);
+            }
+        };
+
+        fetchUserDetails();
     }, []);
 
 
@@ -33,18 +38,18 @@ export const MessagePage = () => {
     //   };
     //   setSelectedMessageId(defaultChatObject);
     // }, [defaultChatId]);
-    
 
-    
+
+
     // WILL NEED TO GET THE ID FROM WHO WE ARE SENING THE MESSAGE TO FROM THE OFFERS PAGE HERE INSIDE OF THE DEFAULTCHATID
     const handleChatSelect = (msg) => {
-      setSelectedMessageId(msg);
+        setSelectedMessageId(msg);
     };
-      
+
     return (
         <Container className="message-page-container">
-            <ChatListComponent onChatSelect={handleChatSelect} senderUserID={senderUserID} userDetails={userDetails}/> 
+            <ChatListComponent onChatSelect={handleChatSelect} senderUserID={senderUserID} userDetails={userDetails} />
             {selectedMessageId && <MessageContainer messageManager={selectedMessageId} userDetails={userDetails} />}
-      </Container>
+        </Container>
     )
 }

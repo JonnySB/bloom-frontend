@@ -47,7 +47,6 @@ const ReceivedOffersTable = ({ receivedOffers, triggerReload, setTriggerReload }
                                     help_offer_id={help_offer.help_offer_id}
                                     triggerReload={triggerReload}
                                     setTriggerReload={setTriggerReload}
-
                                 />
                             </th>
                             <th>
@@ -55,10 +54,13 @@ const ReceivedOffersTable = ({ receivedOffers, triggerReload, setTriggerReload }
                                     help_offer_id={help_offer.help_offer_id}
                                     triggerReload={triggerReload}
                                     setTriggerReload={setTriggerReload}
-
                                 />
                             </th>
-                            <th><StartChatButton help_offer_user_id={help_offer.help_offer_user_id} /></th>
+                            <th>
+                                <StartChatButton
+                                    help_offer_user_id={help_offer.help_offer_user_id}
+                                />
+                            </th>
                         </tr>
                     )
                 })}
