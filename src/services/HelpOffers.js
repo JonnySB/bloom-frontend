@@ -1,10 +1,9 @@
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
-export const createHelpOffer = async (helpRequestId, message, status, user_id, bid, token) => {
+export const createHelpOffer = async (helpRequestId, message, user_id, bid, token) => {
     try {
         const payload = {
             message: message,
-            status: status,
             user_id: user_id,
             bid: bid
         }

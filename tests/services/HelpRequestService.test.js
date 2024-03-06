@@ -1,6 +1,6 @@
 import { describe, expect, vi } from "vitest";
 import createFetchMock from "vitest-fetch-mock";
-import { createHelpRequest, getAllHelpRequestsWithUserDetails, getOneHelpRequestById} from "../../src/services/HelpRequests";
+import { createHelpRequest, getAllHelpRequestsWithUserDetails, getAllRequestsByOneUser, getOneHelpRequestById} from "../../src/services/HelpRequests";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 const mockHelpRequestId = "22";
@@ -85,6 +85,32 @@ describe("Help Request Service", () => {
             } catch(error) {
                 expect(error).toEqual("Unable to make POST request for create request")
             }
-        })
-    })
+        });
+    });
+
+    describe("Get all requests by current user", () => {
+        test("Successful GET request by current user with status 200", async () => {
+            fetch.mockResponseOnce(JSON.stringify({ helpRequests: [] }),{ status: 200 });
+
+            const token = "testToken";
+            const userId = "1";
+
+            await getAllRequestsByOneUser(userId, token);
+            
+            const fetchArguments = fetch.mock.lastCall;
+            const url = fetchArguments[0];
+            const options = fetchArguments[1];
+
+            expect(url).toEqual(`${BACKEND_URL}/help_requests/user/${userId}`);
+            expect(options.method).toEqual("GET");
+        });
+        test("Unsuccessful GET request with missing fields when status NOT 200", async () => {
+            fetch.mockResponseOnce(JSON.stringify({message: "Something went wrong"}),{ status: 400 });
+            try{
+                await getAllRequestsByOneUser();
+            } catch(error){
+                expect(error.message).toEqual("Unable to make GET request for get all requests by one user ");
+            }
+        });
+    });
 });

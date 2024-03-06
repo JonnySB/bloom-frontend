@@ -16,7 +16,6 @@ const CreateOfferForm = (props) => {
     const navigate = useNavigate()
 
     const [message, setMessage] = useState("");
-    const [status, setStatus] = useState("");
     const [bid, setBid] = useState(0);
     
 
@@ -29,13 +28,10 @@ const CreateOfferForm = (props) => {
         setBid(event.target.value);
     }
 
-    const handleStatusChange = (event) => {
-        setStatus(event.target.value);
-    }
-// submit offer not working
+
     const handleSubmitOffer = () => {
         try {
-            createHelpOffer(props.id, message, status, user_id, bid, token)
+            createHelpOffer(props.id, message, user_id, bid, token)
             .then((data) => {
                 console.log("Data -> ", data)
                 console.log("Successfully created a help offer")
@@ -79,10 +75,6 @@ const CreateOfferForm = (props) => {
                             placeholder="0.00"
                         />
                         </Form.Group>
-                        <Form.Select onChange={handleStatusChange} aria-label="Default select example">
-                            <option>Select status</option>
-                            <option value={status}>pending</option>
-                        </Form.Select>
                 </Form>
             </Modal.Body>
             <Modal.Footer>

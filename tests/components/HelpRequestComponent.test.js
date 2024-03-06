@@ -1,6 +1,8 @@
+import createFetchMock from "vitest-fetch-mock";
 import { render, screen } from "@testing-library/react";
 import HelpRequest from "../../src/components/HelpRequest/HelpRequest";
 
+createFetchMock(vi).enableMocks();
 const mockProps = {
     id: 1,
     first_name: 'John',
@@ -16,6 +18,7 @@ const mockProps = {
     showButtonOffer: true
 };
 
+// SKIP not working somehow
 describe("Help request tests", () => {
     test("displays content of help request", () => {
         render(<HelpRequest 
