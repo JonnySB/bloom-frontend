@@ -1,7 +1,5 @@
 // docs: https://vitejs.dev/guide/env-and-mode.html
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
-const TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcwOTcxOTg5NSwianRpIjoiNWFiNWM5NzYtN2FlZi00ZDNhLTgwZTYtM2Q5OTliMzc1ZmQ3IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNzA5NzE5ODk1LCJjc3JmIjoiNTljZDQ5NTctNzg5Ny00OTk1LTllNjYtNDQxODEyNmU4MDg2IiwiZXhwIjoxNzA5ODA2Mjk1fQ.E--Ht9V6F2gNrXzxuPeaL0sJLaSJircBstE4_xt6fws"
-
 
 export const getAllMessagesByUserId = async (userId, token) => {
     const requestOptions = {

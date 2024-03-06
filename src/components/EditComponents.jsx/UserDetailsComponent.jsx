@@ -7,7 +7,7 @@ import { editUsersInformation } from '../../services/users';
 function UserNavbar({ userDetails }) {
     const [show, setShow] = useState(false);
     const [formDetails, setFormDetails] = useState({});
-    
+    const [token, setToken] = useState(window.localStorage.getItem("token"));
     const [inputVisibility, setInputVisibility] = useState({
         firstName: false,
         lastName: false,
@@ -53,7 +53,7 @@ function UserNavbar({ userDetails }) {
         };
     
         try {
-            await editUsersInformation(updatedFormDetails);
+            await editUsersInformation(updatedFormDetails, token);
             console.log("form submited")
             window.location.reload();
         } catch (err) {

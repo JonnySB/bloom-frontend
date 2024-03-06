@@ -7,11 +7,12 @@ import AddPlant from "../../components/MyPlants/AddPlant.jsx"
 
 export const Profile = () => {
     const [userDetails, setUserDetails] = useState(null);
-    
+    const [user_id, setuserID] = useState(window.localStorage.getItem("user_id"));
+
      useEffect(() => {
         const fetchData = async () => {
         try {
-            const userData = await getuserInformationById(1);
+            const userData = await getuserInformationById(user_id);
             setUserDetails(userData)
         } catch (err) {
             console.error('Error fetching user details:', err);
