@@ -14,7 +14,7 @@ const RequiredOffersCard = ({ userOffers }) => {
         <h1>Requests for help</h1>
         <Link to="" className="link-button">Expand</Link>
     </Container>
-    <Row xs={1} md={5} className="myCard"> {/* Adjust the number of cards per row based on the screen width */}
+    <Row xs={1} md={5} className="requestcard"> {/* Adjust the number of cards per row based on the screen width */}
       {userOffers?.slice(0, 5).reverse().map((offer, index) => (
         <Col key={index}>
           <Card>

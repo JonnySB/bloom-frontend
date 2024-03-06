@@ -3,7 +3,7 @@
     justify-content: space-between; /* Aligns children to each end */
     align-items: center; /* Centers items vertically */
     padding: 0 15px 20px 10px; /* Adds some padding on the sides */
-    background-color: beige;
+
 }
 
 .title.container h1 {
@@ -23,16 +23,41 @@
 
 }
 
+.plantcard {
+    margin: 20px 0 20px 0;
+    
+}
+.card-body {
+    padding: 0;
+}
 
-.myCard {
+.card-title {
+    font-weight: 500;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    font-size: medium;
+    padding-left: 5px;
+    padding-top: 5px;
+}
+
+.plantcard img {
+    object-fit: cover;
+    aspect-ratio: 4 / 3;
+}
+
+.plantcard .card {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
+    height: 100%;
+
+}
+
+.requestcard {
+    border-radius: 10px;
     height: 250px;
-    background-color: #2E9C45;
-    margin-top: 20px;
+    margin: 20px 0 20px 0;
   }
   
-.myCard .card{
+.requestcard .card{
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     text-align: center;
