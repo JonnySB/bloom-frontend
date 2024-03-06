@@ -4,12 +4,16 @@ import { Login } from "./pages/Login/Login";
 import { Signup } from "./pages/Signup/Signup";
 import { MyPlants } from "./pages/MyPlants/MyPlants"
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Index } from "./pages/Index/Index";
+import { Profile } from "./pages/Profile/ProfilePage";import { Index } from "./pages/Index/Index";
 import ReceivedOffersPage from "./pages/ManageHelpRequestPages/ReceivedOffersPage/ReceivedOffersPage";
 const router = createBrowserRouter([
   {
     path: "/messages",
     element: <MessagePage />,
+  },
+  {
+    path: "/Profile",
+    element: <Profile />,
   },
   {
     path: "/something",

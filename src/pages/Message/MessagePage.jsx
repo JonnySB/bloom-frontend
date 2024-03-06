@@ -1,9 +1,10 @@
-import ChatListComponent from "../components/MessageComponents.jsx/ChatListComponent"
-import MessageContainer from "../components/MessageComponents.jsx/MessageContainerComponent"
+import ChatListComponent from "../../components/MessageComponents.jsx/ChatListComponent"
+import MessageContainer from "../../components/MessageComponents.jsx/MessageContainerComponent"
 import { Container } from 'react-bootstrap';
 import './MessagePage.css'
 import React, { useState , useEffect} from "react";
-import { getuserInformationById } from "../services/authentication";
+import { getuserInformationById } from "../../services/users";
+import NavbarComponent from "../../components/Navbar/NavbarComponent";
 
 export const MessagePage = () => {
     const [selectedMessageId, setSelectedMessageId] = useState(null);
@@ -42,9 +43,12 @@ export const MessagePage = () => {
     };
       
     return (
+      <>
+        <NavbarComponent />
         <Container className="message-page-container">
             <ChatListComponent onChatSelect={handleChatSelect} senderUserID={senderUserID} userDetails={userDetails}/> 
             {selectedMessageId && <MessageContainer messageManager={selectedMessageId} userDetails={userDetails} />}
       </Container>
+      </>
     )
 }
