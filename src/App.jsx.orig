@@ -2,21 +2,57 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { MessagePage } from "./pages/Message/MessagePage";
 import { Login } from "./pages/Login/Login";
 import { Signup } from "./pages/Signup/SignupPage";
+import { MyPlants } from "./pages/MyPlants/MyPlants"
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Profile } from "./pages/Profile/ProfilePage";
-
+import "./pages/MyPlants/MyPlants.css"
+import { Profile } from "./pages/Profile/ProfilePage";import { Index } from "./pages/Index/Index";
 import ReceivedOffersPage from "./pages/ManageHelpRequestPages/ReceivedOffersPage/ReceivedOffersPage";
-<<<<<<< HEAD
-import MyOffersPage from "./pages/ManageHelpRequestPages/MyOffersPage/MyOffersPage";
-=======
 import './App.css'
 import Homepage from './pages/Home/Homepage';
 import HelpRequestDetailPage from './pages/HelpRequestDetails/HelpRequestDetailsPage';
 import CreateRequestPage from './pages/CreateRequestPage/CreateRequestPage';
 
->>>>>>> main
+import MyOffersPage from "./pages/ManageHelpRequestPages/MyOffersPage/MyOffersPage";
 
 const router = createBrowserRouter([
+<<<<<<< HEAD
+    {
+        path: "/messages",
+        element: <MessagePage />,
+    },
+    {
+        path: "/Profile",
+        element: <Profile />,
+    },
+    {
+        path: "/request_management/received_offers",
+        element: <ReceivedOffersPage />,
+    },
+    {
+        path: "/request_management/my_offers",
+        element: <MyOffersPage />,
+    },
+    {
+        path: "/login",
+        element: <Login />,
+    },
+    {
+        path: "/signup",
+        element: <Signup />,
+    },
+    {
+        path: "/",
+        element: <Homepage />,
+    },
+    {
+        path: "/help_request_details/:requestId",
+        element: <HelpRequestDetailPage />,
+    },
+    {
+        path: "/create_request",
+        element: <CreateRequestPage />,
+    },
+=======
   {
     path: "/messages",
     element: <MessagePage />,
@@ -26,16 +62,20 @@ const router = createBrowserRouter([
     element: <Profile />,
   },
   {
-    path: "/request_management/received_offers",
+    path: "/something",
     element: <ReceivedOffersPage />,
   },
   {
-    path: "/request_management/my_offers",
-    element: <MyOffersPage />,
+    path: "/myplants",
+    element: <MyPlants />
   },
   {
     path: "/login",
     element: <Login />,
+  },
+  {
+    path: "/",
+    element: <Index />
   },
   {
     path: "/signup",
@@ -53,25 +93,17 @@ const router = createBrowserRouter([
     path: "create_request",
     element: <CreateRequestPage />,
   },
+>>>>>>> main
 ])
 
 
 function App() {
 
-<<<<<<< HEAD
-const App = () => {
     return (
         <>
             <RouterProvider router={router} />
         </>
     );
-=======
-  return (
-    <>
-      <RouterProvider router={router} />
-    </>
-  );
->>>>>>> main
 };
 
 export default App;
