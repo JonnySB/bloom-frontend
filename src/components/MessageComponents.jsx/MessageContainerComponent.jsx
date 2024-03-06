@@ -69,7 +69,8 @@ function MessageContainer({ messageManager, userDetails }) {
           messageManager.recipient_id,
           messageManager.receiver_username,
           userDetails.username,
-          newMessage
+          newMessage,
+          token
         );
         socket.emit('message', { 
           message: newMessage, 
