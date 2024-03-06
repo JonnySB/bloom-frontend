@@ -4,8 +4,6 @@ import { signup } from "../../services/authentication";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-
-
 export const Signup = () => {
         const [first_name, setFirst_name] = useState("");
         const [last_name, setLast_name] = useState("");

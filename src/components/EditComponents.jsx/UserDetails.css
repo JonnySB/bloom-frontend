@@ -1,0 +1,99 @@
+
+.user-details {
+    display: flex;
+    flex-direction: row; /* Align children side by side */
+    justify-content: space-between; /* Space between the card and navbar */
+    align-items: flex-end; /* Align items at the end (bottom) */
+    gap: 20px; /* Optional: Adds some space between the card and navbar */
+    border: 0px;
+}
+
+.profileEdit {
+    flex: 1;
+    margin-top: 20px;
+    max-width: 20%;
+}
+
+.navbar-container {
+    flex: 2; /* Allows the navbar to grow and take up necessary space */
+}
+
+.card-img-top {
+    display: flex; /* Enables flexbox properties */
+    align-items: center; /* Centers the content vertically */
+    justify-content: center; /* Centers the content horizontally */
+    height: 300px; /* Fixed height, adjust based on your design needs */
+}
+
+
+
+
+/* Modal Styling */
+.modal-content {
+    background-color: #f8f9fa; /* Light background for the modal */
+    border-radius: 8px; /* Rounded corners for the modal */
+    border: 1px solid #dee2e6; /* Light border for the modal */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+}
+
+.modal-header {
+    border-bottom: 1px solid #dee2e6; /* Light border for the header */
+    background-color: #e9ecef; /* Slightly different background for the header */
+    border-top-left-radius: 8px; /* Match modal border radius */
+    border-top-right-radius: 8px; /* Match modal border radius */
+}
+
+.modal-title {
+    color: #495057; /* Darker text for contrast */
+    font-weight: 500; /* Medium font weight */
+}
+
+.modal-body {
+    padding: 20px; /* More padding for the body */
+}
+
+.modal-footer {
+    border-top: 1px solid #dee2e6; /* Light border for the footer */
+    background-color: #f8f9fa; /* Match modal background */
+    border-bottom-left-radius: 8px; /* Match modal border radius */
+    border-bottom-right-radius: 8px; /* Match modal border radius */
+}
+
+/* Buttons Styling inside Modal */
+.modal-footer .btn {
+    border-radius: 20px; /* Rounded buttons */
+}
+
+.modal-footer .btn-primary {
+    background-color: #007bff; /* Bootstrap primary color */
+    border-color: #007bff; /* Border color to match */
+}
+
+.modal-footer .btn-secondary {
+    background-color: #6c757d; /* Bootstrap secondary color */
+    border-color: #6c757d; /* Border color to match */
+}
+
+
+.navbar-container .navbar {
+    padding: 0.5rem 1rem; /* Reduced padding for a slimmer navbar */
+    background-color: #ffffff; /* Light background for the navbar */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* Subtle shadow for depth */
+}
+
+/* Navbar Brand and Items Styling */
+.navbar-container .navbar-brand,
+.navbar-container .navbar-nav .nav-link {
+    color: #007bff !important; /* Brand and link color for visibility */
+}
+
+/* Active Link Styling */
+.navbar-container .navbar-nav .nav-link.active {
+    font-weight: bold; /* Bold for active link */
+}
+
+/* Adjusts navbar to grow properly */
+.navbar-container {
+    justify-content: center; /* Center navbar items */
+    width: 100%; /* Ensure it takes full width as intended */
+}

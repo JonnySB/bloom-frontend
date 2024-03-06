@@ -1,19 +1,18 @@
 import React, { useState, useEffect } from "react";
-import Card from 'react-bootstrap/Card';
-import ListGroup from 'react-bootstrap/ListGroup';
-import Container from 'react-bootstrap/Container';
+import { Card, ListGroup, Container } from 'react-bootstrap'
 import "./MessageComponents.css";
 import { getAllMessagesByUserId } from "../../services/messages";
 
 function ChatListComponent({ onChatSelect, senderUserID, userDetails }) {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(true);
-
+  const [token, setToken] = useState(window.localStorage.getItem("token"));
+  
     useEffect(() => {
       const fetchData = async () => {
         if (userDetails && userDetails.id) {
           try {
-            let messagesData = await getAllMessagesByUserId(userDetails.id);
+            let messagesData = await getAllMessagesByUserId(userDetails.id, token);
             setMessages(messagesData);
             let chatExists = messagesData.some(m => m.recipient_id === senderUserID);
             

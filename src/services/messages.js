@@ -1,16 +1,14 @@
 // docs: https://vitejs.dev/guide/env-and-mode.html
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
-
-export const getAllMessagesByUserId = async (userId) => {
+export const getAllMessagesByUserId = async (userId, token) => {
     const requestOptions = {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcwOTQ2NTU0MCwianRpIjoiNjNmOTM0ZWUtNjIwNC00MTU5LWExZGMtZmQ4YTc2ZTQ3MGE1IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNzA5NDY1NTQwLCJjc3JmIjoiNTY4ZTM2MzktZjkxNC00MWI2LWE4YzctZThlZjUzNjNkNjIwIiwiZXhwIjoxNzA5NTUxOTQwfQ.dp3b-EfpiHyKBU7goLzusrsj-izldlaeVtc1iCKjjAw`,
+            "Authorization": `Bearer ${token}`
         },
     };
-    
     const response = await fetch(`${BACKEND_URL}/messages/user/${userId}`, requestOptions);
 
     if (response.status === 200) {
@@ -24,13 +22,12 @@ export const getAllMessagesByUserId = async (userId) => {
     }
 }
 
-export const getMessagesById = async (chat_id) => {
+export const getMessagesById = async (chat_id, token) => {
     const requestOptions = {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcwOTQ2NTU0MCwianRpIjoiNjNmOTM0ZWUtNjIwNC00MTU5LWExZGMtZmQ4YTc2ZTQ3MGE1IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNzA5NDY1NTQwLCJjc3JmIjoiNTY4ZTM2MzktZjkxNC00MWI2LWE4YzctZThlZjUzNjNkNjIwIiwiZXhwIjoxNzA5NTUxOTQwfQ.dp3b-EfpiHyKBU7goLzusrsj-izldlaeVtc1iCKjjAw`,
-          
+            "Authorization": `Bearer ${token}`          
         },
 
     };
@@ -47,12 +44,12 @@ export const getMessagesById = async (chat_id) => {
     }
 }
 
-export const sendMessage = async (userId, receiverId, receiver_username, sender_username, messageContent) => {
+export const sendMessage = async (userId, receiverId, receiver_username, sender_username, messageContent, token) => {
     const requestOptions = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcwOTQ2NTU0MCwianRpIjoiNjNmOTM0ZWUtNjIwNC00MTU5LWExZGMtZmQ4YTc2ZTQ3MGE1IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNzA5NDY1NTQwLCJjc3JmIjoiNTY4ZTM2MzktZjkxNC00MWI2LWE4YzctZThlZjUzNjNkNjIwIiwiZXhwIjoxNzA5NTUxOTQwfQ.dp3b-EfpiHyKBU7goLzusrsj-izldlaeVtc1iCKjjAw`,
+        "Authorization": `Bearer ${token}`
       },
       body: JSON.stringify({
         userId: userId,

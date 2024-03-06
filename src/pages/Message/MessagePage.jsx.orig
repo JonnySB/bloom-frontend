@@ -1,14 +1,21 @@
-import ChatListComponent from "../components/MessageComponents.jsx/ChatListComponent"
-import MessageContainer from "../components/MessageComponents.jsx/MessageContainerComponent"
+import ChatListComponent from "../../components/MessageComponents.jsx/ChatListComponent"
+import MessageContainer from "../../components/MessageComponents.jsx/MessageContainerComponent"
 import { Container } from 'react-bootstrap';
 import './MessagePage.css'
+<<<<<<< HEAD:src/pages/MessagePage.jsx
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { getuserInformationById } from "../services/authentication";
+=======
+import React, { useState , useEffect} from "react";
+import { getuserInformationById } from "../../services/users";
+import NavbarComponent from "../../components/Navbar/NavbarComponent";
+>>>>>>> main:src/pages/Message/MessagePage.jsx
 
 export const MessagePage = () => {
     const [selectedMessageId, setSelectedMessageId] = useState(null);
     const [userDetails, setUserDetails] = useState(null);
+<<<<<<< HEAD:src/pages/MessagePage.jsx
     const senderUserID = 4;
 
     // help_offer_user_id passed from StartChatButton
@@ -26,8 +33,24 @@ export const MessagePage = () => {
         };
 
         fetchUserDetails();
-    }, []);
+=======
+    const [user_id, setuserID] = useState(window.localStorage.getItem("user_id"));
+    const senderUserID = 4; 
+  
 
+    useEffect(() => {
+      const fetchUserDetails = async () => {
+        try {
+          const userData = await getuserInformationById(user_id); 
+          setUserDetails(userData);
+        } catch (err) {
+          console.error('Error fetching user details:', err);
+        }
+      };
+      
+      fetchUserDetails();
+>>>>>>> main:src/pages/Message/MessagePage.jsx
+    }, []);
 
     // useEffect(() => {
     //   // This will update the selected message whenever the defaultChatId changes
@@ -47,9 +70,16 @@ export const MessagePage = () => {
     };
 
     return (
+      <>
+        <NavbarComponent />
         <Container className="message-page-container">
             <ChatListComponent onChatSelect={handleChatSelect} senderUserID={senderUserID} userDetails={userDetails} />
             {selectedMessageId && <MessageContainer messageManager={selectedMessageId} userDetails={userDetails} />}
+<<<<<<< HEAD:src/pages/MessagePage.jsx
         </Container>
+=======
+      </Container>
+      </>
+>>>>>>> main:src/pages/Message/MessagePage.jsx
     )
 }
