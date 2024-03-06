@@ -7,20 +7,10 @@ const PlantCards = ({userPlants}) => {
   return (
     <>
     <Container className="title">
-    <h1>Plants owned</h1>
-    <Link>Expand</Link>
-</Container>
-    <Row
-      xs={1}
-      md={5}
-      className="g-4"
-      style={{
-        minWidth: "20rem",
-        padding: "10px",
-        marginLeft: "auto",
-        marginRight: "auto",
-      }}
-    >
+        <h1>Plants owned</h1>
+        <Link>Expand</Link>
+    </Container>
+    <Row xs={1} md={5} >
       {userPlants?.slice(0, 5).reverse().map((plant, index) => (
         <Col key={index}>
           <Card>

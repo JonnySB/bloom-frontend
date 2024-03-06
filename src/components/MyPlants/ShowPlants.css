@@ -1,4 +1,24 @@
 .title.container {
-    background-color: black;
-    
+    display: flex; /* Enables Flexbox layout */
+    justify-content: space-between; /* Aligns children to each end */
+    align-items: center; /* Centers items vertically */
+    padding: 0 15px 20px 10px; /* Adds some padding on the sides */
+    background-color: beige;
+}
+
+.title.container h1 {
+    font-size: 30px;
+    margin: 0;
+}
+
+
+.title.container a {
+    font-size: 20px;
+    background-color: #2E9C45;
+    color: white; 
+    padding: 10px 20px; 
+    text-decoration: none; 
+    border-radius: 5px; 
+    display: inline-block;
+
 }
