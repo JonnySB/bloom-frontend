@@ -1,25 +1,23 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../services/authentication";
-import Col from 'react-bootstrap/Col';
-import Form from 'react-bootstrap/Form';
-import Row from 'react-bootstrap/Row';
-import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
+import {Container, Button, Row, Form, Col } from 'react-bootstrap';
 import "./LoginPage.css"
+
 
 export const Login = () => {
     const [username_email, setUsername_email] = useState("");
     const [password, setPassword] = useState("");
     const [loginError, setError] = useState()
     const navigate = useNavigate();
-
+    
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-        const token = await login(username_email, password);
-        window.localStorage.setItem("token", token);
-        navigate("/posts");
+        const response = await login(username_email, password);
+        window.localStorage.setItem("token", response.token);
+        window.localStorage.setItem("user_id", response.user_id)
+        navigate("/messages");
         } catch (err) {
         console.error(err);
         setError(err.cause)
