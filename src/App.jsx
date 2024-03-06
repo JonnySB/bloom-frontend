@@ -40,10 +40,6 @@ const router = createBrowserRouter([
         element: <Login />,
     },
     {
-        path: "/add_plant",
-        element: <Index />
-    },
-    {
         path: "/signup",
         element: <Signup />,
     },
