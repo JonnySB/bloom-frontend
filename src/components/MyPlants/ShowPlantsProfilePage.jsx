@@ -15,6 +15,7 @@ const PlantCards = ({userPlants}) => {
         <Col key={index}>
           <Card>
             <Card.Body style={{ minHeight: "10rem" }}>
+            <Card.Img variant="top" src={plant.photo} />
               <Card.Title>
                 {plant.common_name} (<em>{plant.latin_name}</em>)
               </Card.Title>
