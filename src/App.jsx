@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { MessagePage } from "./pages/Message/MessagePage";
-import { Login } from "./pages/Login/LoginPage";
+import { Login } from "./pages/Login/Login";
 import { Signup } from "./pages/Signup/SignupPage";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Profile } from "./pages/Profile/ProfilePage";

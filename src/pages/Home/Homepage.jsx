@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { getAllHelpRequestsWithUserDetails } from '../../services/HelpRequests'
 import HelpRequest from '../../components/HelpRequest/HelpRequest'
 import './HomePage.css'
+import NavbarComponent from '../../components/Navbar/NavbarComponent'
 
 
 const Homepage = () => {
@@ -22,6 +23,7 @@ const Homepage = () => {
 
     return (
         <div>
+            <NavbarComponent />
             <h1>BLOOM</h1>
             <div>
                 <div role='feed'>
