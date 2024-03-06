@@ -5,7 +5,7 @@
     justify-content: space-between; /* Space between the card and navbar */
     align-items: flex-end; /* Align items at the end (bottom) */
     gap: 20px; /* Optional: Adds some space between the card and navbar */
-    border: 0px;
+    max-width: 1390px;
 }
 
 .profileEdit {
@@ -24,8 +24,6 @@
     justify-content: center; /* Centers the content horizontally */
     height: 300px; /* Fixed height, adjust based on your design needs */
 }
-
-
 
 
 /* Modal Styling */

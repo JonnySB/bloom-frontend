@@ -29,6 +29,9 @@
 }
 .card-body {
     padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
 }
 
 .card-title {
@@ -37,13 +40,15 @@
     font-size: medium;
     padding-left: 5px;
     padding-top: 5px;
-}
-.card-text {
-    padding-left: 5px;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    height: 3.5em; 
+    overflow: hidden; 
 }
 
+.card-text {
+    padding-left: 5px;
+    padding-bottom: 10px;
+    min-height: 3em; 
+}
 
 .plantcard img {
     object-fit: cover;
@@ -59,7 +64,7 @@
 
 .requestcard {
     border-radius: 10px;
-    height: 250px;
+    height: 200px;
     margin: 20px 0 20px 0;
   }
   

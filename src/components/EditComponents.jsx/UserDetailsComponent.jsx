@@ -75,6 +75,9 @@ function UserNavbar({ userDetails }) {
                 </Card>
             </div>
             <div className="navbar-container"> 
+            <div className='potted-image'>
+                <img src='https://res.cloudinary.com/dououppib/image/upload/v1709755697/PLANTS/Screenshot_2024-03-06_at_8.00.14_PM_a7p84x.png'></img>
+            </div>
                 <Navbar expand="lg" className="bg-body-tertiary">
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
                         <Navbar.Collapse id="basic-navbar-nav">
