@@ -42,8 +42,7 @@ export const Profile = () => {
 
 
 return (
-        <Container>
-            <h1>Welcome to the profile page</h1>
+        <Container className='profile-container'>
             <UserNavbar userDetails={userDetails}/>
             <PlantCards userPlants={userPlants}/>
             <RequiredOffers userOffers={userOffers}/>

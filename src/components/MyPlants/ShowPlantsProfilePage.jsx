@@ -1,8 +1,15 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import {Card, Col, Row} from "react-bootstrap";
+import {Card, Col, Row, Container} from "react-bootstrap";
+import { Link } from "react-router-dom";
+import "./ShowPlants.css"
 
 const PlantCards = ({userPlants}) => {
   return (
+    <>
+    <Container>
+    <h1>Plants owned</h1>
+    <Link>Expand</Link>
+</Container>
     <Row
       xs={1}
       md={5}
@@ -31,6 +38,7 @@ const PlantCards = ({userPlants}) => {
         </Col>
       ))}
     </Row>
+    </>
   );
 };
 

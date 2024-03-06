@@ -1,12 +1,16 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import {Card, Col, Row} from "react-bootstrap";
+import {Card, Col, Row, Container} from "react-bootstrap";
+import { Link } from "react-router-dom";
+import "./ShowPlants.css"
 
 const RequiredOffersCard = ({ userOffers }) => {
   return (
-    <Row
-      xs={1}
-      md={5}
-      className="g-4"
+    <div class="profile-items">
+    <Container className="title">
+        <h1>Requests for help</h1>
+        <Link>Expand</Link>
+    </Container>
+    <Row xs={1} md={5} className="g-4"
       style={{
         minWidth: "20rem",
         padding: "10px",
@@ -33,6 +37,7 @@ const RequiredOffersCard = ({ userOffers }) => {
         </Col>
       ))}
     </Row>
+    </div>
   );
 };
 
