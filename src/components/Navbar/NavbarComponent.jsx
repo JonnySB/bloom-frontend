@@ -60,7 +60,7 @@ const NavbarComponent = () => {
 
 
     return (
-        <Navbar expand="lg" fixed="top">
+        <Navbar expand="lg" sticky="top">
         <Container>
             <Navbar.Brand onClick={home}>BLOOM</Navbar.Brand>
             <Nav className="me-auto">
