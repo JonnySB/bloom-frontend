@@ -62,7 +62,7 @@ const NavbarComponent = () => {
     return (
         <Navbar expand="lg" className="bg-body-tertiary">
             <Container fluid>
-                <Navbar.Brand onClick={home}>BLOOM</Navbar.Brand>
+                <Navbar.Brand style={{cursor: 'pointer'}}onClick={home}>BLOOM</Navbar.Brand>
                 <Nav className="ms-auto nav-spacing">
                     {token && (
                         <>
