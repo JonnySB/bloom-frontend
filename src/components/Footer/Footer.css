@@ -1,6 +1,6 @@
 footer {
     text-align: center;
-    background-color: #2e9c45;
+    background-color: rgb(248, 249, 250);
     min-height: 40px;
     display: flex;
     flex-direction: column;
@@ -16,5 +16,5 @@ footer {
 
 footer p {
     margin: 0;
-    color: white;
+    color: black;
 }
