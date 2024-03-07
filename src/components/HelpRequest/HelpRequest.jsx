@@ -20,7 +20,7 @@ const HelpRequest = (props) => {
     return (
         <div>
             <Col>
-                <Card>
+                <Card className='card-body2'>
                     <Card.Body>
                         <Col xs={6} md={4}>
                             <Image src="holder.js/171x180" roundedCircle />
