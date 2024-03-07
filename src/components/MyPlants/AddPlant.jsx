@@ -26,7 +26,6 @@ const AddPlant = (props) => {
         fetchPlants(token)
             .then((data) => {
                 setPlantList(data)
-                console.log(data)
             })
             .catch((err) => {
                 console.error(err);
