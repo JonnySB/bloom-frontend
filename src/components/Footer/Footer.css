@@ -1,0 +1,20 @@
+footer {
+    text-align: center;
+    background-color: #2e9c45;
+    min-height: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-width: 100%;
+    position: sticky;
+    left: 0;
+    bottom: 0;
+    box-shadow: 0px 0px 5px black;
+    margin-top: 50px;
+}
+
+footer p {
+    margin: 0;
+    color: white;
+}
