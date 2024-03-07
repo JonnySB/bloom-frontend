@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import 'react-datepicker/dist/react-datepicker.css';
-import { createHelpOffer } from '../../services/helpOffers'
+import { createHelpOffer } from '../../services/helpOffers';
 import { useNavigate } from 'react-router-dom';
 
 const CreateOfferForm = (props) => {

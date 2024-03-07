@@ -7,7 +7,7 @@ import { getAllRequestsByOneUser } from "../../services/RequestedOffersService.j
 import PlantCards from "../../components/MyPlants/ShowPlantsProfilePage.jsx"
 import RequiredOffers from "../../components/MyPlants/ShowOffersRequiredProfilePage.jsx"
 import NavbarComponent from '../../components/Navbar/NavbarComponent.jsx';
-
+import "./ProfilePageStyle.css"
 
 export const Profile = () => {
     const [userDetails, setUserDetails] = useState(null);
@@ -43,14 +43,14 @@ export const Profile = () => {
 
 return (
     <>
-         <NavbarComponent />
-        <Container className='profile-container'>
-            <UserNavbar userDetails={userDetails}/>
-        <Container className='Items'>
-            <PlantCards userPlants={userPlants}/>
-            <RequiredOffers userOffers={userOffers}/>
-        </Container>
-        </Container>
-    </>
+    <NavbarComponent />
+    <div className="profile-container"> {/* This div wraps the content and centers it */}
+      <UserNavbar userDetails={userDetails}/>
+      <Container className='Items'>
+        <PlantCards userPlants={userPlants}/>
+        <RequiredOffers userOffers={userOffers}/>
+      </Container>
+    </div>
+  </>
     )
 }
