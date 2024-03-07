@@ -1,12 +1,14 @@
 import React from 'react';
 import PlantCards from '../../components/MyPlants/PlantCards';
-import AddPlant from '../../components/MyPlants/AddPlant'
-import "./MyPlants.css"
+import AddPlant from '../../components/MyPlants/AddPlant';
+import NavbarComponent from '../../components/Navbar/NavbarComponent';
+import Footer from '../../components/Footer/Footer';
+import "./MyPlants.css";
 
 export const MyPlants = () => {
  return (
    <div>
-
+    <NavbarComponent />
      <div className="my-plants-container">
        <div className="back-to-profile">
          <span><a href="/profile">← Back to Profile Page</a></span>
@@ -17,6 +19,7 @@ export const MyPlants = () => {
        <PlantCards />
        </div>
      </div>
+     <Footer />
    </div>
  );
 };
