@@ -19,7 +19,7 @@ const AcceptButton = ({ help_offer_id, triggerReload, setTriggerReload }) => {
     }
 
     return (
-        <Button variant="success" size="sm" className="color" active onClick={handleClick}>
+        <Button variant="success" size="lg" className="color-accept btn-fill" active onClick={handleClick}>
             <FontAwesomeIcon icon={faCircleCheck} />
         </Button>
     );

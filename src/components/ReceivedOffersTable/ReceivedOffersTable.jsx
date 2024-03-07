@@ -2,6 +2,7 @@ import Table from 'react-bootstrap/Table';
 import AcceptButton from '../Buttons/AcceptButton/AcceptButton'
 import RejectButton from '../Buttons/RejectButton/RejectButton'
 import StartChatButton from '../Buttons/StartChatButton/StartChatButton'
+import "./ReceivedOffersTable.css"
 
 const ReceivedOffersTable = ({ receivedOffers, triggerReload, setTriggerReload }) => {
     console.log(receivedOffers)
@@ -18,57 +19,56 @@ const ReceivedOffersTable = ({ receivedOffers, triggerReload, setTriggerReload }
     }
 
     return (
-        <Table striped bordered hover >
-            <thead>
-                <tr >
-                    <th>Status</th>
-                    <th>Request Name</th>
-                    <th>Date Range</th>
-                    <th>Price Offered</th>
-                    <th>User</th>
-                    <th>Message</th>
-                    <th></th>
-                    <th>Start Chat</th>
-                </tr>
-            </thead>
-            <tbody>
-                {receivedOffers?.map((help_offer) => {
-                    return (
-                        <tr key={help_offer.help_offer_id}>
-                            <th>{help_offer.help_offer_status}</th>
-                            <th>{help_offer.help_request_name}</th>
-                            <th>{convertDate(help_offer.help_request_start_date, help_offer.help_request_end_date)}</th>
-                            <th>{help_offer.help_offer_bid}</th>
-                            <th>{help_offer.help_offer_username}</th>
-                            <th>{help_offer.help_offer_message}</th>
-                            <th>
-                                <div>
-                                    <div>
-                                        <AcceptButton
-                                            help_offer_id={help_offer.help_offer_id}
-                                            triggerReload={triggerReload}
-                                            setTriggerReload={setTriggerReload}
-                                        />
-                                    </div>
-                                    <div>
-                                        <RejectButton
-                                            help_offer_id={help_offer.help_offer_id}
-                                            triggerReload={triggerReload}
-                                            setTriggerReload={setTriggerReload}
-                                        />
-                                    </div>
-                                </div>
-                            </th>
-                            <th>
-                                <StartChatButton
-                                    help_offer_user_id={help_offer.help_offer_user_id}
-                                />
-                            </th>
-                        </tr>
-                    )
-                })}
-            </tbody>
-        </Table>
+        <div className="table-container">
+            <Table>
+                <thead>
+                    <tr>
+                        <th>Status</th>
+                        <th>Request Name</th>
+                        <th>Date Range</th>
+                        <th>Price Offered</th>
+                        <th>User</th>
+                        <th>Message</th>
+                        <th>Accept</th>
+                        <th>Reject</th>
+                        <th>Chat</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {receivedOffers?.map((help_offer) => {
+                        return (
+                            <tr key={help_offer.help_offer_id}>
+                                <td>{help_offer.help_offer_status}</td>
+                                <td>{help_offer.help_request_name}</td>
+                                <td>{convertDate(help_offer.help_request_start_date, help_offer.help_request_end_date)}</td>
+                                <td>{help_offer.help_offer_bid}</td>
+                                <td>{help_offer.help_offer_username}</td>
+                                <td>{help_offer.help_offer_message}</td>
+                                <td className="btn-styling" style={{ border: "0" }}>
+                                    <AcceptButton
+                                        help_offer_id={help_offer.help_offer_id}
+                                        triggerReload={triggerReload}
+                                        setTriggerReload={setTriggerReload}
+                                    />
+                                </td>
+                                <td className="btn-styling" style={{ border: "0" }}>
+                                    <RejectButton
+                                        help_offer_id={help_offer.help_offer_id}
+                                        triggerReload={triggerReload}
+                                        setTriggerReload={setTriggerReload}
+                                    />
+                                </td>
+                                <td className="btn-styling" style={{ border: "0" }}>
+                                    <StartChatButton
+                                        help_offer_user_id={help_offer.help_offer_user_id}
+                                    />
+                                </td>
+                            </tr>
+                        )
+                    })}
+                </tbody>
+            </Table>
+        </div >
     );
 }
 

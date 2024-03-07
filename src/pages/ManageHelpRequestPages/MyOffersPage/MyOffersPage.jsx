@@ -31,9 +31,8 @@ const MyOffersPage = () => {
 
     return (
         <div className="page-container">
-            <div>
-                <NavbarComponent />
-            </div>
+            <NavbarComponent />
+            <h1>My Offers</h1>
             <div>
                 <ManageHelpRequestsNavBar />
             </div>

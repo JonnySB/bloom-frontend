@@ -31,7 +31,8 @@ const ReceivedOffersPage = () => {
     return (
         <div className="page-container">
             <NavbarComponent />
-            <div className="manage-requests-nav-bar-container">
+            <h1>Received Offers</h1>
+            <div>
                 <ManageHelpRequestsNavBar />
             </div>
             <div>

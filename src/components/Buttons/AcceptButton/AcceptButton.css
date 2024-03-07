@@ -1,9 +1,13 @@
-.color {
-    background: #2E9C45 !important;
-    border: none;
+.color-accept {
+    background: #0e8225 !important;
+    border: #0e8225;
 }
 
-.color:hover {
+.color-accept:hover {
     background: #033021 !important;
-    border: none;
+}
+
+.btn-fill {
+    min-width: 100% !important;
+    min-height: 50px !important;
 }

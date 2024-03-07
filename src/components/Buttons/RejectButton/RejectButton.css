@@ -1,9 +1,9 @@
-.color-rescind {
+.color-reject {
     background: #B02A37 !important;
     border: #B02A37;
 }
 
-.color-rescind:hover {
+.color-reject:hover {
     background: darkred !important;
 }
 

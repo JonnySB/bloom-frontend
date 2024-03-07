@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
+import "./RescindButton.css"
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCircleXmark } from '@fortawesome/free-solid-svg-icons'
 
 import { rescindHelpOffer } from '../../../services/helpOffers'
 
@@ -16,8 +20,8 @@ const RescindButton = ({ help_offer_id, triggerReload, setTriggerReload }) => {
     }
 
     return (
-        <Button variant="danger" size="sm" active onClick={handleClick}>
-            Rescind Offer
+        <Button variant="danger" size="lg" className="color-rescind btn-fill" active onClick={handleClick}>
+            <FontAwesomeIcon icon={faCircleXmark} />
         </Button>
     );
 };

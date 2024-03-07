@@ -4,6 +4,39 @@
     justify-content: space-around;
 }
 
-.text-align-center {
-    text-align: center;
+.table-container {
+    margin: 80px;
+    margin-top: 40px;
+    border: 3px solid black;
+    border-radius: 10px;
+    z-index: 10000;
+    padding: 5px;
+    padding-bottom: 0px;
+}
+
+Table {
+    text-align: center !important;
+    border-collapse: separate;
+    border-spacing: 10px;
+}
+
+th {
+    border: 1px solid #2E9C45 !important;
+    background-color: #2E9C45 !important;
+    color: white !important;
+    border-radius: 5px;
+}
+
+td {
+    border: 1px solid #033021;
+    border-radius: 5px;
+}
+
+td .btn-border {
+    border: 0px !important;
+}
+
+.btn-styling {
+    padding: 0px !important;
+    margin: 0px !important;
 }

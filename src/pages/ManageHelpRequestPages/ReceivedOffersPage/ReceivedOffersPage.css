@@ -3,14 +3,6 @@
     flex-direction: column;
 }
 
-.white-text {
-    color: white;
-}
-
-.green-text {
-    color: #2E9C45;
-}
-
-.manage-requests-nav-bar-container {
-    margin: 20px;
+h1 {
+    margin-bottom: 40px;
 }
