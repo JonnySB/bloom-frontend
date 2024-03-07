@@ -5,6 +5,9 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
+import "./Login.css"
+import Nav from 'react-bootstrap/Nav';
 
 
 
@@ -37,22 +40,34 @@ export const Login = () => {
     };
 
     return (
-        <Form className="Login" onSubmit={handleSubmit}>
-            <h1 className="h3 mb-3 font-weight-normal">Login</h1>
-        <Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
-            <Col sm="10">
-                <Form.Control type="text" placeholder="Email or username" value={username_email} onChange={handleUsernameEmailChange} />
-            </Col>
-        </Form.Group>
-
-        <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
-            <Col sm="10">
-                <Form.Control type="password" placeholder="Password" value={password} onChange={handlePasswordChange} />
-            </Col>
-        </Form.Group>
-        <Button type="submit">Login</Button>
-        {loginError && <div>{loginError}</div>}
-    </Form>
+        <>    
+        <div className="app-container"> 
+            <Container className="d-flex align-items-center justify-content-center" style={{ minHeight: '100vh' }}>
+                <div className="login-container">
+                    <Form className="Login d-flex flex-column align-items-center" onSubmit={handleSubmit}>
+                        <h1 className="white-text">Login</h1>
+                        <Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
+                            <Col sm="12"> 
+                                <Form.Control type="text" placeholder="Email or username" value={username_email} onChange={handleUsernameEmailChange} />
+                            </Col>
+                        </Form.Group>
+    
+                        <Form.Group as={Row} className="mb-3 justify-content-center" controlId="formPlaintextPassword">
+                            <Col sm="12">
+                                <Form.Control type="password" placeholder="Password" value={password} onChange={handlePasswordChange} />
+                            </Col>
+                        </Form.Group>
+                        <Button variant="success" type="submit">Login</Button>
+                        {loginError && <div>{loginError}</div>}
+                    </Form>
+                    <hr className="white-line" />
+                    <div className="green-text text-center font-weight-bold">
+                    <Nav.Link href="/signup" className="nav-link">Create Account</Nav.Link>
+                    </div>
+                </div>
+            </Container>
+        </div>
+    </>
 
         );
     };

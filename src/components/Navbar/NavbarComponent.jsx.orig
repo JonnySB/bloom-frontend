@@ -2,7 +2,6 @@ import { useNavigate } from "react-router-dom";
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
-import "./NavbarComponent.css";
 
 
 const NavbarComponent = () => {
@@ -16,7 +15,11 @@ const NavbarComponent = () => {
 
     const profilePage = () => {
         if (id) {
-            navigate(`/profile`);
+<<<<<<< HEAD
+            navigate(`/profile/${id}`);
+=======
+        navigate(`/profile`);
+>>>>>>> main
         } else {
             navigate('/login')
         }
@@ -25,7 +28,7 @@ const NavbarComponent = () => {
 
     const requestManagement = (id) => {
         if (id) {
-            navigate(`/create_request`);
+            navigate(`/request_management/received_offers`);
         } else {
             navigate('/login')
         }
@@ -34,33 +37,48 @@ const NavbarComponent = () => {
 
     const myplants = (id) => {
         if (id) {
-            navigate("/myplants");
+            navigate("/plants");
         } else {
             navigate('/login')
         }
     }
     const messages = (id) => {
+<<<<<<< HEAD
         if (id) {
-            navigate(`/messages`);
+            navigate(`/messages/${id}`);
+=======
+        if (id) { 
+        navigate(`/messages`);
+>>>>>>> main
         } else {
             navigate('/login')
         }
     };
 
     const logout = () => {
-        if (id) {
-            window.localStorage.removeItem("token");
-            window.localStorage.removeItem("user_id");
-            navigate("/");
-            window.location.reload()
-        } else {
-            navigate("/login");
-        }
+        window.localStorage.removeItem("token");
+        window.localStorage.removeItem("id");
+        navigate("/");
     };
 
 
     return (
-        <Navbar expand="lg" fixed="top">
+        <Navbar expand="lg" className="bg-body-tertiary">
+<<<<<<< HEAD
+            <Container>
+                <Navbar.Brand onClick={home}>BLOOM</Navbar.Brand>
+
+                <Nav className="me-auto">
+                    <Nav.Link onClick={profilePage}>Profile</Nav.Link>
+                    <Nav.Link onClick={requestManagement}>Request Management</Nav.Link>
+                    <Nav.Link onClick={myplants}>My Plants</Nav.Link>
+                    <Nav.Link onClick={messages}>Chat</Nav.Link>
+                    <Nav.Link onClick={logout}>Logout</Nav.Link>
+                </Nav>
+
+            </Container>
+        </Navbar>
+=======
         <Container>
             <Navbar.Brand onClick={home}>BLOOM</Navbar.Brand>
             <Nav className="me-auto">
@@ -80,6 +98,7 @@ const NavbarComponent = () => {
             </Nav>
         </Container>
     </Navbar>
+>>>>>>> main
     );
 };
 

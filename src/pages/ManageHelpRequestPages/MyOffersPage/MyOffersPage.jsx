@@ -1,31 +1,32 @@
 import React, { useState, useEffect } from "react";
-import "./ReceivedOffersPage.css";
+import "./MyOffersPage.css";
 
-import { getReceivedHelpOffersByUserId } from '../../../services/helpOffers'
+import { getOutgoingHelpOffersByUserId } from '../../../services/helpOffers'
 
 import ManageHelpRequestsNavBar from "../../../components/ManageHelpRequestsNavBar/ManageHelpRequestsNavBar";
-import ReceivedOffersTable from "../../../components/ReceivedOffersTable/ReceivedOffersTable";
+import MyOffersTable from "../../../components/MyOffersTable/MyOffersTable";
 import NavbarComponent from "../../../components/Navbar/NavbarComponent";
 
-const ReceivedOffersPage = () => {
+const MyOffersPage = () => {
 
-    const [receivedOffers, setReceivedOffers] = useState(null);
+    const [myOffers, setMyOffers] = useState(null);
     const [triggerReload, setTriggerReload] = useState(false);
 
     const [user_id, setuserID] = useState(window.localStorage.getItem("user_id"));
     const [token, setToken] = useState(window.localStorage.getItem("token"));
 
     useEffect(() => {
-        const fetchReceivedHelpOffers = async () => {
+        const fetchMyHelpOffers = async () => {
             try {
                 // TODO - add dynamic user
-                const data = await getReceivedHelpOffersByUserId(user_id, token);
-                setReceivedOffers(data);
+                const data = await getOutgoingHelpOffersByUserId(user_id, token);
+                setMyOffers(data);
+                console.log(data);
             } catch (error) {
                 console.error("Error fetching received offers: ", error)
             }
         };
-        fetchReceivedHelpOffers();
+        fetchMyHelpOffers();
     }, [triggerReload])
 
     return (
@@ -37,9 +38,9 @@ const ReceivedOffersPage = () => {
                 <ManageHelpRequestsNavBar />
             </div>
             <div>
-                {receivedOffers != null && (
-                    <ReceivedOffersTable
-                        receivedOffers={receivedOffers}
+                {myOffers != null && (
+                    <MyOffersTable
+                        myOffers={myOffers}
                         triggerReload={triggerReload}
                         setTriggerReload={setTriggerReload}
                     />
@@ -48,4 +49,4 @@ const ReceivedOffersPage = () => {
         </div>
     );
 };
-export default ReceivedOffersPage;
+export default MyOffersPage;
