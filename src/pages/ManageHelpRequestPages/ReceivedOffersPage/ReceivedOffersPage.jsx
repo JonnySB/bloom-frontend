@@ -30,10 +30,8 @@ const ReceivedOffersPage = () => {
 
     return (
         <div className="page-container">
-            <div>
-                <NavbarComponent />
-            </div>
-            <div>
+            <NavbarComponent />
+            <div className="manage-requests-nav-bar-container">
                 <ManageHelpRequestsNavBar />
             </div>
             <div>

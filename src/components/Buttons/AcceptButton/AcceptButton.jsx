@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
+import "./AcceptButton.css"
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleCheck } from '@fortawesome/free-solid-svg-icons'
@@ -18,7 +19,7 @@ const AcceptButton = ({ help_offer_id, triggerReload, setTriggerReload }) => {
     }
 
     return (
-        <Button variant="success" size="sm" bsStyle="custom-btn" active onClick={handleClick}>
+        <Button variant="success" size="sm" className="color" active onClick={handleClick}>
             <FontAwesomeIcon icon={faCircleCheck} />
         </Button>
     );

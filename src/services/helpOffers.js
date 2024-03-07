@@ -139,7 +139,7 @@ export const getOutgoingHelpOffersByUserId = async (user_id, token) => {
   }
 };
 
-export const recindHelpOffer = async (help_offer_id, token) => {
+export const rescindHelpOffer = async (help_offer_id, token) => {
   try {
     const requestOptions = {
       method: "PUT",

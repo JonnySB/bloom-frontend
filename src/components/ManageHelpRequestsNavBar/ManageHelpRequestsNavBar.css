@@ -1,1 +1,12 @@
+.spacing {
+    text-align: center !important;
+    justify-content: space-evenly;
+}
 
+.btn-color {
+    background: #2E9C45 !important;
+}
+
+.btn-color:hover {
+    background: #033021 !important;
+}

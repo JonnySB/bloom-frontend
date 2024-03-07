@@ -1,5 +1,5 @@
 import Table from 'react-bootstrap/Table';
-import RecindButton from '../Buttons/RecindButton/RecindButton'
+import RescindButton from '../Buttons/RescindButton/RescindButton'
 
 const MyOffersTable = ({ myOffers, triggerReload, setTriggerReload }) => {
     console.log(myOffers)
@@ -39,7 +39,7 @@ const MyOffersTable = ({ myOffers, triggerReload, setTriggerReload }) => {
                             <th>{help_offer.help_offer_message}</th>
                             <th>{help_offer.help_offer_status}</th>
                             <th>
-                                <RecindButton
+                                <RescindButton
                                     help_offer_id={help_offer.help_offer_id}
                                     triggerReload={triggerReload}
                                     setTriggerReload={setTriggerReload}
