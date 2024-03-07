@@ -24,24 +24,28 @@ const CreateRequestPage = () => {
         }
         fetchAllRequestsByOneUser()
     }, [])
-
+    
     return (
         <>
-            <NavbarComponent />
+           <NavbarComponent />
             <ManageHelpRequestsNavBar />
             <h1>Create help request page</h1>
             <CreateHelpRequestForm />
             <div role='all-requests-by-user'>
-                {allRequests.map(request => (
-                    <HelpRequest
-                        key={request.id}
-                        title={request.title}
-                        message={request.message}
-                        start_date={request.start_date}
-                        end_date={request.end_date}
-                        maxprice={request.maxprice}
-                    />
-                ))}
+                {allRequests == null ? (
+                    <h1>No requests done by me</h1>
+                ) : (
+                    allRequests?.map(request => (
+                        <HelpRequest
+                            key={request.id}
+                            title={request.title}
+                            message={request.message}
+                            start_date={request.start_date}
+                            end_date={request.end_date}
+                            maxprice={request.maxprice}
+                        />
+                    ))
+                )}
             </div>
         </>
     )

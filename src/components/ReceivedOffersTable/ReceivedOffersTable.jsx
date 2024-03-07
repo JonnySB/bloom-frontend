@@ -4,7 +4,6 @@ import RejectButton from '../Buttons/RejectButton/RejectButton'
 import StartChatButton from '../Buttons/StartChatButton/StartChatButton'
 
 const ReceivedOffersTable = ({ receivedOffers, triggerReload, setTriggerReload }) => {
-    console.log(receivedOffers)
 
     const convertDate = (startDateString, endDateString) => {
         const startDate = new Date(startDateString);
@@ -16,7 +15,7 @@ const ReceivedOffersTable = ({ receivedOffers, triggerReload, setTriggerReload }
 
         return formattedDateRange
     }
-
+ 
     return (
         <Table striped bordered hover>
             <thead>
@@ -70,3 +69,5 @@ const ReceivedOffersTable = ({ receivedOffers, triggerReload, setTriggerReload }
 }
 
 export default ReceivedOffersTable;
+
+
