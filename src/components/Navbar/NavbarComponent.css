@@ -6,3 +6,26 @@ nav {
 .container {
     padding: 0px;
 }
+
+.navbar-nav .nav-link {
+    margin-left: 10px;
+    /* Adjust the value as needed */
+}
+
+.nav-spacing {
+    cursor: pointer;
+}
+
+.profile-icon-container {
+    display: inline-block;
+    width: 40px;
+    /* Adjust the width as needed */
+    height: 40px;
+    /* Adjust the height as needed */
+    background-color: #dedede;
+    /* Gray background color */
+    border-radius: 50%;
+    /* Make it circular */
+    padding: 5px;
+    /* Adjust padding as needed */
+}
