@@ -27,24 +27,23 @@ const CreateRequestPage = () => {
 
     return (
         <>
-        <NavbarComponent />
-        <ManageHelpRequestsNavBar />
-        <h1>Create help request page</h1>
-        <CreateHelpRequestForm />
-        <div className="all-requests-container">
-            {allRequests.map(request => (
-                <HelpRequest
-                    key={request.id}
-                    title={request.title}
-                    message={request.message}
-                    start_date={request.start_date}
-                    end_date={request.end_date}
-                    maxprice={request.maxprice}
-                />
-            ))}
-        </div>
-    </>
-
+            <NavbarComponent />
+            <ManageHelpRequestsNavBar />
+            <h1>Create help request page</h1>
+            <CreateHelpRequestForm />
+            <div role='all-requests-by-user'>
+                {allRequests.map(request => (
+                    <HelpRequest
+                        key={request.id}
+                        title={request.title}
+                        message={request.message}
+                        start_date={request.start_date}
+                        end_date={request.end_date}
+                        maxprice={request.maxprice}
+                    />
+                ))}
+            </div>
+        </>
     )
 }
 
