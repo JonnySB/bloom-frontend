@@ -3,6 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { signup } from "../../services/authentication";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
+import "./SignupPage.css"
+
 
 export const Signup = () => {
         const [first_name, setFirst_name] = useState("");
@@ -60,8 +63,15 @@ export const Signup = () => {
     
 
         return (
-            <Form onSubmit={handleSubmit}>
-                <h1 className="h3 mb-3 font-weight-normal">Create Account</h1>
+        
+        <>    
+            <div className="app-container"> 
+        
+            <Container className="d-flex align-items-center justify-content-center" style={{ minHeight: '100vh' }}>
+            <div className="signup-container">
+        
+            <Form className="signup-form" onSubmit={handleSubmit}>
+                <h1 className="white-text">Create Account</h1>
                 <Form.Group className="mb-3" controlId="firstName">
                     <Form.Control type="text" placeholder="First name" value={first_name} onChange={handleFirstNameChange} />
                 </Form.Group>
@@ -90,8 +100,13 @@ export const Signup = () => {
                     <Form.Control type="text" placeholder="Home address" value={address} onChange={handleAddressChange} />
                 </Form.Group>
     
-                <Button variant="primary" type="submit">Sign Up</Button>
+                <Button variant="success" type="submit">Sign Up</Button>
                 {signUpError && <div>{signUpError}</div>}
             </Form>
+            </div>
+        
+        </Container>
+        </div>
+        </>
         );
     };

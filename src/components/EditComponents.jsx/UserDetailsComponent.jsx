@@ -1,5 +1,5 @@
 
-import { Container, Nav, Navbar, Card, ListGroup, Modal, Button, Form }from 'react-bootstrap';
+import { Container, Nav, Navbar, Card, ListGroup, Modal, Button, Form } from 'react-bootstrap';
 import "./UserDetails.css"
 import { useState, useEffect } from 'react';
 import { editUsersInformation } from '../../services/users';
@@ -28,8 +28,8 @@ function UserNavbar({ userDetails }) {
         });
         setShow(true);
     };
- 
-  
+
+
     const toggleInputVisibility = field => {
         setInputVisibility(prev => ({ ...prev, [field]: !prev[field] }));
     };
@@ -40,7 +40,7 @@ function UserNavbar({ userDetails }) {
             [field]: e.target.value,
         }));
     };
- 
+
     const handleFormSubmit = async (event) => {
         event.preventDefault();
         const updatedFormDetails = {
@@ -51,13 +51,13 @@ function UserNavbar({ userDetails }) {
             email: formDetails.email || userDetails.email,
             address: formDetails.address || userDetails.address,
         };
-    
+
         try {
             await editUsersInformation(updatedFormDetails, token);
             console.log("form submited")
             window.location.reload();
         } catch (err) {
-            console.log('Edit not completed',err);
+            console.log('Edit not completed', err);
         }
     };
 
@@ -88,48 +88,48 @@ function UserNavbar({ userDetails }) {
                             <Button variant="primary" onClick={handleShow}>Edit Profile</Button>
                         </Nav>
                         </Navbar.Collapse>
-                </Navbar>
-            </div>
-        </Container>
-        <Modal show={show} onHide={() => setShow(false)}>
-            <Modal.Header closeButton>
-                <Modal.Title>Edit your information</Modal.Title>
-            </Modal.Header>
-            <Form id="userEditForm" onSubmit={handleFormSubmit}>
-                <Modal.Body>
-                    {inputVisibility.firstName ? 
-                        <input type="text" value={formDetails.firstName} onChange={e => handleChange(e, 'firstName')} /> : 
-                        <>{userDetails?.first_name}<Button variant="primary" onClick={() => toggleInputVisibility('firstName')}>🖊️</Button></>}
-                </Modal.Body>
-                <Modal.Body>
-                    {inputVisibility.lastName ? 
-                        <input type="text" value={formDetails.lastName} onChange={e => handleChange(e, 'lastName')} /> : 
-                        <>{userDetails?.last_name}<Button variant="primary" onClick={() => toggleInputVisibility('lastName')}>🖊️</Button></>}
-                </Modal.Body>
-                <Modal.Body>
-                    {inputVisibility.userName ? 
-                        <input type="text" value={formDetails.userName} onChange={e => handleChange(e, 'userName')} /> : 
-                        <>{userDetails?.username}<Button variant="primary" onClick={() => toggleInputVisibility('userName')}>🖊️</Button></>}
-                </Modal.Body>
-                <Modal.Body>
-                    {inputVisibility.email ? 
-                        <input type="text" value={formDetails.email} onChange={e => handleChange(e, 'email')} /> : 
-                        <>{userDetails?.email}<Button variant="primary" onClick={() => toggleInputVisibility('email')}>🖊️</Button></>}
-                </Modal.Body>
-                <Modal.Body>
-                    {inputVisibility.address ? 
-                        <input type="text" value={formDetails.address} onChange={e => handleChange(e, 'address')} /> : 
-                        <>{userDetails?.address}<Button variant="primary" onClick={() => toggleInputVisibility('address')}>🖊️</Button></>}
-                </Modal.Body> 
-            </Form>
-            <Modal.Footer>
-             <Button variant="secondary" onClick={() => setShow(false)}>Close</Button>
-             <Button variant="primary" type="submit" form="userEditForm" onClick={() => setShow(false)}>Save Changes</Button>
-            </Modal.Footer>
-        </Modal>
-    </>
+                    </Navbar>
+                </div>
+            </Container>
+            <Modal show={show} onHide={() => setShow(false)}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Edit your information</Modal.Title>
+                </Modal.Header>
+                <Form id="userEditForm" onSubmit={handleFormSubmit}>
+                    <Modal.Body>
+                        {inputVisibility.firstName ?
+                            <input type="text" value={formDetails.firstName} onChange={e => handleChange(e, 'firstName')} /> :
+                            <>{userDetails?.first_name}<Button variant="primary" onClick={() => toggleInputVisibility('firstName')}>🖊️</Button></>}
+                    </Modal.Body>
+                    <Modal.Body>
+                        {inputVisibility.lastName ?
+                            <input type="text" value={formDetails.lastName} onChange={e => handleChange(e, 'lastName')} /> :
+                            <>{userDetails?.last_name}<Button variant="primary" onClick={() => toggleInputVisibility('lastName')}>🖊️</Button></>}
+                    </Modal.Body>
+                    <Modal.Body>
+                        {inputVisibility.userName ?
+                            <input type="text" value={formDetails.userName} onChange={e => handleChange(e, 'userName')} /> :
+                            <>{userDetails?.username}<Button variant="primary" onClick={() => toggleInputVisibility('userName')}>🖊️</Button></>}
+                    </Modal.Body>
+                    <Modal.Body>
+                        {inputVisibility.email ?
+                            <input type="text" value={formDetails.email} onChange={e => handleChange(e, 'email')} /> :
+                            <>{userDetails?.email}<Button variant="primary" onClick={() => toggleInputVisibility('email')}>🖊️</Button></>}
+                    </Modal.Body>
+                    <Modal.Body>
+                        {inputVisibility.address ?
+                            <input type="text" value={formDetails.address} onChange={e => handleChange(e, 'address')} /> :
+                            <>{userDetails?.address}<Button variant="primary" onClick={() => toggleInputVisibility('address')}>🖊️</Button></>}
+                    </Modal.Body>
+                </Form>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={() => setShow(false)}>Close</Button>
+                    <Button variant="primary" type="submit" form="userEditForm" onClick={() => setShow(false)}>Save Changes</Button>
+                </Modal.Footer>
+            </Modal>
+        </>
     );
-  }
+}
 
 export default UserNavbar;
 
