@@ -13,12 +13,12 @@ const HelpRequest = (props) => {
     const handleSubmitView = (e) => {
         navigate(`/help_request_details/${props.id}`);
     }
-    const handleSubmitOffer = (e) => {
-        navigate(`/help_offers/${props.id}`);
-    }
     const handleProfileNavigate = (e) => {
         navigate('/Profile')
     }
+    const formatPrice = (price) => {
+        return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'GDP' }).format(price);
+    };
 
     return (
         <div>
@@ -49,9 +49,11 @@ const HelpRequest = (props) => {
                         </div>
                         {props.message && <Card.Text>{props.message}</Card.Text>}
                         {props.start_date && <Card.Text>{props.start_date} to {props.end_date}</Card.Text>}
-                        {props.maxprice && <Card.Text>Max Price: {props.maxprice}</Card.Text>}
                         {props.username && <Card.Text>Username: {props.username}</Card.Text>}
-                        
+                        {props.maxprice &&
+                        <Card.Footer>
+                        {formatPrice(props.maxprice)}
+                        </Card.Footer>}
                     </Card.Body>
                 </Card>
             </Col>

@@ -3,11 +3,13 @@ import { getAllHelpRequestsWithUserDetails } from '../../services/HelpRequests'
 import HelpRequest from '../../components/HelpRequest/HelpRequest'
 import './HomePage.css'
 import NavbarComponent from '../../components/Navbar/NavbarComponent'
-import { Row, Col, Card, Image } from 'react-bootstrap';
+import { Row, Col, Card, Image, Button } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom'
 
 
 const Homepage = () => {
     const [helpRequestsWithUsers, setHelpRequestsWithUsers] = useState([]);
+    const navigate = useNavigate();
 
 
     useEffect(() => {
@@ -23,12 +25,17 @@ const Homepage = () => {
         fetchHelpRequestsWithUsers();
     }, []); 
 
+    const redirectToCreateRequest = (e) => {
+        navigate("/create_request");
+    }
+
     return (
         <>
             <NavbarComponent />
             <div className='homepage-main-div'>
                 <h1>BLOOM</h1>
                 <div>
+                    <Button onClick={redirectToCreateRequest}>create request</Button>
                     <div role='feed'>
                         {helpRequestsWithUsers.map((helpRequest, index) => (
                             (index % 3 === 0) && <Row key={index}>
