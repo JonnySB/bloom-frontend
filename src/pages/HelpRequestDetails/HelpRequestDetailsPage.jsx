@@ -4,6 +4,8 @@ import HelpRequest from '../../components/HelpRequest/HelpRequest';
 import { useParams } from 'react-router-dom';
 import { getOneHelpRequestById } from '../../services/HelpRequests';
 import CreateOfferForm from '../../components/CreateOfferForm/CreateOfferForm';
+import NavbarComponent from '../../components/Navbar/NavbarComponent';
+import Footer from '../../components/Footer/Footer';
 
 const HelpRequestDetailsPage = () => {
     const { requestId } = useParams(); 
@@ -29,37 +31,29 @@ const HelpRequestDetailsPage = () => {
     }
 
     return (
-        <div>
-            <div>
-            {/* <div>
-                <h1>{helpRequest.title}</h1>
-                <p>{helpRequest.date}</p>
-                <p>{helpRequest.message}</p>
-                <p>{helpRequest.start_date}</p>
-                <p>{helpRequest.end_date}</p>
-                <p>{helpRequest.maxprice}</p>
-                <p>{helpRequest.user_details.username}</p>
-                <p>{helpRequest.user_details.first_name}</p>
-                <p>{helpRequest.user_details.last_name}</p>
-                <p>{helpRequest.user_details.avatar_url_string}</p>
-            </div> */}
-                    <HelpRequest
-                        key={helpRequest.id}
-                        title={helpRequest.title}
-                        date={helpRequest.date}
-                        message={helpRequest.message}
-                        start_date={helpRequest.start_date}
-                        end_date={helpRequest.end_date}
-                        maxprice={helpRequest.maxprice}
-                        username={helpRequest.user_details.username}
-                        first_name={helpRequest.user_details.first_name}
-                        last_name={helpRequest.user_details.last_name}
-                        avatar_url_string={helpRequest.user_details.avatar_url_string}
-                        showButtonView={false}
-                    />
-                    <CreateOfferForm  id={requestId} />
+        <>
+        <NavbarComponent />
+        <div className='details-page-container'>
+            <div className='details-page-content'>
+                <HelpRequest
+                    key={helpRequest.id}
+                    title={helpRequest.title}
+                    date={helpRequest.date}
+                    message={helpRequest.message}
+                    start_date={helpRequest.start_date}
+                    end_date={helpRequest.end_date}
+                    maxprice={helpRequest.maxprice}
+                    username={helpRequest.user_details.username}
+                    first_name={helpRequest.user_details.first_name}
+                    last_name={helpRequest.user_details.last_name}
+                    avatar_url_string={helpRequest.user_details.avatar_url_string}
+                    showButtonView={false}
+                />
+                <CreateOfferForm id={requestId} />
             </div>
         </div>
+        <Footer />
+    </>
     )
 }
 

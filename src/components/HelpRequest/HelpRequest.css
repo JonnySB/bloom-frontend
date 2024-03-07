@@ -1,0 +1,20 @@
+.card-body2{
+    margin-bottom: 4%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    width: 450px;
+}
+
+/* .profile-and-fullname {
+    display: inline-block;
+} */
+
+.title-and-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.view-button {
+    cursor: pointer;
+}
+

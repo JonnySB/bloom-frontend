@@ -16,8 +16,9 @@ const CreateRequestPage = () => {
         const fetchAllRequestsByOneUser = async () => {
             try {
                 const data = await getAllRequestsByOneUser(userID, token);
-                console.log("data for all requests by current user", data);
-                setAllRequests(data)
+                // Sort the data by ID in descending order
+                const sortedData = data.sort((a, b) => b.id - a.id);
+                setAllRequests(sortedData);
             } catch (error) {
                 console.error(`Error fetching GET all requests made by current user with user_id: ${userID}`, error)
             }
@@ -28,8 +29,8 @@ const CreateRequestPage = () => {
     return (
         <>
            <NavbarComponent />
+           <h1>Create help request page</h1>
             <ManageHelpRequestsNavBar />
-            <h1>Create help request page</h1>
             <CreateHelpRequestForm />
             <div role='all-requests-by-user'>
                 {allRequests == null ? (
