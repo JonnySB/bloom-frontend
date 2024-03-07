@@ -6,3 +6,21 @@ nav {
 .container {
     padding: 0px;
 }
+
+.navbar-brand {
+    color: #fdfdfd !important;
+    font-family: "Madimi One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.nav-link {
+    color: #fdfdfd !important;
+}
+
+.madimi-one-regular {
+    font-family: "Madimi One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  

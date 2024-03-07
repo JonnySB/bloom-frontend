@@ -40,3 +40,17 @@
 .read-the-docs {
   color: #888;
 } */
+
+@import url('https://fonts.googleapis.com/css2?family=Madimi+One&display=swap');
+
+.madimi-one-regular {
+  font-family: "Madimi One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+h1 {
+    font-family: "Madimi One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
