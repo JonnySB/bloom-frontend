@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import { getOneHelpRequestById } from '../../services/HelpRequests';
 import CreateOfferForm from '../../components/CreateOfferForm/CreateOfferForm';
 import NavbarComponent from '../../components/Navbar/NavbarComponent';
+import Footer from '../../components/Footer/Footer';
 
 const HelpRequestDetailsPage = () => {
     const { requestId } = useParams(); 
@@ -51,6 +52,7 @@ const HelpRequestDetailsPage = () => {
                 <CreateOfferForm id={requestId} />
             </div>
         </div>
+        <Footer />
     </>
     )
 }

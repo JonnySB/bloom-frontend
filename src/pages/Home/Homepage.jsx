@@ -5,6 +5,7 @@ import './HomePage.css'
 import NavbarComponent from '../../components/Navbar/NavbarComponent'
 import { Row, Col, Card, Image, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom'
+import Footer from '../../components/Footer/Footer'
 
 
 const Homepage = () => {
@@ -58,6 +59,7 @@ const Homepage = () => {
                     </div>
                 </div>
             </div>
+            <Footer />
         </>
     );
 }

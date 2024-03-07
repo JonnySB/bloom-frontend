@@ -29,8 +29,8 @@ const CreateRequestPage = () => {
     return (
         <>
            <NavbarComponent />
+           <h1>Create help request page</h1>
             <ManageHelpRequestsNavBar />
-            <h1>Create help request page</h1>
             <CreateHelpRequestForm />
             <div role='all-requests-by-user'>
                 {allRequests == null ? (
