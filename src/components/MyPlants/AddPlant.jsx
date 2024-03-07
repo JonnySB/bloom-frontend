@@ -35,13 +35,14 @@ const AddPlant = (props) => {
 
     const handleSubmit = () => {
         console.log(userPlants)
+        console.log("submitting")
         if (userPlants.includes(type)) {
             updatePlantsQuantity(userId, type, quantity, token)
                 .then((data) => {
                     // window.localStorage.setItem("token", data.token)
                 });
         } else {
-            assignPlant(1, type, quantity, token)
+            assignPlant(userId, type, quantity, token)
                 .then((data) => {
                     userPlants.push(type)
                     console.log(userPlants)
