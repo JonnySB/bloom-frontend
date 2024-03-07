@@ -16,6 +16,7 @@ export const MessagePage = () => {
     // help_offer_user_id passed from StartChatButton
     const state = useLocation();
     const { help_offer_user_id } = state;
+    console.log(help_offer_user_id)
 
     useEffect(() => {
       const fetchUserDetails = async () => {
