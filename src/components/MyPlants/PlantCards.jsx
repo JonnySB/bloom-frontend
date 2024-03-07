@@ -5,6 +5,8 @@ import Button from "react-bootstrap/Button";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useState, useEffect } from "react";
 import { getUserPlants } from "../../services/userPlants";
+import "./ShowPlants.css";
+import "./PlantCards.css"
 
 const PlantCards = (props) => {
   const [userPlantList, setUserPlantList] = useState(
@@ -30,7 +32,7 @@ const PlantCards = (props) => {
     <Row
       xs={1}
       md={4}
-      className="g-4"
+      className="plantcard"
       style={{
         minWidth: "20rem",
         padding: "10px",
@@ -40,19 +42,18 @@ const PlantCards = (props) => {
     >
       {userPlantList.map((plant) => (
         <Col>
-          <Card>
-            <Card.Body style={{ minHeight: "10rem" }}>
-              <Card.Title>
-                {plant.common_name} (<em>{plant.latin_name}</em>)
-              </Card.Title>
-              <Card.Text>{plant.description}</Card.Text>
-              <Card.Text>
-                Watering Frequency: Approximately every{" "}
-                {plant.watering_frequency} days
-              </Card.Text>
-            </Card.Body>
-          </Card>
-        </Col>
+        <Card>
+          <Card.Body style={{ minHeight: "10rem" }}>
+          <Card.Img variant="top" src={plant.photo} />
+            <Card.Title>
+              {plant.common_name} (<em>{plant.latin_name}</em>)
+            </Card.Title>
+            <Card.Text>
+              Watering Frequency: Approximately every{" "} {plant.watering_frequency} days
+            </Card.Text>
+          </Card.Body>
+        </Card>
+      </Col>
       ))}
     </Row>
   );

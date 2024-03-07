@@ -13,7 +13,7 @@ export const getAllHelpRequestsWithUserDetails = async () => {
         }
 
         const data = await response.json();
-        console.log("DATA", data)
+        // console.log("DATA", data)
         return data;
         
     } catch(error) {
@@ -35,7 +35,7 @@ export const getOneHelpRequestById = async (requestId) => {
         }
 
         const data = await response.json();
-        console.log("DATA", data);
+        // console.log("DATA", data);
         return data;
         
     } catch(error) {
@@ -69,7 +69,7 @@ export const createHelpRequest = async (title, message, start_date, end_date, ma
         }
 
         const data = await response.json();
-        console.log("DATA", data);
+        // console.log("DATA", data);
         return data;
 
     } catch(error) {
@@ -77,6 +77,7 @@ export const createHelpRequest = async (title, message, start_date, end_date, ma
     }
 }
 
+// THIS NEEDS TO BE FIXED IN CASE THE USER STARTS HIS FIRST OFFER 
 export const getAllRequestsByOneUser = async (userId, token) => {
     try {
         const requestOptions = {
@@ -92,9 +93,9 @@ export const getAllRequestsByOneUser = async (userId, token) => {
         if (response.status !== 200) {
             throw new Error("Unable to make GET request for get all requests by one user");
         }
-
+    
         const data = await response.json();
-        console.log("DATA", data);
+        // console.log("DATA", data);
         return data;
 
     } catch(error) {
