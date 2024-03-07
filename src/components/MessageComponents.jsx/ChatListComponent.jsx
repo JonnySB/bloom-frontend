@@ -7,6 +7,8 @@ function ChatListComponent({ onChatSelect, senderUserID, userDetails, receiverDe
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(true);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
+  const [selectedId, setSelectedId] = useState(null);
+
   
     useEffect(() => {
       const fetchData = async () => {
@@ -46,11 +48,12 @@ function ChatListComponent({ onChatSelect, senderUserID, userDetails, receiverDe
         recipient_id: senderUserID, 
         receiver_username: receiverDetails?.username, 
         messages: [], 
-        sender_id: userDetails?.id,  
-      }); 
+        sender_id: userDetails?.id,
+      });
     } else {
       onChatSelect(message);
     }
+    setSelectedId(message.id);
   };
   
   if (loading) {
@@ -63,7 +66,7 @@ function ChatListComponent({ onChatSelect, senderUserID, userDetails, receiverDe
         <Card.Header>Messages</Card.Header>
         <ListGroup variant="flush">
           {messages.map((message) => (
-            <ListGroup.Item key={message.id}  onClick={() => handleConversationClick(message)} >
+            <ListGroup.Item   className={selectedId === message.id ? 'selected' : ''} key={message.id} onClick={() => handleConversationClick(message)} >
               {message.receiver_username}
             </ListGroup.Item>
           ))}

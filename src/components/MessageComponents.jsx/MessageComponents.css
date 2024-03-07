@@ -4,24 +4,28 @@
     overflow-y: auto; /* Enable vertical scroll */
 }
 
-
+.side-message .list-group-item.selected {
+    background-color: #2E9C45; 
+    color: white; 
+}
 .message-container {
-
     display: flex; /* Make it a flex container */
     flex-direction: column; /* Align children vertically */
-
+    
 }
 
 .message {
     flex: 1; /* This will make it fill the height of its flex container parent */
     display: flex;
     flex-direction: column;
+  
 }
 
 .message-card {
     flex-grow: 1; /* Grow to use available space */
     display: flex;
     flex-direction: column;
+  
 }
 
 .message-card .card-body {

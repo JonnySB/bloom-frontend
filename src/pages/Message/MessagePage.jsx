@@ -37,7 +37,6 @@ export const MessagePage = () => {
     }, [user_id, help_offer_user_id]);
    
 
-    // WILL NEED TO GET THE ID FROM WHO WE ARE SENING THE MESSAGE TO FROM THE OFFERS PAGE HERE INSIDE OF THE DEFAULTCHATID
     const handleChatSelect = (msg) => {
         setSelectedMessageId(msg);
     };
