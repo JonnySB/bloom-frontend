@@ -63,25 +63,30 @@ function UserNavbar({ userDetails }) {
 
     return (
         <>
-            <Container className='user-details'>
-                <div className="profileEdit">
-                    <Card>
-                        <Card.Img variant="top" src={userDetails?.avatar_url_string} className='profileAvatar' />
-                        <ListGroup className="list-group-flush">
-                            <ListGroup.Item>{userDetails?.first_name} {userDetails?.last_name}</ListGroup.Item>
-                            <ListGroup.Item>{userDetails?.email}</ListGroup.Item>
-                            <ListGroup.Item>{userDetails?.address}</ListGroup.Item>
-                        </ListGroup>
-                    </Card>
-                </div>
-                <div className="navbar-container">
-                    <Navbar expand="lg" className="bg-body-tertiary">
+        <Container className='user-details'>
+        <div className="profileEdit">
+                <Card>
+                <img variant="top" src={userDetails?.avatar_url_string} className='profileAvatar'/>
+                <ListGroup className="list-group-flush">
+                    <ListGroup.Item>{userDetails?.first_name} {userDetails?.last_name}</ListGroup.Item>
+                    <ListGroup.Item>{userDetails?.email}</ListGroup.Item>
+                    <ListGroup.Item>{userDetails?.address}</ListGroup.Item>
+                    <ListGroup.Item>Zetland House</ListGroup.Item>
+                    <ListGroup.Item>Unit 2FG, 5-25 Scrutton Street</ListGroup.Item>
+                    <ListGroup.Item>EC2A 4HJ.</ListGroup.Item>
+                </ListGroup>
+                </Card>
+            </div>
+            <div className="navbar-container"> 
+            <div className='potted-image'>
+                <img src='https://res.cloudinary.com/dououppib/image/upload/v1709758337/PLANTS/pb_yxwurp.png'></img>
+            </div>
+                <Navbar expand="lg" className="bg-body-tertiary">
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
                         <Navbar.Collapse id="basic-navbar-nav">
-                            <Nav className="mr-auto">
-                                <Nav.Link href="/create_request">Manage Request</Nav.Link>
-                                <Button variant="primary" onClick={handleShow}>Edit Profile</Button>
-                            </Nav>
+                        <Nav className="mr-auto">
+                            <Button variant="primary" onClick={handleShow}>Edit Profile</Button>
+                        </Nav>
                         </Navbar.Collapse>
                     </Navbar>
                 </div>
