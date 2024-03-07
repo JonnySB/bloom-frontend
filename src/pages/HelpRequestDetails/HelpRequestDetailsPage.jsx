@@ -4,6 +4,7 @@ import HelpRequest from '../../components/HelpRequest/HelpRequest';
 import { useParams } from 'react-router-dom';
 import { getOneHelpRequestById } from '../../services/HelpRequests';
 import CreateOfferForm from '../../components/CreateOfferForm/CreateOfferForm';
+import NavbarComponent from '../../components/Navbar/NavbarComponent';
 
 const HelpRequestDetailsPage = () => {
     const { requestId } = useParams(); 
@@ -29,20 +30,10 @@ const HelpRequestDetailsPage = () => {
     }
 
     return (
+        <>
+        <NavbarComponent />
         <div>
-            <div>
-            {/* <div>
-                <h1>{helpRequest.title}</h1>
-                <p>{helpRequest.date}</p>
-                <p>{helpRequest.message}</p>
-                <p>{helpRequest.start_date}</p>
-                <p>{helpRequest.end_date}</p>
-                <p>{helpRequest.maxprice}</p>
-                <p>{helpRequest.user_details.username}</p>
-                <p>{helpRequest.user_details.first_name}</p>
-                <p>{helpRequest.user_details.last_name}</p>
-                <p>{helpRequest.user_details.avatar_url_string}</p>
-            </div> */}
+            <div className='details-page-main-div'>
                     <HelpRequest
                         key={helpRequest.id}
                         title={helpRequest.title}
@@ -60,6 +51,7 @@ const HelpRequestDetailsPage = () => {
                     <CreateOfferForm  id={requestId} />
             </div>
         </div>
+        </>
     )
 }
 
