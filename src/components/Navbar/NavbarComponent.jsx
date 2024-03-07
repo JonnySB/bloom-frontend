@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
+import "./NavbarComponent.css";
 
 
 const NavbarComponent = () => {
@@ -24,7 +25,7 @@ const NavbarComponent = () => {
 
     const myplants = (id) => {
         if (id) {
-        navigate("/plants");
+        navigate("/myplants");
         } else {
         navigate('/login')
         }
@@ -38,14 +39,19 @@ const NavbarComponent = () => {
     };
 
     const logout = () => {
-        window.localStorage.removeItem("token");
-        window.localStorage.removeItem("id");
-        navigate("/");
+        if (id) {
+            window.localStorage.removeItem("token");
+            window.localStorage.removeItem("user_id");
+            navigate("/");
+            window.location.reload()
+        } else {
+            navigate("/login");
+        }
     };
 
 
     return (
-        <Navbar expand="lg" className="bg-body-tertiary">
+        <Navbar expand="lg" fixed="top">
         <Container>
             <Navbar.Brand onClick={home}>BLOOM</Navbar.Brand>
             <Nav className="me-auto">
