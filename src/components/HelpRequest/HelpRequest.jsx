@@ -28,8 +28,9 @@ const HelpRequest = (props) => {
                     <Card.Body>
                         
                         <Col xs={6} md={4}>
-                            <Image src="https://upload.wikimedia.org/wikipedia/en/d/da/Matt_LeBlanc_as_Joey_Tribbiani.jpg" roundedCircle style={{ width: '30px', height: '30px'}} onClick={handleProfileNavigate}/>
+                            <Image src={props.avatar_url_string} roundedCircle style={{ width: '30px', height: '30px'}} onClick={handleProfileNavigate}/>
                             {/* {props.avatar_url_string} */}
+                            {/* https://upload.wikimedia.org/wikipedia/en/d/da/Matt_LeBlanc_as_Joey_Tribbiani.jpg */}
                         </Col>
                         {props.first_name && <p role='firstnameAndLastname'>{props.first_name}&nbsp;{props.last_name}</p>}
                         <small className='text-muted'>&nbsp;{props.date}</small>
