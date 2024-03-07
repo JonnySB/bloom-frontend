@@ -1,14 +1,36 @@
-import Button from 'react-bootstrap/Button';
-import "./ManageHelpRequestsNavBar.css"
+import Col from 'react-bootstrap/Col';
+import Nav from 'react-bootstrap/Nav';
+import Row from 'react-bootstrap/Row';
+import Tab from 'react-bootstrap/Tab';
 
-function TagTypesExample() {
+function LeftTabsExample() {
     return (
-        <div className='container'>
-            <Button type="submit">Create Help Request</Button>{' '}
-            <Button type="submit">Received Offers</Button>{' '}
-            <Button type="submit">Help Offers</Button>{' '}
-        </div>
+        <Tab.Container id="left-tabs-example" defaultActiveKey="first">
+            <Row>
+                <Col sm={3}>
+                    <Nav variant="pills" className="flex-column">
+                        <Nav.Item>
+                            <Nav.Link eventKey="first" href="/create_request">My Requests</Nav.Link>
+                        </Nav.Item>
+                    </Nav>
+                </Col>
+                <Col sm={3}>
+                    <Nav variant="pills" className="flex-column">
+                        <Nav.Item>
+                            <Nav.Link eventKey="first" href="/request_management/received_offers">Received Offers</Nav.Link>
+                        </Nav.Item>
+                    </Nav>
+                </Col>
+                <Col sm={3}>
+                    <Nav variant="pills" className="flex-column">
+                        <Nav.Item>
+                            <Nav.Link eventKey="first" href="/request_management/my_offers">My Offers</Nav.Link>
+                        </Nav.Item>
+                    </Nav>
+                </Col>
+            </Row>
+        </Tab.Container>
     );
 }
 
-export default TagTypesExample;
+export default LeftTabsExample;
