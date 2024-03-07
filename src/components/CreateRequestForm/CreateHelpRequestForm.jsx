@@ -42,7 +42,7 @@ const CreateHelpRequestForm = (props) => {
         }
     }
 
-    const handleSubmitOffer = () => {
+    const handleSubmitRequest = () => {
         createHelpRequest(title, message, startDate, endDate, maxprice, userID, token)
         .then((data) => {
             console.log("Data -> ", data)
@@ -106,7 +106,7 @@ const CreateHelpRequestForm = (props) => {
                         placeholder="0.00"
                     />
                 </Form.Group>
-                <Button variant="primary" onClick={handleSubmitOffer}>
+                <Button variant="primary" onClick={handleSubmitRequest}>
                     Submit Request
                 </Button>
             </Form>
