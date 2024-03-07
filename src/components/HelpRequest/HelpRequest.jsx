@@ -16,17 +16,21 @@ const HelpRequest = (props) => {
     const handleSubmitOffer = (e) => {
         navigate(`/help_offers/${props.id}`);
     }
+    const handleProfileNavigate = (e) => {
+        navigate('/Profile')
+    }
 
     return (
         <div>
             <Col>
-                <Card className='card-body2'>
+                <Card className='card-body2' >
+                <Card.Img variant="top" src="https://thepinkwheelbarrowcom.files.wordpress.com/2019/07/photo-24-04-2019-9-28-54-am.jpg"  />
                     <Card.Body>
-                        <div className='profile-and-fullname'>
-                            <Col xs={6} md={4}>
-                                    <Image src="https://upload.wikimedia.org/wikipedia/en/d/da/Matt_LeBlanc_as_Joey_Tribbiani.jpg" roundedCircle style={{ width: '30px', height: '30px'}} />
-                                </Col>
-                        </div>
+                        
+                        <Col xs={6} md={4}>
+                            <Image src="https://upload.wikimedia.org/wikipedia/en/d/da/Matt_LeBlanc_as_Joey_Tribbiani.jpg" roundedCircle style={{ width: '30px', height: '30px'}} onClick={handleProfileNavigate}/>
+                            {/* {props.avatar_url_string} */}
+                        </Col>
                         {props.first_name && <p role='firstnameAndLastname'>{props.first_name}&nbsp;{props.last_name}</p>}
                         <small className='text-muted'>&nbsp;{props.date}</small>
                         <div className='title-and-button'>
