@@ -11,7 +11,7 @@ const AddPlant = (props) => {
     // user_plants should be an array of plant_id of plants belonging to user.
     const [show, setShow] = useState(false);
     const [userPlants, setUserPlants] = useState(props.user_plants)
-    const [plantList, setPlantList] = useState([{id: 1, common_name: "Placeholder plant"}]);
+    const [plantList, setPlantList] = useState([{ id: 1, common_name: "Placeholder plant" }]);
     const [type, setType] = useState("");
     const [quantity, setQuantity] = useState(0)
     const [token, setToken] = useState(window.localStorage.getItem("token"))
@@ -22,15 +22,15 @@ const AddPlant = (props) => {
     const handleShow = () => setShow(true);
 
     useEffect(() => {
-      if(token) {
-        fetchPlants(token)
-            .then((data) => {
-                setPlantList(data)
-            })
-            .catch((err) => {
-                console.error(err);
-            });
-          }
+        if (token) {
+            fetchPlants(token)
+                .then((data) => {
+                    setPlantList(data)
+                })
+                .catch((err) => {
+                    console.error(err);
+                });
+        }
     }, [userPlants])
 
     const handleSubmit = () => {
@@ -47,12 +47,11 @@ const AddPlant = (props) => {
                     userPlants.push(type)
                     setToken(data.token)
                     window.localStorage.setItem("token", data.token)
-
                 });
         }
         handleClose()
         window.location.reload();
-      };
+    };
 
     const onTypeChange = (e) => {
         setType(e.target.value)
@@ -68,41 +67,41 @@ const AddPlant = (props) => {
                 Add a Plant
             </Button>
 
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Add a new plant to your collection</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-            <Form.Label>Type</Form.Label>
-            <Form.Select aria-label="Default select example" onChange={onTypeChange}>
-                <option>What type of plant are you adding?</option>
-                {plantList.map((plant) => (
-                  <option value={plant.id} key={plant.id} label={plant.common_name}>{plant.common_name}</option>
-                ))}
-            </Form.Select>
-            </Form.Group>
-            <Form.Group
-              className="mb-3"
-              controlId="exampleForm.ControlTextarea1"
-            >
-              <Form.Label>Enter quantity</Form.Label>
-              <Form.Control type="text" placeholder="How many of these plants do you own?" onChange={onQuantityChange} />
-            </Form.Group>
-          </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleSubmit}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    </>
-  );
+            <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Add a new plant to your collection</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Form>
+                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                            <Form.Label>Type</Form.Label>
+                            <Form.Select aria-label="Default select example" onChange={onTypeChange}>
+                                <option>What type of plant are you adding?</option>
+                                {plantList.map((plant) => (
+                                    <option value={plant.id} key={plant.id} label={plant.common_name}>{plant.common_name}</option>
+                                ))}
+                            </Form.Select>
+                        </Form.Group>
+                        <Form.Group
+                            className="mb-3"
+                            controlId="exampleForm.ControlTextarea1"
+                        >
+                            <Form.Label>Enter quantity</Form.Label>
+                            <Form.Control type="text" placeholder="How many of these plants do you own?" onChange={onQuantityChange} />
+                        </Form.Group>
+                    </Form>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        Close
+                    </Button>
+                    <Button variant="primary" onClick={handleSubmit}>
+                        Save Changes
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+        </>
+    );
 }
 
 export default AddPlant;
