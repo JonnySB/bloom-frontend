@@ -66,11 +66,14 @@ function UserNavbar({ userDetails }) {
         <Container className='user-details'>
         <div className="profileEdit">
                 <Card>
-                <Card.Img variant="top" src={userDetails?.avatar_url_string} className='profileAvatar'/>
+                <img variant="top" src={userDetails?.avatar_url_string} className='profileAvatar'/>
                 <ListGroup className="list-group-flush">
                     <ListGroup.Item>{userDetails?.first_name} {userDetails?.last_name}</ListGroup.Item>
                     <ListGroup.Item>{userDetails?.email}</ListGroup.Item>
                     <ListGroup.Item>{userDetails?.address}</ListGroup.Item>
+                    <ListGroup.Item>Zetland House</ListGroup.Item>
+                    <ListGroup.Item>Unit 2FG, 5-25 Scrutton Street</ListGroup.Item>
+                    <ListGroup.Item>EC2A 4HJ.</ListGroup.Item>
                 </ListGroup>
                 </Card>
             </div>

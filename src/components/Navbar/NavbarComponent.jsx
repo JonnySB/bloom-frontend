@@ -46,7 +46,7 @@ const NavbarComponent = () => {
 
     return (
         <Navbar expand="lg" className="bg-body-tertiary">
-        <Container>
+        <Container fluid>
             <Navbar.Brand onClick={home}>BLOOM</Navbar.Brand>
             <Nav className="me-auto">
                 {token && (
