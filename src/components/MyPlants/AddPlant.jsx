@@ -50,7 +50,7 @@ const AddPlant = (props) => {
                 });
         }
         handleClose()
-        window.location.reload();
+        // window.location.reload();
     };
 
     const onTypeChange = (e) => {
