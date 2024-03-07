@@ -3,7 +3,7 @@ import { Card, ListGroup, Container } from 'react-bootstrap'
 import "./MessageComponents.css";
 import { getAllMessagesByUserId } from "../../services/messages";
 
-function ChatListComponent({ onChatSelect, senderUserID, userDetails }) {
+function ChatListComponent({ onChatSelect, senderUserID, userDetails, receiverDetails }) {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(true);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
@@ -19,8 +19,8 @@ function ChatListComponent({ onChatSelect, senderUserID, userDetails }) {
             if (senderUserID && !chatExists) {
               const newChatPlaceholder = {
                 id: 'new',
-                recipient_id: senderUserID,
-                receiver_username: `user${senderUserID}`,
+                recipient_id: receiverDetails?.id,
+                receiver_username: receiverDetails?.username,
                 messages: []
               };
               messagesData.unshift(newChatPlaceholder);
@@ -38,14 +38,13 @@ function ChatListComponent({ onChatSelect, senderUserID, userDetails }) {
       if (userDetails && userDetails.id) {
         fetchData();
       }
-    }, [senderUserID, userDetails]);
-    
+    }, [senderUserID, userDetails, receiverDetails]);
 
-  const handleConversationClick = (message) => {
+    const handleConversationClick = (message) => {
     if (message.id === 'new') {
       onChatSelect({ 
         recipient_id: senderUserID, 
-        receiver_username: `user${senderUserID}`, 
+        receiver_username: receiverDetails?.username, 
         messages: [], 
         sender_id: userDetails?.id,  
       }); 

@@ -15,7 +15,7 @@ const ReceivedOffersTable = ({ receivedOffers, triggerReload, setTriggerReload }
 
         return formattedDateRange
     }
-    console.log(receivedOffers)
+ 
     return (
         <Table striped bordered hover>
             <thead>
@@ -71,4 +71,3 @@ const ReceivedOffersTable = ({ receivedOffers, triggerReload, setTriggerReload }
 export default ReceivedOffersTable;
 
 
-// https://res.cloudinary.com/dououppib/image/upload/v1708633707/MY_UPLOADS/aibxzxdpk6gl4u5xjgjg.jpg

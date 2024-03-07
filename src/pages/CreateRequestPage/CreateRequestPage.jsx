@@ -35,7 +35,7 @@ const CreateRequestPage = () => {
                 {allRequests == null ? (
                     <h1>No requests done by me</h1>
                 ) : (
-                    allRequests.map(request => (
+                    allRequests?.map(request => (
                         <HelpRequest
                             key={request.id}
                             title={request.title}
