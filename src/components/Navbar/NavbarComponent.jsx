@@ -62,7 +62,7 @@ const NavbarComponent = () => {
         <Navbar expand="lg" fixed="top">
         <Container>
             <Navbar.Brand onClick={home}>BLOOM</Navbar.Brand>
-            <Nav className="me-auto">
+            <Nav className="">
                 {token && (
                     <>
                         <Nav.Link onClick={profilePage}>Profile</Nav.Link>

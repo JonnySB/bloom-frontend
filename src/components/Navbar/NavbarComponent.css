@@ -6,3 +6,12 @@ nav {
 .container {
     padding: 0px;
 }
+
+.navbar-nav {
+    margin-right: 0 !important;
+    margin-left: auto !important;
+}
+
+.me-auto {
+    margin-right: 0 !important;
+}
