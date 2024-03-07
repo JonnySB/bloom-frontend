@@ -20,7 +20,6 @@ const PlantCards = (props) => {
 
   useEffect(() => {
     getUserPlants(userId, token).then((data) => {
-      console.log(data);
       if (data) {
         setUserPlantList(data)
       };
@@ -40,9 +39,9 @@ const PlantCards = (props) => {
         marginRight: "auto",
       }}
     >
-      {userPlantList.map((plant) => (
-        <Col>
-        <Card>
+      {userPlantList.map((plant, index) => (
+        <Col key={index}>
+        <Card >
           <Card.Body style={{ minHeight: "10rem" }}>
           <Card.Img variant="top" src={plant.photo} />
             <Card.Title>

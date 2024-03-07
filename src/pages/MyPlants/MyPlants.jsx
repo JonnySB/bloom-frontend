@@ -4,6 +4,7 @@ import PlantCards from '../../components/MyPlants/PlantCards';
 import AddPlant from '../../components/MyPlants/AddPlant';
 import NavbarComponent from '../../components/Navbar/NavbarComponent';
 import Footer from "../../components/Footer/Footer";
+import { getUserPlants } from "../../services/userPlants.js"
 import "./MyPlants.css"
 
 export const MyPlants = () => {
@@ -23,7 +24,7 @@ export const MyPlants = () => {
 fetchData()
 }, [])
 
-
+ 
  return (
    <div>
     <NavbarComponent sticky="top" />
