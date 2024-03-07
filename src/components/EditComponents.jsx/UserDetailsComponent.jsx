@@ -66,7 +66,7 @@ function UserNavbar({ userDetails }) {
             <Container className='user-details'>
                 <div className="profileEdit">
                     <Card>
-                        <img variant="top" src={userDetails?.avatar_url_string == null ? "https://res.cloudinary.com/dououppib/image/upload/v1709830638/PLANTS/placeholder_ry6d8v.webp" : userDetails?.avatar_url_string} className='profileAvatar' />
+                        <img variant="top" src={userDetails?.avatar_url_string == "" ? "https://res.cloudinary.com/dououppib/image/upload/v1709830638/PLANTS/placeholder_ry6d8v.webp" : userDetails?.avatar_url_string} className='profileAvatar' />
                         <ListGroup className="list-group-flush">
                             <ListGroup.Item>{userDetails?.first_name} {userDetails?.last_name}</ListGroup.Item>
                             <ListGroup.Item>{userDetails?.email}</ListGroup.Item>

@@ -11,7 +11,7 @@ const AddPlant = (props) => {
     // user_plants should be an array of plant_id of plants belonging to user.
     const [show, setShow] = useState(false);
     const userPlants = props.user_plants;
-    const [plantList, setPlantList] = useState([{id: 1, common_name: "Placeholder plant"}]);
+    const [plantList, setPlantList] = useState([{ id: 1, common_name: "Placeholder plant" }]);
     const [type, setType] = useState("");
     const [quantity, setQuantity] = useState(0)
     const [token, setToken] = useState(window.localStorage.getItem("token"))
@@ -38,14 +38,14 @@ const AddPlant = (props) => {
         if (userPlants.includes(type)) {
             updatePlantsQuantity(userId, type, quantity, token)
                 .then((data) => {
-                    window.localStorage.setItem("token", data.token)
+                    // window.localStorage.setItem("token", data.token)
                 });
         } else {
             assignPlant(1, type, quantity, token)
                 .then((data) => {
                     userPlants.push(type)
                     console.log(userPlants)
-                    window.localStorage.setItem("token", data.token)
+                    // window.localStorage.setItem("token", data.token)
                 });
         }
         handleClose()

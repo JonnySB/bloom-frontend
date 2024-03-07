@@ -17,7 +17,7 @@ const HelpRequest = (props) => {
         navigate('/Profile')
     }
     const formatPrice = (price) => {
-        return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'GDP' }).format(price);
+        return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'GBP' }).format(price);
     };
 
     return (
@@ -28,7 +28,7 @@ const HelpRequest = (props) => {
                     <Card.Body>
 
                         <Col xs={6} md={4}>
-                            <Image src={props.avatar_url_string} roundedCircle style={{ width: '30px', height: '30px' }} onClick={handleProfileNavigate} />
+                            <Image src={props?.avatar_url_string} roundedCircle style={{ width: '30px', height: '30px' }} onClick={handleProfileNavigate} />
                             {/* {props.avatar_url_string} */}
                             {/* https://upload.wikimedia.org/wikipedia/en/d/da/Matt_LeBlanc_as_Joey_Tribbiani.jpg */}
                         </Col>

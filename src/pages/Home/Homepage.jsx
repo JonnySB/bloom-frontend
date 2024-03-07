@@ -24,7 +24,7 @@ const Homepage = () => {
             }
         };
         fetchHelpRequestsWithUsers();
-    }, []); 
+    }, []);
 
     const redirectToCreateRequest = (e) => {
         navigate("/create_request");
@@ -50,6 +50,7 @@ const Homepage = () => {
                                             date={helpRequest.date}
                                             first_name={helpRequest.first_name}
                                             last_name={helpRequest.last_name}
+                                            avatar_url_string={helpRequest.avatar_url_string}
                                             showButtonView={true}
                                         />
                                     </Col>

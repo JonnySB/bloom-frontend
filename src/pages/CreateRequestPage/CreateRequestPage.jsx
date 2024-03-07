@@ -25,11 +25,11 @@ const CreateRequestPage = () => {
         }
         fetchAllRequestsByOneUser()
     }, [])
-    
+
     return (
         <>
-           <NavbarComponent />
-           <h1>Create help request page</h1>
+            <NavbarComponent />
+            <h1>Create help request page</h1>
             <ManageHelpRequestsNavBar />
             <CreateHelpRequestForm />
             <div role='all-requests-by-user'>
