@@ -37,6 +37,8 @@ const Homepage = () => {
                 <h1>BLOOM</h1>
                 <div>
                     <Button onClick={redirectToCreateRequest}>create request</Button>
+                    <br />
+                    <br />
                     <div role='feed'>
                         {helpRequestsWithUsers.map((helpRequest, index) => (
                             (index % 3 === 0) && <Row key={index}>

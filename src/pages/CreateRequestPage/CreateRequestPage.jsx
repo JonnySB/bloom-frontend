@@ -33,6 +33,8 @@ const CreateRequestPage = () => {
             <ManageHelpRequestsNavBar />
             <CreateHelpRequestForm />
             <div role='all-requests-by-user'>
+                <br />
+                <br />
                 {allRequests == null ? (
                     <h1>No requests done by me</h1>
                 ) : (
