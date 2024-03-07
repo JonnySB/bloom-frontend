@@ -5,6 +5,8 @@ import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import { updatePlantsQuantity, assignPlant } from '../../services/userPlants';
 import { fetchPlants } from '../../services/plants';
+import "./AddPlant.css"
+
 
 const AddPlant = (props) => {
     // Note: This component needs user_plants passed into it as props.
@@ -94,10 +96,10 @@ const AddPlant = (props) => {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+          <Button variant="secondary" id="closeButton" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleSubmit}>
+          <Button variant="primary" className="submitButton" onClick={handleSubmit}>
             Save Changes
           </Button>
         </Modal.Footer>
