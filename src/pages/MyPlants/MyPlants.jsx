@@ -10,8 +10,15 @@ import "./MyPlants.css"
 export const MyPlants = () => {
   const [user_id, setuserID] = useState(window.localStorage.getItem("user_id"));
   const [token, setToken] = useState(window.localStorage.getItem("token"));
-  const [userPlants, setUserPlants] = useState(null)
-
+  const [userPlants, setUserPlants] = useState(['1'])
+  const [userPlantsID, setUserPlantsID] = useState([])
+  let i = 0;
+  while (i < userPlants.length) {
+     if(!userPlants.includes(userPlants[i].id)) {
+      userPlantsID.push(String(userPlants[i].id))
+     }
+      i++;
+  }
   useEffect(() => {
     const fetchData = async () => {
     try {
@@ -34,7 +41,7 @@ fetchData()
        </div>
        <h1>My Plants</h1>
        <div className="plant-cards-container">
-       <div className="add-plants-button"><AddPlant user_plants={userPlants} /></div>
+       <div className="add-plants-button"><AddPlant user_plants={userPlantsID} /></div>
        <PlantCards />
        </div>
      </div>

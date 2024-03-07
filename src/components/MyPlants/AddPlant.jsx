@@ -10,7 +10,7 @@ const AddPlant = (props) => {
     // Note: This component needs user_plants passed into it as props.
     // user_plants should be an array of plant_id of plants belonging to user.
     const [show, setShow] = useState(false);
-    const [userPlants, setUserPlants] = useState(props.user_plants)
+    const userPlants = props.user_plants;
     const [plantList, setPlantList] = useState([{id: 1, common_name: "Placeholder plant"}]);
     const [type, setType] = useState("");
     const [quantity, setQuantity] = useState(0)
@@ -38,20 +38,18 @@ const AddPlant = (props) => {
         if (userPlants.includes(type)) {
             updatePlantsQuantity(userId, type, quantity, token)
                 .then((data) => {
-                    setToken(data.token)
                     window.localStorage.setItem("token", data.token)
                 });
         } else {
             assignPlant(1, type, quantity, token)
                 .then((data) => {
                     userPlants.push(type)
-                    setToken(data.token)
+                    console.log(userPlants)
                     window.localStorage.setItem("token", data.token)
 
                 });
         }
         handleClose()
-        window.location.reload();
       };
 
     const onTypeChange = (e) => {
@@ -79,7 +77,7 @@ const AddPlant = (props) => {
             <Form.Select aria-label="Default select example" onChange={onTypeChange}>
                 <option>What type of plant are you adding?</option>
                 {plantList.map((plant) => (
-                  <option value={plant.id} key={plant.id} label={plant.common_name}>{plant.common_name}</option>
+                  <option value={plant.id} label={plant.common_name}>{plant.common_name}</option>
                 ))}
             </Form.Select>
             </Form.Group>
