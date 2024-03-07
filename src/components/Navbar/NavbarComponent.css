@@ -6,3 +6,11 @@ nav {
 .container {
     padding: 0px;
 }
+
+.navbar-nav .nav-link {
+    margin-left: 10px; /* Adjust the value as needed */
+}
+
+.nav-spacing {
+    cursor: pointer;
+}
