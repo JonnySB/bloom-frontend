@@ -1,0 +1,13 @@
+.color-rescind {
+    background: #B02A37 !important;
+    border: #B02A37;
+}
+
+.color-rescind:hover {
+    background: darkred !important;
+}
+
+.btn-fill {
+    min-width: 100% !important;
+    min-height: 50px !important;
+}

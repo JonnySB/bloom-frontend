@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
+import "./AcceptButton.css"
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCircleCheck } from '@fortawesome/free-solid-svg-icons'
 
 import { acceptHelpOffer } from '../../../services/helpOffers'
 
@@ -15,8 +19,8 @@ const AcceptButton = ({ help_offer_id, triggerReload, setTriggerReload }) => {
     }
 
     return (
-        <Button vaient="sucess" size="sm" active onClick={handleClick}>
-            Accept Offer
+        <Button variant="success" size="lg" className="color-accept btn-fill" active onClick={handleClick}>
+            <FontAwesomeIcon icon={faCircleCheck} />
         </Button>
     );
 };

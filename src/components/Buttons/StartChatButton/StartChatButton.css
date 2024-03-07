@@ -1,0 +1,14 @@
+.color-chat {
+    background: gold important;
+    border: gold;
+}
+
+.color-chat:hover {
+    background: goldenrod !important;
+}
+
+.btn-fill {
+    min-width: 100% !important;
+    min-height: 50px !important;
+    margin: 0 !important;
+}
