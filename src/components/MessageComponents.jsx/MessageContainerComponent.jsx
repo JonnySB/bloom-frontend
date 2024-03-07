@@ -23,7 +23,6 @@ function MessageContainer({ messageManager, userDetails }) {
         console.error('Error:', err);
       }
     };
-
     fetchData();
 
     if (messageManager.sender_id && messageManager.recipient_id) {
@@ -87,6 +86,7 @@ function MessageContainer({ messageManager, userDetails }) {
   };
     
   const renderMessage = (messageObj, idx) => {
+  
     try {
       const parsedMessage = JSON.parse(messageObj); // Parse the message string into an object
       return (
@@ -109,7 +109,7 @@ function MessageContainer({ messageManager, userDetails }) {
       <div className="message">
         {messages.map((messageObj, index) => (
           <Card key={index} className="message-card">
-            <Card.Header>Messages from {messageObj.sender_username}</Card.Header>
+            <Card.Header>Messages from {messageManager?.receiver_username}</Card.Header>
             <Card.Body>
               {Array.isArray(messageObj.message) ? messageObj.message.map(renderMessage) : renderMessage(messageObj.message)}
             </Card.Body>

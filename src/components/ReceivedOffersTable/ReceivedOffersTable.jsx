@@ -5,7 +5,6 @@ import StartChatButton from '../Buttons/StartChatButton/StartChatButton'
 import "./ReceivedOffersTable.css"
 
 const ReceivedOffersTable = ({ receivedOffers, triggerReload, setTriggerReload }) => {
-    console.log(receivedOffers)
 
     const convertDate = (startDateString, endDateString) => {
         const startDate = new Date(startDateString);
@@ -17,7 +16,7 @@ const ReceivedOffersTable = ({ receivedOffers, triggerReload, setTriggerReload }
 
         return formattedDateRange
     }
-
+ 
     return (
         <div className="table-container">
             <Table>
@@ -73,3 +72,5 @@ const ReceivedOffersTable = ({ receivedOffers, triggerReload, setTriggerReload }
 }
 
 export default ReceivedOffersTable;
+
+

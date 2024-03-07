@@ -26,6 +26,7 @@ export const createHelpOffer = async (
       `${BACKEND_URL}/help_offers/${helpRequestId}`,
       requestOptions,
     );
+    console.log(response)
     if (!response.ok) {
       throw new Error(
         `Failed to create help offer for help request with ID ${helpRequestId}`,
@@ -33,7 +34,7 @@ export const createHelpOffer = async (
     }
 
     const data = await response.json();
-    console.log("DATA", data);
+
     return data;
   } catch (error) {
     console.error("API Error:", error);
