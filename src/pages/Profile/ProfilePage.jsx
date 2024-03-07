@@ -8,6 +8,7 @@ import PlantCards from "../../components/MyPlants/ShowPlantsProfilePage.jsx"
 import RequiredOffers from "../../components/MyPlants/ShowOffersRequiredProfilePage.jsx"
 import NavbarComponent from '../../components/Navbar/NavbarComponent.jsx';
 import "./ProfilePageStyle.css"
+import Footer from "../../components/Footer/Footer.jsx"
 
 export const Profile = () => {
     const [userDetails, setUserDetails] = useState(null);
@@ -51,6 +52,7 @@ return (
         <RequiredOffers userOffers={userOffers}/>
       </Container>
     </div>
+    <Footer/>
   </>
     )
 }
