@@ -6,6 +6,7 @@ import { getReceivedHelpOffersByUserId } from '../../../services/helpOffers'
 import ManageHelpRequestsNavBar from "../../../components/ManageHelpRequestsNavBar/ManageHelpRequestsNavBar";
 import ReceivedOffersTable from "../../../components/ReceivedOffersTable/ReceivedOffersTable";
 import NavbarComponent from "../../../components/Navbar/NavbarComponent";
+import Footer from "../../../components/Footer/Footer";
 
 const ReceivedOffersPage = () => {
 
@@ -44,6 +45,7 @@ const ReceivedOffersPage = () => {
                     />
                 )}
             </div>
+            <Footer />
         </div>
     );
 };
