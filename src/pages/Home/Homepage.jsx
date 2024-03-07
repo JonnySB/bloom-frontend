@@ -14,7 +14,8 @@ const Homepage = () => {
         const fetchHelpRequestsWithUsers = async () => {
             try {
                 const data = await getAllHelpRequestsWithUserDetails();
-                setHelpRequestsWithUsers(data);
+                const sortedData = data.sort((a, b) => b.id - a.id);
+                setHelpRequestsWithUsers(sortedData);
             } catch (error) {
                 console.error('Error fetching help requests with users:', error);
             }
