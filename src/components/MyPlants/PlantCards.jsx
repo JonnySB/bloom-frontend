@@ -1,5 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import {Card, Col, Row , Button } from 'react-bootstrap'
+import {Card, Col, Row  } from 'react-bootstrap'
 import "./ShowPlants.css";
 import "./PlantCards.css"
 
