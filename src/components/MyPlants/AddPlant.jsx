@@ -1,57 +1,51 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import { updatePlantsQuantity, assignPlant } from '../../services/userPlants';
-import { fetchPlants } from '../../services/plants';
 
-const AddPlant = (props) => {
-    // Note: This component needs user_plants passed into it as props.
-    // user_plants should be an array of plant_id of plants belonging to user.
+const AddPlant = ({userPlants}) => {
     const [show, setShow] = useState(false);
-    const userPlants = props.user_plants;
     const [plantList, setPlantList] = useState([{ id: 1, common_name: "Placeholder plant" }]);
     const [type, setType] = useState("");
-    const [quantity, setQuantity] = useState(0)
     const [token, setToken] = useState(window.localStorage.getItem("token"))
     const [userId, setUserId] = useState(window.localStorage.getItem("user_id"))
-    const navigate = useNavigate()
+    const [plantDetails, setPlantDetails] =  useState({});
+    const [quantityDetails, setQuantityDetails] =  useState({});
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const handleShow = () => {
+        setShow(true);
+    };
 
-    useEffect(() => {
-        if (token) {
-            fetchPlants(token)
-                .then((data) => {
-                    setPlantList(data)
-                })
-                .catch((err) => {
-                    console.error(err);
-                });
-        }
-    }, [userPlants])
+
+
+    
 
     const handleSubmit = () => {
-        console.log(userPlants)
-        console.log("submitting")
+        let plantAlreadyAdded = userPlants.some(m => m.recipient_id === senderUserID);
+
         if (userPlants.includes(type)) {
             updatePlantsQuantity(userId, type, quantity, token)
-                .then((data) => {
-                    // window.localStorage.setItem("token", data.token)
-                });
         } else {
             assignPlant(userId, type, quantity, token)
-                .then((data) => {
-                    userPlants.push(type)
-                    console.log(userPlants)
-                    // window.localStorage.setItem("token", data.token)
-                });
+                userPlants.push(type)
         }
-        handleClose()
-        // window.location.reload();
+      
+
     };
+    // console.log(props)
+    // const handleSubmit = () => {
+    //     if (userPlants.includes(type)) {
+    //         updatePlantsQuantity(userId, type, quantity, token)
+    //     } else {
+    //         assignPlant(userId, type, quantity, token)
+    //             .then(() => {
+    //                 // Assuming updateUserPlants is a new prop function that correctly updates parent state
+    //                 props.updateUserPlants(type); 
+    //             });
+    //     }
+    //     handleClose();
+    // };
 
     const onTypeChange = (e) => {
         setType(e.target.value)
@@ -66,13 +60,12 @@ const AddPlant = (props) => {
             <Button variant="primary" onClick={handleShow}>
                 Add a Plant
             </Button>
-
-            <Modal show={show} onHide={handleClose}>
+            <Modal show={show} onClick={() => setShow(false)} >
                 <Modal.Header closeButton>
                     <Modal.Title>Add a new plant to your collection</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form>
+                    <Form id="addingPlants">
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                             <Form.Label>Type</Form.Label>
                             <Form.Select aria-label="Default select example" onChange={onTypeChange}>
@@ -92,10 +85,10 @@ const AddPlant = (props) => {
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
+                    <Button variant="secondary" onClick={() => setShow(false)}>
                         Close
                     </Button>
-                    <Button variant="primary" onClick={handleSubmit}>
+                    <Button variant="primary" type="submit" form="userEditForm" onClick={() => setShow(false)}>
                         Save Changes
                     </Button>
                 </Modal.Footer>

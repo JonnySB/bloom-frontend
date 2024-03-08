@@ -12,7 +12,7 @@ export const getUserPlants = async (user_id, token) => {
     }
 
     const data = await response.json();
-    console.log("got user plants,", data)
+    // console.log("got user plants,", data)
     return "User plants list:", data;
 
   } catch (error) {
@@ -48,7 +48,7 @@ export const assignPlant = async (user_id, plant_id, quantity, token) => {
     }
 
     const data = await response.json();
-    console.log('response received,', data)
+    // console.log('response received,', data)
     return "Assignment successful:", data;
   } catch (error) {
     console.error("Error assigning plant:", error);
@@ -88,7 +88,7 @@ export const updatePlantsQuantity = async (
     }
 
     const data = await response.json();
-    console.log('response received,', data)
+    // console.log('response received,', data)
 
     return "Update successful:", data;
   } catch (error) {
