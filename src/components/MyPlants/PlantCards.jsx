@@ -4,20 +4,9 @@ import "./ShowPlants.css";
 import "./PlantCards.css"
 
 const PlantCards = ({ myPlants }) => {
- 
-  // const slicedList = plantList.toReversed().slice(0, 5)
+
   return (
-    <Row
-      xs={1}
-      md={4}
-      className="plantcard"
-      style={{
-        minWidth: "20rem",
-        padding: "10px",
-        marginLeft: "auto",
-        marginRight: "auto",
-      }}
-    >
+    <Row xs={1} md={4} className="plantcard">
       {myPlants.map((plant, index) => (
         <Col key={index}>
         <Card >

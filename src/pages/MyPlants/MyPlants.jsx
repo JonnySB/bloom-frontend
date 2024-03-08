@@ -28,7 +28,6 @@ export const MyPlants = () => {
     
     useEffect(() => {
         fetchPlants();
-        console.log('Fetching plants...');
     }, [user_id, token]); 
     
   
