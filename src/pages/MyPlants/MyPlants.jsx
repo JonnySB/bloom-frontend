@@ -11,21 +11,27 @@ export const MyPlants = () => {
     const [user_id, setuserID] = useState(window.localStorage.getItem("user_id"));
     const [token, setToken] = useState(window.localStorage.getItem("token"));
     const [userPlants, setUserPlants] = useState([])
- 
+    const [isLoading, setIsLoading] = useState(true);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const getUserPlantsData = await getUserPlants(user_id, token)
-                setUserPlants(getUserPlantsData)
-            } catch (err) {
-                console.error('Error fetching userPlants details:', err);
-            }
+
+    const fetchPlants = async () => {
+        setIsLoading(true);
+        try {
+            const getUserPlantsData = await getUserPlants(user_id, token);
+            setUserPlants(getUserPlantsData);
+        } catch (err) {
+            console.error('Error fetching userPlants details:', err);
+        } finally {
+            setIsLoading(false);
         }
-        fetchData()
-    }, [])
-
-
+    };
+    
+    useEffect(() => {
+        fetchPlants();
+        console.log('Fetching plants...');
+    }, [user_id, token]); 
+    
+  
     return (
         <div>
             <NavbarComponent sticky="top" />
@@ -35,8 +41,8 @@ export const MyPlants = () => {
                 </div>
                 <h1>My Plants</h1>
                 <div className="plant-cards-container">
-                    <div className="add-plants-button"><AddPlant user_plants={userPlants} /></div>
-                    <PlantCards />
+                    <div className="add-plants-button">{!isLoading && <AddPlant myPlants={userPlants}  refreshPlants={fetchPlants}/>}</div>
+                    <PlantCards  myPlants={userPlants} />
                 </div>
             </div>
             <Footer />

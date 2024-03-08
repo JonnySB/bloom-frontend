@@ -1,31 +1,10 @@
-import Card from "react-bootstrap/Card";
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
-import Button from "react-bootstrap/Button";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useState, useEffect } from "react";
-import { getUserPlants } from "../../services/userPlants";
+import {Card, Col, Row , Button } from 'react-bootstrap'
 import "./ShowPlants.css";
 import "./PlantCards.css"
 
-const PlantCards = (props) => {
-  const [userPlantList, setUserPlantList] = useState(
-    [{id: 0, common_name: "Placeholder plant", latin_name: "Plantus placeholderious", watering_frequency: 7}]);
-  const [userId, setUserId] = useState(
-    window.localStorage.getItem("user_id")
-  );
-  const [token, setToken] = useState(
-    window.localStorage.getItem("token")
-  );
-
-  useEffect(() => {
-    getUserPlants(userId, token).then((data) => {
-      if (data) {
-        setUserPlantList(data)
-      };
-    });
-  }, []);
-
+const PlantCards = ({ myPlants }) => {
+ 
   // const slicedList = plantList.toReversed().slice(0, 5)
   return (
     <Row
@@ -39,7 +18,7 @@ const PlantCards = (props) => {
         marginRight: "auto",
       }}
     >
-      {userPlantList.map((plant, index) => (
+      {myPlants.map((plant, index) => (
         <Col key={index}>
         <Card >
           <Card.Body style={{ minHeight: "10rem" }}>

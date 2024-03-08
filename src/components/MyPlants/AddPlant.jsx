@@ -1,51 +1,46 @@
 import { useState, useEffect } from 'react';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import Modal from 'react-bootstrap/Modal';
+import {CloseButton, Button, Modal, Form} from 'react-bootstrap'
 import { updatePlantsQuantity, assignPlant } from '../../services/userPlants';
+import { fetchPlants } from '../../services/plants';
 
-const AddPlant = ({userPlants}) => {
+const AddPlant = ({ myPlants, refreshPlants }) => {
     const [show, setShow] = useState(false);
-    const [plantList, setPlantList] = useState([{ id: 1, common_name: "Placeholder plant" }]);
+    const [plantList, setPlantList] = useState([]);
     const [type, setType] = useState("");
+    const [quantity, setQuantity] = useState("0")
     const [token, setToken] = useState(window.localStorage.getItem("token"))
     const [userId, setUserId] = useState(window.localStorage.getItem("user_id"))
-    const [plantDetails, setPlantDetails] =  useState({});
-    const [quantityDetails, setQuantityDetails] =  useState({});
+    
+    useEffect(() => {
+        if (token) {
+            fetchPlants(token)
+                .then((data) => {
+                    setPlantList(data)
+                })
+                .catch((err) => {
+                    console.error(err);
+                });
+        }
+    }, [])
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        let doesExist = myPlants.some(plant => plant.id.toString() === type); 
+        try {
+            if (doesExist) {
+                await updatePlantsQuantity(userId, type, quantity, token);
+            } else {
+                await assignPlant(userId, type, quantity, token);
+            }
+            refreshPlants();
+        } catch (error) {
+            console.error('Error updating or assigning plant:', error);
+        }
+    };
 
     const handleShow = () => {
         setShow(true);
     };
-
-
-
-    
-
-    const handleSubmit = () => {
-        let plantAlreadyAdded = userPlants.some(m => m.recipient_id === senderUserID);
-
-        if (userPlants.includes(type)) {
-            updatePlantsQuantity(userId, type, quantity, token)
-        } else {
-            assignPlant(userId, type, quantity, token)
-                userPlants.push(type)
-        }
-      
-
-    };
-    // console.log(props)
-    // const handleSubmit = () => {
-    //     if (userPlants.includes(type)) {
-    //         updatePlantsQuantity(userId, type, quantity, token)
-    //     } else {
-    //         assignPlant(userId, type, quantity, token)
-    //             .then(() => {
-    //                 // Assuming updateUserPlants is a new prop function that correctly updates parent state
-    //                 props.updateUserPlants(type); 
-    //             });
-    //     }
-    //     handleClose();
-    // };
 
     const onTypeChange = (e) => {
         setType(e.target.value)
@@ -60,12 +55,13 @@ const AddPlant = ({userPlants}) => {
             <Button variant="primary" onClick={handleShow}>
                 Add a Plant
             </Button>
-            <Modal show={show} onClick={() => setShow(false)} >
-                <Modal.Header closeButton>
+            <Modal show={show}  >
+                <Modal.Header>
                     <Modal.Title>Add a new plant to your collection</Modal.Title>
+                    <CloseButton onClick={() => setShow(false)} />
                 </Modal.Header>
                 <Modal.Body>
-                    <Form id="addingPlants">
+                    <Form id="addingPlants"  onSubmit={handleSubmit}>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                             <Form.Label>Type</Form.Label>
                             <Form.Select aria-label="Default select example" onChange={onTypeChange}>
@@ -88,7 +84,7 @@ const AddPlant = ({userPlants}) => {
                     <Button variant="secondary" onClick={() => setShow(false)}>
                         Close
                     </Button>
-                    <Button variant="primary" type="submit" form="userEditForm" onClick={() => setShow(false)}>
+                    <Button variant="primary" type="submit" form="addingPlants" onClick={() => setShow(false)}>
                         Save Changes
                     </Button>
                 </Modal.Footer>

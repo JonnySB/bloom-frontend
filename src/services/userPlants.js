@@ -13,7 +13,7 @@ export const getUserPlants = async (user_id, token) => {
 
     const data = await response.json();
     // console.log("got user plants,", data)
-    return "User plants list:", data;
+    return data;
 
   } catch (error) {
     console.error("Error getting user plants:", error);
