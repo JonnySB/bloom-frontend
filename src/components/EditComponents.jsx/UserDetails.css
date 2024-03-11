@@ -96,16 +96,47 @@
 
 .modal-title {
     color: #495057; /* Darker text for contrast */
-    font-weight: 500; /* Medium font weight */
+    font-weight: 700; /* Medium font weight */
 }
 
 .modal-body {
-    display: flex; /* Enables flexbox */
     justify-content: space-between; /* Positions items to have space between them */
     align-items: center; /* Aligns items vertically in the center */
-    padding: 20px;
+    padding: 20px; 
 }
 
+.modal-body .modal-row {
+    display: flex; /* Use flexbox to align the elements */
+    align-items: center; /* Align items vertically */   
+}
+
+.modal-body .input-container {
+    padding-left: 10px;
+    display: flex; /* Flexbox for internal alignment */
+    justify-content: space-between; /* Space between text/input and button */
+    width: 80%;
+}
+
+.modal-body .text {
+    font-size: 20px; /* Large font size for visibility */
+}
+.modal-body .edit-btn {
+    color: beige;
+    background-color: #495057;
+}
+
+.modal-body .edit-input {
+    display: block; /* Show the input field */
+    width: 80%; /* Take 80% of the container width */
+
+}
+
+.modal-body h3 {
+    font-size: 15px;
+    font-weight: 700;
+    
+    color: #495057; 
+}
 
 .modal-footer {
     border-top: 1px solid #dee2e6; /* Light border for the footer */

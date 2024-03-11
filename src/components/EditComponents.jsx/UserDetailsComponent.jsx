@@ -131,27 +131,46 @@ function UserNavbar({ userDetails, refeshUserData }) {
                     <Modal.Title>Edit your information</Modal.Title>
                 </Modal.Header>
                 <Form id="userEditForm" onSubmit={handleFormSubmit}>
-                    <Modal.Body> First Name: 
-                        {inputVisibility.firstName ?
-                            <input type="text" value={formDetails.firstName} onChange={e => handleChange(e, 'firstName')} /> :
-                            <>{userDetails?.first_name}<Button variant="primary" onClick={() => toggleInputVisibility('firstName')}>🖊️</Button></>}
+                    <Modal.Body> 
+                    <div className="modal-row">
+        <h3>First Name:</h3>
+        <div className="input-container">
+                            {inputVisibility.firstName ? (
+                                <input 
+                                    type="text" 
+                                    value={formDetails.firstName} 
+                                    onChange={e => handleChange(e, 'firstName')} 
+                                    className="edit-input"
+                                />
+                            ) : (
+                                <span className="text">{userDetails?.first_name}</span>
+                            )}
+                            <Button 
+                                variant="primary" 
+                                onClick={() => toggleInputVisibility('firstName')} 
+                                className="edit-btn"
+                            >
+                                🖊️
+                            </Button>
+                        </div>
+                    </div>
                     </Modal.Body>
-                    <Modal.Body> Last Name:
+                    <Modal.Body> <h3>Last Name:</h3>
                         {inputVisibility.lastName ?
                             <input type="text" value={formDetails.lastName} onChange={e => handleChange(e, 'lastName')} /> :
                             <>{userDetails?.last_name}<Button variant="primary" onClick={() => toggleInputVisibility('lastName')}>🖊️</Button></>}
                     </Modal.Body>
-                    <Modal.Body>Username: 
+                    <Modal.Body><h3>Username:</h3>
                         {inputVisibility.userName ?
                             <input type="text" value={formDetails.userName} onChange={e => handleChange(e, 'userName')} /> :
                             <>{userDetails?.username}<Button variant="primary" onClick={() => toggleInputVisibility('userName')}>🖊️</Button></>}
                     </Modal.Body>
-                    <Modal.Body>Email Address:
+                    <Modal.Body><h3>Email Address:</h3>
                         {inputVisibility.email ?
                             <input type="text" value={formDetails.email} onChange={e => handleChange(e, 'email')} /> :
                             <>{userDetails?.email}<Button variant="primary" onClick={() => toggleInputVisibility('email')}>🖊️</Button></>}
                     </Modal.Body>
-                    <Modal.Body>Address:
+                    <Modal.Body><h3>Address:</h3>
                         {inputVisibility.address ?
                             <input type="text" value={formDetails.address} onChange={e => handleChange(e, 'address')} /> :
                             <>{userDetails?.address}<Button variant="primary" onClick={() => toggleInputVisibility('address')}>🖊️</Button></>}
