@@ -74,8 +74,6 @@ export const editUserAvatar = async (file, token, user_id) => {
 
     const response = await fetch(`${BACKEND_URL}/edit_user_avatar/${user_id}`, requestOptions);
 
-    // console.log("Response received", response);
-
     if (response.ok) {
         const data = await response.json();
         console.log("Avatar updated successfully:", data);

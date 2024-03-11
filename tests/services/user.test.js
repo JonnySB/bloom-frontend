@@ -77,4 +77,35 @@ describe("User service", () => {
             });
         });
     });
+    describe("Edit user avatar", () => {
+        test("Successful edit user's avatar and return an OK status", async () =>  {
+            fetch.mockResponseOnce(JSON.stringify({}), { status: 200 });
+            const token = "testToken";
+            const userId = "1"
+            const file = new Blob(["image data"], { type: "image/png" });
+            file.name = "test.png"; // Mocking a file
+            await editUserAvatar(file, token, userId);
+            const fetchArguments = fetch.mock.lastCall;
+            const url = fetchArguments[0];
+            const options = fetchArguments[1];
+            const formDataEntries = options.body.entries();
+            const formDataObj = Array.from(formDataEntries).reduce((obj, [key, value]) => {
+                obj[key] = value;
+                return obj;
+            }, {});
+            
+            expect(url).toEqual(`${BACKEND_URL}/edit_user_avatar/${userId}`);
+            expect(options.method).toEqual("PUT");
+            expect(options.body instanceof FormData).toBeTruthy();
+            expect(formDataObj).toHaveProperty('avatar');
+        });
+        test("Rejects PUT request with an error if the status is NOT 200", async () => {
+            fetch.mockResponseOnce(
+                JSON.stringify({ message: "Something went wrong" }),
+                { status: 400 }
+            );
+            await expect(editUserAvatar(1)).rejects.toThrow("Failed to update avatar.");
+     
+        });
+    });
 });
