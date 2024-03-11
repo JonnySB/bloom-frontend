@@ -65,43 +65,31 @@ export const editUsersInformation = async (form, token) => {
     }
 };
 
-export const editUserAvatar = async (form, token) => {
-    // console.log("Preparing to send edit request with form data:", form);
+export const editUserAvatar = async (file, token, user_id) => {
+    const formData = new FormData();
+    formData.append("avatar", file); 
 
     const requestOptions = {
         method: "PUT",
         headers: {
-            "Content-Type": "application/json",
             "Authorization": `Bearer ${token}`,
         },
-        body: JSON.stringify({
-            avatar: form.avatar,
-        }),
+        body: formData,
     };
     
-    // console.log("Request options:", requestOptions);
+    console.log("Sending file to the backend");
 
-    const response = await fetch(`${BACKEND_URL}/edit_user_avatar/${form.userId}`, requestOptions);
+    const response = await fetch(`${BACKEND_URL}/edit_user_avatar/${user_id}`, requestOptions);
 
     // console.log("Response received", response);
 
     if (response.ok) {
-        try {
-            const data = await response.json();
-            // console.log("Response data loaded successfully:", data);
-            return data;
-        } catch (error) {
-            console.error("Failed to parse response JSON:", error);
-            throw new Error("Failed to parse response JSON.");
-        }
+        const data = await response.json();
+        console.log("Avatar updated successfully:", data);
+        return data;
     } else {
-        console.error("Response status was not OK:", response.status);
-        try {
-            const errorResponse = await response.json();
-            console.error('Full error response:', errorResponse);
-            throw new Error(`Error from server: ${errorResponse.message || 'Unknown error'}`);
-        } catch (error) {
-            throw new Error("Failed to parse error response JSON.");
-        }
+        const error = await response.json();
+        console.error("Failed to update avatar:", error);
+        throw new Error("Failed to update avatar.");
     }
 };

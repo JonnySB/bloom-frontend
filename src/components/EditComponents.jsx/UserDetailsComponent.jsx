@@ -9,6 +9,7 @@ function UserNavbar({ userDetails, refeshUserData }) {
     const [showButtonPicutre, setShowButtonPicture] = useState(false)
     const [formDetails, setFormDetails] = useState({});
     const [token, setToken] = useState(window.localStorage.getItem("token"));
+    const [user_id, setuserID] = useState(window.localStorage.getItem("user_id"));
     const [userAvatar, setUserAvatar] = useState()
     const [inputVisibility, setInputVisibility] = useState({
         firstName: false,
@@ -45,13 +46,21 @@ function UserNavbar({ userDetails, refeshUserData }) {
     const handleShowProfilePicture = () => {
         setShowButtonPicture(true)
     }
-
-    const handleUserAvatar = (event) => {
-        setUserAvatar(event.target.files[0])
+    const handleProfilePicture = (event) => {
+        const file = event.target.files[0];
+        setUserAvatar(file);
     }
 
+    const handleUserAvatar = async (event) => {
+        event.preventDefault();
+        try {
+            await editUserAvatar(userAvatar, token, user_id);
+            // refeshUserData()
+        } catch(err) {
+            console.log('Edit not completed', err);
+        }
+    }
 
-    console.log(userAvatar)
     const handleFormSubmit = async (event) => {
         event.preventDefault();
         const updatedFormDetails = {
@@ -77,11 +86,11 @@ function UserNavbar({ userDetails, refeshUserData }) {
                 <div className="profileEdit">
                     <Card>
                         <img variant="top" src={userDetails?.avatar_url_string == "" ? "https://res.cloudinary.com/dououppib/image/upload/v1709830638/PLANTS/placeholder_ry6d8v.webp" : userDetails?.avatar_url_string} className='profileAvatar' />
-                        <Button variant="primary" onClick={handleShowProfilePicture}>Edit Profile</Button>
+                        <Button variant="primary" onClick={handleShowProfilePicture}>Edit picture</Button>
                         <Modal show={showButtonPicutre} onHide={() => setShowButtonPicture(false)}>
-                            <Form id="userAvatar" className="mb-3" onSubmit={handleUserAvatar}>
+                            <Form id="userAvatar" className="mb-2" onSubmit={handleUserAvatar}>
                                 <Modal.Body>
-                                <Form.Control type="file" accept="image/*"  placeholder="Product Name" />
+                                <Form.Control type="file" accept="image/*"  placeholder="Product Name"  onChange={handleProfilePicture}/>
                                 </Modal.Body>
                             </Form>
                             <Modal.Footer>
