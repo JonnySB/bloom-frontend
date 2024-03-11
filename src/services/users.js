@@ -21,7 +21,7 @@ export const getuserInformationById = async (userId) => {
 }
 
 export const editUsersInformation = async (form, token) => {
-    console.log("Preparing to send edit request with form data:", form);
+    // console.log("Preparing to send edit request with form data:", form);
 
     const requestOptions = {
         method: "PUT",
@@ -38,16 +38,57 @@ export const editUsersInformation = async (form, token) => {
         }),
     };
     
-    console.log("Request options:", requestOptions);
+    // console.log("Request options:", requestOptions);
 
     const response = await fetch(`${BACKEND_URL}/edit_user_details/${form.userId}`, requestOptions);
 
-    console.log("Response received", response);
+    // console.log("Response received", response);
 
     if (response.ok) {
         try {
             const data = await response.json();
-            console.log("Response data loaded successfully:", data);
+            // console.log("Response data loaded successfully:", data);
+            return data;
+        } catch (error) {
+            console.error("Failed to parse response JSON:", error);
+            throw new Error("Failed to parse response JSON.");
+        }
+    } else {
+        console.error("Response status was not OK:", response.status);
+        try {
+            const errorResponse = await response.json();
+            console.error('Full error response:', errorResponse);
+            throw new Error(`Error from server: ${errorResponse.message || 'Unknown error'}`);
+        } catch (error) {
+            throw new Error("Failed to parse error response JSON.");
+        }
+    }
+};
+
+export const editUserAvatar = async (form, token) => {
+    // console.log("Preparing to send edit request with form data:", form);
+
+    const requestOptions = {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+            avatar: form.avatar,
+        }),
+    };
+    
+    // console.log("Request options:", requestOptions);
+
+    const response = await fetch(`${BACKEND_URL}/edit_user_avatar/${form.userId}`, requestOptions);
+
+    // console.log("Response received", response);
+
+    if (response.ok) {
+        try {
+            const data = await response.json();
+            // console.log("Response data loaded successfully:", data);
             return data;
         } catch (error) {
             console.error("Failed to parse response JSON:", error);
