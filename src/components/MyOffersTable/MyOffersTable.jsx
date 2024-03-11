@@ -31,24 +31,30 @@ const MyOffersTable = ({ myOffers, triggerReload, setTriggerReload }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {myOffers?.map((help_offer) => {
+                    {myOffers?.sort().reverse().map((help_offer) => {
                         return (
-                            <tr key={help_offer.help_offer_id}>
-                                <td>{help_offer.help_request_name}</td>
-                                <td>{convertDate(help_offer.help_request_start_date, help_offer.help_request_end_date)}</td>
-                                <td>{help_offer.help_offer_bid}</td>
-                                <td>{help_offer.help_request_user_id}</td>
-                                <td>{help_offer.help_offer_message}</td>
-                                <td>{help_offer.help_offer_status}</td>
-                                <td className="btn-styling" style={{ border: "0" }}>
-                                    <RescindButton
-                                        help_offer_id={help_offer.help_offer_id}
-                                        triggerReload={triggerReload}
-                                        setTriggerReload={setTriggerReload}
+                            <>
+                                {
+                                    help_offer.help_offer_status != "recinded" && (
+                                        <tr key={help_offer.help_offer_id}>
+                                            <td>{help_offer.help_request_name}</td>
+                                            <td>{convertDate(help_offer.help_request_start_date, help_offer.help_request_end_date)}</td>
+                                            <td>{help_offer.help_offer_bid}</td>
+                                            <td>{help_offer.help_request_user_id}</td>
+                                            <td>{help_offer.help_offer_message}</td>
+                                            <td>{help_offer.help_offer_status}</td>
+                                            <td className="btn-styling" style={{ border: "0" }}>
+                                                <RescindButton
+                                                    help_offer_id={help_offer.help_offer_id}
+                                                    triggerReload={triggerReload}
+                                                    setTriggerReload={setTriggerReload}
 
-                                    />
-                                </td>
-                            </tr>
+                                                />
+                                            </td>
+                                        </tr>
+                                    )
+                                }
+                            </>
                         )
                     })}
                 </tbody>

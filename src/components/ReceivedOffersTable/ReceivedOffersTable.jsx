@@ -16,7 +16,7 @@ const ReceivedOffersTable = ({ receivedOffers, triggerReload, setTriggerReload }
 
         return formattedDateRange
     }
- 
+
     return (
         <div className="table-container">
             <Table>
@@ -34,35 +34,39 @@ const ReceivedOffersTable = ({ receivedOffers, triggerReload, setTriggerReload }
                     </tr>
                 </thead>
                 <tbody>
-                    {receivedOffers?.map((help_offer) => {
+                    {receivedOffers?.sort().reverse().map((help_offer) => {
                         return (
-                            <tr key={help_offer.help_offer_id}>
-                                <td>{help_offer.help_offer_status}</td>
-                                <td>{help_offer.help_request_name}</td>
-                                <td>{convertDate(help_offer.help_request_start_date, help_offer.help_request_end_date)}</td>
-                                <td>{help_offer.help_offer_bid}</td>
-                                <td>{help_offer.help_offer_username}</td>
-                                <td>{help_offer.help_offer_message}</td>
-                                <td className="btn-styling" style={{ border: "0" }}>
-                                    <AcceptButton
-                                        help_offer_id={help_offer.help_offer_id}
-                                        triggerReload={triggerReload}
-                                        setTriggerReload={setTriggerReload}
-                                    />
-                                </td>
-                                <td className="btn-styling" style={{ border: "0" }}>
-                                    <RejectButton
-                                        help_offer_id={help_offer.help_offer_id}
-                                        triggerReload={triggerReload}
-                                        setTriggerReload={setTriggerReload}
-                                    />
-                                </td>
-                                <td className="btn-styling" style={{ border: "0" }}>
-                                    <StartChatButton
-                                        help_offer_user_id={help_offer.help_offer_user_id}
-                                    />
-                                </td>
-                            </tr>
+                            <>
+                                {(help_offer.help_offer_status == "accepted" || help_offer.help_offer_status == "pending") && (
+                                    <tr key={help_offer.help_offer_id}>
+                                        <td>{help_offer.help_offer_status}</td>
+                                        <td>{help_offer.help_request_name}</td>
+                                        <td>{convertDate(help_offer.help_request_start_date, help_offer.help_request_end_date)}</td>
+                                        <td>{help_offer.help_offer_bid}</td>
+                                        <td>{help_offer.help_offer_username}</td>
+                                        <td>{help_offer.help_offer_message}</td>
+                                        <td className="btn-styling" style={{ border: "0" }}>
+                                            <AcceptButton
+                                                help_offer_id={help_offer.help_offer_id}
+                                                triggerReload={triggerReload}
+                                                setTriggerReload={setTriggerReload}
+                                            />
+                                        </td>
+                                        <td className="btn-styling" style={{ border: "0" }}>
+                                            <RejectButton
+                                                help_offer_id={help_offer.help_offer_id}
+                                                triggerReload={triggerReload}
+                                                setTriggerReload={setTriggerReload}
+                                            />
+                                        </td>
+                                        <td className="btn-styling" style={{ border: "0" }}>
+                                            <StartChatButton
+                                                help_offer_user_id={help_offer.help_offer_user_id}
+                                            />
+                                        </td>
+                                    </tr>
+                                )}
+                            </>
                         )
                     })}
                 </tbody>
