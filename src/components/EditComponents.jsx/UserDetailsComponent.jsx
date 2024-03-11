@@ -3,6 +3,8 @@ import { Container, Nav, Navbar, Card, ListGroup, Modal, Button, Form } from 're
 import "./UserDetails.css"
 import { useState, useEffect } from 'react';
 import { editUsersInformation, editUserAvatar } from '../../services/users';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCamera } from '@fortawesome/free-solid-svg-icons'; 
 
 function UserNavbar({ userDetails, refeshUserData }) {
     const [show, setShow] = useState(false);
@@ -55,7 +57,7 @@ function UserNavbar({ userDetails, refeshUserData }) {
         event.preventDefault();
         try {
             await editUserAvatar(userAvatar, token, user_id);
-            // refeshUserData()
+            refeshUserData()
         } catch(err) {
             console.log('Edit not completed', err);
         }
@@ -85,8 +87,12 @@ function UserNavbar({ userDetails, refeshUserData }) {
             <Container className='user-details'>
                 <div className="profileEdit">
                     <Card>
-                        <img variant="top" src={userDetails?.avatar_url_string == "" ? "https://res.cloudinary.com/dououppib/image/upload/v1709830638/PLANTS/placeholder_ry6d8v.webp" : userDetails?.avatar_url_string} className='profileAvatar' />
-                        <Button variant="primary" onClick={handleShowProfilePicture}>Edit picture</Button>
+                        <div className="image-container">
+                            <img variant="top" src={userDetails?.avatar_url_string == "" ? "https://res.cloudinary.com/dououppib/image/upload/v1709830638/PLANTS/placeholder_ry6d8v.webp" : userDetails?.avatar_url_string} className='profileAvatar' />
+                            <Button variant="primary" className="edit-picture-btn" onClick={handleShowProfilePicture}>
+                                <FontAwesomeIcon icon={faCamera} />
+                            </Button>
+                        </div>
                         <Modal show={showButtonPicutre} onHide={() => setShowButtonPicture(false)}>
                             <Form id="userAvatar" className="mb-2" onSubmit={handleUserAvatar}>
                                 <Modal.Body>
@@ -103,8 +109,6 @@ function UserNavbar({ userDetails, refeshUserData }) {
                             <ListGroup.Item>{userDetails?.username}</ListGroup.Item>
                             <ListGroup.Item>{userDetails?.email}</ListGroup.Item>
                             <ListGroup.Item>{userDetails?.address}</ListGroup.Item>
-                            <ListGroup.Item>Zetland House</ListGroup.Item>
-                            <ListGroup.Item>Unit 2FG, 5-25 Scrutton Street</ListGroup.Item>
                         </ListGroup>
                     </Card>
                 </div>
