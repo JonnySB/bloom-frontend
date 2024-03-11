@@ -7,7 +7,7 @@ const PlantCards = ({ myPlants }) => {
 
   return (
     <Row xs={1} md={4} className="plantcard">
-      {myPlants.map((plant, index) => (
+      {myPlants?.map((plant, index) => (
         <Col key={index}>
         <Card >
           <Card.Body style={{ minHeight: "10rem" }}>
