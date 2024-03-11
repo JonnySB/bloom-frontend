@@ -4,7 +4,7 @@ import { Container } from 'react-bootstrap';
 import './MessagePage.css'
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { getuserInformationById } from "../../services/users";
+import { getUserInformationById } from "../../services/users";
 import NavbarComponent from "../../components/Navbar/NavbarComponent";
 
 export const MessagePage = () => {
@@ -21,11 +21,11 @@ export const MessagePage = () => {
     useEffect(() => {
       const fetchUserDetails = async () => {
         try {
-          const userData = await getuserInformationById(user_id);
+          const userData = await getUserInformationById(user_id);
           setUserDetails(userData);
     
           if (help_offer_user_id !== undefined) {
-            const receiverMessageData = await getuserInformationById(help_offer_user_id);
+            const receiverMessageData = await getUserInformationById(help_offer_user_id);
             setreciverDetails(receiverMessageData);
           }
         } catch (err) {

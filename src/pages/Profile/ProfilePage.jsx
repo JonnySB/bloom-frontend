@@ -1,7 +1,7 @@
 import Container from 'react-bootstrap/Container';
 import UserNavbar from '../../components/EditComponents.jsx/UserDetailsComponent';
 import React, { useState, useEffect } from "react";
-import { getuserInformationById } from '../../services/users';
+import { getUserInformationById } from '../../services/users';
 import { getUserPlants } from "../../services/userPlants.js"
 import { getAllRequestsByOneUser } from "../../services/RequestedOffersService.js"
 import PlantCards from "../../components/MyPlants/ShowPlantsProfilePage.jsx"
@@ -38,7 +38,7 @@ export const Profile = () => {
    
     const fetchUserData = async () => {
         try {
-            const userData = await getuserInformationById(user_id);
+            const userData = await getUserInformationById(user_id);
             setUserDetails(userData);
         } catch (err) {
             console.error('Error fetching userPlants details:', err);
