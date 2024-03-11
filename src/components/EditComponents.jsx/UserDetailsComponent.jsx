@@ -4,7 +4,7 @@ import "./UserDetails.css"
 import { useState, useEffect } from 'react';
 import { editUsersInformation } from '../../services/users';
 
-function UserNavbar({ userDetails }) {
+function UserNavbar({ userDetails, refeshUserData }) {
     const [show, setShow] = useState(false);
     const [formDetails, setFormDetails] = useState({});
     const [token, setToken] = useState(window.localStorage.getItem("token"));
@@ -55,7 +55,7 @@ function UserNavbar({ userDetails }) {
         try {
             await editUsersInformation(updatedFormDetails, token);
             console.log("form submited")
-            window.location.reload();
+            refeshUserData()
         } catch (err) {
             console.log('Edit not completed', err);
         }
@@ -69,11 +69,11 @@ function UserNavbar({ userDetails }) {
                         <img variant="top" src={userDetails?.avatar_url_string == "" ? "https://res.cloudinary.com/dououppib/image/upload/v1709830638/PLANTS/placeholder_ry6d8v.webp" : userDetails?.avatar_url_string} className='profileAvatar' />
                         <ListGroup className="list-group-flush">
                             <ListGroup.Item>{userDetails?.first_name} {userDetails?.last_name}</ListGroup.Item>
+                            <ListGroup.Item>{userDetails?.username}</ListGroup.Item>
                             <ListGroup.Item>{userDetails?.email}</ListGroup.Item>
                             <ListGroup.Item>{userDetails?.address}</ListGroup.Item>
                             <ListGroup.Item>Zetland House</ListGroup.Item>
                             <ListGroup.Item>Unit 2FG, 5-25 Scrutton Street</ListGroup.Item>
-                            <ListGroup.Item>EC2A 4HJ.</ListGroup.Item>
                         </ListGroup>
                     </Card>
                 </div>
@@ -96,27 +96,27 @@ function UserNavbar({ userDetails }) {
                     <Modal.Title>Edit your information</Modal.Title>
                 </Modal.Header>
                 <Form id="userEditForm" onSubmit={handleFormSubmit}>
-                    <Modal.Body>
+                    <Modal.Body> First Name: 
                         {inputVisibility.firstName ?
                             <input type="text" value={formDetails.firstName} onChange={e => handleChange(e, 'firstName')} /> :
                             <>{userDetails?.first_name}<Button variant="primary" onClick={() => toggleInputVisibility('firstName')}>🖊️</Button></>}
                     </Modal.Body>
-                    <Modal.Body>
+                    <Modal.Body> Last Name:
                         {inputVisibility.lastName ?
                             <input type="text" value={formDetails.lastName} onChange={e => handleChange(e, 'lastName')} /> :
                             <>{userDetails?.last_name}<Button variant="primary" onClick={() => toggleInputVisibility('lastName')}>🖊️</Button></>}
                     </Modal.Body>
-                    <Modal.Body>
+                    <Modal.Body>Username: 
                         {inputVisibility.userName ?
                             <input type="text" value={formDetails.userName} onChange={e => handleChange(e, 'userName')} /> :
                             <>{userDetails?.username}<Button variant="primary" onClick={() => toggleInputVisibility('userName')}>🖊️</Button></>}
                     </Modal.Body>
-                    <Modal.Body>
+                    <Modal.Body>Email Address:
                         {inputVisibility.email ?
                             <input type="text" value={formDetails.email} onChange={e => handleChange(e, 'email')} /> :
                             <>{userDetails?.email}<Button variant="primary" onClick={() => toggleInputVisibility('email')}>🖊️</Button></>}
                     </Modal.Body>
-                    <Modal.Body>
+                    <Modal.Body>Address:
                         {inputVisibility.address ?
                             <input type="text" value={formDetails.address} onChange={e => handleChange(e, 'address')} /> :
                             <>{userDetails?.address}<Button variant="primary" onClick={() => toggleInputVisibility('address')}>🖊️</Button></>}
