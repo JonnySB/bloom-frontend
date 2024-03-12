@@ -11,7 +11,6 @@ function MessageContainer({ messageManager, userDetails }) {
   const [roomInfo, setRoomInfo] = useState("");
   const [token, setToken] = useState(window.localStorage.getItem("token"));
 
-
   useEffect(() => {
     const fetchData = async () => {
       try {

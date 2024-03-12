@@ -45,7 +45,7 @@ export const MessagePage = () => {
       <>
         <NavbarComponent />
         <Container className="message-page-container">
-            <ChatListComponent onChatSelect={handleChatSelect} receiverDetails={receiverDetails} senderUserID={help_offer_user_id} userDetails={userDetails} />
+            <ChatListComponent onChatSelect={handleChatSelect} receiverDetails={receiverDetails} userDetails={userDetails} />
             {selectedMessageId && <MessageContainer messageManager={selectedMessageId} userDetails={userDetails} />}
       </Container>
       </>

@@ -3,12 +3,13 @@ import { Card, ListGroup, Container } from 'react-bootstrap'
 import "./MessageComponents.css";
 import { getAllMessagesByUserId } from "../../services/messages";
 
-function ChatListComponent({ onChatSelect, senderUserID, userDetails, receiverDetails }) {
+function ChatListComponent({ onChatSelect, userDetails, receiverDetails }) {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(true);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [user_id, setuserID] = useState(window.localStorage.getItem("user_id"));
   const [selectedId, setSelectedId] = useState(null);
+  const [firstSelectMessage ,setFirstSelectedMessage] = useState(false);
 
   
     useEffect(() => {
@@ -30,13 +31,16 @@ function ChatListComponent({ onChatSelect, senderUserID, userDetails, receiverDe
                 sender_username: userDetails?.username,
                 sender_id: user_id
               };
-              messagesData.unshift(placeHolderNoMessages);
+              messagesData.unshift(placeHolderNoMessages)
+              
             } else {
               setMessages(getUserMessages);
             }
           } catch(err) {
             console.log("Error fetching user's messages", err);
-          }
+          } finally {
+            setLoading(false);
+          }  
         } 
         else if (receiverDetails !== null) {
           try{
@@ -65,32 +69,23 @@ function ChatListComponent({ onChatSelect, senderUserID, userDetails, receiverDe
       };
       fetchData();
     }, [ user_id, receiverDetails]);
-
-    const handleConversationClick = (message) => {
-    if (message.id === 'new') {
-      onChatSelect({ 
-        recipient_id: senderUserID, 
-        receiver_username: receiverDetails?.username, 
-        messages: [], 
-        sender_id: user_id,
-      });
-    } else {
-      onChatSelect(message);
-    }
-    setSelectedId(message.id);
-  };
   
+    const handleConversationClick = (message) => {
+      onChatSelect(message);
+      setSelectedId(message.id);
+  };
+
   if (loading) {
     return <div>Loading...</div>; 
-  }
-
+    }
+ 
   return (
     <Container className="side-message">
       <Card>
         <Card.Header>Messages</Card.Header>
         <ListGroup variant="flush">
           {messages.map((message) => (
-            <ListGroup.Item   className={selectedId === message.id ? 'selected' : ''} key={message.id} onClick={() => handleConversationClick(message)} >
+            <ListGroup.Item   className={selectedId === message.id ? 'selected' : ""} key={message.id} onClick={() => handleConversationClick(message)} >
               {message.receiver_username}
             </ListGroup.Item>
           ))}
