@@ -4,6 +4,10 @@ import RejectButton from '../Buttons/RejectButton/RejectButton'
 import StartChatButton from '../Buttons/StartChatButton/StartChatButton'
 import "./ReceivedOffersTable.css"
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBell } from '@fortawesome/free-solid-svg-icons';
+import { faCalendarCheck } from '@fortawesome/free-solid-svg-icons';
+
 const ReceivedOffersTable = ({ receivedOffers, triggerReload, setTriggerReload }) => {
 
     const convertDate = (startDateString, endDateString) => {
@@ -39,7 +43,8 @@ const ReceivedOffersTable = ({ receivedOffers, triggerReload, setTriggerReload }
                             <>
                                 {(help_offer.help_offer_status == "accepted" || help_offer.help_offer_status == "pending") && (
                                     <tr key={help_offer.help_offer_id}>
-                                        <td>{help_offer.help_offer_status}</td>
+                                        <td>{help_offer.help_offer_status == "accepted" ? <FontAwesomeIcon icon={faCalendarCheck} /> : <FontAwesomeIcon icon={faBell} />}</td>
+
                                         <td>{help_offer.help_request_name}</td>
                                         <td>{convertDate(help_offer.help_request_start_date, help_offer.help_request_end_date)}</td>
                                         <td>{help_offer.help_offer_bid}</td>
