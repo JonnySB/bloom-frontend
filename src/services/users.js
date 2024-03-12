@@ -1,6 +1,6 @@
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
-export const getuserInformationById = async (userId) => {
+export const getUserInformationById = async (userId) => {
     const requestOptions = {
         method: "GET",
         headers: {
@@ -21,8 +21,6 @@ export const getuserInformationById = async (userId) => {
 }
 
 export const editUsersInformation = async (form, token) => {
-    console.log("Preparing to send edit request with form data:", form);
-
     const requestOptions = {
         method: "PUT",
         headers: {
@@ -37,17 +35,12 @@ export const editUsersInformation = async (form, token) => {
             address: form.address,
         }),
     };
-    
-    console.log("Request options:", requestOptions);
 
     const response = await fetch(`${BACKEND_URL}/edit_user_details/${form.userId}`, requestOptions);
-
-    console.log("Response received", response);
 
     if (response.ok) {
         try {
             const data = await response.json();
-            console.log("Response data loaded successfully:", data);
             return data;
         } catch (error) {
             console.error("Failed to parse response JSON:", error);
@@ -62,5 +55,32 @@ export const editUsersInformation = async (form, token) => {
         } catch (error) {
             throw new Error("Failed to parse error response JSON.");
         }
+    }
+};
+
+export const editUserAvatar = async (file, token, user_id) => {
+    const formData = new FormData();
+    formData.append("avatar", file); 
+
+    const requestOptions = {
+        method: "PUT",
+        headers: {
+            "Authorization": `Bearer ${token}`,
+        },
+        body: formData,
+    };
+    
+    console.log("Sending file to the backend");
+
+    const response = await fetch(`${BACKEND_URL}/edit_user_avatar/${user_id}`, requestOptions);
+
+    if (response.ok) {
+        const data = await response.json();
+        console.log("Avatar updated successfully:", data);
+        return data;
+    } else {
+        const error = await response.json();
+        console.error("Failed to update avatar:", error);
+        throw new Error("Failed to update avatar.");
     }
 };

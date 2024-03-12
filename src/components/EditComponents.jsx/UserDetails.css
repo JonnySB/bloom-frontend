@@ -9,22 +9,52 @@
 
 .profileEdit {
     width: 30%;
-
 }
 .profileEdit .card {
     border: none; 
 }
 
-
-.profileAvatar {
-    width: 168px; /* Fixed width */
-    height: 168px; /* Fixed height to match width */
-    border-radius: 50%; /* Make the image circular */
-    object-fit: cover; /* Ensures the content is not stretched */
-    display: block; /* Changes the display to block */
-    margin: 0 auto; /* Centers the image horizontally within its container */
+.image-container {
+    position: relative;
+    width: 168px; /* Adjust the width to your image size */
+    height: 168px; /* Adjust the height to your image size */
+    margin: 0 auto; /* Centers the container */
 }
 
+
+.profileAvatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+}
+
+.edit-picture-btn {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    border-radius: 50%;
+    background-color: #007bff; /* Or any color you want */
+    color: white;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Optional: for better visibility */
+    width: 40px; /* Size of the button */
+    height: 40px; /* Size of the button */
+    padding: 0; /* Remove padding to keep it circular */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translate(10%, 0%); /* Adjust position to hang off the bottom right corner */
+}
+
+.edit-picture-btn:hover {
+    background-color: #0056b3; /* Slightly darker on hover */
+}
+
+.edit-picture-btn i {
+    font-size: 20px; /* Adjust the size of the icon */
+}
 
 .potted-image {
     justify-content: center;
@@ -66,16 +96,48 @@
 
 .modal-title {
     color: #495057; /* Darker text for contrast */
-    font-weight: 500; /* Medium font weight */
+    font-weight: 700; /* Medium font weight */
 }
 
 .modal-body {
-    display: flex; /* Enables flexbox */
     justify-content: space-between; /* Positions items to have space between them */
     align-items: center; /* Aligns items vertically in the center */
     padding: 20px;
+
 }
 
+.modal-body .modal-row {
+    align-items: center; /* Align items vertically */   
+}
+
+.modal-body .input-container {
+    padding-left: 10px;
+    display: flex; /* Flexbox for internal alignment */
+    justify-content: space-between; /* Space between text/input and button */
+    width: 100%;
+    padding-left: 0;
+}
+
+.modal-body .text {
+    font-size: 18px; /* Large font size for visibility */
+}
+.modal-body .edit-btn {
+    color: beige;
+    background-color: #495057;
+}
+
+.modal-body .edit-input {
+    display: block; /* Show the input field */
+    width: 80%; /* Take 80% of the container width */
+
+
+}
+
+.modal-body h3 {
+    font-size: 15px;
+    font-weight: 700;
+    color: #495057; 
+}
 
 .modal-footer {
     border-top: 1px solid #dee2e6; /* Light border for the footer */

@@ -1,7 +1,7 @@
 import Container from 'react-bootstrap/Container';
 import UserNavbar from '../../components/EditComponents.jsx/UserDetailsComponent';
 import React, { useState, useEffect } from "react";
-import { getuserInformationById } from '../../services/users';
+import { getUserInformationById } from '../../services/users';
 import { getUserPlants } from "../../services/userPlants.js"
 import { getAllRequestsByOneUser } from "../../services/RequestedOffersService.js"
 import PlantCards from "../../components/MyPlants/ShowPlantsProfilePage.jsx"
@@ -20,12 +20,6 @@ export const Profile = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const userData = await getuserInformationById(user_id);
-                setUserDetails(userData)
-            } catch (err) {
-                console.error('Error fetching user details:', err);
-            }
-            try {
                 const getUserPlantsData = await getUserPlants(user_id, token)
                 setUserPlants(getUserPlantsData)
             } catch (err) {
@@ -41,12 +35,27 @@ export const Profile = () => {
         fetchData()
     }, [])
 
+   
+    const fetchUserData = async () => {
+        try {
+            const userData = await getUserInformationById(user_id);
+            setUserDetails(userData);
+        } catch (err) {
+            console.error('Error fetching userPlants details:', err);
+        } 
+    };
+    
+    useEffect(() => {
+        fetchUserData();
+    }, [user_id]); 
+    
+
 
     return (
         <>
             <NavbarComponent />
             <div className="profile-container"> {/* This div wraps the content and centers it */}
-                <UserNavbar userDetails={userDetails} />
+                <UserNavbar userDetails={userDetails} refeshUserData={fetchUserData}/>
                 <Container className='Items'>
                     <PlantCards userPlants={userPlants} />
                     <RequiredOffers userOffers={userOffers} />
