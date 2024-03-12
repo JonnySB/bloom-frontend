@@ -4,6 +4,7 @@ import { signup } from "../../services/authentication";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
+import passwordValidator from "password-validator";
 import "./SignupPage.css"
 
 
@@ -13,6 +14,7 @@ export const Signup = () => {
         const [username, setUsername] = useState("");
         const [email, setEmail] = useState("");
         const [password, setPassword] = useState("");
+        const [isValid, setIsValid] = useState(false);
         const [password_confirm, setPassword_confirm] = useState("");
         const [address, setAddress] = useState("");
     
@@ -23,8 +25,13 @@ export const Signup = () => {
         event.preventDefault();
         try {
             await signup(first_name, last_name, username, email, password, password_confirm, address)
-            console.log("redirecting...:");
+            if(validatePassword(password)){
+                console.log("redirecting...:");
             navigate("/login");
+            } else {
+                console.log("Password needs to meet requirements")
+                alert("Password not good enough")
+            }
     
         } catch (err) {
             console.error(err);
@@ -49,8 +56,29 @@ export const Signup = () => {
             setEmail(event.target.value);
         };
 
+        const validatePassword = (password) => {
+            const schema = new passwordValidator();
+            schema
+              .is()
+              .min(8) // Minimum length 8
+              .is()
+              .max(100) // Maximum length 100
+              .has()
+              .uppercase() // Must have uppercase letters
+              .has()
+              .lowercase() // Must have lowercase letters
+              .has()
+              .digits() // Must have digits
+              .has()
+              .symbols(); // Must have symbols
+            const isValidPassword = schema.validate(password);
+            setIsValid(isValidPassword);
+        };
+
         const handlePasswordChange = (event) => {
-            setPassword(event.target.value);
+            const newPassword = event.target.value
+            setPassword(newPassword);
+            validatePassword(newPassword)
         };
 
         const handlePasswordConfirmChange = (event) => {
@@ -102,6 +130,22 @@ export const Signup = () => {
     
                 <Button variant="success" type="submit">Sign Up</Button>
                 {signUpError && <div>{signUpError}</div>}
+                {!isValid && (
+                  <p className="font-medium text-xs text-red-600 dark:text-green-500">
+                    Password must have:
+                    <br />
+                    - 8 characters minimum
+                    <br />
+                    - at least one capital letter <br />
+                    - at least one number
+                    <br />- at least one special character
+                  </p>
+                )}
+                {isValid && (
+                  <p className="font-medium text-xs text-green-600 dark:text-green-500">
+                    Password is valid!
+                  </p>
+                )}
             </Form>
             </div>
         
