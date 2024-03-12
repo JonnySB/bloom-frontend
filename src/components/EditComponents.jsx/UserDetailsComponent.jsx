@@ -94,7 +94,8 @@ function UserNavbar({ userDetails, refeshUserData }) {
                         <Modal show={showButtonPicutre} onHide={() => setShowButtonPicture(false)}>
                             <Form id="userAvatar" className="mb-2" onSubmit={handleUserAvatar}>
                                 <Modal.Body>
-                                    <Form.Control type="file" accept="image/*"  placeholder="Product Name"  onChange={handleProfilePicture}/>
+                                    <Form.Label for="avatarUpload">Upload file</Form.Label>
+                                    <Form.Control type="file" accept="image/*"  id="avatarUpload" onChange={handleProfilePicture}/>
                                 </Modal.Body>
                             </Form>
                             <Modal.Footer>
@@ -136,7 +137,7 @@ function UserNavbar({ userDetails, refeshUserData }) {
                                 {inputVisibility.firstName ? (
                                     <input type="text" value={formDetails?.firstName} onChange={e => handleChange(e, 'firstName')} className="edit-input"/>
                                     ) : ( <span className="text">{userDetails?.first_name}</span> )}
-                                <Button variant="primary" onClick={() => toggleInputVisibility('firstName')}  className="edit-btn"> 🖊️</Button>
+                                <Button variant="primary" onClick={() => toggleInputVisibility('firstName')}  data-testid="edit-firstName-btn"  className="edit-btn"> 🖊️</Button>
                             </div>
                         </div>
                     </Modal.Body>
