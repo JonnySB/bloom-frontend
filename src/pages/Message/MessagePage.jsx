@@ -40,7 +40,7 @@ export const MessagePage = () => {
     const handleChatSelect = (msg) => {
         setSelectedMessageId(msg);
     };
-
+    
     return (
       <>
         <NavbarComponent />

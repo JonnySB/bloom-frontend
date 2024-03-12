@@ -9,7 +9,6 @@ function ChatListComponent({ onChatSelect, userDetails, receiverDetails }) {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [user_id, setuserID] = useState(window.localStorage.getItem("user_id"));
   const [selectedId, setSelectedId] = useState(null);
-  const [firstSelectMessage ,setFirstSelectedMessage] = useState(false);
 
   
     useEffect(() => {
@@ -35,6 +34,10 @@ function ChatListComponent({ onChatSelect, userDetails, receiverDetails }) {
               
             } else {
               setMessages(getUserMessages);
+              if (getUserMessages.length > 0) {
+                setSelectedId(getUserMessages[0].id);
+                onChatSelect(getUserMessages[0]); 
+              }
             }
           } catch(err) {
             console.log("Error fetching user's messages", err);
