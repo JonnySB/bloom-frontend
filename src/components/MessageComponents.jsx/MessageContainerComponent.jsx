@@ -14,7 +14,7 @@ function MessageContainer({ messageManager, userDetails }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        if (messageManager.id) {
+        if (messageManager.id != 'new') {
           const messagesData = await getMessagesById(messageManager.id, token);
           setMessages(messagesData);
         } 
@@ -23,7 +23,7 @@ function MessageContainer({ messageManager, userDetails }) {
       }
     };
     fetchData();
-
+    console.log(messageManager)
     if (messageManager.sender_id && messageManager.recipient_id) {
       socket.emit('join', { user_id: messageManager.sender_id, receiver_id: messageManager.recipient_id });
 
@@ -60,7 +60,6 @@ function MessageContainer({ messageManager, userDetails }) {
         console.error('Error creating new chat or sending message:', error);
       }
     } else {
-      console.log("HERE NOW")
       try {
         await sendMessage(
           messageManager.sender_id,

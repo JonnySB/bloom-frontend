@@ -16,62 +16,64 @@ function ChatListComponent({ onChatSelect, userDetails, receiverDetails }) {
         // gonna need to refactor a few stuff, in the 3 below senarios 
         // if the receiver id is null then show all chats that the user have opening the lasted chat conversation with the last person. 
         // if there is no messages at all from this user then we will show a a message tab saying you have no message
-        // if the user comes from the received offers page then we will start a new message with and show all other messages that the user have 
-        if(receiverDetails == null) {
-          try {
-            let getUserMessages = await getAllMessagesByUserId(user_id, token);
-            if (getUserMessages == null)  {
-              // need to create a place holder here for no messages
-              const placeHolderNoMessages = {
-                id : "new",
-                recipient_id: "new",
-                messages: [],
-                receiver_username: "You have no messages",
-                sender_username: userDetails?.username,
-                sender_id: user_id
-              };
-              messagesData.unshift(placeHolderNoMessages)
-              
-            } else {
-              setMessages(getUserMessages);
-              if (getUserMessages.length > 0) {
-                setSelectedId(getUserMessages[0].id);
-                onChatSelect(getUserMessages[0]); 
+        // if the user comes from the received offers page then we will start a new message with and show all other messages that the user have
+        if (userDetails) {
+          if(receiverDetails == null) {
+            try {
+              let getUserMessages = await getAllMessagesByUserId(user_id, token);
+              if (getUserMessages == null)  {
+                // need to create a place holder here for no messages
+                const placeHolderNoMessages = {
+                  id : "new",
+                  recipient_id: "new",
+                  messages: [],
+                  receiver_username: "You have no messages",
+                  sender_username: userDetails?.username,
+                  sender_id: user_id
+                };
+                messagesData.unshift(placeHolderNoMessages)
+                
+              } else {
+                setMessages(getUserMessages);
+                if (getUserMessages.length > 0) {
+                  setSelectedId(getUserMessages[0].id);
+                  onChatSelect(getUserMessages[0]); 
+                }
               }
-            }
-          } catch(err) {
-            console.log("Error fetching user's messages", err);
-          } finally {
-            setLoading(false);
-          }  
-        } 
-        else if (receiverDetails !== null) {
-          try{
-            let messagesData = await getAllMessagesByUserId(user_id, token);
-            setMessages(messagesData);
-            let chatExists = messagesData.some(m => m.recipient_id === user_id);
-            if (!chatExists) {
-              const newChatPlaceholder = {
-                id : "new",
-                recipient_id: receiverDetails?.id,
-                messages: [],
-                receiver_username: receiverDetails?.username,
-                sender_username: userDetails.username,
-                sender_id: user_id
-              };
-              messagesData.unshift(newChatPlaceholder);
-            }
-            setMessages(messagesData);
-          } catch (err) {
-            console.error('Error fetching messages:', err);
+            } catch(err) {
+              console.log("Error fetching user's messages", err);
+            } finally {
+              setLoading(false);
+            }  
           } 
-          finally {
-            setLoading(false);
-          }  
-        }
+          else if (receiverDetails && receiverDetails !== null) {
+            try{
+              let messagesData = await getAllMessagesByUserId(user_id, token);
+              setMessages(messagesData);
+              let chatExists = messagesData.some(m => m.recipient_id === user_id);
+              if (!chatExists) {
+                const newChatPlaceholder = {
+                  id : "new",
+                  recipient_id: receiverDetails?.id,
+                  messages: [],
+                  receiver_username: receiverDetails?.username,
+                  sender_username: userDetails.username,
+                  sender_id: user_id
+                };
+                messagesData.unshift(newChatPlaceholder);
+              }
+              setMessages(messagesData);
+            } catch (err) {
+              console.error('Error fetching messages:', err);
+            } 
+            finally {
+              setLoading(false);
+            }  
+          }   
       };
+    }
       fetchData();
-    }, [ user_id, receiverDetails]);
+    }, [ user_id, receiverDetails, userDetails, token]);
   
     const handleConversationClick = (message) => {
       onChatSelect(message);
@@ -81,7 +83,7 @@ function ChatListComponent({ onChatSelect, userDetails, receiverDetails }) {
   if (loading) {
     return <div>Loading...</div>; 
     }
- 
+
   return (
     <Container className="side-message">
       <Card>
