@@ -46,6 +46,7 @@ export const getMessagesById = async (chat_id, token) => {
 }
 
 export const sendMessage = async (userId, receiverId, receiver_username, sender_username, messageContent, token) => {
+  console.log(userId, receiverId, receiver_username, sender_username, messageContent)
     const requestOptions = {
       method: "POST",
       headers: {

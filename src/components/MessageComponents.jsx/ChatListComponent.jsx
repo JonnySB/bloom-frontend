@@ -79,19 +79,18 @@ function ChatListComponent({ onChatSelect, userDetails, receiverDetails }) {
       onChatSelect(message);
       setSelectedId(message.id);
   };
-
-  if (loading) {
-    return <div>Loading...</div>; 
-    }
-
-  return (
+    if (loading) {
+      return <div>Loading...</div>; 
+      }
+  
+      return (
     <Container className="side-message">
       <Card>
         <Card.Header>Messages</Card.Header>
         <ListGroup variant="flush">
           {messages.map((message) => (
             <ListGroup.Item   className={selectedId === message.id ? 'selected' : ""} key={message.id} onClick={() => handleConversationClick(message)} >
-              {message.receiver_username}
+              {message.sender_username}
             </ListGroup.Item>
           ))}
         </ListGroup>

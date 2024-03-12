@@ -5,11 +5,12 @@ import { getMessagesById, sendMessage } from "../../services/messages";
 import io from "socket.io-client";
 const socket = io("http://localhost:5001");
 
-function MessageContainer({ messageManager, userDetails }) {
+function MessageContainer({ messageManager, userDetails, receiverDetails }) {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const [roomInfo, setRoomInfo] = useState("");
   const [token, setToken] = useState(window.localStorage.getItem("token"));
+  const [user_id, setuserID] = useState(window.localStorage.getItem("user_id"));
 
   useEffect(() => {
     const fetchData = async () => {
@@ -23,9 +24,9 @@ function MessageContainer({ messageManager, userDetails }) {
       }
     };
     fetchData();
-    console.log(messageManager)
-    if (messageManager.sender_id && messageManager.recipient_id) {
-      socket.emit('join', { user_id: messageManager.sender_id, receiver_id: messageManager.recipient_id });
+    // console.log(messageManager)
+    if (user_id && messageManager.recipient_id) {
+      socket.emit('join', { user_id: user_id, receiver_id: messageManager.recipient_id });
 
       socket.on('new_messages', (data) => {
         setMessages(data.messages);
@@ -40,11 +41,10 @@ function MessageContainer({ messageManager, userDetails }) {
         socket.off('joined_room');
       };
     }
-  }, [messageManager, userDetails]);
+  }, [messageManager, userDetails, user_id, receiverDetails]); 
 
   const handleSendMessage = async (e) => {
     e.preventDefault();
-    
     if (!messageManager.id) {
       // Call the API to create a new chat, then send the message
       try {
@@ -62,9 +62,9 @@ function MessageContainer({ messageManager, userDetails }) {
     } else {
       try {
         await sendMessage(
-          messageManager.sender_id,
-          messageManager.recipient_id,
-          messageManager.receiver_username,
+          user_id,
+          receiverDetails.id,
+          receiverDetails.username,
           userDetails.username,
           newMessage,
           token
@@ -101,7 +101,6 @@ function MessageContainer({ messageManager, userDetails }) {
       );
     }
   };
-
   return (
     <Container className="message-container">
       <div className="message">
