@@ -49,18 +49,12 @@ export const MessagePage = () => {
     }, [user_id, help_offer_user_id, token]);
 
     const handleChatSelect = async (selectedMessage) => {
-      // console.log(selectedMessage)
-      setSelectedMessageId(selectedMessage);
-      // const userId = selectedMessage.sender_id === user_id ? selectedMessage.recipient_id : selectedMessage.sender_id;
+      console.log(selectedMessage)
 
-      // if (!help_offer_user_id || userId !== help_offer_user_id) {
-      //   try {
-      //     const receiverData = await getUserInformationById(userId);
-      //     setReceiverDetails(receiverData);
-      //   } catch (err) {
-      //     console.error('Error fetching receiver details from selection:', err);
-      //   }
-      // }
+      const newReceiptID = selectedMessage.sender_id == user_id ? selectedMessage.recipient_id : selectedMessage.sender_id;
+      setSelectedMessageId(selectedMessage);
+      console.log(newReceiptID)
+
   };
  
     return (

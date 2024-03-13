@@ -58,7 +58,7 @@ function MessageContainer({ messageManager, userDetails, receiverDetails }) {
       }
     } else {
       try {
-        await sendMessage(user_id,receiverDetails.id,receiverDetails.username,userDetails.username,newMessage,token);
+        await sendMessage(messageManager.sender_id, messageManager.recipient_id, messageManager.receiver_username, userDetails.username, newMessage,token);
         socket.emit('message', { message: newMessage, chatId: messageManager.id, sender: userDetails.username, receiver: messageManager.recipient_id,});
         setNewMessage(""); 
       } catch (error) {
@@ -66,7 +66,7 @@ function MessageContainer({ messageManager, userDetails, receiverDetails }) {
       }
     }
   };
-    
+
   const renderMessage = (messageObj, idx) => {
   
     try {
@@ -85,7 +85,7 @@ function MessageContainer({ messageManager, userDetails, receiverDetails }) {
       );
     }
   };
-  console.log(userDetails?.username)
+
   return (
     <Container className="message-container">
       <div className="message">
