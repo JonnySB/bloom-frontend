@@ -19,6 +19,7 @@ export const MessagePage = () => {
     const [token, setToken] = useState(window.localStorage.getItem("token"));
     const [receiptID, setreceiptID] = useState()
     const [newUserName, setNewUserName] = useState()
+    const [myRoomIdentifier, setMyRoomIdentifier] = useState()
 
 
     // help_offer_user_id passed from StartChatButton
@@ -66,8 +67,10 @@ export const MessagePage = () => {
       setNewUserName(newUserName)
       
       const roomIdentifier = getRoomIdentifier(user_id, newRecipientId);
-      // console.log(`Joining room: ${roomIdentifier}`);
-      socket.emit('join', { room: roomIdentifier });
+ 
+      setMyRoomIdentifier(roomIdentifier)
+ 
+
     };
 
 
@@ -76,7 +79,7 @@ export const MessagePage = () => {
         <NavbarComponent />
         <Container className="message-page-container">
             <ChatListComponent onChatSelect={handleChatSelect} allMessages={messages} receiverDetails={receiverDetails} userDetails={userDetails} />
-            {selectedMessageId && <MessageContainer messageManager={selectedMessageId} newUserName={newUserName} newRecipientId={receiptID}  userDetails={userDetails}  receiverDetails={receiverDetails} />}
+            {selectedMessageId && <MessageContainer messageManager={selectedMessageId} myRoomIdentifier={myRoomIdentifier} newUserName={newUserName} newRecipientId={receiptID}  userDetails={userDetails}  receiverDetails={receiverDetails} />}
       </Container>
       </>
     )

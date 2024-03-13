@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Card, ListGroup, Container } from 'react-bootstrap'
 import "./MessageComponents.css";
-import { getAllMessagesByUserId } from "../../services/messages";
 
 function ChatListComponent({ onChatSelect, userDetails, receiverDetails, allMessages }) {
   const [messages, setMessages] = useState([]);
@@ -13,8 +12,8 @@ function ChatListComponent({ onChatSelect, userDetails, receiverDetails, allMess
       let needPlaceholder = false;
       let newChatPlaceholder;
       if (receiverDetails) {
-        const chatExistsReceipt = allMessages.some(m => m.recipient_id === receiverDetails.id); // between sender and recipient
-        const chatExistSender = allMessages.some(m => m.sender_id === receiverDetails.id); // between receiver and sender
+        const chatExistsReceipt = allMessages?.some(m => m.recipient_id === receiverDetails.id); // between sender and recipient
+        const chatExistSender = allMessages?.some(m => m.sender_id === receiverDetails.id); // between receiver and sender
         needPlaceholder = !chatExistSender && !chatExistsReceipt;
         if (needPlaceholder) {
           newChatPlaceholder = {

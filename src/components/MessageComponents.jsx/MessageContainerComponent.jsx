@@ -5,10 +5,9 @@ import { getMessagesById, sendMessage } from "../../services/messages";
 import io from "socket.io-client";
 const socket = io("http://localhost:5001");
 
-function MessageContainer({ messageManager, userDetails, receiverDetails, newRecipientId, newUserName }) {
+function MessageContainer({ messageManager, userDetails, receiverDetails, newRecipientId, newUserName, myRoomIdentifier }) {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
-  const [roomInfo, setRoomInfo] = useState("");
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [user_id, setuserID] = useState(window.localStorage.getItem("user_id"));
 
@@ -24,42 +23,45 @@ function MessageContainer({ messageManager, userDetails, receiverDetails, newRec
       } catch (err) {
         console.error('Error:', err);
       }
-    };
+    }; 
     fetchData();
-    
-    // if (user_id && messageManager.recipient_id) {
-    //   socket.emit('join', { user_id: messageManager.sender_id, receiver_id: messageManager.receiver_id});
-     
-    //   socket.on('new_messages', (data) => {
-    //     setMessages(data.messages);
-    //   });
-
-    //   socket.on('joined_room', (data) => {
-    //     setRoomInfo(data.message); 
-    //   });
-
-    //   return () => {
-    //     socket.off('new_messages');
-    //     socket.off('joined_room');
-    //   };
-    // }
   }, [messageManager, userDetails, user_id, receiverDetails]); 
+
+  useEffect(() => {
+    socket.emit('join', { room: myRoomIdentifier }); 
+
+    // socket.on('new_messages', (data) => {
+    //   console.log(data)
+    //   setMessages(data.messages);
+    // });
+  
+   
+    socket.on('joined_room', (data) => {
+      console.log(data.message, "YOU HAVE JOINED THE ROOM", data); // "You have joined the room."
+    });
+  
+    return () => {
+      socket.off('new_messages');
+      socket.off('joined_room');
+    };
+  }, [myRoomIdentifier]);
+
 
   const handleSendMessage = async (e) => {
     e.preventDefault();
     if (messageManager.id == 'new') {
       // Call the API to create a new chat, then send the message
       try {
-        const newChat = await sendMessage(messageManager.sender_id, messageManager.recipient_id, messageManager.receiver_username, userDetails.username, newMessage, token);
-        socket.emit('message', { message: newMessage, chatId: newChat.id, sender: userDetails.username, receiver: messageManager.recipient_id});
+        const newChat = await sendMessage(messageManager.sender_id, messageManager.recipient_id, messageManager.receiver_username, userDetails.username, newMessage, token, myRoomIdentifier);
+        socket.emit('message', {  room: myRoomIdentifier, message: newMessage, chatId: newChat.id, sender: userDetails.username, receiver: messageManager.recipient_id});
         setNewMessage(""); 
       } catch (error) {
         console.error('Error creating new chat or sending message:', error);
       }
     } else {
       try {
-        await sendMessage(parseInt(user_id),  newRecipientId, newUserName, userDetails.username, newMessage, token);
-        socket.emit('message', { message: newMessage, chatId: messageManager.id, sender: userDetails.username, receiver: messageManager.recipient_id,});
+        await sendMessage(parseInt(user_id),  newRecipientId, newUserName, userDetails.username, newMessage, token, myRoomIdentifier);
+        socket.emit('message', { room: myRoomIdentifier, message: newMessage, chatId: messageManager.id, sender: userDetails.username, receiver: messageManager.recipient_id,});
         setNewMessage(""); 
       } catch (error) {
         console.error('Error sending message:', error);
