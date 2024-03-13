@@ -16,7 +16,6 @@ export const MessagePage = () => {
     // help_offer_user_id passed from StartChatButton
     const location = useLocation();
     const help_offer_user_id = location.state?.help_offer_user_id;
-   
 
     useEffect(() => {
       const fetchUserDetails = async () => {
@@ -24,41 +23,51 @@ export const MessagePage = () => {
           const userData = await getUserInformationById(user_id);
           setUserDetails(userData);
 
-          if (help_offer_user_id !== undefined) {
-            const receiverMessageData = await getUserInformationById(help_offer_user_id);
-            setReceiverDetails(receiverMessageData);  
-          } 
-      
         } catch (err) {
           console.error('Error fetching user details:', err);
         }
       };
     
       fetchUserDetails();
-    }, [user_id, help_offer_user_id]);
+    }, [user_id]);
 
-
-    const updateReceiverDetails = async (selectedMessage) => {
-      if (!selectedMessage) return;
-      try {
-          const receiverData = await getUserInformationById(selectedMessage.sender_id);
-          setReceiverDetails(receiverData);
-      } catch (err) {
-          console.error('Error fetching receiver details:', err);
+    useEffect(() => {
+      const fetchReceiverDetails = async () => {
+        try {
+          if (help_offer_user_id !== undefined) {
+            const receiverMessageData = await getUserInformationById(help_offer_user_id);
+            setReceiverDetails(receiverMessageData);  
+          
+          } else if (help_offer_user_id == undefined) {
+            const receiverData = await getUserInformationById(3);
+            setReceiverDetails(receiverData);
+          }
+        } catch(err) {
+        }
       }
-  };
+      fetchReceiverDetails()
+    }, [help_offer_user_id, selectedMessageId?.sender_id])
 
-    const handleChatSelect = (msg) => {
+
+  //   const updateReceiverDetails = async (selectedMessage) => {
+  //     if (!selectedMessage) return;
+  //     try {
+
+  //         const receiverData = await getUserInformationById(selectedMessage.sender_id);
+  //         setReceiverDetails(receiverData);
+  //     } catch (err) {
+  //         console.error('Error fetching receiver details:', err);
+  //     }
+  // };
+  const handleChatSelect = (msg) => {
         setSelectedMessageId(msg);
-        updateReceiverDetails(msg)
     }; 
-
-
+ 
     return (
       <>
         <NavbarComponent />
         <Container className="message-page-container">
-            <ChatListComponent onChatSelect={handleChatSelect} receiverDetails={receiverDetails} userDetails={userDetails} />
+            <ChatListComponent onChatSelect={handleChatSelect} receiverDetails={receiverDetails} userDetails={userDetails} helpOferUserId={help_offer_user_id}/>
             {selectedMessageId && <MessageContainer messageManager={selectedMessageId} userDetails={userDetails}  receiverDetails={receiverDetails} />}
       </Container>
       </>

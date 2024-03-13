@@ -43,6 +43,7 @@ function MessageContainer({ messageManager, userDetails, receiverDetails }) {
     }
   }, [messageManager, userDetails, user_id, receiverDetails]); 
 
+  
   const handleSendMessage = async (e) => {
     e.preventDefault();
     if (!messageManager.id) {
