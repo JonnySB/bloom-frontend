@@ -7,6 +7,8 @@ import { useLocation } from "react-router-dom";
 import { getUserInformationById } from "../../services/users";
 import NavbarComponent from "../../components/Navbar/NavbarComponent";
 import { getAllMessagesByUserId } from "../../services/messages";
+import io from "socket.io-client";
+const socket = io("http://localhost:5001");
 
 export const MessagePage = () => {
     const [selectedMessageId, setSelectedMessageId] = useState(null);
@@ -51,12 +53,21 @@ export const MessagePage = () => {
       fetchMessagesAndDetails();
     }, [user_id, help_offer_user_id, token]);
 
+    function getRoomIdentifier(userId1, userId2) {
+      return [userId1, userId2].sort((a, b) => a - b).join('_');
+    }
+
     const handleChatSelect = async (selectedMessage) => {
       setSelectedMessageId(selectedMessage)
+      // console.log(selectedMessage)
       const newRecipientId = selectedMessage.sender_id == user_id ? selectedMessage.recipient_id : selectedMessage.sender_id;
       const newUserName = selectedMessage.sender_id == user_id ? selectedMessage.receiver_username : selectedMessage.sender_username;
       setreceiptID(newRecipientId)
       setNewUserName(newUserName)
+      
+      const roomIdentifier = getRoomIdentifier(user_id, newRecipientId);
+      // console.log(`Joining room: ${roomIdentifier}`);
+      socket.emit('join', { room: roomIdentifier });
     };
 
 

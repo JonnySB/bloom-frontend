@@ -26,23 +26,23 @@ function MessageContainer({ messageManager, userDetails, receiverDetails, newRec
       }
     };
     fetchData();
-    // console.log(messageManager)
-    if (user_id && messageManager.recipient_id) {
-      socket.emit('join', { user_id: parseInt(user_id), receiver_id: messageManager.recipient_id == user_id ? messageManager.sender_id : messageManager.recipient_id});
+    
+    // if (user_id && messageManager.recipient_id) {
+    //   socket.emit('join', { user_id: messageManager.sender_id, receiver_id: messageManager.receiver_id});
+     
+    //   socket.on('new_messages', (data) => {
+    //     setMessages(data.messages);
+    //   });
 
-      socket.on('new_messages', (data) => {
-        setMessages(data.messages);
-      });
+    //   socket.on('joined_room', (data) => {
+    //     setRoomInfo(data.message); 
+    //   });
 
-      socket.on('joined_room', (data) => {
-        setRoomInfo(data.message); 
-      });
-
-      return () => {
-        socket.off('new_messages');
-        socket.off('joined_room');
-      };
-    }
+    //   return () => {
+    //     socket.off('new_messages');
+    //     socket.off('joined_room');
+    //   };
+    // }
   }, [messageManager, userDetails, user_id, receiverDetails]); 
 
   const handleSendMessage = async (e) => {
