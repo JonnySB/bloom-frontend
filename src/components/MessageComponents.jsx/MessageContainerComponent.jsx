@@ -30,14 +30,17 @@ function MessageContainer({ messageManager, userDetails, receiverDetails, newRec
   useEffect(() => {
     socket.emit('join', { room: myRoomIdentifier }); 
 
-    // socket.on('new_messages', (data) => {
-    //   console.log(data)
-    //   setMessages(data.messages);
-    // });
+    socket.on('new_messages', (data) => {
+      // If data.messages is a string, wrap it in an array
+      const newMessages = typeof data.messages === 'string' ? [{ message: data.messages }] : data.messages;
+      
+      // Assuming each message is an object that contains the message string under a 'message' key
+      setMessages((currentMessages) => [...currentMessages, ...newMessages]);
+    });
   
    
     socket.on('joined_room', (data) => {
-      console.log(data.message, "YOU HAVE JOINED THE ROOM", data); // "You have joined the room."
+      console.log(data.message, "YOU HAVE JOINED THE ROOM", data); 
     });
   
     return () => {
@@ -69,45 +72,51 @@ function MessageContainer({ messageManager, userDetails, receiverDetails, newRec
     }
   };
 
-  const renderMessage = (messageObj, idx) => {
+  // const renderMessage = (messageObj, idx) => {
   
-    try {
-      const parsedMessage = JSON.parse(messageObj); // Parse the message string into an object
-      return (
-        <div key={idx} className="message-bubble">
-          <strong>{parsedMessage.sender === userDetails?.username ? "You" : parsedMessage.sender}:</strong> {parsedMessage.message}
-        </div>
-      );
-    } catch (e) {
-      console.error('Error parsing message:', e);
-      return (
-        <div key={idx} className="message-bubble">
-          {messageObj} 
-        </div>
-      );
-    }
+  //   try {
+  //     const parsedMessage = JSON.parse(messageObj); // Parse the message string into an object
+  //     return (
+  //       <div key={idx} className="message-bubble">
+  //         <strong>{parsedMessage.sender === userDetails?.username ? "You" : parsedMessage.sender}:</strong> {parsedMessage.message}
+  //       </div>
+  //     );
+  //   } catch (e) {
+  //     console.error('Error parsing message:', e);
+  //     return (
+  //       <div key={idx} className="message-bubble">
+  //         {messageObj} 
+  //       </div>
+  //     );
+  //   }
+  // };
+  const renderMessage = (messageObj, idx) => {
+    // Directly access message content without JSON.parse
+    const messageContent = messageObj.message;
+    return (
+      <div key={idx} className="message-bubble">
+        <strong>{messageContent.sender === userDetails?.username ? "You" : messageContent.sender}:</strong> {messageContent}
+      </div>
+    );
   };
-
   return (
     <Container className="message-container">
       <div className="message">
         {messages.length === 0 ? (
           <div className="no-messages-placeholder">
             <Card className="message-card">
-            <Card.Header>{userDetails?.username} 's Messages </Card.Header>
-            <Card.Body>
-            </Card.Body>
+              <Card.Header>{userDetails?.username} 's Messages</Card.Header>
+              <Card.Body>No Messages</Card.Body>
             </Card>
           </div>
         ) : (
-          messages.map((messageObj, index) => (
-            <Card key={index} className="message-card">
-              <Card.Header>{userDetails?.username} 's Messages</Card.Header>
-              <Card.Body>
-                {Array.isArray(messageObj.message) ? messageObj.message.map(renderMessage) : renderMessage(messageObj.message)}
-              </Card.Body>
-            </Card>
-          ))
+          <Card className="message-card">
+            <Card.Header>{userDetails?.username} 's Messages</Card.Header>
+            <Card.Body>
+              {messages.map((messageObj, index) => renderMessage(messageObj, index)
+              )}
+            </Card.Body>
+          </Card>
         )}
         <Form onSubmit={handleSendMessage}>
           <div className="input-group mb-3">
@@ -126,6 +135,7 @@ function MessageContainer({ messageManager, userDetails, receiverDetails, newRec
       </div>        
     </Container>
   );
-          }
+}
 
 export default MessageContainer
+// {Array.isArray(messageObj.message) ? messageObj.message.map(renderMessage) : renderMessage(messageObj.message)}
