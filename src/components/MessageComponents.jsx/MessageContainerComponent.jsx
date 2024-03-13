@@ -18,7 +18,9 @@ function MessageContainer({ messageManager, userDetails, receiverDetails }) {
         if (messageManager.id != 'new') {
           const messagesData = await getMessagesById(messageManager.id, token);
           setMessages(messagesData);
-        } 
+        } else {
+          setMessages([]);
+        }
       } catch (err) {
         console.error('Error:', err);
       }
@@ -26,7 +28,7 @@ function MessageContainer({ messageManager, userDetails, receiverDetails }) {
     fetchData();
     // console.log(messageManager)
     if (user_id && messageManager.recipient_id) {
-      socket.emit('join', { user_id: user_id, receiver_id: messageManager.recipient_id });
+      socket.emit('join', { user_id: parseInt(user_id), receiver_id: messageManager.recipient_id == user_id ? messageManager.sender_id : messageManager.recipient_id});
 
       socket.on('new_messages', (data) => {
         setMessages(data.messages);
@@ -43,41 +45,22 @@ function MessageContainer({ messageManager, userDetails, receiverDetails }) {
     }
   }, [messageManager, userDetails, user_id, receiverDetails]); 
 
-  
   const handleSendMessage = async (e) => {
     e.preventDefault();
-    if (!messageManager.id) {
+    if (messageManager.id == 'new') {
       // Call the API to create a new chat, then send the message
       try {
         const newChat = await sendMessage(messageManager.sender_id, messageManager.recipient_id, messageManager.receiver_username, userDetails.username, newMessage, token);
-        socket.emit('message', { 
-          message: newMessage, 
-          chatId: newChat.id,
-          sender: userDetails.username, 
-          receiver: messageManager.recipient_id,
-        });
+        socket.emit('message', { message: newMessage, chatId: newChat.id, sender: userDetails.username, receiver: messageManager.recipient_id});
         setNewMessage(""); 
       } catch (error) {
         console.error('Error creating new chat or sending message:', error);
       }
     } else {
       try {
-        await sendMessage(
-          user_id,
-          receiverDetails.id,
-          receiverDetails.username,
-          userDetails.username,
-          newMessage,
-          token
-        );
-        socket.emit('message', { 
-          message: newMessage, 
-          chatId: messageManager.id, 
-          sender: userDetails.username, 
-          receiver: messageManager.recipient_id,
-        });
+        await sendMessage(user_id,receiverDetails.id,receiverDetails.username,userDetails.username,newMessage,token);
+        socket.emit('message', { message: newMessage, chatId: messageManager.id, sender: userDetails.username, receiver: messageManager.recipient_id,});
         setNewMessage(""); 
-
       } catch (error) {
         console.error('Error sending message:', error);
       }
@@ -102,17 +85,28 @@ function MessageContainer({ messageManager, userDetails, receiverDetails }) {
       );
     }
   };
+  console.log(userDetails?.username)
   return (
     <Container className="message-container">
       <div className="message">
-        {messages.map((messageObj, index) => (
-          <Card key={index} className="message-card">
-            <Card.Header>Messages from {messageManager?.receiver_username}</Card.Header>
+        {messages.length === 0 ? (
+          <div className="no-messages-placeholder">
+            <Card className="message-card">
+            <Card.Header>{userDetails?.username} 's Messages </Card.Header>
             <Card.Body>
-              {Array.isArray(messageObj.message) ? messageObj.message.map(renderMessage) : renderMessage(messageObj.message)}
             </Card.Body>
-          </Card>
-        ))}
+            </Card>
+          </div>
+        ) : (
+          messages.map((messageObj, index) => (
+            <Card key={index} className="message-card">
+              <Card.Header>{userDetails?.username} 's Messages</Card.Header>
+              <Card.Body>
+                {Array.isArray(messageObj.message) ? messageObj.message.map(renderMessage) : renderMessage(messageObj.message)}
+              </Card.Body>
+            </Card>
+          ))
+        )}
         <Form onSubmit={handleSendMessage}>
           <div className="input-group mb-3">
             <Form.Control
@@ -130,6 +124,6 @@ function MessageContainer({ messageManager, userDetails, receiverDetails }) {
       </div>        
     </Container>
   );
-}
+          }
 
-export default MessageContainer;
+export default MessageContainer

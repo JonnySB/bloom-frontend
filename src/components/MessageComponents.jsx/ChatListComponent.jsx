@@ -3,20 +3,18 @@ import { Card, ListGroup, Container } from 'react-bootstrap'
 import "./MessageComponents.css";
 import { getAllMessagesByUserId } from "../../services/messages";
 
-function ChatListComponent({ onChatSelect, userDetails, receiverDetails, userDetailsFromMessagePage, messages_ }) {
+function ChatListComponent({ onChatSelect, userDetails, receiverDetails, allMessages }) {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [token, setToken] = useState(window.localStorage.getItem("token"));
-  const [user_id, setuserID] = useState(window.localStorage.getItem("user_id"));
   const [selectedId, setSelectedId] = useState(null);
 
   useEffect(() => {
-    if (userDetails && messages_) {
+    if (userDetails && allMessages) {
       let needPlaceholder = false;
       let newChatPlaceholder;
       if (receiverDetails) {
-        const chatExistsReceipt = messages_.some(m => m.recipient_id === receiverDetails.id); // between sender and recipient
-        const chatExistSender = messages_.some(m => m.sender_id === receiverDetails.id); // between receiver and sender
+        const chatExistsReceipt = allMessages.some(m => m.recipient_id === receiverDetails.id); // between sender and recipient
+        const chatExistSender = allMessages.some(m => m.sender_id === receiverDetails.id); // between receiver and sender
         needPlaceholder = !chatExistSender && !chatExistsReceipt;
         if (needPlaceholder) {
           newChatPlaceholder = {
@@ -31,14 +29,14 @@ function ChatListComponent({ onChatSelect, userDetails, receiverDetails, userDet
       }
 
       if (needPlaceholder && newChatPlaceholder) {
-        setMessages([newChatPlaceholder, ...messages_]);
+        setMessages([newChatPlaceholder, ...allMessages]);
       
       } else {
-        setMessages(messages_);
+        setMessages(allMessages);
         
       }
     } 
-  }, [userDetails, messages_, receiverDetails, receiverDetails]); 
+  }, [userDetails, allMessages, receiverDetails, receiverDetails]); 
 
   
     const handleConversationClick = (message) => {
@@ -47,7 +45,7 @@ function ChatListComponent({ onChatSelect, userDetails, receiverDetails, userDet
   };
     // if (loading) {
     //   return <div>Loading...</div>; 
-    //   }
+    //   }  
 
       return (
     <Container className="side-message">
@@ -56,7 +54,7 @@ function ChatListComponent({ onChatSelect, userDetails, receiverDetails, userDet
         <ListGroup variant="flush">
           {messages.map((message) => (
             <ListGroup.Item   className={selectedId === message.id ? 'selected' : ""} key={message.id} onClick={() => handleConversationClick(message)} >
-              {message.sender_username}
+              {message.sender_username == userDetails?.username ? message.receiver_username : message.sender_username}
             </ListGroup.Item>
           ))}
         </ListGroup>

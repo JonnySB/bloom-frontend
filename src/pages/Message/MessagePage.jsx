@@ -49,8 +49,8 @@ export const MessagePage = () => {
     }, [user_id, help_offer_user_id, token]);
 
     const handleChatSelect = async (selectedMessage) => {
-      console.log(selectedMessage)
-      // setSelectedMessageId(selectedMessage);
+      // console.log(selectedMessage)
+      setSelectedMessageId(selectedMessage);
       // const userId = selectedMessage.sender_id === user_id ? selectedMessage.recipient_id : selectedMessage.sender_id;
 
       // if (!help_offer_user_id || userId !== help_offer_user_id) {
@@ -67,7 +67,7 @@ export const MessagePage = () => {
       <>
         <NavbarComponent />
         <Container className="message-page-container">
-            <ChatListComponent onChatSelect={handleChatSelect} messages_={messages} receiverDetails={receiverDetails} userDetails={userDetails} />
+            <ChatListComponent onChatSelect={handleChatSelect} allMessages={messages} receiverDetails={receiverDetails} userDetails={userDetails} />
             {selectedMessageId && <MessageContainer messageManager={selectedMessageId} userDetails={userDetails}  receiverDetails={receiverDetails} />}
       </Container>
       </>
