@@ -5,7 +5,7 @@ import { getMessagesById, sendMessage } from "../../services/messages";
 import io from "socket.io-client";
 const socket = io("http://localhost:5001");
 
-function MessageContainer({ messageManager, userDetails, receiverDetails }) {
+function MessageContainer({ messageManager, userDetails, receiverDetails, newRecipientId, newUserName }) {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const [roomInfo, setRoomInfo] = useState("");
@@ -58,7 +58,7 @@ function MessageContainer({ messageManager, userDetails, receiverDetails }) {
       }
     } else {
       try {
-        await sendMessage(messageManager.sender_id, messageManager.recipient_id, messageManager.receiver_username, userDetails.username, newMessage,token);
+        await sendMessage(parseInt(user_id),  newRecipientId, newUserName, userDetails.username, newMessage, token);
         socket.emit('message', { message: newMessage, chatId: messageManager.id, sender: userDetails.username, receiver: messageManager.recipient_id,});
         setNewMessage(""); 
       } catch (error) {

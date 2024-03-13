@@ -15,6 +15,9 @@ export const MessagePage = () => {
     const [receiverDetails, setReceiverDetails] = useState(null);
     const [user_id, setuserID] = useState(window.localStorage.getItem("user_id"));
     const [token, setToken] = useState(window.localStorage.getItem("token"));
+    const [receiptID, setreceiptID] = useState()
+    const [newUserName, setNewUserName] = useState()
+
 
     // help_offer_user_id passed from StartChatButton
     const location = useLocation();
@@ -49,20 +52,20 @@ export const MessagePage = () => {
     }, [user_id, help_offer_user_id, token]);
 
     const handleChatSelect = async (selectedMessage) => {
-      console.log(selectedMessage)
+      setSelectedMessageId(selectedMessage)
+      const newRecipientId = selectedMessage.sender_id == user_id ? selectedMessage.recipient_id : selectedMessage.sender_id;
+      const newUserName = selectedMessage.sender_id == user_id ? selectedMessage.receiver_username : selectedMessage.sender_username;
+      setreceiptID(newRecipientId)
+      setNewUserName(newUserName)
+    };
 
-      const newReceiptID = selectedMessage.sender_id == user_id ? selectedMessage.recipient_id : selectedMessage.sender_id;
-      setSelectedMessageId(selectedMessage);
-      console.log(newReceiptID)
 
-  };
- 
     return (
       <>
         <NavbarComponent />
         <Container className="message-page-container">
             <ChatListComponent onChatSelect={handleChatSelect} allMessages={messages} receiverDetails={receiverDetails} userDetails={userDetails} />
-            {selectedMessageId && <MessageContainer messageManager={selectedMessageId} userDetails={userDetails}  receiverDetails={receiverDetails} />}
+            {selectedMessageId && <MessageContainer messageManager={selectedMessageId} newUserName={newUserName} newRecipientId={receiptID}  userDetails={userDetails}  receiverDetails={receiverDetails} />}
       </Container>
       </>
     )
