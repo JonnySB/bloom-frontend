@@ -32,9 +32,8 @@ function MessageContainer({ messageManager, userDetails, receiverDetails, newRec
 
     socket.on('new_messages', (data) => {
       // If data.messages is a string, wrap it in an array
+      console.log(data)
       const newMessages = typeof data.messages === 'string' ? [{ message: data.messages }] : data.messages;
-      
-      // Assuming each message is an object that contains the message string under a 'message' key
       setMessages((currentMessages) => [...currentMessages, ...newMessages]);
     });
   
@@ -52,23 +51,27 @@ function MessageContainer({ messageManager, userDetails, receiverDetails, newRec
 
   const handleSendMessage = async (e) => {
     e.preventDefault();
-    if (messageManager.id == 'new') {
-      // Call the API to create a new chat, then send the message
-      try {
-        const newChat = await sendMessage(messageManager.sender_id, messageManager.recipient_id, messageManager.receiver_username, userDetails.username, newMessage, token, myRoomIdentifier);
-        socket.emit('message', {  room: myRoomIdentifier, message: newMessage, chatId: newChat.id, sender: userDetails.username, receiver: messageManager.recipient_id});
-        setNewMessage(""); 
-      } catch (error) {
-        console.error('Error creating new chat or sending message:', error);
+    const newMessageObj = {
+      room: myRoomIdentifier,
+      sender: userDetails.username,
+      sender_id: parseInt(user_id),
+      message: newMessage,
+      receiver_id: newRecipientId,
+      chatId: messageManager.id !== 'new' ? messageManager.id : undefined,
+    };
+    try {
+      if (messageManager.id === 'new') {
+        const newChatDetails = await sendMessage(parseInt(user_id), newRecipientId, newUserName, userDetails.username, newMessage, token, myRoomIdentifier);
+        newMessageObj.chatId = newChatDetails.id; 
+      } else {
+        await sendMessage(parseInt(user_id), newRecipientId, newUserName, userDetails.username, newMessage, token, myRoomIdentifier);
       }
-    } else {
-      try {
-        await sendMessage(parseInt(user_id),  newRecipientId, newUserName, userDetails.username, newMessage, token, myRoomIdentifier);
-        socket.emit('message', { room: myRoomIdentifier, message: newMessage, chatId: messageManager.id, sender: userDetails.username, receiver: messageManager.recipient_id,});
-        setNewMessage(""); 
-      } catch (error) {
-        console.error('Error sending message:', error);
-      }
+      socket.emit('message', newMessageObj);
+      setMessages(currentMessages => [...currentMessages, newMessageObj]);
+      setNewMessage(""); 
+  
+    } catch (error) {
+      console.error('Error:', error);
     }
   };
 
