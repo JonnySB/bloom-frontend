@@ -59,6 +59,8 @@ export const MessagePage = () => {
     }
 
     const handleChatSelect = async (selectedMessage) => {
+      
+ 
       setSelectedMessageId(selectedMessage)
       // console.log(selectedMessage)
       const newRecipientId = selectedMessage.sender_id == user_id ? selectedMessage.recipient_id : selectedMessage.sender_id;
