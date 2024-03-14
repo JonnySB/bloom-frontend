@@ -28,12 +28,78 @@ function MessageContainer({ messageManager, userDetails, receiverDetails, newRec
     fetchData();
   }, [messageManager, userDetails, user_id, receiverDetails]); 
 
+  // useEffect(() => {
+  //   socket.emit('join', { room: myRoomIdentifier }); 
+
+  //   socket.on('new_messages', (data) => {
+  //     console.log("Raw incoming data:", data);
+  //     const newMessages = typeof data.messages === 'string' ? [{ message: data.messages }] : data.messages;
+  //     console.log("Processed newMessages:", newMessages);
+  //     setMessages((currentMessages) => [...currentMessages, ...newMessages]);
+  //   });
+  
+  //   socket.on('joined_room', (data) => {
+  //     setRoomInfo(data.message); 
+  //   });
+  
+  //   return () => {
+  //     socket.off('new_messages');
+  //     socket.off('joined_room');
+  //   };
+  // }, [myRoomIdentifier]);
+
+ 
+  // useEffect(() => {
+  //   socket.emit('join', { room: myRoomIdentifier }); 
+
+  //   socket.on('new_messages', (data) => {
+  //     let normalizedMessages;
+  //     if (typeof data.messages === 'string') {
+  //       normalizedMessages = [{ message: data.messages }];
+  //     } else if (Array.isArray(data.messages)) {
+  //       normalizedMessages = data.messages;
+  //     } else if (typeof data.messages === 'object') {
+  //       normalizedMessages = [data.messages];
+  //     } else {
+  //       console.error("Unexpected format for 'data.messages'.", data.messages);
+  //       normalizedMessages = [];
+  //     }
+  //     setMessages(currentMessages => [...currentMessages, ...normalizedMessages]);
+  //   });
+  
+  //   socket.on('joined_room', (data) => {
+  //     setRoomInfo(data.message); 
+  //   });
+  
+  //   return () => {
+  //     socket.off('new_messages');
+  //     socket.off('joined_room');
+  //   };
+  // }, [myRoomIdentifier, socket]);
+  
   useEffect(() => {
     socket.emit('join', { room: myRoomIdentifier }); 
-
+  
     socket.on('new_messages', (data) => {
-      const newMessages = typeof data.messages === 'string' ? [{ message: data.messages }] : data.messages;
-      setMessages((currentMessages) => [...currentMessages, ...newMessages]);
+      console.log(data.messages)
+      let normalizedMessages;
+      if (typeof data.messages === 'string') {
+        try {
+          const parsed = JSON.parse(data.messages);
+          normalizedMessages = [{ message: parsed.message, sender: parsed.sender }];
+        } catch (e) {
+          console.error("Error parsing message:", e);
+          normalizedMessages = [{ message: data.messages, sender: "Unknown" }]; // Handle as plain text if not JSON.
+        }
+      } else if (Array.isArray(data.messages)) {
+        // Handle as array of messages.
+        normalizedMessages = data.messages.map(msg => typeof msg === 'string' ? JSON.parse(msg) : { message: msg.message, sender: msg.sender });
+      } else {
+        // If it's an object, extract the message and sender directly.
+        normalizedMessages = [{ message: data.messages.message, sender: data.messages.sender }];
+      }
+  
+      setMessages(currentMessages => [...currentMessages, ...normalizedMessages]);
     });
   
     socket.on('joined_room', (data) => {
@@ -44,7 +110,7 @@ function MessageContainer({ messageManager, userDetails, receiverDetails, newRec
       socket.off('new_messages');
       socket.off('joined_room');
     };
-  }, [myRoomIdentifier]);
+  }, [myRoomIdentifier, socket]);
 
 
   const handleSendMessage = async (e) => {
@@ -68,8 +134,8 @@ function MessageContainer({ messageManager, userDetails, receiverDetails, newRec
         sentMessageDetails = newMessageObj;
       }
       socket.emit('message', newMessageObj);
-      const newMessageFormat = { ...sentMessageDetails, message: [JSON.stringify(sentMessageDetails)] };
-      setMessages(currentMessages => [...currentMessages, newMessageFormat]);
+      const normalizedMessageM = { sender: userDetails?.username, message: newMessage,};
+      setMessages(currentMessages => [...currentMessages, normalizedMessageM]);
       setNewMessage(""); 
 
     } catch (error) {
@@ -77,21 +143,34 @@ function MessageContainer({ messageManager, userDetails, receiverDetails, newRec
     }
   };
 
-  const renderMessage = (msgStr, idx, msgBundleId) => {
-    let messageObj; 
-    try {
-      messageObj = JSON.parse(msgStr);
-    } catch (e) {
-      console.error('Error parsing message:', e);
-      return <div key={`error-${idx}`} className="message-bubble">Invalid message format</div>;
+
+
+  const renderMessage = (msgObj, index) => {
+    // Check if msgObj is a string or an object and extract message and sender accordingly
+    let message, sender;
+    if (typeof msgObj === 'string') {
+      try {
+        const parsedMsg = JSON.parse(msgObj);
+        message = parsedMsg.message;
+        sender = parsedMsg.sender;
+      } catch (error) {
+        // If parsing fails, it's a new message string
+        message = msgObj;
+        sender = userDetails.username; // Assuming new messages are always from the current user
+      }
+    } else {
+      message = msgObj.message;
+      sender = msgObj.sender;
     }
-    const isCurrentUserMessage = messageObj.sender === userDetails?.username;
+    console.log(sender)
+    const isCurrentUserMessage = sender === userDetails?.username;
     return (
-      <div key={`${msgBundleId}-${idx}`} className="message-bubble">
-        <strong>{isCurrentUserMessage ? "You" : messageObj.sender}:</strong> {messageObj.message}
+      <div key={index} className="message-bubble">
+        <strong>{isCurrentUserMessage ? "You" : sender}:</strong> {message}
       </div>
     );
   };
+  
 
   return (
     <Container className="message-container">
@@ -99,16 +178,12 @@ function MessageContainer({ messageManager, userDetails, receiverDetails, newRec
         <Card className="message-card">
           <Card.Header>{userDetails?.username}'s Messages</Card.Header>
           <Card.Body>
-            
             {messages.length === 0 ? (
               <div className="no-messages-placeholder">No Messages</div>
             ) : (
-              messages.flatMap((msgBundle, bundleIdx) =>
-                msgBundle.message.map((msgStr, msgIdx) =>
-                  renderMessage(msgStr, msgIdx, msgBundle.id || `new-${bundleIdx}`) 
-                )
-              )
-            )}
+              messages.map((msg, index) =>
+              Array.isArray(msg.message) ? msg.message.map(renderMessage) : renderMessage(msg.message)
+            ))}
           </Card.Body>
         </Card>
         <Form onSubmit={handleSendMessage}>
