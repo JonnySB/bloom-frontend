@@ -7,7 +7,6 @@ import axios from 'axios';
 const AddPlant = ({ myPlants, refreshPlants }) => {
     const [show, setShow] = useState(false);
     const [type, setType] = useState("");
-    const [plantInd, setPlantId] = useState("")
     const [quantity, setQuantity] = useState("0")
     const [token, setToken] = useState(window.localStorage.getItem("token"))
     const [userId, setUserId] = useState(window.localStorage.getItem("user_id"))
@@ -26,24 +25,7 @@ const AddPlant = ({ myPlants, refreshPlants }) => {
         
         fetchData();
     }, []);
-    
-    // const handleSubmit = async (event) => {
-    //     event.preventDefault();
-    //     try {
-    //         const newPlantResponse = await createNewPlant(type);
-    //         const newPlantId = parseInt(newPlantResponse[1]);
-    //         console.log(typeof newPlantId)
-    //         let doesExist = myPlants.some(plant => plant.id.toString() === newPlantId);
-    //         if (doesExist) {
-    //             await updatePlantsQuantity(userId, newPlantId, quantity, token);
-    //         } else {
-    //             await assignPlant(userId, newPlantId, quantity, token);
-    //         }
-    //         refreshPlants();
-    //     } catch (error) {
-    //         console.error('Error updating or assigning plant:', error);
-    //     }
-    // };
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         
@@ -76,7 +58,6 @@ const AddPlant = ({ myPlants, refreshPlants }) => {
 
     const onTypeChange = (e) => {
         const plantData = JSON.parse(e.target.value);
-        setPlantId(plantData.plant_id)
         setType(plantData)
     }
 

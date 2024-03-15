@@ -11,7 +11,6 @@ export const MyPlants = () => {
     const [user_id, setuserID] = useState(window.localStorage.getItem("user_id"));
     const [token, setToken] = useState(window.localStorage.getItem("token"));
     const [userPlants, setUserPlants] = useState([])
-    const [userPlantsFromApi, setUserPlantsFromAPi] = useState([])
     const [isLoading, setIsLoading] = useState(true);
 
 
@@ -31,7 +30,8 @@ export const MyPlants = () => {
         fetchPlants();
     }, [user_id, token]); 
 
- 
+    console.log(userPlants)
+    console.log("HELLO")
     return (
         <div>
             <NavbarComponent sticky="top" />

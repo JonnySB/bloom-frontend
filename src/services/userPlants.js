@@ -21,28 +21,6 @@ export const getUserPlants = async (user_id, token) => {
 };
 
 
-export const getUserPlantsFROMAPI = async (user_id, token) => {
-  try {
-    const response = await fetch(`${BACKEND_URL}/api/user/${user_id}`, {
-      method: "GET",
-      headers: { "Authorization": `Bearer ${token}` },
-    });
-
-    if (!response.ok) {
-      throw new Error(`Status: ${response.status}`);
-    }
-
-    const data = await response.json();
-    // console.log("got user plants,", data)
-    return data;
-
-  } catch (error) {
-    console.error("Error getting user plants:", error);
-  }
-};
-
-
-
 
 export const assignPlant = async (user_id, plant_id, quantity, token) => {
   const requestData = {
