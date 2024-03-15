@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import {CloseButton, Button, Modal, Form} from 'react-bootstrap'
 import { updatePlantsQuantity, assignPlant } from '../../services/userPlants';
-import { fetchPlants } from '../../services/plants';
+import { fetchPlants, fetchPlantsFROMAPI } from '../../services/plants';
+import axios from 'axios';
 
 const AddPlant = ({ myPlants, refreshPlants }) => {
     const [show, setShow] = useState(false);
@@ -10,6 +11,7 @@ const AddPlant = ({ myPlants, refreshPlants }) => {
     const [quantity, setQuantity] = useState("0")
     const [token, setToken] = useState(window.localStorage.getItem("token"))
     const [userId, setUserId] = useState(window.localStorage.getItem("user_id"))
+    const [plants, setPlants] = useState(null)
     
     useEffect(() => {
         if (token) {
@@ -22,6 +24,21 @@ const AddPlant = ({ myPlants, refreshPlants }) => {
                 });
         }
     }, [])
+    
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                const myplants = await fetchPlantsFROMAPI(token)
+                setPlants(myplants);
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        }
+        
+        fetchData();
+    }, []);
+
+
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -49,7 +66,6 @@ const AddPlant = ({ myPlants, refreshPlants }) => {
     const onQuantityChange = (e) => {
         setQuantity(Number(e.target.value))
     }
-
     return (
         <>
             <Button variant="primary" onClick={handleShow}>
@@ -66,8 +82,8 @@ const AddPlant = ({ myPlants, refreshPlants }) => {
                             <Form.Label>Type</Form.Label>
                             <Form.Select aria-label="Default select example" onChange={onTypeChange}>
                                 <option>What type of plant are you adding?</option>
-                                {plantList.map((plant) => (
-                                    <option value={plant.id} key={plant.id} label={plant.common_name}>{plant.common_name}</option>
+                                {plants?.map((plant) => (
+                                    <option value={plant.plant_id} key={plant.plant_id} label={plant.common_name}>{plant.common_name}</option> 
                                 ))}
                             </Form.Select>
                         </Form.Group>
@@ -94,3 +110,5 @@ const AddPlant = ({ myPlants, refreshPlants }) => {
 }
 
 export default AddPlant;
+
+
