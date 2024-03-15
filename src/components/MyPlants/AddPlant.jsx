@@ -26,24 +26,22 @@ const AddPlant = ({ myPlants, refreshPlants }) => {
         fetchData();
     }, []);
 
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         
+
         try {
             const newPlantResponse = await createNewPlant(type, token);
-            const newPlantId = newPlantResponse[1];
-    
-            if (!newPlantId) {
-                throw new Error("New plant ID was not returned");
-            }
-    
-            console.log("New plant ID:", newPlantId);
-            let doesExist = myPlants.some(plant => parseInt(plant.id) === newPlantId);
-    
-            if (doesExist) {
-                await updatePlantsQuantity(userId, newPlantId, quantity, token);
-            } else {
-                await assignPlant(userId, newPlantId, quantity, token);
+            if (newPlantResponse.message === "Plant Created successfully") {
+                await assignPlant(userId, newPlantResponse.plant_id, quantity, token);
+            } 
+            else if (newPlantResponse.message == "Plant already exists.") {
+                await updatePlantsQuantity(userId, newPlantResponse.plant_id, quantity, token);
+            }  
+            else {
+                console.error('Unexpected response:', newPlantResponse.message);
+                return; 
             }
             refreshPlants();
         } catch (error) {

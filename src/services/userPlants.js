@@ -57,12 +57,7 @@ export const assignPlant = async (user_id, plant_id, quantity, token) => {
   }
 };
 
-export const updatePlantsQuantity = async (
-  user_id,
-  plant_id,
-  new_quantity,
-  token
-) => {
+export const updatePlantsQuantity = async (user_id,plant_id,new_quantity,token) => {
   const requestData = {
     user_id: user_id,
     plant_id: Number(plant_id),

@@ -39,6 +39,7 @@ export const createNewPlant = async (plant, token) => {
           body: JSON.stringify(payload),
       }
       const response =  await fetch(`${BACKEND_URL}/plants/create`, requestOptions)
+  
       if (response.status !== 200) {
           throw new Error("Unable to make POST request for create request");
       }

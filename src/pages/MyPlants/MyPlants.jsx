@@ -30,8 +30,7 @@ export const MyPlants = () => {
         fetchPlants();
     }, [user_id, token]); 
 
-    console.log(userPlants)
-    console.log("HELLO")
+
     return (
         <div>
             <NavbarComponent sticky="top" />
