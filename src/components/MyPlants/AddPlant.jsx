@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import {CloseButton, Button, Modal, Form} from 'react-bootstrap'
 import { updatePlantsQuantity, assignPlant } from '../../services/userPlants';
-import { fetchPlantsFROMAPI } from '../../services/plants';
+import { fetchPlantsFROMAPI, createNewPlant } from '../../services/plants';
 import axios from 'axios';
 
 const AddPlant = ({ myPlants, refreshPlants }) => {
@@ -29,6 +29,7 @@ const AddPlant = ({ myPlants, refreshPlants }) => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         let doesExist = myPlants.some(plant => plant.id.toString() === type);
+        
         try {
             if (doesExist) {
                 await updatePlantsQuantity(userId, type, quantity, token);
@@ -46,6 +47,7 @@ const AddPlant = ({ myPlants, refreshPlants }) => {
     };
 
     const onTypeChange = (e) => {
+        const plantData = JSON.parse(e.target.value);
         setType(e.target.value)
     }
 
@@ -69,7 +71,16 @@ const AddPlant = ({ myPlants, refreshPlants }) => {
                             <Form.Select aria-label="Default select example" onChange={onTypeChange}>
                                 <option>What type of plant are you adding?</option>
                                 {plants?.map((plant) => (
-                                    <option value={plant.plant_id} key={plant.plant_id} label={plant.common_name}>{plant.common_name}</option> 
+                                    <option  key={plant.plant_id} 
+                                    value={JSON.stringify({
+                                        plant_id: plant.plant_id,
+                                        common_name: plant.common_name,
+                                        latin_name: plant.latin_name,
+                                        url: plant.photo
+                                    })}
+                                    >
+                                    {plant.common_name}
+                                    </option> 
                                 ))}
                             </Form.Select>
                         </Form.Group>
