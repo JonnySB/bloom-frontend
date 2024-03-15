@@ -6,24 +6,12 @@ import axios from 'axios';
 
 const AddPlant = ({ myPlants, refreshPlants }) => {
     const [show, setShow] = useState(false);
-    const [plantList, setPlantList] = useState([]);
     const [type, setType] = useState("");
     const [quantity, setQuantity] = useState("0")
     const [token, setToken] = useState(window.localStorage.getItem("token"))
     const [userId, setUserId] = useState(window.localStorage.getItem("user_id"))
     const [plants, setPlants] = useState(null)
     
-    useEffect(() => {
-        if (token) {
-            fetchPlants(token)
-                .then((data) => {
-                    setPlantList(data)
-                })
-                .catch((err) => {
-                    console.error(err);
-                });
-        }
-    }, [])
     
     useEffect(() => {
         async function fetchData() {
