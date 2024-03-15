@@ -5,8 +5,13 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { createHelpRequest } from '../../services/HelpRequests';
 import { useNavigate } from 'react-router-dom';
+import Modal from 'react-bootstrap/Modal';
 
 const CreateHelpRequestForm = (props) => {
+
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     const [title, setTitle] = useState("");
     const [message, setMessage] = useState("");
@@ -58,8 +63,15 @@ const CreateHelpRequestForm = (props) => {
     }
     return (
         <>
-
-            <Form>
+            <Button variant="primary" onClick={handleShow}>
+                Make Request
+            </Button>
+            <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Make an offer to help</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                <Form>
                 <Form.Group className="mb-3" controlId="title">
                     <Form.Label>Title</Form.Label>
                     <Form.Control
@@ -109,10 +121,14 @@ const CreateHelpRequestForm = (props) => {
                         placeholder="0.00"
                     />
                 </Form.Group>
-                <Button variant="primary" onClick={handleSubmitRequest}>
-                    Submit Request
-                </Button>
             </Form>
+            </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="primary" onClick={handleSubmitRequest}>
+                        Submit Request
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </>
     )
 }
