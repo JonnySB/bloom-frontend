@@ -29,7 +29,12 @@ const AddPlant = ({ myPlants, refreshPlants }) => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         let doesExist = myPlants.some(plant => plant.id.toString() === type);
-        
+        try {
+            await createNewPlant(token)
+        } catch (error) {
+            console.error("Error fetching data:", error);
+        }
+
         try {
             if (doesExist) {
                 await updatePlantsQuantity(userId, type, quantity, token);
@@ -48,7 +53,7 @@ const AddPlant = ({ myPlants, refreshPlants }) => {
 
     const onTypeChange = (e) => {
         const plantData = JSON.parse(e.target.value);
-        setType(e.target.value)
+        setType(plantData)
     }
 
     const onQuantityChange = (e) => {
