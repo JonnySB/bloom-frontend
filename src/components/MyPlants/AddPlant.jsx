@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import {CloseButton, Button, Modal, Form} from 'react-bootstrap'
 import { updatePlantsQuantity, assignPlant } from '../../services/userPlants';
-import { fetchPlants, fetchPlantsFROMAPI } from '../../services/plants';
+import { fetchPlantsFROMAPI } from '../../services/plants';
 import axios from 'axios';
 
 const AddPlant = ({ myPlants, refreshPlants }) => {
@@ -25,12 +25,10 @@ const AddPlant = ({ myPlants, refreshPlants }) => {
         
         fetchData();
     }, []);
-
-
-
+    
     const handleSubmit = async (event) => {
         event.preventDefault();
-        let doesExist = myPlants.some(plant => plant.id.toString() === type); 
+        let doesExist = myPlants.some(plant => plant.id.toString() === type);
         try {
             if (doesExist) {
                 await updatePlantsQuantity(userId, type, quantity, token);
