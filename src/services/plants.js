@@ -24,13 +24,10 @@ export const fetchPlantsFROMAPI = async (token) => {
   }
 }
 
-export const createNewPlant = async (common_name, latin_name, photo, plant_id, token) => {
+export const createNewPlant = async (plant, token) => {
   try {
       const payload = {
-          common_name: common_name,
-          latin_name: latin_name,
-          photo: photo,
-          plant_id: plant_id
+        plant: plant,
       }
 
       const requestOptions = {
@@ -41,14 +38,12 @@ export const createNewPlant = async (common_name, latin_name, photo, plant_id, t
           },
           body: JSON.stringify(payload),
       }
-
       const response =  await fetch(`${BACKEND_URL}/plants/create`, requestOptions)
       if (response.status !== 200) {
           throw new Error("Unable to make POST request for create request");
       }
 
       const data = await response.json();
-      // console.log("DATA", data);
       return data;
 
   } catch(error) {
