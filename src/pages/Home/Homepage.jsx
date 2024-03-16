@@ -36,7 +36,7 @@ const Homepage = () => {
             <div className='homepage-main-div'>
                 <h1>BLOOM</h1>
                 <div>
-                    <Button onClick={redirectToCreateRequest}>create request</Button>
+                    {/* <Button onClick={redirectToCreateRequest}>create request</Button> */}
                     <br />
                     <br />
                     <div role='feed'>

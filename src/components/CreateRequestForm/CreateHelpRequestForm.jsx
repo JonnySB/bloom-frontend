@@ -1,11 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { createHelpRequest } from '../../services/HelpRequests';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Modal from 'react-bootstrap/Modal';
+import { Image } from 'react-bootstrap';
 
 const CreateHelpRequestForm = (props) => {
 
@@ -22,6 +23,7 @@ const CreateHelpRequestForm = (props) => {
     const token = window.localStorage.getItem("token");
     const userID = window.localStorage.getItem("user_id");
     const navigate = useNavigate();
+    const location = useLocation();
 
     const handleTitleChange = (title) => {
         setTitle(title.target.value);
@@ -54,7 +56,11 @@ const CreateHelpRequestForm = (props) => {
             .then((data) => {
                 console.log("Data -> ", data)
                 console.log("Successfully created a help request")
-                navigate("/")
+                if (location.pathname === "/") {
+                    window.location.reload(); // Refresh the page
+                } else {
+                    navigate("/"); // Navigate to '/profile'
+                }
             })
             .catch((error) => {
                 console.error("Error fetching create request: ", error)
@@ -72,6 +78,7 @@ const CreateHelpRequestForm = (props) => {
                 </Modal.Header>
                 <Modal.Body>
                 <Form>
+                <Image src={props?.avatar_url_string == "" ? "https://res.cloudinary.com/dououppib/image/upload/v1709830638/PLANTS/placeholder_ry6d8v.webp" : props.avatar_url_string} roundedCircle style={{ width: '30px', height: '30px' }} />
                 <Form.Group className="mb-3" controlId="title">
                     <Form.Label>Title</Form.Label>
                     <Form.Control
