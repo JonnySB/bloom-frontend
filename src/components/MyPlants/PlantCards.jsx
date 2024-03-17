@@ -5,33 +5,26 @@ import "./PlantCards.css"
 import { deletePlantsFromUser } from '../../services/userPlants';
 import { useState, useEffect } from 'react';
 
-const PlantCards = ({ myPlants }) => {
-  const [plant, setPlant] = useState([])
-  const [deletePlant, setDeletePlant] =  useState("")
+const PlantCards = ({ myPlants, refreshPlants }) => {
   const [userId, setUserId] = useState(window.localStorage.getItem("user_id"));
+  const [token, setToken] = useState(window.localStorage.getItem("token"));
 
-  const fetchPlants = async () => {
+  const handleDelete = async (plantId) => {
     try {
-       await deletePlantsFromUser(user_id, token);
+      await deletePlantsFromUser(userId, plantId, token);
+      refreshPlants(); 
     } catch (err) {
-        console.error('Error fetching userPlants details:', err);
-    } finally {
-        setIsLoading(false);
+      console.error('Error deleting the plant:', err);
     }
-    fetchPlants()
-};
-const handleDelete = (item) => {
-  setPlant(item);
-};
+  };
 
-  console.log(plant)
   return (
     <Row xs={1} md={4} className="plantcard">
       {myPlants?.map((plant, index) => (
         <Col key={index}>
         <Card >
         <Card.Header>Featured
-            <CloseButton  onClick={() => handleDelete(plant)}/>
+            <CloseButton  onClick={() => handleDelete(plant.plant_id)}/>
         </Card.Header>
           <Card.Body style={{ minHeight: "10rem" }}>
           <Card.Img variant="top" src={plant.photo} />

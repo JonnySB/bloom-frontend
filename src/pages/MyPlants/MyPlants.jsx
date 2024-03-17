@@ -41,7 +41,7 @@ export const MyPlants = () => {
                 <h1>My Plants</h1>
                 <div className="plant-cards-container">
                     <div className="add-plants-button">{!isLoading && <AddPlant myPlants={userPlants}  refreshPlants={fetchPlants}/>}</div>
-                    <PlantCards  myPlants={userPlants} />
+                    <PlantCards  myPlants={userPlants} refreshPlants={fetchPlants} />
                 </div>
             </div>
             <Footer />
