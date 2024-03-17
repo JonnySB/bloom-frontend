@@ -4,6 +4,21 @@ import { updatePlantsQuantity, assignPlant } from '../../services/userPlants';
 import { fetchPlantsFROMAPI, createNewPlant, fetchPlantsByName } from '../../services/plants';
 
 
+
+function useDebounce(value, delay) {
+    const [debouncedValue, setDebouncedValue] = useState(value);
+  
+    useEffect(() => {
+      const handler = setTimeout(() => {
+        setDebouncedValue(value);
+      }, delay);
+  
+      return () => clearTimeout(handler);
+    }, [value, delay]);
+  
+    return debouncedValue;
+  }
+
 const AddPlant = ({ refreshPlants }) => {
     const [show, setShow] = useState(false);
     const [type, setType] = useState("");
@@ -12,22 +27,23 @@ const AddPlant = ({ refreshPlants }) => {
     const [userId, setUserId] = useState(window.localStorage.getItem("user_id"))
     const [plants, setPlants] = useState(null)
     const [plantName, setPlantName] = useState("")
-    const [te, setTet] = useState("")
+    const [suggestions, setSuggestions] = useState([]);
+    const debouncedSearchTerm = useDebounce(plantName, 500); 
     
 
     useEffect(() => {
-        async function fetchPlants() {
-            try {
-                if (plantName !== "") {
-                    const dataPlant = await fetchPlantsByName(token, plantName)
-                    setTet(dataPlant)
-                }
-            } catch(error) {
-                console.error("Error fetching data:", error);  
-            }
+        if (debouncedSearchTerm) {
+            fetchPlantsByName(token, debouncedSearchTerm)
+                .then(data => {
+                    setSuggestions(data); // Assuming data is an array of suggestions
+                })
+                .catch(error => {
+                    console.error("Error fetching data:", error);
+                });
+        } else {
+            setSuggestions([]);
         }
-        fetchPlants()
-    })
+    }, [debouncedSearchTerm]); // Depend on the debounced value
 
     useEffect(() => {
         async function fetchData() {
@@ -112,7 +128,7 @@ const AddPlant = ({ refreshPlants }) => {
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                                 <Form.Label>Search by name</Form.Label>
-                                <Form.Control type="email" placeholder="Cowgrass clover" onChange={onTypeChageForPlant}/>
+                                <Form.Control type="text" placeholder="Cowgrass clover" onChange={onTypeChageForPlant}/>
                             </Form.Group>
                         <Form.Group
                             className="mb-3"
