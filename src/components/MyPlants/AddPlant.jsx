@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import {CloseButton, Button, Modal, Form} from 'react-bootstrap'
+import {CloseButton, Button, Modal, Form, Card} from 'react-bootstrap'
 import { updatePlantsQuantity, assignPlant } from '../../services/userPlants';
 import { fetchPlantsFROMAPI, createNewPlant, fetchPlantsByName } from '../../services/plants';
-
+import './AddPlantsStyle.css'
 
 
 function useDebounce(value, delay) {
@@ -95,7 +95,7 @@ const AddPlant = ({ refreshPlants }) => {
     const onQuantityChange = (e) => {
         setQuantity(Number(e.target.value))
     }
-    console.log(suggestions)
+
     return (
         <>
             <Button variant="primary" onClick={handleShow}>
@@ -134,6 +134,7 @@ const AddPlant = ({ refreshPlants }) => {
                                 {suggestions.map((suggestion, index) => (
                                     <div key={index} onClick={() => setPlantName(suggestion.common_name)}>
                                         {suggestion.common_name || suggestion.latin_name}
+                                     
                                     </div>
                                 ))}
                             </div>
