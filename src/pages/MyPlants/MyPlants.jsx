@@ -7,6 +7,7 @@ import Footer from "../../components/Footer/Footer";
 import { getUserPlants } from "../../services/userPlants.js"
 import "./MyPlants.css"
 
+
 export const MyPlants = () => {
     const [user_id, setuserID] = useState(window.localStorage.getItem("user_id"));
     const [token, setToken] = useState(window.localStorage.getItem("token"));
@@ -29,8 +30,8 @@ export const MyPlants = () => {
     useEffect(() => {
         fetchPlants();
     }, [user_id, token]); 
-    
-  
+
+
     return (
         <div>
             <NavbarComponent sticky="top" />
@@ -41,7 +42,7 @@ export const MyPlants = () => {
                 <h1>My Plants</h1>
                 <div className="plant-cards-container">
                     <div className="add-plants-button">{!isLoading && <AddPlant myPlants={userPlants}  refreshPlants={fetchPlants}/>}</div>
-                    <PlantCards  myPlants={userPlants} />
+                    <PlantCards  myPlants={userPlants} refreshPlants={fetchPlants} />
                 </div>
             </div>
             <Footer />
