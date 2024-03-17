@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import {CloseButton, Button, Modal, Form, Card} from 'react-bootstrap'
 import { updatePlantsQuantity, assignPlant } from '../../services/userPlants';
-import { fetchPlantsFROMAPI, createNewPlant, fetchPlantsByName } from '../../services/plants';
+import { createNewPlant, fetchPlantsByName } from '../../services/plants';
 import './AddPlantsStyle.css'
 
 
@@ -21,11 +21,9 @@ function useDebounce(value, delay) {
 
 const AddPlant = ({ refreshPlants }) => {
     const [show, setShow] = useState(false);
-    const [type, setType] = useState("");
     const [quantity, setQuantity] = useState("0")
     const [token, setToken] = useState(window.localStorage.getItem("token"))
     const [userId, setUserId] = useState(window.localStorage.getItem("user_id"))
-    const [plants, setPlants] = useState(null)
     const [plantName, setPlantName] = useState("")
     const [plantImage, setPlantImage] = useState([])
     const [suggestions, setSuggestions] = useState([]);
@@ -47,19 +45,6 @@ const AddPlant = ({ refreshPlants }) => {
             setSuggestions([]);
         }
     }, [debouncedSearchTerm]);
-
-    useEffect(() => {
-        async function fetchData() {
-            try {
-                const myplants = await fetchPlantsFROMAPI(token)
-                setPlants(myplants);
-            } catch (error) {
-                console.error("Error fetching data:", error);
-            }
-        }
-        
-        fetchData();
-    }, []);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -86,10 +71,6 @@ const AddPlant = ({ refreshPlants }) => {
         setShow(true);
     };
 
-    const onTypeChange = (e) => {
-        const plantData = JSON.parse(e.target.value);
-        setType(plantData)
-    }
     const onTypeChageForPlant = (e) => {
         setPlantName(e.target.value)
         setFetchSuggestions(true);
@@ -119,27 +100,9 @@ const AddPlant = ({ refreshPlants }) => {
                 </Modal.Header>
                 <Modal.Body>
                     <Form id="addingPlants"  onSubmit={handleSubmit}>
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                            <Form.Label>Search for by type</Form.Label>
-                            <Form.Select aria-label="Default select example" onChange={onTypeChange}>
-                                <option>What type of plant are you adding?</option>
-                                {plants?.map((plant) => (
-                                    <option  key={plant.plant_id} 
-                                    value={JSON.stringify({
-                                        plant_id: plant.plant_id,
-                                        common_name: plant.common_name,
-                                        latin_name: plant.latin_name,
-                                        url: plant.photo
-                                    })}
-                                    >
-                                    {plant.common_name}
-                                    </option> 
-                                ))}
-                            </Form.Select>
-                        </Form.Group>
                        <Form.Group className="mb-3" controlId="searchByNameInput">
                         <Form.Label>Search by name</Form.Label>
-                            <Form.Control type="text" placeholder="Cowgrass clover"   value={plantName}  onChange={onTypeChageForPlant}/>
+                            <Form.Control type="text" placeholder="Example: Cowgrass clover..."   value={plantName}  onChange={onTypeChageForPlant}/>
                             <div className="autocomplete-suggestions">
                                 {suggestions.map((suggestion, index) => (
                                     <div className="suggestion-item" key={index} onClick={() => selectSuggestion(suggestion)}>
@@ -169,5 +132,4 @@ const AddPlant = ({ refreshPlants }) => {
 }
 
 export default AddPlant;
-
 
