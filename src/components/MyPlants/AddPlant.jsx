@@ -29,11 +29,13 @@ const AddPlant = ({ refreshPlants }) => {
     const [plantName, setPlantName] = useState("")
     const [plantImage, setPlantImage] = useState([])
     const [suggestions, setSuggestions] = useState([]);
-    const debouncedSearchTerm = useDebounce(plantName, 500); 
+    const [selectedPlant, setSelectedPlant] = useState("")
+    const debouncedSearchTerm = useDebounce(plantName, 500);
+    const [fetchSuggestions, setFetchSuggestions] = useState(true);
     
 
     useEffect(() => {
-        if (debouncedSearchTerm) {
+        if (fetchSuggestions && debouncedSearchTerm) {
             fetchPlantsByName(token, debouncedSearchTerm)
                 .then(data => {
                     setSuggestions(data); 
@@ -61,8 +63,9 @@ const AddPlant = ({ refreshPlants }) => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+   
         try {
-            const newPlantResponse = await createNewPlant(type, token);
+            const newPlantResponse = await createNewPlant(selectedPlant, token);
             if (newPlantResponse.message === "Plant Created successfully") {
                 await assignPlant(userId, newPlantResponse.plant_id, quantity, token);
             } 
@@ -79,7 +82,6 @@ const AddPlant = ({ refreshPlants }) => {
         }
     };
     
-
     const handleShow = () => {
         setShow(true);
     };
@@ -90,6 +92,7 @@ const AddPlant = ({ refreshPlants }) => {
     }
     const onTypeChageForPlant = (e) => {
         setPlantName(e.target.value)
+        setFetchSuggestions(true);
     }
 
     const onQuantityChange = (e) => {
@@ -97,10 +100,13 @@ const AddPlant = ({ refreshPlants }) => {
     }
 
     const selectSuggestion = (suggestion) => {
+        setSelectedPlant(suggestion)
         setPlantName(suggestion.common_name || suggestion.latin_name);
         setPlantImage(suggestion.photo)
-        setSuggestions([]); 
+        setSuggestions([]);
+        setFetchSuggestions(false);
     };
+
     return (
         <>
             <Button variant="primary" onClick={handleShow}>
@@ -133,7 +139,7 @@ const AddPlant = ({ refreshPlants }) => {
                         </Form.Group>
                        <Form.Group className="mb-3" controlId="searchByNameInput">
                         <Form.Label>Search by name</Form.Label>
-                            <Form.Control type="text" placeholder="Cowgrass clover" onChange={onTypeChageForPlant}/>
+                            <Form.Control type="text" placeholder="Cowgrass clover"   value={plantName}  onChange={onTypeChageForPlant}/>
                             <div className="autocomplete-suggestions">
                                 {suggestions.map((suggestion, index) => (
                                     <div className="suggestion-item" key={index} onClick={() => selectSuggestion(suggestion)}>
