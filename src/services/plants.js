@@ -29,10 +29,11 @@ export const fetchPlantsByName = async (token, name) => {
 }
 
 
-export const createNewPlant = async (plant, token) => {
+export const createNewPlant = async (plant, waterQuantity, token) => {
   try {
       const payload = {
         plant: plant,
+        waterQuantity:waterQuantity
       }
 
       const requestOptions = {

@@ -22,6 +22,7 @@ function useDebounce(value, delay) {
 const AddPlant = ({ refreshPlants }) => {
     const [show, setShow] = useState(false);
     const [quantity, setQuantity] = useState("0")
+    const [waterQuantity, setWaterQuantity] = useState("0")
     const [token, setToken] = useState(window.localStorage.getItem("token"))
     const [userId, setUserId] = useState(window.localStorage.getItem("user_id"))
     const [plantName, setPlantName] = useState("")
@@ -50,7 +51,7 @@ const AddPlant = ({ refreshPlants }) => {
         event.preventDefault();
    
         try {
-            const newPlantResponse = await createNewPlant(selectedPlant, token);
+            const newPlantResponse = await createNewPlant(selectedPlant,waterQuantity, token);
             if (newPlantResponse.message === "Plant Created successfully") {
                 await assignPlant(userId, newPlantResponse.plant_id, quantity, token);
             } 
@@ -88,6 +89,10 @@ const AddPlant = ({ refreshPlants }) => {
         setFetchSuggestions(false);
     };
 
+    const waterQuantityChange = (e) => {
+        setWaterQuantity(Number(e.target.value))
+    }
+
     return (
         <>
             <Button variant="primary" onClick={handleShow}>
@@ -102,7 +107,7 @@ const AddPlant = ({ refreshPlants }) => {
                     <Form id="addingPlants"  onSubmit={handleSubmit}>
                        <Form.Group className="mb-3" controlId="searchByNameInput">
                         <Form.Label>Search by name</Form.Label>
-                            <Form.Control type="text" placeholder="Example: Cowgrass clover..."   value={plantName}  onChange={onTypeChageForPlant}/>
+                            <Form.Control type="text" placeholder="Example: Coconut..."   value={plantName}  onChange={onTypeChageForPlant}/>
                             <div className="autocomplete-suggestions">
                                 {suggestions.map((suggestion, index) => (
                                     <div className="suggestion-item" key={index} onClick={() => selectSuggestion(suggestion)}>
@@ -116,6 +121,13 @@ const AddPlant = ({ refreshPlants }) => {
                             <Form.Label>Enter quantity</Form.Label>
                             <Form.Control type="text" placeholder="How many of these plants do you own?" onChange={onQuantityChange} />
                         </Form.Group>
+                        <Form.Label>How often do you water this plant per week</Form.Label>
+                        <Form.Select aria-label="Default select example" onChange={waterQuantityChange}>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                            <option value="3">More than 3 times</option>
+                        </Form.Select>
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
