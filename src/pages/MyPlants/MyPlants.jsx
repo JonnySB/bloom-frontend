@@ -7,6 +7,7 @@ import Footer from "../../components/Footer/Footer";
 import { getUserPlants } from "../../services/userPlants.js"
 import "./MyPlants.css"
 
+
 export const MyPlants = () => {
     const [user_id, setuserID] = useState(window.localStorage.getItem("user_id"));
     const [token, setToken] = useState(window.localStorage.getItem("token"));
