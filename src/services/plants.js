@@ -38,7 +38,7 @@ export const fetchPlantsByName = async (token, name) => {
         },
         body: JSON.stringify(payload),
     }
-    const response =  await fetch(`${BACKEND_URL}api/plants/name`, requestOptions)
+    const response =  await fetch(`${BACKEND_URL}/api/plants/name`, requestOptions)
 
     if (response.status !== 200) {
         throw new Error("Unable to make POST request for create request");

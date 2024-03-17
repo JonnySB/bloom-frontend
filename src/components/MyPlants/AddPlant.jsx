@@ -35,7 +35,7 @@ const AddPlant = ({ refreshPlants }) => {
         if (debouncedSearchTerm) {
             fetchPlantsByName(token, debouncedSearchTerm)
                 .then(data => {
-                    setSuggestions(data); // Assuming data is an array of suggestions
+                    setSuggestions(data); 
                 })
                 .catch(error => {
                     console.error("Error fetching data:", error);
@@ -43,7 +43,7 @@ const AddPlant = ({ refreshPlants }) => {
         } else {
             setSuggestions([]);
         }
-    }, [debouncedSearchTerm]); // Depend on the debounced value
+    }, [debouncedSearchTerm]);
 
     useEffect(() => {
         async function fetchData() {
@@ -95,7 +95,7 @@ const AddPlant = ({ refreshPlants }) => {
     const onQuantityChange = (e) => {
         setQuantity(Number(e.target.value))
     }
-
+    console.log(suggestions)
     return (
         <>
             <Button variant="primary" onClick={handleShow}>
@@ -126,14 +126,19 @@ const AddPlant = ({ refreshPlants }) => {
                                 ))}
                             </Form.Select>
                         </Form.Group>
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                                <Form.Label>Search by name</Form.Label>
-                                <Form.Control type="text" placeholder="Cowgrass clover" onChange={onTypeChageForPlant}/>
-                            </Form.Group>
-                        <Form.Group
-                            className="mb-3"
-                            controlId="exampleForm.ControlTextarea1"
-                        >
+
+                       <Form.Group className="mb-3" controlId="searchByNameInput">
+                        <Form.Label>Search by name</Form.Label>
+                            <Form.Control type="text" placeholder="Cowgrass clover" onChange={onTypeChageForPlant}/>
+                            <div className="autocomplete-suggestions">
+                                {suggestions.map((suggestion, index) => (
+                                    <div key={index} onClick={() => setPlantName(suggestion.common_name)}>
+                                        {suggestion.common_name || suggestion.latin_name}
+                                    </div>
+                                ))}
+                            </div>
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
                             <Form.Label>Enter quantity</Form.Label>
                             <Form.Control type="text" placeholder="How many of these plants do you own?" onChange={onQuantityChange} />
                         </Form.Group>
