@@ -93,10 +93,6 @@ export const updatePlantsQuantity = async (user_id,plant_id,new_quantity,token) 
   }
 };
 
-
-
-
-
 export const deletePlantsFromUser = async (user_id, plant_id, token) => {
   const requestData = {
     user_id: user_id,
