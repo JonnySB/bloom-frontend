@@ -1,18 +1,34 @@
 import { useState, useEffect } from 'react';
 import {CloseButton, Button, Modal, Form} from 'react-bootstrap'
 import { updatePlantsQuantity, assignPlant } from '../../services/userPlants';
-import { fetchPlantsFROMAPI, createNewPlant } from '../../services/plants';
-import axios from 'axios';
+import { fetchPlantsFROMAPI, createNewPlant, fetchPlantsByName } from '../../services/plants';
 
-const AddPlant = ({ myPlants, refreshPlants }) => {
+
+const AddPlant = ({ refreshPlants }) => {
     const [show, setShow] = useState(false);
     const [type, setType] = useState("");
     const [quantity, setQuantity] = useState("0")
     const [token, setToken] = useState(window.localStorage.getItem("token"))
     const [userId, setUserId] = useState(window.localStorage.getItem("user_id"))
     const [plants, setPlants] = useState(null)
+    const [plantName, setPlantName] = useState("")
+    const [te, setTet] = useState("")
     
-    
+
+    useEffect(() => {
+        async function fetchPlants() {
+            try {
+                if (plantName !== "") {
+                    const dataPlant = await fetchPlantsByName(token, plantName)
+                    setTet(dataPlant)
+                }
+            } catch(error) {
+                console.error("Error fetching data:", error);  
+            }
+        }
+        fetchPlants()
+    })
+
     useEffect(() => {
         async function fetchData() {
             try {
@@ -29,8 +45,6 @@ const AddPlant = ({ myPlants, refreshPlants }) => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        
-
         try {
             const newPlantResponse = await createNewPlant(type, token);
             if (newPlantResponse.message === "Plant Created successfully") {
@@ -58,6 +72,9 @@ const AddPlant = ({ myPlants, refreshPlants }) => {
         const plantData = JSON.parse(e.target.value);
         setType(plantData)
     }
+    const onTypeChageForPlant = (e) => {
+        setPlantName(e.target.value)
+    }
 
     const onQuantityChange = (e) => {
         setQuantity(Number(e.target.value))
@@ -76,7 +93,7 @@ const AddPlant = ({ myPlants, refreshPlants }) => {
                 <Modal.Body>
                     <Form id="addingPlants"  onSubmit={handleSubmit}>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                            <Form.Label>Type</Form.Label>
+                            <Form.Label>Search for by type</Form.Label>
                             <Form.Select aria-label="Default select example" onChange={onTypeChange}>
                                 <option>What type of plant are you adding?</option>
                                 {plants?.map((plant) => (
@@ -93,6 +110,10 @@ const AddPlant = ({ myPlants, refreshPlants }) => {
                                 ))}
                             </Form.Select>
                         </Form.Group>
+                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                                <Form.Label>Search by name</Form.Label>
+                                <Form.Control type="email" placeholder="Cowgrass clover" onChange={onTypeChageForPlant}/>
+                            </Form.Group>
                         <Form.Group
                             className="mb-3"
                             controlId="exampleForm.ControlTextarea1"
