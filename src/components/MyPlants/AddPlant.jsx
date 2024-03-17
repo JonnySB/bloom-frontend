@@ -1,43 +1,41 @@
 import { useState, useEffect } from 'react';
-import {CloseButton, Button, Modal, Form, Card} from 'react-bootstrap'
+import { CloseButton, Button, Modal, Form, Card } from 'react-bootstrap';
 import { updatePlantsQuantity, assignPlant } from '../../services/userPlants';
 import { createNewPlant, fetchPlantsByName } from '../../services/plants';
-import './AddPlantsStyle.css'
-
+import './AddPlantsStyle.css';
 
 function useDebounce(value, delay) {
     const [debouncedValue, setDebouncedValue] = useState(value);
-  
-    useEffect(() => {
-      const handler = setTimeout(() => {
-        setDebouncedValue(value);
-      }, delay);
-  
-      return () => clearTimeout(handler);
-    }, [value, delay]);
-  
-    return debouncedValue;
-  }
 
-const AddPlant = ({ refreshPlants }) => {
+    useEffect(() => {
+        const handler = setTimeout(() => {
+            setDebouncedValue(value);
+        }, delay);
+
+        return () => clearTimeout(handler);
+    }, [value, delay]);
+
+    return debouncedValue;
+}
+
+const AddPlant = ({ refreshPlants, myPlants }) => {
     const [show, setShow] = useState(false);
-    const [quantity, setQuantity] = useState("0")
-    const [waterQuantity, setWaterQuantity] = useState("0")
-    const [token, setToken] = useState(window.localStorage.getItem("token"))
-    const [userId, setUserId] = useState(window.localStorage.getItem("user_id"))
-    const [plantName, setPlantName] = useState("")
-    const [plantImage, setPlantImage] = useState([])
+    const [quantity, setQuantity] = useState("0");
+    const [waterQuantity, setWaterQuantity] = useState("0");
+    const [token, setToken] = useState(window.localStorage.getItem("token"));
+    const [userId, setUserId] = useState(window.localStorage.getItem("user_id"));
+    const [plantName, setPlantName] = useState("");
+    const [plantImage, setPlantImage] = useState([]);
     const [suggestions, setSuggestions] = useState([]);
-    const [selectedPlant, setSelectedPlant] = useState("")
+    const [selectedPlant, setSelectedPlant] = useState("");
     const debouncedSearchTerm = useDebounce(plantName, 500);
     const [fetchSuggestions, setFetchSuggestions] = useState(true);
-    
 
     useEffect(() => {
         if (fetchSuggestions && debouncedSearchTerm) {
             fetchPlantsByName(token, debouncedSearchTerm)
                 .then(data => {
-                    setSuggestions(data); 
+                    setSuggestions(data);
                 })
                 .catch(error => {
                     console.error("Error fetching data:", error);
@@ -49,65 +47,67 @@ const AddPlant = ({ refreshPlants }) => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-   
+
         try {
-            const newPlantResponse = await createNewPlant(selectedPlant,waterQuantity, token);
-            if (newPlantResponse.message === "Plant Created successfully") {
-                await assignPlant(userId, newPlantResponse.plant_id, quantity, token);
-            } 
-            else if (newPlantResponse.message == "Plant already exists.") {
-                await updatePlantsQuantity(userId, newPlantResponse.plant_id, quantity, token);
-            }  
-            else {
+            const newPlantResponse = await createNewPlant(selectedPlant, waterQuantity, token);
+            if (newPlantResponse.message === "Plant inserted in the database successfully" || newPlantResponse.message === "Plant already exists in the database.") {
+                const doesUserHasThisPlant = myPlants?.some(p => p.plant_id === newPlantResponse.plant_id)
+                console.log(doesUserHasThisPlant)
+                if (doesUserHasThisPlant) {
+                    await updatePlantsQuantity(userId, newPlantResponse.plant_id, waterQuantity, token);
+                } else {
+                    await assignPlant(userId, newPlantResponse.plant_id, waterQuantity, token);
+                }
+            } else {
                 console.error('Unexpected response:', newPlantResponse.message);
-                return; 
+                return;
             }
             refreshPlants();
         } catch (error) {
             console.error('Error updating or assigning plant:', error);
         }
     };
-    
+
     const handleShow = () => {
         setShow(true);
     };
 
     const onTypeChageForPlant = (e) => {
-        setPlantName(e.target.value)
+        setPlantName(e.target.value);
         setFetchSuggestions(true);
-    }
+    };
 
     const onQuantityChange = (e) => {
-        setQuantity(Number(e.target.value))
-    }
+        setQuantity(Number(e.target.value));
+    };
 
     const selectSuggestion = (suggestion) => {
-        setSelectedPlant(suggestion)
+        setSelectedPlant(suggestion);
         setPlantName(suggestion.common_name || suggestion.latin_name);
-        setPlantImage(suggestion.photo)
+        setPlantImage(suggestion.photo);
         setSuggestions([]);
         setFetchSuggestions(false);
     };
 
     const waterQuantityChange = (e) => {
-        setWaterQuantity(Number(e.target.value))
-    }
+        setWaterQuantity(Number(e.target.value));
+    };
 
     return (
         <>
             <Button variant="primary" onClick={handleShow}>
                 Add a Plant
             </Button>
-            <Modal show={show}  >
+            <Modal show={show}>
                 <Modal.Header>
                     <Modal.Title>Add a new plant to your collection</Modal.Title>
                     <CloseButton onClick={() => setShow(false)} />
                 </Modal.Header>
                 <Modal.Body>
-                    <Form id="addingPlants"  onSubmit={handleSubmit}>
-                       <Form.Group className="mb-3" controlId="searchByNameInput">
-                        <Form.Label>Search by name</Form.Label>
-                            <Form.Control type="text" placeholder="Example: Coconut..."   value={plantName}  onChange={onTypeChageForPlant}/>
+                    <Form id="addingPlants" onSubmit={handleSubmit}>
+                        <Form.Group className="mb-3" controlId="searchByNameInput">
+                            <Form.Label>Search by name</Form.Label>
+                            <Form.Control type="text" placeholder="Example: Coconut..." value={plantName} onChange={onTypeChageForPlant} />
                             <div className="autocomplete-suggestions">
                                 {suggestions.map((suggestion, index) => (
                                     <div className="suggestion-item" key={index} onClick={() => selectSuggestion(suggestion)}>
@@ -115,7 +115,13 @@ const AddPlant = ({ refreshPlants }) => {
                                     </div>
                                 ))}
                             </div>
-                            {plantImage.length > 0 ? <Card.Img variant="top" src={plantImage} /> : ""}
+
+                            {plantImage.length > 0 ? (
+                                <div className='myPlantCardTwo'>
+                                    <Card.Title>See plant picture below</Card.Title>
+                                    <Card.Img variant="top" src={plantImage} />
+                                </div>
+                            ) : ""}
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
                             <Form.Label>Enter quantity</Form.Label>
@@ -141,7 +147,6 @@ const AddPlant = ({ refreshPlants }) => {
             </Modal>
         </>
     );
-}
+};
 
 export default AddPlant;
-

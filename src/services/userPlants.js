@@ -92,3 +92,5 @@ export const updatePlantsQuantity = async (user_id,plant_id,new_quantity,token) 
     console.error("Error updating quantity:", error);
   }
 };
+
+
