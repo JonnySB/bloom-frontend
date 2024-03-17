@@ -52,9 +52,8 @@ const AddPlant = ({ refreshPlants, myPlants }) => {
             const newPlantResponse = await createNewPlant(selectedPlant, waterQuantity, token);
             if (newPlantResponse.message === "Plant inserted in the database successfully" || newPlantResponse.message === "Plant already exists in the database.") {
                 const doesUserHasThisPlant = myPlants?.some(p => p.plant_id === newPlantResponse.plant_id)
-                console.log(doesUserHasThisPlant)
                 if (doesUserHasThisPlant) {
-                    await updatePlantsQuantity(userId, newPlantResponse.plant_id, waterQuantity, token);
+                    await updatePlantsQuantity(userId, newPlantResponse.plant_id, quantity, token);
                 } else {
                     await assignPlant(userId, newPlantResponse.plant_id, waterQuantity, token);
                 }

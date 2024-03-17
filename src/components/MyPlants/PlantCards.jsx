@@ -15,9 +15,8 @@ const PlantCards = ({ myPlants }) => {
             <Card.Title>
               {plant.common_name} (<em>{plant.latin_name}</em>)
             </Card.Title>
-            <Card.Text>
-              Watering Frequency: Approximately {plant.watering_frequency == 1 ? "once a week" : `${plant.watering_frequency} times a week`}
-            </Card.Text>
+            <Card.Text>Watering Frequency: Approximately {plant.watering_frequency == 1 ? "once a week" : `${plant.watering_frequency} times a week`}</Card.Text>
+            <Card.Text> Quantity: {plant.quantity} </Card.Text>
           </Card.Body>
         </Card>
       </Col>
