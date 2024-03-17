@@ -27,6 +27,7 @@ const AddPlant = ({ refreshPlants }) => {
     const [userId, setUserId] = useState(window.localStorage.getItem("user_id"))
     const [plants, setPlants] = useState(null)
     const [plantName, setPlantName] = useState("")
+    const [plantImage, setPlantImage] = useState([])
     const [suggestions, setSuggestions] = useState([]);
     const debouncedSearchTerm = useDebounce(plantName, 500); 
     
@@ -57,7 +58,6 @@ const AddPlant = ({ refreshPlants }) => {
         
         fetchData();
     }, []);
-
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -96,6 +96,11 @@ const AddPlant = ({ refreshPlants }) => {
         setQuantity(Number(e.target.value))
     }
 
+    const selectSuggestion = (suggestion) => {
+        setPlantName(suggestion.common_name || suggestion.latin_name);
+        setPlantImage(suggestion.photo)
+        setSuggestions([]); 
+    };
     return (
         <>
             <Button variant="primary" onClick={handleShow}>
@@ -126,18 +131,17 @@ const AddPlant = ({ refreshPlants }) => {
                                 ))}
                             </Form.Select>
                         </Form.Group>
-
                        <Form.Group className="mb-3" controlId="searchByNameInput">
                         <Form.Label>Search by name</Form.Label>
                             <Form.Control type="text" placeholder="Cowgrass clover" onChange={onTypeChageForPlant}/>
                             <div className="autocomplete-suggestions">
                                 {suggestions.map((suggestion, index) => (
-                                    <div key={index} onClick={() => setPlantName(suggestion.common_name)}>
+                                    <div className="suggestion-item" key={index} onClick={() => selectSuggestion(suggestion)}>
                                         {suggestion.common_name || suggestion.latin_name}
-                                     
                                     </div>
                                 ))}
                             </div>
+                            {plantImage.length > 0 ? <Card.Img variant="top" src={plantImage} /> : ""}
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
                             <Form.Label>Enter quantity</Form.Label>
