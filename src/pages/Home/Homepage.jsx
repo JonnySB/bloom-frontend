@@ -14,26 +14,26 @@ const Homepage = () => {
 
 
     useEffect(() => {
-        // const fetchHelpRequestsWithUsers = async () => {
-        //     try {
-        //         const data = await getAllHelpRequestsWithUserDetails();
-        //         const sortedData = data.sort((a, b) => b.id - a.id);
-        //         setHelpRequestsWithUsers(sortedData);
-        //     } catch (error) {
-        //         console.error('Error fetching help requests with users:', error);
-        //     }
-        // };
-        // fetchHelpRequestsWithUsers();
-        const fetchHelpRequestsWithUsersAndPlant = async () => {
+        const fetchHelpRequestsWithUsers = async () => {
             try {
-                const data = await getAllHelpRequestsWithUserDetailsAndPlant();
+                const data = await getAllHelpRequestsWithUserDetails();
                 const sortedData = data.sort((a, b) => b.id - a.id);
                 setHelpRequestsWithUsers(sortedData);
             } catch (error) {
                 console.error('Error fetching help requests with users:', error);
             }
         };
-        fetchHelpRequestsWithUsersAndPlant();
+        fetchHelpRequestsWithUsers();
+        // const fetchHelpRequestsWithUsersAndPlant = async () => {
+        //     try {
+        //         const data = await getAllHelpRequestsWithUserDetailsAndPlant();
+        //         const sortedData = data.sort((a, b) => b.id - a.id);
+        //         setHelpRequestsWithUsers(sortedData);
+        //     } catch (error) {
+        //         console.error('Error fetching help requests with users:', error);
+        //     }
+        // };
+        // fetchHelpRequestsWithUsersAndPlant();
     }, []);
 
     const redirectToCreateRequest = (e) => {
@@ -46,7 +46,6 @@ const Homepage = () => {
             <div className='homepage-main-div'>
                 <h1>BLOOM</h1>
                 <div>
-                    {/* <Button onClick={redirectToCreateRequest}>create request</Button> */}
                     <br />
                     <br />
                     <div role='feed'>
