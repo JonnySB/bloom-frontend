@@ -12,7 +12,7 @@ import './App.css'
 import Homepage from './pages/Home/Homepage';
 import HelpRequestDetailPage from './pages/HelpRequestDetails/HelpRequestDetailsPage';
 import CreateRequestPage from './pages/CreateRequestPage/CreateRequestPage';
-
+import { UserProvider } from './context/UserContext.jsx';
 import MyOffersPage from "./pages/ManageHelpRequestPages/MyOffersPage/MyOffersPage";
 
 const router = createBrowserRouter([
@@ -63,7 +63,9 @@ function App() {
 
     return (
         <>
-            <RouterProvider router={router} />
+            <UserProvider>
+                <RouterProvider router={router} />
+            </UserProvider>
         </>
     );
 };

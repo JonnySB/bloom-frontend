@@ -2,11 +2,11 @@ import {Navbar, Container, Nav} from 'react-bootstrap';
 import "./NavbarComponent.css";
 import { useNavigate, useLocation } from "react-router-dom";
 
-const NavbarComponent = ( userDetails ) => {
+
+const NavbarComponent = ({  userDetails }) => {
     const navigate = useNavigate();
     const id = window.localStorage.getItem("user_id")
     const location = useLocation();
-
 
     const home = () => {
         navigate("/")
@@ -56,17 +56,19 @@ const NavbarComponent = ( userDetails ) => {
         }
     };
 
+    
+
     return (
         <Navbar expand="lg" className="bg-body-tertiary sticky-top">
             <Container fluid>
                 <Navbar.Brand style={{ cursor: 'pointer' }} onClick={home}>BLOOM</Navbar.Brand>
                 <Nav className="ms-auto nav-spacing">
                 <div className="userName">
-                    {userDetails?.userDetails?.username}
+                    {userDetails?.username}
                 </div>
                 &nbsp;  &nbsp;  &nbsp;
                 <div className={`profile-icon-container ${location.pathname === '/profile' ? 'active-nav-item' : ''}`} onClick={profilePage}>
-                    <img variant="top" src={userDetails?.userDetails?.avatar_url_string == "" ? "https://res.cloudinary.com/dououppib/image/upload/v1709830638/PLANTS/placeholder_ry6d8v.webp" : userDetails?.userDetails?.avatar_url_string} className='profileAvatar' />
+                    <img variant="top" src={userDetails?.avatar_url_string == "" ? "https://res.cloudinary.com/dououppib/image/upload/v1709830638/PLANTS/placeholder_ry6d8v.webp" : userDetails?.avatar_url_string} className='profileAvatar' />
                 </div>
                 &nbsp;  &nbsp;  &nbsp;
                 <div className={`other-icons-container ${location.pathname === '/create_request' ? 'active-nav-item' : ''}`} onClick={requestManagement}>
