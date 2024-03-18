@@ -6,14 +6,14 @@ import NavbarComponent from '../../components/Navbar/NavbarComponent';
 import Footer from "../../components/Footer/Footer";
 import { getUserPlants } from "../../services/userPlants.js"
 import "./MyPlants.css"
-
+import { getUserInformationById } from '../../services/users';
 
 export const MyPlants = () => {
     const [user_id, setuserID] = useState(window.localStorage.getItem("user_id"));
     const [token, setToken] = useState(window.localStorage.getItem("token"));
     const [userPlants, setUserPlants] = useState([])
     const [isLoading, setIsLoading] = useState(true);
-
+    const [userDetails, setUserDetails] = useState(null);
 
     const fetchPlants = async () => {
         setIsLoading(true);
@@ -30,11 +30,23 @@ export const MyPlants = () => {
     useEffect(() => {
         fetchPlants();
     }, [user_id, token]); 
-
+    
+    const fetchUserData = async () => {
+        try {
+            const userData = await getUserInformationById(user_id);
+            setUserDetails(userData);
+        } catch (err) {
+            console.error('Error fetching userPlants details:', err);
+        } 
+    };
+    
+    useEffect(() => {
+        fetchUserData();
+    }, [user_id]); 
 
     return (
         <div>
-            <NavbarComponent sticky="top" />
+           <NavbarComponent userDetails={userDetails}  />
             <div className="my-plants-container">
                 <div className="back-to-profile">
                     <span><a href="/profile">← Back to Profile Page</a></span>

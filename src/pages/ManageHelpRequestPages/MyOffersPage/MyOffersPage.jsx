@@ -1,18 +1,14 @@
 import React, { useState, useEffect } from "react";
 import "./MyOffersPage.css";
-
 import { getOutgoingHelpOffersByUserId } from '../../../services/helpOffers'
-
 import ManageHelpRequestsNavBar from "../../../components/ManageHelpRequestsNavBar/ManageHelpRequestsNavBar";
 import MyOffersTable from "../../../components/MyOffersTable/MyOffersTable";
 import NavbarComponent from "../../../components/Navbar/NavbarComponent";
 import Footer from "../../../components/Footer/Footer";
 
 const MyOffersPage = () => {
-
     const [myOffers, setMyOffers] = useState(null);
     const [triggerReload, setTriggerReload] = useState(false);
-
     const [user_id, setuserID] = useState(window.localStorage.getItem("user_id"));
     const [token, setToken] = useState(window.localStorage.getItem("token"));
 

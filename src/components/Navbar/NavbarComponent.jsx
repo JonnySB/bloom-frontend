@@ -1,28 +1,12 @@
-import { useEffect, useState } from "react";
 import {Navbar, Container, Nav} from 'react-bootstrap';
 import "./NavbarComponent.css";
-import { getUserInformationById } from "../../services/users";
 import { useNavigate, useLocation } from "react-router-dom";
 
-const NavbarComponent = () => {
+const NavbarComponent = ( userDetails ) => {
     const navigate = useNavigate();
     const id = window.localStorage.getItem("user_id")
-    const token = window.localStorage.getItem("token")
-    const [userInfo, setUserInfo] = useState("")
     const location = useLocation();
 
-
-    useEffect(() => {
-        const fetchUserData = async () => {
-            try {
-                let userData = await getUserInformationById(id);
-                setUserInfo(userData);
-            } catch (err) {
-                console.log("Error fetching user data", err);
-            }
-        };
-        fetchUserData();
-    }, []); // This empty array ensures it runs only once on mount
 
     const home = () => {
         navigate("/")
@@ -78,11 +62,11 @@ const NavbarComponent = () => {
                 <Navbar.Brand style={{ cursor: 'pointer' }} onClick={home}>BLOOM</Navbar.Brand>
                 <Nav className="ms-auto nav-spacing">
                 <div className="userName">
-                    {userInfo.username}
+                    {userDetails?.userDetails?.username}
                 </div>
                 &nbsp;  &nbsp;  &nbsp;
                 <div className={`profile-icon-container ${location.pathname === '/profile' ? 'active-nav-item' : ''}`} onClick={profilePage}>
-                    <img variant="top" src={userInfo?.avatar_url_string == "" ? "https://res.cloudinary.com/dououppib/image/upload/v1709830638/PLANTS/placeholder_ry6d8v.webp" : userInfo?.avatar_url_string} className='profileAvatar' />
+                    <img variant="top" src={userDetails?.userDetails?.avatar_url_string == "" ? "https://res.cloudinary.com/dououppib/image/upload/v1709830638/PLANTS/placeholder_ry6d8v.webp" : userDetails?.userDetails?.avatar_url_string} className='profileAvatar' />
                 </div>
                 &nbsp;  &nbsp;  &nbsp;
                 <div className={`other-icons-container ${location.pathname === '/create_request' ? 'active-nav-item' : ''}`} onClick={requestManagement}>

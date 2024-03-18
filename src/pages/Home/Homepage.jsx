@@ -6,11 +6,13 @@ import NavbarComponent from '../../components/Navbar/NavbarComponent'
 import { Row, Col, Card, Image, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom'
 import Footer from '../../components/Footer/Footer'
-
+import { getUserInformationById } from '../../services/users';
 
 const Homepage = () => {
     const [helpRequestsWithUsers, setHelpRequestsWithUsers] = useState([]);
     const navigate = useNavigate();
+    const [userDetails, setUserDetails] = useState(null);
+    const [user_id, setuserID] = useState(window.localStorage.getItem("user_id"));
 
 
     useEffect(() => {
@@ -30,9 +32,22 @@ const Homepage = () => {
         navigate("/create_request");
     }
 
+    const fetchUserData = async () => {
+        try {
+            const userData = await getUserInformationById(user_id);
+            setUserDetails(userData);
+        } catch (err) {
+            console.error('Error fetching userPlants details:', err);
+        } 
+    };
+    
+    useEffect(() => {
+        fetchUserData();
+    }, [user_id]); 
+
     return (
         <>
-            <NavbarComponent />
+            <NavbarComponent userDetails={userDetails}  />
             <div className='homepage-main-div'>
                 <h1>BLOOM</h1>
                 <div>

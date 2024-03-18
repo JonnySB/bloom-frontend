@@ -53,7 +53,7 @@ export const Profile = () => {
 
     return (
         <>
-            <NavbarComponent />
+            <NavbarComponent userDetails={userDetails}  />
             <div className="profile-container"> {/* This div wraps the content and centers it */}
                 <UserNavbar userDetails={userDetails} refeshUserData={fetchUserData}/>
                 <Container className='Items'>
