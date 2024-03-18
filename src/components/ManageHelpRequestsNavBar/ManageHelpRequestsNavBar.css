@@ -1,12 +1,17 @@
 .spacing {
     text-align: center !important;
-    justify-content: space-evenly;
+    justify-content: space-around;
 }
 
-.btn-color {
-    background: #2E9C45 !important;
+.btn-format {
+    font-weight: 700;
+    font-size: 1.5rem;
 }
 
-.btn-color:hover {
-    background: #033021 !important;
+.btn-format {
+    background: #BDBDBD !important;
+}
+
+.btn-format:hover {
+    background: #696969 !important;
 }

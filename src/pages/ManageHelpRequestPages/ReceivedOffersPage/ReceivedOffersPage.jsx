@@ -33,17 +33,17 @@ const ReceivedOffersPage = () => {
         <div className="page-container">
             <NavbarComponent />
             <h1>Received Offers</h1>
-            <div>
+            <div className="content-width">
                 <ManageHelpRequestsNavBar />
-            </div>
-            <div>
-                {receivedOffers != null && (
-                    <ReceivedOffersTable
-                        receivedOffers={receivedOffers}
-                        triggerReload={triggerReload}
-                        setTriggerReload={setTriggerReload}
-                    />
-                )}
+                <div>
+                    {receivedOffers != null && (
+                        <ReceivedOffersTable
+                            receivedOffers={receivedOffers}
+                            triggerReload={triggerReload}
+                            setTriggerReload={setTriggerReload}
+                        />
+                    )}
+                </div>
             </div>
             <Footer />
         </div>

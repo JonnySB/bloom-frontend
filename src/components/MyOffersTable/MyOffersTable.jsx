@@ -17,48 +17,50 @@ const MyOffersTable = ({ myOffers, triggerReload, setTriggerReload }) => {
     }
 
     return (
-        <div className='table-container'>
-            <Table>
-                <thead>
-                    <tr>
-                        <th>Request Title</th>
-                        <th>Date Range</th>
-                        <th>Price Offered</th>
-                        <th>User</th>
-                        <th>Message Sent</th>
-                        <th>Status</th>
-                        <th>Rescind Offer</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {myOffers?.sort().reverse().map((help_offer) => {
-                        return (
-                            <>
-                                {
-                                    help_offer.help_offer_status != "recinded" && (
-                                        <tr key={help_offer.help_offer_id}>
-                                            <td>{help_offer.help_request_name}</td>
-                                            <td>{convertDate(help_offer.help_request_start_date, help_offer.help_request_end_date)}</td>
-                                            <td>{help_offer.help_offer_bid}</td>
-                                            <td>{help_offer.help_request_user_id}</td>
-                                            <td>{help_offer.help_offer_message}</td>
-                                            <td>{help_offer.help_offer_status}</td>
-                                            <td className="btn-styling" style={{ border: "0" }}>
-                                                <RescindButton
-                                                    help_offer_id={help_offer.help_offer_id}
-                                                    triggerReload={triggerReload}
-                                                    setTriggerReload={setTriggerReload}
+        <div className='page-container'>
+            <div className='table-container'>
+                <Table>
+                    <thead>
+                        <tr>
+                            <th className='r-title'>Request Title</th>
+                            <th>Date Range</th>
+                            <th>Price Offered</th>
+                            <th>User</th>
+                            <th>Message Sent</th>
+                            <th>Status</th>
+                            <th>Rescind Offer</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {myOffers?.sort().reverse().map((help_offer) => {
+                            return (
+                                <>
+                                    {
+                                        help_offer.help_offer_status != "recinded" && (
+                                            <tr key={help_offer.help_offer_id}>
+                                                <td>{help_offer.help_request_name}</td>
+                                                <td>{convertDate(help_offer.help_request_start_date, help_offer.help_request_end_date)}</td>
+                                                <td>{help_offer.help_offer_bid}</td>
+                                                <td>{help_offer.help_request_user_id}</td>
+                                                <td>{help_offer.help_offer_message}</td>
+                                                <td>{help_offer.help_offer_status}</td>
+                                                <td className="btn-styling" style={{ border: "0" }}>
+                                                    <RescindButton
+                                                        help_offer_id={help_offer.help_offer_id}
+                                                        triggerReload={triggerReload}
+                                                        setTriggerReload={setTriggerReload}
 
-                                                />
-                                            </td>
-                                        </tr>
-                                    )
-                                }
-                            </>
-                        )
-                    })}
-                </tbody>
-            </Table>
+                                                    />
+                                                </td>
+                                            </tr>
+                                        )
+                                    }
+                                </>
+                            )
+                        })}
+                    </tbody>
+                </Table>
+            </div>
         </div>
     );
 }
