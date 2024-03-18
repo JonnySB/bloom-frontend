@@ -114,11 +114,12 @@ const AddPlant = ({ refreshPlants, myPlants }) => {
                                     </div>
                                 ))}
                             </div>
-                            {plantImage.length > 0 || plantName != null ? (
+                            {plantImage.length > 0  ? (
                                 <div className='myPlantCardTwo'>
                                     <Card.Title>See plant picture below</Card.Title>
                                     <Card.Img variant="top" src={plantImage} />
                                 </div>
+                                
                             ) : ""}
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
