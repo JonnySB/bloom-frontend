@@ -6,12 +6,13 @@ import NavbarComponent from '../../components/Navbar/NavbarComponent'
 import { Row, Col, Card, Image, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom'
 import Footer from '../../components/Footer/Footer'
-
+import { useUser } from '../../context/UserContext.jsx';
 
 const Homepage = () => {
     const [helpRequestsWithUsers, setHelpRequestsWithUsers] = useState([]);
     const navigate = useNavigate();
-
+    const [user_id, setuserID] = useState(window.localStorage.getItem("user_id"));
+    const { userData, refreshUserData } = useUser();
 
     useEffect(() => {
         const fetchHelpRequestsWithUsers = async () => {
@@ -30,9 +31,11 @@ const Homepage = () => {
         navigate("/create_request");
     }
 
+
+
     return (
         <>
-            <NavbarComponent />
+        <NavbarComponent userDetails={userData}  refeshUserData={refreshUserData}  />
             <div className='homepage-main-div'>
                 <h1>BLOOM</h1>
                 <div>

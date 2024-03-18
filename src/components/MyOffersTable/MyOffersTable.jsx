@@ -3,7 +3,6 @@ import RescindButton from '../Buttons/RescindButton/RescindButton'
 import "./MyOffersTable.css"
 
 const MyOffersTable = ({ myOffers, triggerReload, setTriggerReload }) => {
-    console.log(myOffers)
 
     const convertDate = (startDateString, endDateString) => {
         const startDate = new Date(startDateString);
