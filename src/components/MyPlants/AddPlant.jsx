@@ -114,8 +114,7 @@ const AddPlant = ({ refreshPlants, myPlants }) => {
                                     </div>
                                 ))}
                             </div>
-
-                            {plantImage.length > 0 ? (
+                            {plantImage.length > 0 || plantName != null ? (
                                 <div className='myPlantCardTwo'>
                                     <Card.Title>See plant picture below</Card.Title>
                                     <Card.Img variant="top" src={plantImage} />
