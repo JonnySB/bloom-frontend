@@ -16,27 +16,35 @@ nav {
     cursor: pointer;
 }
 
-.profile-icon-container {
+.profile-icon-container, .other-icons-container {
     display: inline-block;
-    width: 40px;
-    /* Adjust the width as needed */
-    height: 40px;
-    /* Adjust the height as needed */
-    background-color: #dedede;
-    /* Gray background color */
+    width: 40px; /* Adjust the width as needed */
+    height: 40px; /* Adjust the height as needed */
+    background-color: #dedede; /* Gray background color */
     border-radius: 50%;
-}
-
-
-
-.other-icons-container {
-    display: inline-block;
-    width: 40px;
-    /* Adjust the width as needed */
-    height: 40px;
-    /* Adjust the height as needed */
-    background-color: #dedede;
-    /* Gray background color */
-    border-radius: 50%;
+    position: relative; /* Add this line */
     padding: 5px;
 }
+.userName {
+    padding-top: 8px;
+    font-weight: 800;
+    cursor: default; 
+}
+
+
+.active-nav-item {
+    background-color: #2e9c45;
+    position: relative; 
+  }
+
+
+  .active-nav-item::after {
+    content: ''; /* Required for pseudo-elements */
+    position: absolute;
+    bottom: -5px; /* Adjust the distance from the bottom */
+    left: 0;
+    right: 0;
+    height: 2px; /* Thickness of the underline */
+    background-color: #ffffff; /* Color of the underline */
+    border-radius: 1px; /* Optional: Adds slight rounding to the underline */
+  }
