@@ -1,4 +1,3 @@
-import ViewButton from '../Buttons/ViewButton';
 import { useNavigate, Link } from "react-router-dom";
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
@@ -28,16 +27,12 @@ const HelpRequest = (props) => {
                     <Card.Body>
 
                         <Col xs={6} md={4}>
-                            {/* {userDetails?.avatar_url_string == "" ? "https://res.cloudinary.com/dououppib/image/upload/v1709830638/PLANTS/placeholder_ry6d8v.webp" : userDetails?.avatar_url_string} */}
                             <Image src={props?.avatar_url_string == "" ? "https://res.cloudinary.com/dououppib/image/upload/v1709830638/PLANTS/placeholder_ry6d8v.webp" : props.avatar_url_string} roundedCircle style={{ width: '30px', height: '30px' }} onClick={handleProfileNavigate} />
-                            {/* {props.avatar_url_string} */}
-                            {/* https://upload.wikimedia.org/wikipedia/en/d/da/Matt_LeBlanc_as_Joey_Tribbiani.jpg */}
                         </Col>
                         {props.first_name && <p role='firstnameAndLastname'>{props.first_name}&nbsp;{props.last_name}</p>}
-                        <small className='text-muted'>&nbsp;{props.date}</small>
                         <div className='title-and-button'>
-                            <Card.Text>{props.title}</Card.Text>
-                            {/* {props.showButtonView && <ViewButton onClick={handleSubmitView}>View</ViewButton>} */}
+                            <Card.Title>{props.title}</Card.Title>
+                            <small className='text-muted'>&nbsp;{props.date}</small>
                             {props.showButtonView &&
                                 <svg
                                     className='view-button'
@@ -51,7 +46,6 @@ const HelpRequest = (props) => {
                         </div>
                         {props.message && <Card.Text>{props.message}</Card.Text>}
                         {props.start_date && <Card.Text>{props.start_date} to {props.end_date}</Card.Text>}
-                        {props.username && <Card.Text>Username: {props.username}</Card.Text>}
                         {props.maxprice &&
                             <Card.Footer>
                                 {formatPrice(props.maxprice)}

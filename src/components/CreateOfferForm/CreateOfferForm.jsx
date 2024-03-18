@@ -44,10 +44,12 @@ const CreateOfferForm = (props) => {
 
     return (
         <>
-            <Button variant="primary" onClick={handleShow}>
-                Make offer
-            </Button>
-
+            {token && (
+                <Button variant="primary" onClick={handleShow}>
+                    Make offer
+                </Button>
+            )}
+    
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Make an offer to help</Modal.Title>
