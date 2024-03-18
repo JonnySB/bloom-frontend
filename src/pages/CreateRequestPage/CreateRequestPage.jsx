@@ -4,10 +4,10 @@ import HelpRequest from '../../components/HelpRequest/HelpRequest'
 import { getAllRequestsByOneUser } from '../../services/HelpRequests'
 import NavbarComponent from '../../components/Navbar/NavbarComponent'
 import ManageHelpRequestsNavBar from '../../components/ManageHelpRequestsNavBar/ManageHelpRequestsNavBar'
-
+import { useUser } from '../../context/UserContext.jsx';
 
 const CreateRequestPage = () => {
-
+    const { userData, refreshUserData } = useUser();
     const userID = window.localStorage.getItem("user_id")
     const token = window.localStorage.getItem("token")
     const [allRequests, setAllRequests] = useState([]);
@@ -28,7 +28,7 @@ const CreateRequestPage = () => {
 
     return (
         <>
-            <NavbarComponent />
+             <NavbarComponent userDetails={userData}  refeshUserData={refreshUserData}  />
             <h1>Create help request page</h1>
             <ManageHelpRequestsNavBar />
             <CreateHelpRequestForm />

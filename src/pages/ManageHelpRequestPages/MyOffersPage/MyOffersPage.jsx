@@ -20,7 +20,6 @@ const MyOffersPage = () => {
                 // TODO - add dynamic user
                 const data = await getOutgoingHelpOffersByUserId(user_id, token);
                 setMyOffers(data);
-                console.log(data);
             } catch (error) {
                 console.error("Error fetching received offers: ", error)
             }
