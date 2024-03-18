@@ -27,7 +27,6 @@ const PlantCards = ({myPlants, refreshPlants}) => {
       }
     }
   };
-
   return (
     <>
      <Container className="title">

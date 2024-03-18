@@ -1,3 +1,15 @@
 .row {
     --bs-gutter-y: 1.5rem !important;
 }
+
+.pagination {
+    justify-content: center;
+    padding-top: 10px;
+}
+.page-link {
+    color: #2E9C45;
+}
+.active .page-link{
+    background-color: #2E9C45;
+    border-color: #2E9C45;
+}

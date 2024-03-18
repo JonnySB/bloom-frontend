@@ -1,5 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import {Card, Col, Row, CloseButton, Alert, Button, Modal  } from 'react-bootstrap'
+import {Card, Col, Row, CloseButton, Pagination, Button, Modal  } from 'react-bootstrap'
 import "./ShowPlants.css";
 import "./PlantCards.css"
 import { deletePlantsFromUser } from '../../services/userPlants';
@@ -10,7 +10,13 @@ const PlantCards = ({ myPlants, refreshPlants }) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [show, setShow] = useState(false);
   const [plantToDelete, setPlantToDelete] = useState(null);
-  
+  const itemsPerPage = 8;
+  const [currentPage, setCurrentPage] = useState(1);
+  const totalPages = Math.ceil(myPlants.length / itemsPerPage);
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentPlants = myPlants.slice(indexOfFirstItem, indexOfLastItem);
+
   const confirmDelete = (plantId) => {
     setPlantToDelete(plantId);
     setShow(true);
@@ -28,11 +34,15 @@ const PlantCards = ({ myPlants, refreshPlants }) => {
     }
   };
 
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+  
 
   return (
     <>
       <Row xs={1} md={4} className="plantcard">
-        {myPlants?.map((plant, index) => (
+        {currentPlants?.map((plant, index) => (
           <Col key={index}>
             <Card>
               <Card.Header>Featured
@@ -54,6 +64,17 @@ const PlantCards = ({ myPlants, refreshPlants }) => {
           </Col>
         ))}
       </Row>
+      <Pagination>
+          <Pagination.First onClick={() => handlePageChange(1)} />
+          <Pagination.Prev onClick={() => handlePageChange(Math.max(1, currentPage - 1))} />
+          {Array.from({ length: totalPages }, (_, i) => (
+            <Pagination.Item key={i + 1} active={i + 1 === currentPage} onClick={() => handlePageChange(i + 1)}>
+              {i + 1}
+            </Pagination.Item>
+          ))}
+          <Pagination.Next onClick={() => handlePageChange(Math.min(totalPages, currentPage + 1))} />
+          <Pagination.Last onClick={() => handlePageChange(totalPages)} />
+      </Pagination>
       <Modal show={show} onHide={() => setShow(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Delete Confirmation</Modal.Title>
@@ -71,4 +92,3 @@ const PlantCards = ({ myPlants, refreshPlants }) => {
 
 export default PlantCards;
 
-{/* */}
