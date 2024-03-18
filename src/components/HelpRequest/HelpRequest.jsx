@@ -23,7 +23,7 @@ const HelpRequest = (props) => {
         <div>
             <Col>
                 <Card className='card-body2' >
-                    <Card.Img variant="top" src="https://res.cloudinary.com/dououppib/image/upload/v1709825357/PLANTS/Cover_zohttr.png" />
+                    <Card.Img variant="top" src={props?.plant_photo == "" ? "https://res.cloudinary.com/dououppib/image/upload/v1709825357/PLANTS/Cover_zohttr.png" : props.plant_photo} />
                     <Card.Body>
 
                         <Col xs={6} md={4}>

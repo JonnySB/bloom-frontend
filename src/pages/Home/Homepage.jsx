@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { getAllHelpRequestsWithUserDetails } from '../../services/HelpRequests'
+import { getAllHelpRequestsWithUserDetails, getAllHelpRequestsWithUserDetailsAndPlant } from '../../services/HelpRequests'
 import HelpRequest from '../../components/HelpRequest/HelpRequest'
 import './HomePage.css'
 import NavbarComponent from '../../components/Navbar/NavbarComponent'
@@ -14,16 +14,26 @@ const Homepage = () => {
 
 
     useEffect(() => {
-        const fetchHelpRequestsWithUsers = async () => {
+        // const fetchHelpRequestsWithUsers = async () => {
+        //     try {
+        //         const data = await getAllHelpRequestsWithUserDetails();
+        //         const sortedData = data.sort((a, b) => b.id - a.id);
+        //         setHelpRequestsWithUsers(sortedData);
+        //     } catch (error) {
+        //         console.error('Error fetching help requests with users:', error);
+        //     }
+        // };
+        // fetchHelpRequestsWithUsers();
+        const fetchHelpRequestsWithUsersAndPlant = async () => {
             try {
-                const data = await getAllHelpRequestsWithUserDetails();
+                const data = await getAllHelpRequestsWithUserDetailsAndPlant();
                 const sortedData = data.sort((a, b) => b.id - a.id);
                 setHelpRequestsWithUsers(sortedData);
             } catch (error) {
                 console.error('Error fetching help requests with users:', error);
             }
         };
-        fetchHelpRequestsWithUsers();
+        fetchHelpRequestsWithUsersAndPlant();
     }, []);
 
     const redirectToCreateRequest = (e) => {
@@ -52,6 +62,7 @@ const Homepage = () => {
                                             date={helpRequest.date}
                                             first_name={helpRequest.first_name}
                                             last_name={helpRequest.last_name}
+                                            plant_photo={helpRequest.plant_photo}
                                             avatar_url_string={helpRequest.avatar_url_string}
                                             showButtonView={true}
                                         />
