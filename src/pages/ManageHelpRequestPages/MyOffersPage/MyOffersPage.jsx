@@ -11,7 +11,7 @@ const MyOffersPage = () => {
     const [triggerReload, setTriggerReload] = useState(false);
     const [user_id, setuserID] = useState(window.localStorage.getItem("user_id"));
     const [token, setToken] = useState(window.localStorage.getItem("token"));
-
+    
     useEffect(() => {
         const fetchMyHelpOffers = async () => {
             try {
