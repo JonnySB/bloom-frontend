@@ -20,6 +20,7 @@ const Homepage = () => {
             try {
                 const data = await getAllHelpRequestsWithUserDetails();
                 const sortedData = data.sort((a, b) => b.id - a.id);
+                refreshUserData()
                 setHelpRequestsWithUsers(sortedData);
             } catch (error) {
                 console.error('Error fetching help requests with users:', error);
@@ -34,7 +35,6 @@ const Homepage = () => {
     const redirecToLogin = () => {
         navigate("/login");
     }
-
 
     return (
         <>
