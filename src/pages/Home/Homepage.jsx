@@ -13,12 +13,14 @@ const Homepage = () => {
     const navigate = useNavigate();
     const [user_id, setuserID] = useState(window.localStorage.getItem("user_id"));
     const { userData, refreshUserData } = useUser();
+    const token = window.localStorage.getItem("token")
 
     useEffect(() => {
         const fetchHelpRequestsWithUsers = async () => {
             try {
                 const data = await getAllHelpRequestsWithUserDetails();
                 const sortedData = data.sort((a, b) => b.id - a.id);
+                refreshUserData()
                 setHelpRequestsWithUsers(sortedData);
             } catch (error) {
                 console.error('Error fetching help requests with users:', error);
@@ -30,8 +32,9 @@ const Homepage = () => {
     const redirectToCreateRequest = (e) => {
         navigate("/create_request");
     }
-
-
+    const redirecToLogin = () => {
+        navigate("/login");
+    }
 
     return (
         <>

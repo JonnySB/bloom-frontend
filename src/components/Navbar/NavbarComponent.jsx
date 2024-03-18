@@ -8,7 +8,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 
 const NavbarComponent = ({  userDetails }) => {
     const navigate = useNavigate();
-    const id = window.localStorage.getItem("user_id");
+    const id = window.localStorage.getItem("user_id")
     const location = useLocation();
     const token = window.localStorage.getItem("token")
 
@@ -65,6 +65,7 @@ const NavbarComponent = ({  userDetails }) => {
             navigate("/");
         }
     };
+   
     return (
         <Navbar expand="lg" className="bg-body-tertiary sticky-top">
             <Container fluid>
@@ -135,3 +136,6 @@ const NavbarComponent = ({  userDetails }) => {
 };
 
 export default NavbarComponent;
+
+
+
