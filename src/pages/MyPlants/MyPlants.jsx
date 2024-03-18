@@ -6,14 +6,14 @@ import NavbarComponent from '../../components/Navbar/NavbarComponent';
 import Footer from "../../components/Footer/Footer";
 import { getUserPlants } from "../../services/userPlants.js"
 import "./MyPlants.css"
-
+import { useUser } from '../../context/UserContext.jsx';
 
 export const MyPlants = () => {
     const [user_id, setuserID] = useState(window.localStorage.getItem("user_id"));
     const [token, setToken] = useState(window.localStorage.getItem("token"));
     const [userPlants, setUserPlants] = useState([])
     const [isLoading, setIsLoading] = useState(true);
-
+    const { userData, refreshUserData } = useUser();
 
     const fetchPlants = async () => {
         setIsLoading(true);
@@ -34,7 +34,7 @@ export const MyPlants = () => {
 
     return (
         <div>
-           <NavbarComponent refreshPlants={fetchPlants} />
+            <NavbarComponent userDetails={userData}  refeshUserData={refreshUserData}  />
             <div className="my-plants-container">
                 <div className="back-to-profile">
                     <span><a href="/profile">← Back to Profile Page</a></span>

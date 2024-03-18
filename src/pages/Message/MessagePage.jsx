@@ -9,6 +9,7 @@ import NavbarComponent from "../../components/Navbar/NavbarComponent";
 import { getAllMessagesByUserId } from "../../services/messages";
 import io from "socket.io-client";
 const socket = io("http://localhost:5001");
+import { useUser } from '../../context/UserContext.jsx';
 
 export const MessagePage = () => {
     const [selectedMessageId, setSelectedMessageId] = useState(null);
@@ -20,7 +21,7 @@ export const MessagePage = () => {
     const [receiptID, setreceiptID] = useState()
     const [newUserName, setNewUserName] = useState()
     const [myRoomIdentifier, setMyRoomIdentifier] = useState()
-
+    const { userData, refreshUserData } = useUser();
 
     // help_offer_user_id passed from StartChatButton
     const location = useLocation();
@@ -78,7 +79,7 @@ export const MessagePage = () => {
 
     return (
       <>
-        <NavbarComponent />
+          <NavbarComponent userDetails={userData}  refeshUserData={refreshUserData}  />
         <Container className="message-page-container">
             <ChatListComponent onChatSelect={handleChatSelect} allMessages={messages} receiverDetails={receiverDetails} userDetails={userDetails} />
             {selectedMessageId && <MessageContainer messageManager={selectedMessageId} myRoomIdentifier={myRoomIdentifier} newUserName={newUserName} newRecipientId={receiptID}  userDetails={userDetails}  receiverDetails={receiverDetails} />}

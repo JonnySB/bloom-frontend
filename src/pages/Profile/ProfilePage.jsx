@@ -36,7 +36,6 @@ export const Profile = () => {
     }, [])
 
 
-
     return (
         <>
             <NavbarComponent userDetails={userData}  refeshUserData={refreshUserData}  />
