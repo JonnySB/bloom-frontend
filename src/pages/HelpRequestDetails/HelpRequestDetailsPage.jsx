@@ -6,11 +6,12 @@ import { getOneHelpRequestById } from '../../services/HelpRequests';
 import CreateOfferForm from '../../components/CreateOfferForm/CreateOfferForm';
 import NavbarComponent from '../../components/Navbar/NavbarComponent';
 import Footer from '../../components/Footer/Footer';
+import { useUser } from '../../context/UserContext.jsx';
 
 const HelpRequestDetailsPage = () => {
     const { requestId } = useParams(); 
     const [helpRequest, setHelpRequest] = useState(null);
-
+    const { userData, refreshUserData } = useUser();
 
     useEffect(() => {
         const fetchHelpRequest = async () => {
@@ -32,7 +33,7 @@ const HelpRequestDetailsPage = () => {
 
     return (
         <>
-        <NavbarComponent />
+          <NavbarComponent userDetails={userData}  refeshUserData={refreshUserData}  />
         <div className='details-page-container'>
             <div className='details-page-content'>
                 <HelpRequest
