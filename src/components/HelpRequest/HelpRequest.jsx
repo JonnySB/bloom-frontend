@@ -23,7 +23,25 @@ const HelpRequest = ({helpRequestsWithUsers}) => {
         setRquestId(item.id)
         setShow(true);
     }
- 
+    
+    const handleMessageSize = (message) => {
+        if (!message) return ""; 
+        const words = message.split(" ");
+        const fullSize = words.length;
+        const maxWordsToShow = 8;
+    
+        if (fullSize > maxWordsToShow) {
+            return (
+                <>
+                    {words.slice(0, maxWordsToShow).join(" ")}
+                    <br />
+                    <strong>(See full message below)</strong>
+                </>
+            );
+        } else {
+            return message;
+        }
+    };
 
     return (
         <>
@@ -38,11 +56,9 @@ const HelpRequest = ({helpRequestsWithUsers}) => {
                     {item?.first_name && <p role='firstnameAndLastname'>{item?.first_name}&nbsp;{item?.last_name}</p>}
                     <Card.Title>{item?.title}</Card.Title>
                 </Card.Body>
-                {item?.message && <Card.Text>{item?.message}</Card.Text>}
-                {item?.start_date && <Card.Text> Starting date : {item?.start_date} to {item?.end_date}</Card.Text>}
-                <Card.Footer>
-                    {formatPrice(item?.maxprice)}
-                </Card.Footer>
+                <Card.Text>{handleMessageSize(item?.message)}</Card.Text>
+                <Card.Text> Starting date : {item?.start_date} to {item?.end_date}</Card.Text>
+                <Card.Text>{formatPrice(item?.maxprice)}</Card.Text>
                 <Button onClick={() => handleShow(item)}>See full details and make an offer</Button>
             </Card>
             ))}
