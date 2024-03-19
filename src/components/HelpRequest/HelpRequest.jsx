@@ -6,8 +6,7 @@ import CreateOfferForm from '../../components/CreateOfferForm/CreateOfferForm';
 
 const HelpRequest = ({helpRequestsWithUsers}) => {
     const [show, setShow] = useState(false);
-    const [showSecondModal, setShowSecondModal] = useState(false);
-    const handleSecondClose = () => setShowSecondModal(false);
+
     const [requestId, setRquestId] = useState()
     const handleClose = () => setShow(false);
     const navigate = useNavigate();
@@ -24,10 +23,7 @@ const HelpRequest = ({helpRequestsWithUsers}) => {
         setRquestId(item.id)
         setShow(true);
     }
-    const handleSecondShow = () => {
-        setShow(false); 
-        setShowSecondModal(true); 
-    };
+ 
 
     return (
         <>
@@ -57,20 +53,9 @@ const HelpRequest = ({helpRequestsWithUsers}) => {
                 <Modal.Title>Modal heading</Modal.Title>
             </Modal.Header>
             <Modal.Body>Woohoo, you are reading this text in a modal!</Modal.Body>
-            <CreateOfferForm id={requestId} />
-            <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>
-                    Close
-                </Button>
-                <Button variant="primary" onClick={handleClose}>
-                    Save Changes
-                </Button>
-            </Modal.Footer>
+            <CreateOfferForm id={requestId} onSubmitSuccess={() => {handleClose()}} />
+            <Button variant="secondary" onClick={handleClose}>Cancel</Button>
         </Modal>
-   <Modal show={showSecondModal} onHide={handleSecondClose}>
-
-    </Modal>
-
     </>
     )
 }
