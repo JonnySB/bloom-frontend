@@ -55,7 +55,7 @@ const HelpRequest = ({ helpRequestsWithUsers }) => {
                  <Image className="helpRequestImage" src={item?.avatar_url_string == "" ? "https://res.cloudinary.com/dououppib/image/upload/v1709830638/PLANTS/placeholder_ry6d8v.webp" : item?.avatar_url_string} roundedCircle style={{ width: '30px', height: '30px' }} onClick={handleProfileNavigate}/>
                  <Card.Text>{item?.first_name} {item?.last_name}</Card.Text>
               </Card.Header>
-                <Card.Img variant="top" src="https://res.cloudinary.com/dououppib/image/upload/v1709825357/PLANTS/Cover_zohttr.png" />
+                <Card.Img variant="top" src={item?.plant_photo == "" ? "https://res.cloudinary.com/dououppib/image/upload/v1709825357/PLANTS/Cover_zohttr.png" : item.plant_photo} />
                 <Card.Body className="helpRequestBody">
                 <Card.Title className="helpRequestTitle">{item?.title}</Card.Title>
                 <Card.Text className="helpRequestMessage">{handleMessageSize(item?.message)}</Card.Text>
