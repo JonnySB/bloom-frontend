@@ -6,7 +6,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { createHelpOffer } from '../../services/helpOffers';
 import { useNavigate } from 'react-router-dom';
 
-const CreateOfferForm = (props) => {
+const CreateOfferForm = ({id, onSubmitSuccess}) => {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -31,23 +31,22 @@ const CreateOfferForm = (props) => {
 
     const handleSubmitOffer = () => {
         try {
-            createHelpOffer(props.id, message, user_id, bid, token)
+            createHelpOffer(id, message, user_id, bid, token)
                 .then((data) => {
-                    console.log("Data -> ", data)
-                    console.log("Successfully created a help offer")
-                    navigate("/")
-                })
+                    console.log("Data -> ", data);
+                    console.log("Successfully created a help offer");
+                    onSubmitSuccess();
+                    navigate("/");
+                });
         } catch (error) {
-            console.error("Error fetching help offer form", error)
+            console.error("Error fetching help offer form", error);
         }
-    }
+    };
 
     return (
         <>
             {token && (
-                <Button variant="primary" onClick={handleShow}>
-                    Make offer
-                </Button>
+                <Button variant="primary" onClick={handleShow}>Make offer</Button>
             )}
     
             <Modal show={show} onHide={handleClose}>

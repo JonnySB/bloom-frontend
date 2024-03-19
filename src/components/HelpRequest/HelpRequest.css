@@ -1,20 +1,51 @@
-.card-body2{
-    margin-bottom: 4%;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    width: 450px;
+
+.helpRequestContainer {
+    max-width: 1600px; 
+    margin: auto;
 }
-
-/* .profile-and-fullname {
-    display: inline-block;
-} */
-
-.title-and-button {
+.helpRequestInsideContainer {
+    display: flex; 
+    justify-content: center; 
+    flex-wrap: wrap;
+}
+.helpRequestCard {
+    padding: 0;
+    margin-left: 15px; 
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: space-between; 
+    margin-bottom: 15px; 
+    position: relative; 
 }
 
-.view-button {
-    cursor: pointer;
+.helpRequestBody {
+    background-color: white;
+    display: flex;
 }
 
+.helpRequestHeader {
+    background-color: #cefad0;
+    display: flex;
+    padding-bottom: 0px;
+    height: 45px;
+}
+.helpRequestHeader p{
+    padding-left: 15px;
+    font-weight: 800;
+    max-height: 3rem; 
+}
+
+.helpRequestTitle {
+    color: #cefad0;
+}
+.helpRequestButton {
+    background-color: #2E9C45;
+    margin: 0 auto 15px auto; 
+}
+
+.helpRequestModalBody {
+    height: 400px;
+}
+.helpRequestModalfooter {
+    justify-content: center;
+}
