@@ -73,7 +73,7 @@ const CreateRequestPage = () => {
         setShow(true);
       };
 
-      
+      console.log(myRequest)
     return (
         <>
             <NavbarComponent userDetails={userData}  refeshUserData={refreshUserData}  />
@@ -91,7 +91,7 @@ const CreateRequestPage = () => {
                  <Card.Header className="helpRequestHeader">
                     <CloseButton onClick={() => confirmDelete(item.id)} />
                 </Card.Header>
-                <Card.Img variant="top" src={item?.plant_photo == "" ? "https://res.cloudinary.com/dououppib/image/upload/v1709825357/PLANTS/Cover_zohttr.png" : item.plant_photo} />
+                <Card.Img variant="top" src={item?.plant_photos[0] == "" ? "https://res.cloudinary.com/dououppib/image/upload/v1709825357/PLANTS/Cover_zohttr.png" : item?.plant_photos[0]} />
                 <Card.Body className="helpRequestBody">
                 <Card.Title className="helpRequestTitle">{item?.title}</Card.Title>
                 <Card.Text className="helpRequestMessage">{handleMessageSize(item?.message)}</Card.Text>
