@@ -11,8 +11,6 @@ const HelpRequest = ({ helpRequestsWithUsers }) => {
     const handleClose = () => setShow(false);
     const navigate = useNavigate();
 
-
-
     const handleProfileNavigate = (e) => {
         navigate('/Profile')
     }

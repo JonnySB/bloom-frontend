@@ -76,8 +76,7 @@ const CreateRequestPage = () => {
 
     return (
         <>
-  
-             <NavbarComponent userDetails={userData}  refeshUserData={refreshUserData}  />
+            <NavbarComponent userDetails={userData}  refeshUserData={refreshUserData}  />
             <h1>Create help request page</h1>
             <ManageHelpRequestsNavBar />
         <div className='createRequestContainer'>

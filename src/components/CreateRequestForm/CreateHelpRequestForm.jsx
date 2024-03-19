@@ -5,6 +5,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { createHelpRequest } from '../../services/HelpRequests';
 import { useUser } from '../../context/UserContext.jsx';
 
+
 const CreateHelpRequestForm = () => {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
@@ -17,7 +18,7 @@ const CreateHelpRequestForm = () => {
     const { userData, refreshUserData } = useUser();
     const token = window.localStorage.getItem("token");
     const userID = window.localStorage.getItem("user_id");
-  
+
 
     const handleTitleChange = (title) => {
         setTitle(title.target.value);
@@ -48,6 +49,7 @@ const CreateHelpRequestForm = () => {
         try {
             createHelpRequest(title, message, startDate, endDate, maxprice, userID, token)
             setShow(false);
+            window.location.reload()
         } catch(err) {
             console.log("Error fetching create request: ", error)
         }
