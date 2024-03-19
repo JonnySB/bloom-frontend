@@ -10,12 +10,12 @@
 }
 .helpRequestCard {
     padding: 0;
-    margin-left: 15px; /* This might need adjusting if it affects centering */
+    margin-left: 15px; 
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* This will push the button to the bottom */
-    margin-bottom: 15px; /* Adds margin at the bottom of each card */
-    position: relative; /* Needed for absolute positioning of the button */
+    justify-content: space-between; 
+    margin-bottom: 15px; 
+    position: relative; 
 }
 
 .helpRequestBody {

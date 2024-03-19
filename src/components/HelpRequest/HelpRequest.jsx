@@ -47,9 +47,6 @@ const HelpRequest = ({ helpRequestsWithUsers }) => {
     return (
         <>
     <div className="helpRequestContainer">
-     <div className="title"> 
-     <h1>BLOOM</h1>
-     </div>
         <Row xs={1} md={5} className="helpRequestInsideContainer">
             {helpRequestsWithUsers?.map((item, index) => (
             <Card className='helpRequestCard' key={index}>
