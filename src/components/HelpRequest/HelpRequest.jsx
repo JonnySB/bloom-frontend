@@ -4,10 +4,10 @@ import './HelpRequest.css'
 import { useState, useEffect } from 'react';
 import CreateOfferForm from '../../components/CreateOfferForm/CreateOfferForm';
 
-const HelpRequest = ({helpRequestsWithUsers}) => {
+const HelpRequest = ({ helpRequestsWithUsers }) => {
     const [show, setShow] = useState(false);
-
-    const [requestId, setRquestId] = useState()
+    const [fullItem, setFullItem] = useState("")
+    const [requestId, setRequestId] = useState("")
     const handleClose = () => setShow(false);
     const navigate = useNavigate();
 
@@ -20,7 +20,8 @@ const HelpRequest = ({helpRequestsWithUsers}) => {
         return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'GBP' }).format(price);
     };
     const handleShow = (item) => {
-        setRquestId(item.id)
+        setRequestId(item.id)
+        setFullItem(item)
         setShow(true);
     }
     
@@ -42,7 +43,7 @@ const HelpRequest = ({helpRequestsWithUsers}) => {
             return message;
         }
     };
-
+    console.log(fullItem)
     return (
         <>
     <Container>
@@ -66,9 +67,10 @@ const HelpRequest = ({helpRequestsWithUsers}) => {
     </Container>
         <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
-                <Modal.Title>Modal heading</Modal.Title>
+                <Modal.Title>{fullItem.title}</Modal.Title>
             </Modal.Header>
-            <Modal.Body>Woohoo, you are reading this text in a modal!</Modal.Body>
+            <Modal.Body>{fullItem.message}</Modal.Body>
+            <Modal.Footer>Starting date : {fullItem.start_date} to {fullItem.end_date} per {fullItem.maxprice}</Modal.Footer>
             <CreateOfferForm id={requestId} onSubmitSuccess={() => {handleClose()}} />
             <Button variant="secondary" onClick={handleClose}>Cancel</Button>
         </Modal>
@@ -80,40 +82,3 @@ export default HelpRequest;
 
 
 
-
-// return (
-//     <div>
-//         <Col>
-//             <Card className='card-body2' >
-//                 <Card.Img variant="top" src="https://res.cloudinary.com/dououppib/image/upload/v1709825357/PLANTS/Cover_zohttr.png" />
-//                 <Card.Body>
-
-//                     <Col xs={6} md={4}>
-//                         <Image src={props?.avatar_url_string == "" ? "https://res.cloudinary.com/dououppib/image/upload/v1709830638/PLANTS/placeholder_ry6d8v.webp" : props.avatar_url_string} roundedCircle style={{ width: '30px', height: '30px' }} onClick={handleProfileNavigate} />
-//                     </Col>
-//                     {props.first_name && <p role='firstnameAndLastname'>{props.first_name}&nbsp;{props.last_name}</p>}
-//                     <div className='title-and-button'>
-//                         <Card.Title>{props.title}</Card.Title>
-//                         <small className='text-muted'>&nbsp;{props.date}</small>
-//                         {props.showButtonView &&
-//                             <svg
-//                                 className='view-button'
-//                                 xmlns="http://www.w3.org/2000/svg"
-//                                 viewBox="0 0 256 512"
-//                                 style={{ width: '30px', height: '30px' }}
-//                                 onClick={handleSubmitView}>
-//                                 <path d="m224.3 273-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9l22.5-22.8c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z" />
-//                             </svg>
-//                         }
-//                     </div>
-//                     {props.message && <Card.Text>{props.message}</Card.Text>}
-//                     {props.start_date && <Card.Text>{props.start_date} to {props.end_date}</Card.Text>}
-//                     {props.maxprice &&
-//                         <Card.Footer>
-//                             {formatPrice(props.maxprice)}
-//                         </Card.Footer>}
-//                 </Card.Body>
-//             </Card>
-//         </Col>
-//     </div>
-// )
