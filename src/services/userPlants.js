@@ -20,6 +20,8 @@ export const getUserPlants = async (user_id, token) => {
   }
 };
 
+
+
 export const assignPlant = async (user_id, plant_id, quantity, token) => {
   const requestData = {
     user_id: user_id,
@@ -55,12 +57,7 @@ export const assignPlant = async (user_id, plant_id, quantity, token) => {
   }
 };
 
-export const updatePlantsQuantity = async (
-  user_id,
-  plant_id,
-  new_quantity,
-  token
-) => {
+export const updatePlantsQuantity = async (user_id,plant_id,new_quantity,token) => {
   const requestData = {
     user_id: user_id,
     plant_id: Number(plant_id),
@@ -95,3 +92,34 @@ export const updatePlantsQuantity = async (
     console.error("Error updating quantity:", error);
   }
 };
+
+export const deletePlantsFromUser = async (user_id, plant_id, token) => {
+  const requestData = {
+    user_id: user_id,
+    plant_id: Number(plant_id),
+  };
+
+  try {
+    const response = await fetch(`${BACKEND_URL}/plants/user/delete`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(requestData),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Status: ${response.status}`);
+    }
+
+    const data = await response.json();
+
+
+    return "Update successful:", data;
+  } catch (error) {
+    console.error("Error updating quantity:", error);
+  }
+};
+
+

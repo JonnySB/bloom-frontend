@@ -111,7 +111,6 @@ export const getAllRequestsByOneUser = async (userId, token) => {
         };
 
         const response = await fetch(`${BACKEND_URL}/help_requests/user/${userId}`, requestOptions)
-        console.log("The response from service", response)
         if (response.status !== 200) {
             throw new Error("Unable to make GET request for get all requests by one user");
         }

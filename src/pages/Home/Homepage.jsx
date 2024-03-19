@@ -6,12 +6,14 @@ import NavbarComponent from '../../components/Navbar/NavbarComponent'
 import { Row, Col, Card, Image, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom'
 import Footer from '../../components/Footer/Footer'
-
+import { useUser } from '../../context/UserContext.jsx';
 
 const Homepage = () => {
     const [helpRequestsWithUsers, setHelpRequestsWithUsers] = useState([]);
     const navigate = useNavigate();
-
+    const [user_id, setuserID] = useState(window.localStorage.getItem("user_id"));
+    const { userData, refreshUserData } = useUser();
+    const token = window.localStorage.getItem("token")
 
     useEffect(() => {
         
@@ -19,6 +21,7 @@ const Homepage = () => {
             try {
                 const data = await getAllHelpRequestsWithUserDetailsAndPlant();
                 const sortedData = data.sort((a, b) => b.id - a.id);
+                refreshUserData()
                 setHelpRequestsWithUsers(sortedData);
             } catch (error) {
                 console.error('Error fetching help requests with users:', error);
@@ -30,10 +33,13 @@ const Homepage = () => {
     const redirectToCreateRequest = (e) => {
         navigate("/create_request");
     }
+    const redirecToLogin = () => {
+        navigate("/login");
+    }
 
     return (
         <>
-            <NavbarComponent />
+        <NavbarComponent userDetails={userData}  refeshUserData={refreshUserData}  />
             <div className='homepage-main-div'>
                 <h1>BLOOM</h1>
                 <div>

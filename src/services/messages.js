@@ -43,14 +43,15 @@ export const getMessagesById = async (chat_id, token) => {
         console.error('Full error response:', errorResponse);
         throw new Error(`Error fetching messages: ${errorResponse}`);
     }
-}
+} 
 
-export const sendMessage = async (userId, receiverId, receiver_username, sender_username, messageContent, token) => {
+export const sendMessage = async (userId, receiverId, receiver_username, sender_username, messageContent, token, myRoomIdentifier) => {
+  // console.log(userId, receiverId, receiver_username, sender_username, messageContent, myRoomIdentifier) asdasd   
     const requestOptions = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`
+        "Authorization": `Bearer ${token}` 
       },
       body: JSON.stringify({
         userId: userId,
@@ -58,6 +59,7 @@ export const sendMessage = async (userId, receiverId, receiver_username, sender_
         receiver_username:receiver_username,
         sender_username:sender_username,
         content: messageContent,
+        myRoomIdentifier: myRoomIdentifier
         }),
     };
 

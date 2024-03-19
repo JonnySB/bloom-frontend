@@ -9,4 +9,9 @@ export default defineConfig({
     environment: "jsdom", // We are testing a DOM environment, not Node
     setupFiles: "./tests/setup.js", //
   },
+  server: {
+    proxy: {
+      '/api': 'http://localhost:5001', // Proxy /api requests to your Flask backend
+    },
+  }
 });

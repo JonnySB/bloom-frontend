@@ -5,116 +5,119 @@ import { getMessagesById, sendMessage } from "../../services/messages";
 import io from "socket.io-client";
 const socket = io("http://localhost:5001");
 
-function MessageContainer({ messageManager, userDetails }) {
+function MessageContainer({ messageManager, userDetails, receiverDetails, newRecipientId, newUserName, myRoomIdentifier }) {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
-  const [roomInfo, setRoomInfo] = useState("");
   const [token, setToken] = useState(window.localStorage.getItem("token"));
-
+  const [user_id, setuserID] = useState(window.localStorage.getItem("user_id"));
+  const [roomInfo, setRoomInfo] = useState("");
+  const [prevRoomIdentifier, setPrevRoomIdentifier] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        if (messageManager.id) {
+        if (messageManager.id !== 'new') {
           const messagesData = await getMessagesById(messageManager.id, token);
-          setMessages(messagesData);
-        } 
+          const normalizedMessages = messagesData.flatMap(dataItem => 
+            dataItem.message.map(msgStr => {
+              try {
+                return JSON.parse(msgStr);
+              } catch (error) {
+                console.error("Error parsing message:", error, "in string:", msgStr);
+                return { message: "Error parsing message", sender: "Unknown" };
+              }
+            })
+          );
+          setMessages(normalizedMessages);
+        } else {
+          setMessages([]);
+        }
       } catch (err) {
         console.error('Error:', err);
       }
     };
     fetchData();
+  }, [messageManager, token]);
+  
+  useEffect(() => {
 
-    if (messageManager.sender_id && messageManager.recipient_id) {
-      socket.emit('join', { user_id: messageManager.sender_id, receiver_id: messageManager.recipient_id });
-
-      socket.on('new_messages', (data) => {
-        setMessages(data.messages);
-      });
-
-      socket.on('joined_room', (data) => {
-        setRoomInfo(data.message); 
-      });
-
-      return () => {
-        socket.off('new_messages');
-        socket.off('joined_room');
-      };
+  if (myRoomIdentifier !== prevRoomIdentifier) {
+    if (prevRoomIdentifier) {
+      socket.emit('leave', { room: prevRoomIdentifier });
     }
-  }, [messageManager, userDetails]);
+    socket.emit('join', { room: myRoomIdentifier });
+    setPrevRoomIdentifier(myRoomIdentifier);
+  }
+
+  socket.on('new_messages', (data) => {
+    const normalizedData = Array.isArray(data) ? data : [data]; 
+    const newMessages = normalizedData.map(msg => 
+      typeof msg === 'string' ? JSON.parse(msg) : msg
+    );
+    setMessages(currentMessages => [...currentMessages, ...newMessages]);
+  });
+
+  socket.on('joined_room', (data) => {
+    setRoomInfo(data.message); 
+  });
+
+  return () => {
+     if (myRoomIdentifier) {
+    socket.emit('leave', { room: myRoomIdentifier });
+  }
+    socket.off('new_messages');
+    socket.off('joined_room');
+  };
+}, [myRoomIdentifier, socket]);
+
+
 
   const handleSendMessage = async (e) => {
     e.preventDefault();
-    
-    if (!messageManager.id) {
-      // Call the API to create a new chat, then send the message
-      try {
-        const newChat = await sendMessage(messageManager.sender_id, messageManager.recipient_id, messageManager.receiver_username, userDetails.username, newMessage, token);
-        socket.emit('message', { 
-          message: newMessage, 
-          chatId: newChat.id,
-          sender: userDetails.username, 
-          receiver: messageManager.recipient_id,
-        });
-        setNewMessage(""); 
-      } catch (error) {
-        console.error('Error creating new chat or sending message:', error);
-      }
-    } else {
-      console.log("HERE NOW")
-      try {
-        await sendMessage(
-          messageManager.sender_id,
-          messageManager.recipient_id,
-          messageManager.receiver_username,
-          userDetails.username,
-          newMessage,
-          token
-        );
-        socket.emit('message', { 
-          message: newMessage, 
-          chatId: messageManager.id, 
-          sender: userDetails.username, 
-          receiver: messageManager.recipient_id,
-        });
-        setNewMessage(""); 
-
-      } catch (error) {
-        console.error('Error sending message:', error);
-      }
-    }
-  };
-    
-  const renderMessage = (messageObj, idx) => {
-  
+    const newMessageObj = {
+      room: myRoomIdentifier,
+      sender: userDetails.username,
+      sender_id: parseInt(user_id),
+      message: newMessage,
+      receiver_id: newRecipientId,
+      chatId: messageManager.id !== 'new' ? messageManager.id : undefined,
+    };
     try {
-      const parsedMessage = JSON.parse(messageObj); // Parse the message string into an object
-      return (
-        <div key={idx} className="message-bubble">
-          <strong>{parsedMessage.sender === userDetails?.username ? "You" : parsedMessage.sender}:</strong> {parsedMessage.message}
-        </div>
-      );
-    } catch (e) {
-      console.error('Error parsing message:', e);
-      return (
-        <div key={idx} className="message-bubble">
-          {messageObj} 
-        </div>
-      );
+      await sendMessage(parseInt(user_id), newRecipientId, newUserName, userDetails.username, newMessage, token, myRoomIdentifier);
+      socket.emit('message', newMessageObj);
+      const normalizedMessageM = { sender: userDetails?.username, message: newMessage,};
+      setMessages(currentMessages => [...currentMessages, normalizedMessageM]);
+      setNewMessage(""); 
+
+    } catch (error) {
+      console.error('Error:', error);
     }
   };
+
+  const renderMessage = (msgObj, index) => {
+
+    const isCurrentUserMessage = msgObj.sender === userDetails?.username;
+    return (
+      <div key={`message-${index}`} className="message-bubble">
+        <strong>{isCurrentUserMessage ? "You" : msgObj.sender}:</strong> {msgObj.message}
+      </div>
+    );
+  };
+  
 
   return (
     <Container className="message-container">
       <div className="message">
-        {messages.map((messageObj, index) => (
-          <Card key={index} className="message-card">
-            <Card.Header>Messages from {messageManager?.receiver_username}</Card.Header>
-            <Card.Body>
-              {Array.isArray(messageObj.message) ? messageObj.message.map(renderMessage) : renderMessage(messageObj.message)}
-            </Card.Body>
-          </Card>
-        ))}
+        <Card className="message-card">
+          <Card.Header>{userDetails?.username}'s Messages</Card.Header>
+          <Card.Body>
+            {messages.length === 0 ? (
+              <div className="no-messages-placeholder">No Messages</div>
+            ) : (
+              messages.map((msg, index) => renderMessage(msg, index)
+              ))}
+          </Card.Body>
+        </Card>
         <Form onSubmit={handleSendMessage}>
           <div className="input-group mb-3">
             <Form.Control
@@ -129,9 +132,9 @@ function MessageContainer({ messageManager, userDetails }) {
             </Button>
           </div>
         </Form>
-      </div>        
-    </Container>
-  );
+      </div>
+    </Container>  
+  );  
 }
 
-export default MessageContainer;
+export default MessageContainer

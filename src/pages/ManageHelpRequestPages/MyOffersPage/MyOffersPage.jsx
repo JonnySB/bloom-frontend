@@ -1,20 +1,18 @@
 import React, { useState, useEffect } from "react";
 import "./MyOffersPage.css";
-
 import { getOutgoingHelpOffersByUserId } from '../../../services/helpOffers'
-
 import ManageHelpRequestsNavBar from "../../../components/ManageHelpRequestsNavBar/ManageHelpRequestsNavBar";
 import MyOffersTable from "../../../components/MyOffersTable/MyOffersTable";
 import NavbarComponent from "../../../components/Navbar/NavbarComponent";
 import Footer from "../../../components/Footer/Footer";
+import { useUser } from '../../../context/UserContext.jsx';
 
 const MyOffersPage = () => {
-
     const [myOffers, setMyOffers] = useState(null);
     const [triggerReload, setTriggerReload] = useState(false);
-
     const [user_id, setuserID] = useState(window.localStorage.getItem("user_id"));
     const [token, setToken] = useState(window.localStorage.getItem("token"));
+    const { userData, refreshUserData } = useUser();
 
     useEffect(() => {
         const fetchMyHelpOffers = async () => {
@@ -22,7 +20,6 @@ const MyOffersPage = () => {
                 // TODO - add dynamic user
                 const data = await getOutgoingHelpOffersByUserId(user_id, token);
                 setMyOffers(data);
-                console.log(data);
             } catch (error) {
                 console.error("Error fetching received offers: ", error)
             }
@@ -32,7 +29,7 @@ const MyOffersPage = () => {
 
     return (
         <div className="page-container">
-            <NavbarComponent />
+              <NavbarComponent userDetails={userData}  refeshUserData={refreshUserData}  />
             <h1>My Offers</h1>
             <div>
                 <ManageHelpRequestsNavBar />
