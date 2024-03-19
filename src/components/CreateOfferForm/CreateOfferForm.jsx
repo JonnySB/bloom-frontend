@@ -45,9 +45,7 @@ const CreateOfferForm = (props) => {
     return (
         <>
             {token && (
-                <Button variant="primary" onClick={handleShow}>
-                    Make offer
-                </Button>
+                <Button variant="primary" onClick={handleShow}>Make offer</Button>
             )}
     
             <Modal show={show} onHide={handleClose}>

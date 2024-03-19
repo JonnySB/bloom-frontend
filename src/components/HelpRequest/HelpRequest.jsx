@@ -1,24 +1,32 @@
 import { useNavigate, Link } from "react-router-dom";
-import {Card, Col, Row, Pagination, Button, Modal, Container, Image  } from 'react-bootstrap'
+import {Card, Col, Row, Button, Modal, Container, Image  } from 'react-bootstrap'
 import './HelpRequest.css'
 import { useState, useEffect } from 'react';
-
-
+import CreateOfferForm from '../../components/CreateOfferForm/CreateOfferForm';
 
 const HelpRequest = ({helpRequestsWithUsers}) => {
     const [show, setShow] = useState(false);
+    const [showSecondModal, setShowSecondModal] = useState(false);
+    const handleSecondClose = () => setShowSecondModal(false);
+    const [requestId, setRquestId] = useState()
     const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
     const navigate = useNavigate();
 
-    const handleSubmitView = (e) => {
-        navigate(`/help_request_details/${user_id}`);
-    }
+
+
     const handleProfileNavigate = (e) => {
         navigate('/Profile')
     }
     const formatPrice = (price) => {
         return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'GBP' }).format(price);
+    };
+    const handleShow = (item) => {
+        setRquestId(item.id)
+        setShow(true);
+    }
+    const handleSecondShow = () => {
+        setShow(false); 
+        setShowSecondModal(true); 
     };
 
     return (
@@ -39,25 +47,30 @@ const HelpRequest = ({helpRequestsWithUsers}) => {
                 <Card.Footer>
                     {formatPrice(item?.maxprice)}
                 </Card.Footer>
-                <Button onClick={handleShow}>See full details and make an offer</Button>
+                <Button onClick={() => handleShow(item)}>See full details and make an offer</Button>
             </Card>
             ))}
         </Row>
     </Container>
         <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
-            <Modal.Title>Modal heading</Modal.Title>
+                <Modal.Title>Modal heading</Modal.Title>
             </Modal.Header>
             <Modal.Body>Woohoo, you are reading this text in a modal!</Modal.Body>
+            <CreateOfferForm id={requestId} />
             <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
-                Close
-            </Button>
-            <Button variant="primary" onClick={handleClose}>
-                Save Changes
-            </Button>
+                <Button variant="secondary" onClick={handleClose}>
+                    Close
+                </Button>
+                <Button variant="primary" onClick={handleClose}>
+                    Save Changes
+                </Button>
             </Modal.Footer>
-       </Modal>
+        </Modal>
+   <Modal show={showSecondModal} onHide={handleSecondClose}>
+
+    </Modal>
+
     </>
     )
 }
