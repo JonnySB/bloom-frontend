@@ -48,6 +48,7 @@ const HelpRequestDetailsPage = () => {
                     first_name={helpRequest.user_details.first_name}
                     last_name={helpRequest.user_details.last_name}
                     avatar_url_string={helpRequest.user_details.avatar_url_string}
+                    plant_photo={helpRequest.plant_photo}
                     showButtonView={false}
                 />
                 <CreateOfferForm id={requestId} />
