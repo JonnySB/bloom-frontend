@@ -1,29 +1,23 @@
-import React, { useState, useRef } from 'react';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
+import React, { useState } from 'react';
+import {Button, Form, Image, Modal} from 'react-bootstrap';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { createHelpRequest } from '../../services/HelpRequests';
-import { useNavigate, useLocation } from 'react-router-dom';
-import Modal from 'react-bootstrap/Modal';
-import { Image } from 'react-bootstrap';
+import { useUser } from '../../context/UserContext.jsx';
 
-const CreateHelpRequestForm = (props) => {
-
+const CreateHelpRequestForm = () => {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-
     const [title, setTitle] = useState("");
     const [message, setMessage] = useState("");
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
     const [maxprice, setMaxprice] = useState(0);
-
+    const { userData, refreshUserData } = useUser();
     const token = window.localStorage.getItem("token");
     const userID = window.localStorage.getItem("user_id");
-    const navigate = useNavigate();
-    const location = useLocation();
+  
 
     const handleTitleChange = (title) => {
         setTitle(title.target.value);
@@ -50,23 +44,15 @@ const CreateHelpRequestForm = (props) => {
             console.log("Make sure you enter in the following format: 00.00")
         }
     }
-
-    const handleSubmitRequest = () => {
-        createHelpRequest(title, message, startDate, endDate, maxprice, userID, token)
-            .then((data) => {
-                console.log("Data -> ", data)
-                console.log("Successfully created a help request")
-                if (location.pathname === "/") {
-                    window.location.reload(); // Refresh the page
-                } else {
-                    navigate("/"); // Navigate to '/profile'
-                }
-            })
-            .catch((error) => {
-                console.error("Error fetching create request: ", error)
-                alert("Sorry, there was an error!")
-            })
+    const handleSubmitRequest = async () => {
+        try {
+            createHelpRequest(title, message, startDate, endDate, maxprice, userID, token)
+            setShow(false);
+        } catch(err) {
+            console.log("Error fetching create request: ", error)
+        }
     }
+
     return (
         <>
             <Button variant="primary" onClick={handleShow}>
@@ -74,20 +60,14 @@ const CreateHelpRequestForm = (props) => {
             </Button>
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Make an offer to help</Modal.Title>
+                    <Image src={userData?.avatar_url_string == "" ? "https://res.cloudinary.com/dououppib/image/upload/v1709830638/PLANTS/placeholder_ry6d8v.webp" : userData?.avatar_url_string} roundedCircle style={{ width: '30px', height: '30px' }} />
+                    <Modal.Title>Make a help request</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                 <Form>
-                <Image src={props?.avatar_url_string == "" ? "https://res.cloudinary.com/dououppib/image/upload/v1709830638/PLANTS/placeholder_ry6d8v.webp" : props.avatar_url_string} roundedCircle style={{ width: '30px', height: '30px' }} />
                 <Form.Group className="mb-3" controlId="title">
                     <Form.Label>Title</Form.Label>
-                    <Form.Control
-                        type="text"
-                        placeholder="Title"
-                        value={title}
-                        autoFocus
-                        onChange={handleTitleChange}
-                    />
+                    <Form.Control type="text" placeholder="Title" value={title} autoFocus onChange={handleTitleChange} />
                 </Form.Group>
                 <Form.Group
                     className="mb-3"
