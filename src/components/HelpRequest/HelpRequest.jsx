@@ -59,11 +59,11 @@ const HelpRequest = ({ helpRequestsWithUsers }) => {
               </Card.Header>
                 <Card.Img variant="top" src="https://res.cloudinary.com/dououppib/image/upload/v1709825357/PLANTS/Cover_zohttr.png" />
                 <Card.Body className="helpRequestBody">
-                <Card.Title>{item?.title}</Card.Title>
+                <Card.Title className="helpRequestTitle">{item?.title}</Card.Title>
                 <Card.Text className="helpRequestMessage">{handleMessageSize(item?.message)}</Card.Text>
-                <Card.Text className="helpRequestDate"> Starting date : {item?.start_date} to {item?.end_date}</Card.Text>
-                <Card.Text className="helpRequestPrice">{formatPrice(item?.maxprice)}</Card.Text>
-                <Button onClick={() => handleShow(item)}>See full details and make an offer</Button>
+                <Card.Text className="helpRequestDate"> From : {item?.start_date} to {item?.end_date}</Card.Text>
+                <Card.Text className="helpRequestPrice">Price offered {formatPrice(item?.maxprice)}</Card.Text>
+                <Button className="helpRequestButton" onClick={() => handleShow(item)}>See full details and make an offer</Button>
                 </Card.Body>
             </Card>
             ))}
@@ -73,8 +73,8 @@ const HelpRequest = ({ helpRequestsWithUsers }) => {
             <Modal.Header closeButton>
                 <Modal.Title>{fullItem.title}</Modal.Title>
             </Modal.Header>
-            <Modal.Body>{fullItem.message}</Modal.Body>
-            <Modal.Footer>Starting date : {fullItem.start_date} to {fullItem.end_date} per {fullItem.maxprice}</Modal.Footer>
+            <Modal.Body className="helpRequestModalBody">{fullItem.message}</Modal.Body>
+            <Modal.Footer className="helpRequestModalfooter">Starting date : {fullItem.start_date} to {fullItem.end_date} {formatPrice(fullItem.maxprice)}</Modal.Footer>
             <CreateOfferForm id={requestId} onSubmitSuccess={() => {handleClose()}} />
             <Button variant="secondary" onClick={handleClose}>Cancel</Button>
         </Modal>

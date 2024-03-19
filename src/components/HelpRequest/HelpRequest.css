@@ -10,14 +10,17 @@
 }
 .helpRequestCard {
     padding: 0;
-    margin-left: 15px;
+    margin-left: 15px; /* This might need adjusting if it affects centering */
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    justify-content: space-between; /* This will push the button to the bottom */
+    margin-bottom: 15px; /* Adds margin at the bottom of each card */
+    position: relative; /* Needed for absolute positioning of the button */
 }
 
 .helpRequestBody {
     background-color: white;
+    display: flex;
 }
 
 .helpRequestHeader {
@@ -29,4 +32,20 @@
 .helpRequestHeader p{
     padding-left: 15px;
     font-weight: 800;
+    max-height: 3rem; 
+}
+
+.helpRequestTitle {
+    color: #cefad0;
+}
+.helpRequestButton {
+    background-color: #2E9C45;
+    margin: 0 auto 15px auto; 
+}
+
+.helpRequestModalBody {
+    height: 400px;
+}
+.helpRequestModalfooter {
+    justify-content: center;
 }
