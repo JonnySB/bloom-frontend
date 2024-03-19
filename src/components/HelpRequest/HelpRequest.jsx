@@ -1,11 +1,14 @@
 import { useNavigate, Link } from "react-router-dom";
 import {Card, Col, Row, Pagination, Button, Modal, Container, Image  } from 'react-bootstrap'
 import './HelpRequest.css'
-
+import { useState, useEffect } from 'react';
 
 
 
 const HelpRequest = ({helpRequestsWithUsers}) => {
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
     const navigate = useNavigate();
 
     const handleSubmitView = (e) => {
@@ -19,6 +22,7 @@ const HelpRequest = ({helpRequestsWithUsers}) => {
     };
 
     return (
+        <>
     <Container>
         <h1>BLOOM</h1>
         <Row xs={1} md={4} >
@@ -31,16 +35,30 @@ const HelpRequest = ({helpRequestsWithUsers}) => {
                     <Card.Title>{item?.title}</Card.Title>
                 </Card.Body>
                 {item?.message && <Card.Text>{item?.message}</Card.Text>}
-                {item?.start_date && <Card.Text>{item?.start_date} to {item?.end_date}</Card.Text>}
+                {item?.start_date && <Card.Text> Starting date : {item?.start_date} to {item?.end_date}</Card.Text>}
                 <Card.Footer>
                     {formatPrice(item?.maxprice)}
                 </Card.Footer>
+                <Button onClick={handleShow}>See full details and make an offer</Button>
             </Card>
             ))}
         </Row>
-
     </Container>
-
+        <Modal show={show} onHide={handleClose}>
+            <Modal.Header closeButton>
+            <Modal.Title>Modal heading</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>Woohoo, you are reading this text in a modal!</Modal.Body>
+            <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+                Close
+            </Button>
+            <Button variant="primary" onClick={handleClose}>
+                Save Changes
+            </Button>
+            </Modal.Footer>
+       </Modal>
+    </>
     )
 }
 
