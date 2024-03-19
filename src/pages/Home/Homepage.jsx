@@ -14,26 +14,17 @@ const Homepage = () => {
 
 
     useEffect(() => {
-        const fetchHelpRequestsWithUsers = async () => {
+        
+        const fetchHelpRequestsWithUsersAndPlant = async () => {
             try {
-                const data = await getAllHelpRequestsWithUserDetails();
+                const data = await getAllHelpRequestsWithUserDetailsAndPlant();
                 const sortedData = data.sort((a, b) => b.id - a.id);
                 setHelpRequestsWithUsers(sortedData);
             } catch (error) {
                 console.error('Error fetching help requests with users:', error);
             }
         };
-        fetchHelpRequestsWithUsers();
-        // const fetchHelpRequestsWithUsersAndPlant = async () => {
-        //     try {
-        //         const data = await getAllHelpRequestsWithUserDetailsAndPlant();
-        //         const sortedData = data.sort((a, b) => b.id - a.id);
-        //         setHelpRequestsWithUsers(sortedData);
-        //     } catch (error) {
-        //         console.error('Error fetching help requests with users:', error);
-        //     }
-        // };
-        // fetchHelpRequestsWithUsersAndPlant();
+        fetchHelpRequestsWithUsersAndPlant();
     }, []);
 
     const redirectToCreateRequest = (e) => {
