@@ -16,6 +16,7 @@ const CreateRequestPage = () => {
     const [myRequest, setMyRequests] = useState([]);
     const [show, setShow] = useState(false);
     const [cardToDelete, setCardToDelete] = useState(null);
+    const [deleted, setDeleted] = useState(false);
 
     useEffect(() => {
         const fetchAllRequestsByOneUser = async () => {
@@ -28,8 +29,8 @@ const CreateRequestPage = () => {
                 console.error(`Error fetching GET all requests made by current user with user_id: ${userID}`, error)
             }
         }
-        fetchAllRequestsByOneUser()
-    }, [])
+        fetchAllRequestsByOneUser().then(() => setDeleted(false));
+    }, [deleted])
 
     const formatPrice = (price) => {
         return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'GBP' }).format(price);
@@ -53,12 +54,13 @@ const CreateRequestPage = () => {
             return message;
         }
     };
-    console.log(cardToDelete)
+
     const handleDelete = async () => {
         if (cardToDelete) {
           try {
             await deleteHelpRequestFromUser(userID, cardToDelete, token);
-            setShow(false); 
+            setShow(false);
+            setDeleted(true);
           } catch (err) {
             console.error('Error deleting the plant:', err);
           }
