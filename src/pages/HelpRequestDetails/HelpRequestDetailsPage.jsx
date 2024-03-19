@@ -6,11 +6,12 @@ import { getOneHelpRequestById } from '../../services/HelpRequests';
 import CreateOfferForm from '../../components/CreateOfferForm/CreateOfferForm';
 import NavbarComponent from '../../components/Navbar/NavbarComponent';
 import Footer from '../../components/Footer/Footer';
+import { useUser } from '../../context/UserContext.jsx';
 
 const HelpRequestDetailsPage = () => {
     const { requestId } = useParams(); 
     const [helpRequest, setHelpRequest] = useState(null);
-
+    const { userData, refreshUserData } = useUser();
 
     useEffect(() => {
         const fetchHelpRequest = async () => {
@@ -32,7 +33,7 @@ const HelpRequestDetailsPage = () => {
 
     return (
         <>
-        <NavbarComponent />
+          <NavbarComponent userDetails={userData}  refeshUserData={refreshUserData}  />
         <div className='details-page-container'>
             <div className='details-page-content'>
                 <HelpRequest
@@ -47,6 +48,7 @@ const HelpRequestDetailsPage = () => {
                     first_name={helpRequest.user_details.first_name}
                     last_name={helpRequest.user_details.last_name}
                     avatar_url_string={helpRequest.user_details.avatar_url_string}
+                    plant_photo={helpRequest.plant_photo}
                     showButtonView={false}
                 />
                 <CreateOfferForm id={requestId} />
