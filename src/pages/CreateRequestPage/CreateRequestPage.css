@@ -1,3 +1,13 @@
-h1 {
-    margin-bottom: 40px;
+
+.crequestRequestBar {
+    background-color: aquamarine;
+    display: flex;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.createRequestContainer {
+    margin: auto;
+    background-color: aqua;
+    max-width: 1600px; 
 }

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { getAllHelpRequestsWithUserDetails, getAllHelpRequestsWithUserDetailsAndPlant } from '../../services/HelpRequests'
+import { getAllHelpRequestsWithUserDetailsAndPlant } from '../../services/HelpRequests'
 import HelpRequest from '../../components/HelpRequest/HelpRequest'
 import './HomePage.css'
 import NavbarComponent from '../../components/Navbar/NavbarComponent'
