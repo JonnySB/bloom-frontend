@@ -101,3 +101,25 @@ export const getAllRequestsByOneUser = async (userId, token) => {
         console.error("API Error", error)
     }
 }
+
+export const getAllHelpRequestsWithUserDetailsAndPlant = async () => {
+    try {
+        const requestOptions = {
+            method: "GET",
+            headers: {}
+        };
+
+        const response = await fetch(`${BACKEND_URL}/help_requests3`, requestOptions);
+        if (!response.ok) {
+            throw new Error('Failed to fetch all help requests with user details');
+        }
+
+        const data = await response.json();
+        // console.log("DATA", data)
+        return data;
+
+    } catch(error) {
+        console.error("API Error:", error);
+        throw error;
+    }
+}
