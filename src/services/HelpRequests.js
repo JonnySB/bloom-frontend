@@ -57,7 +57,7 @@ export const getOneHelpRequestById = async (requestId) => {
         }
 
         const data = await response.json();
-        // console.log("DATA", data);
+        console.log("DATA", data);
         return data;
         
     } catch(error) {
