@@ -3,17 +3,14 @@ import { getAllHelpRequestsWithUserDetails } from '../../services/HelpRequests'
 import HelpRequest from '../../components/HelpRequest/HelpRequest'
 import './HomePage.css'
 import NavbarComponent from '../../components/Navbar/NavbarComponent'
-import { Row, Col, Card, Image, Button } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom'
+import { Row, Col, Container } from 'react-bootstrap';
 import Footer from '../../components/Footer/Footer'
 import { useUser } from '../../context/UserContext.jsx';
 
 const Homepage = () => {
     const [helpRequestsWithUsers, setHelpRequestsWithUsers] = useState([]);
-    const navigate = useNavigate();
-    const [user_id, setuserID] = useState(window.localStorage.getItem("user_id"));
     const { userData, refreshUserData } = useUser();
-    const token = window.localStorage.getItem("token")
+
 
     useEffect(() => {
         const fetchHelpRequestsWithUsers = async () => {
@@ -29,12 +26,6 @@ const Homepage = () => {
         fetchHelpRequestsWithUsers();
     }, []);
 
-    const redirectToCreateRequest = (e) => {
-        navigate("/create_request");
-    }
-    const redirecToLogin = () => {
-        navigate("/login");
-    }
 
     return (
         <>
@@ -42,9 +33,7 @@ const Homepage = () => {
             <div className='homepage-main-div'>
                 <h1>BLOOM</h1>
                 <div>
-                    {/* <Button onClick={redirectToCreateRequest}>create request</Button> */}
-                    <br />
-                    <br />
+          
                     <div role='feed'>
                         {helpRequestsWithUsers.map((helpRequest, index) => (
                             (index % 3 === 0) && <Row key={index}>

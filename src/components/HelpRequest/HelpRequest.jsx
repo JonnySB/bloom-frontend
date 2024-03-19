@@ -5,7 +5,6 @@ import './HelpRequest.css'
 import { Image } from 'react-bootstrap';
 
 
-
 const HelpRequest = (props) => {
     const navigate = useNavigate();
 
