@@ -22,6 +22,28 @@ export const getAllHelpRequestsWithUserDetails = async () => {
     }
 }
 
+export const getAllHelpRequestsWithUserDetailsAndPlant = async () => {
+    try {
+        const requestOptions = {
+            method: "GET",
+            headers: {}
+        };
+
+        const response = await fetch(`${BACKEND_URL}/help_requests3`, requestOptions);
+        if (!response.ok) {
+            throw new Error('Failed to fetch all help requests with user details');
+        }
+
+        const data = await response.json();
+        // console.log("DATA", data)
+        return data;
+        
+    } catch(error) {
+        console.error("API Error:", error);
+        throw error;
+    }
+}
+
 export const getOneHelpRequestById = async (requestId) => {
     try {
         const requestOptions = {
@@ -35,7 +57,7 @@ export const getOneHelpRequestById = async (requestId) => {
         }
 
         const data = await response.json();
-        // console.log("DATA", data);
+        console.log("DATA", data);
         return data;
         
     } catch(error) {
@@ -102,24 +124,3 @@ export const getAllRequestsByOneUser = async (userId, token) => {
     }
 }
 
-export const getAllHelpRequestsWithUserDetailsAndPlant = async () => {
-    try {
-        const requestOptions = {
-            method: "GET",
-            headers: {}
-        };
-
-        const response = await fetch(`${BACKEND_URL}/help_requests3`, requestOptions);
-        if (!response.ok) {
-            throw new Error('Failed to fetch all help requests with user details');
-        }
-
-        const data = await response.json();
-        // console.log("DATA", data)
-        return data;
-
-    } catch(error) {
-        console.error("API Error:", error);
-        throw error;
-    }
-}
