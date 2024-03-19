@@ -43,28 +43,32 @@ const HelpRequest = ({ helpRequestsWithUsers }) => {
             return message;
         }
     };
-    console.log(fullItem)
+
     return (
         <>
-    <Container>
-        <h1>BLOOM</h1>
-        <Row xs={1} md={4} >
+    <div className="helpRequestContainer">
+     <div className="title"> 
+     <h1>BLOOM</h1>
+     </div>
+        <Row xs={1} md={5} className="helpRequestInsideContainer">
             {helpRequestsWithUsers?.map((item, index) => (
-            <Card className='card-body2' key={index}>
+            <Card className='helpRequestCard' key={index}>
+                 <Card.Header className="helpRequestHeader">
+                 <Image className="helpRequestImage" src={item?.avatar_url_string == "" ? "https://res.cloudinary.com/dououppib/image/upload/v1709830638/PLANTS/placeholder_ry6d8v.webp" : item?.avatar_url_string} roundedCircle style={{ width: '30px', height: '30px' }} onClick={handleProfileNavigate}/>
+                 <Card.Text>{item?.first_name} {item?.last_name}</Card.Text>
+              </Card.Header>
                 <Card.Img variant="top" src="https://res.cloudinary.com/dououppib/image/upload/v1709825357/PLANTS/Cover_zohttr.png" />
-                <Card.Body>
-                <Image src={item?.avatar_url_string == "" ? "https://res.cloudinary.com/dououppib/image/upload/v1709830638/PLANTS/placeholder_ry6d8v.webp" : item?.avatar_url_string} roundedCircle style={{ width: '30px', height: '30px' }} onClick={handleProfileNavigate}/>
-                    {item?.first_name && <p role='firstnameAndLastname'>{item?.first_name}&nbsp;{item?.last_name}</p>}
-                    <Card.Title>{item?.title}</Card.Title>
-                </Card.Body>
-                <Card.Text>{handleMessageSize(item?.message)}</Card.Text>
-                <Card.Text> Starting date : {item?.start_date} to {item?.end_date}</Card.Text>
-                <Card.Text>{formatPrice(item?.maxprice)}</Card.Text>
+                <Card.Body className="helpRequestBody">
+                <Card.Title>{item?.title}</Card.Title>
+                <Card.Text className="helpRequestMessage">{handleMessageSize(item?.message)}</Card.Text>
+                <Card.Text className="helpRequestDate"> Starting date : {item?.start_date} to {item?.end_date}</Card.Text>
+                <Card.Text className="helpRequestPrice">{formatPrice(item?.maxprice)}</Card.Text>
                 <Button onClick={() => handleShow(item)}>See full details and make an offer</Button>
+                </Card.Body>
             </Card>
             ))}
         </Row>
-    </Container>
+    </div>
         <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
                 <Modal.Title>{fullItem.title}</Modal.Title>

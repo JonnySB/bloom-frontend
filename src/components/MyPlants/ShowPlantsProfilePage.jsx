@@ -37,7 +37,7 @@ const PlantCards = ({myPlants, refreshPlants}) => {
         {myPlants?.slice(0, 4).reverse().map((plant, index) => (
           <Col key={index}>
             <Card>
-              <Card.Header>Featured
+              <Card.Header>Featuredd
                 <CloseButton onClick={() => confirmDelete(plant.plant_id)} />
               </Card.Header>
               <Card.Body style={{ minHeight: "10rem" }}>
