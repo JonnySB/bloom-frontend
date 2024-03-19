@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import CreateHelpRequestForm from '../../components/CreateRequestForm/CreateHelpRequestForm'
-import { getAllRequestsByOneUser } from '../../services/HelpRequests'
+import { getAllRequestsByOneUser, deleteHelpRequestFromUser } from '../../services/HelpRequests'
 import NavbarComponent from '../../components/Navbar/NavbarComponent'
 import ManageHelpRequestsNavBar from '../../components/ManageHelpRequestsNavBar/ManageHelpRequestsNavBar'
 import { useUser } from '../../context/UserContext.jsx';
@@ -53,10 +53,25 @@ const CreateRequestPage = () => {
             return message;
         }
     };
-    const confirmDelete = (plantId) => {
-        setCardToDelete(plantId);
+    console.log(cardToDelete)
+    const handleDelete = async () => {
+        if (cardToDelete) {
+          try {
+            await deleteHelpRequestFromUser(userID, cardToDelete, token);
+            setShow(false); 
+          } catch (err) {
+            console.error('Error deleting the plant:', err);
+          }
+        }
+      };
+
+
+    const confirmDelete = (itemId) => {
+        setCardToDelete(itemId);
         setShow(true);
       };
+
+
     return (
         <>
   
@@ -94,7 +109,7 @@ const CreateRequestPage = () => {
             <Modal.Body>Are you sure you want to delete this plant?</Modal.Body>
             <Modal.Footer>
             <Button variant="secondary" onClick={() => setShow(false)}>Cancel</Button>
-            <Button variant="danger">Delete</Button>
+            <Button variant="danger" onClick={handleDelete}>Delete</Button>
             </Modal.Footer>
       </Modal>
     </div>
