@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from 'react'
 import CreateHelpRequestForm from '../../components/CreateRequestForm/CreateHelpRequestForm'
-import HelpRequest from '../../components/HelpRequest/HelpRequest'
 import { getAllRequestsByOneUser } from '../../services/HelpRequests'
 import NavbarComponent from '../../components/Navbar/NavbarComponent'
 import ManageHelpRequestsNavBar from '../../components/ManageHelpRequestsNavBar/ManageHelpRequestsNavBar'
 import { useUser } from '../../context/UserContext.jsx';
-import {Card, Col, Row, Button, Modal, Container, Image  } from 'react-bootstrap'
+import {Card, CloseButton, Row, Button, Modal  } from 'react-bootstrap'
+
+
+
 
 const CreateRequestPage = () => {
     const { userData, refreshUserData } = useUser();
     const userID = window.localStorage.getItem("user_id")
     const token = window.localStorage.getItem("token")
     const [myRequest, setMyRequests] = useState([]);
+    const [show, setShow] = useState(false);
+    const [cardToDelete, setCardToDelete] = useState(null);
 
     useEffect(() => {
         const fetchAllRequestsByOneUser = async () => {
@@ -49,20 +53,26 @@ const CreateRequestPage = () => {
             return message;
         }
     };
-    console.log(myRequest)
-
+    const confirmDelete = (plantId) => {
+        setCardToDelete(plantId);
+        setShow(true);
+      };
+      console.log(userData)
     return (
         <>
              <NavbarComponent userDetails={userData}  refeshUserData={refreshUserData}  />
             <h1>Create help request page</h1>
             <ManageHelpRequestsNavBar />
-            <div><CreateHelpRequestForm /></div>
+            <div className='crequestRequestBar'>
+                Hello {userData?.username} see your requests below you can also create make a new request
+                <CreateHelpRequestForm />
+            </div>
             <div className="helpRequestContainer">
         <Row xs={1} md={5} className="helpRequestInsideContainer">
             {myRequest?.map((item, index) => (
             <Card className='helpRequestCard' key={index}>
                  <Card.Header className="helpRequestHeader">
-             
+                    <CloseButton onClick={() => confirmDelete(item.id)} />
                 </Card.Header>
                 <Card.Img variant="top" src="https://res.cloudinary.com/dououppib/image/upload/v1709825357/PLANTS/Cover_zohttr.png" />
                 <Card.Body className="helpRequestBody">
@@ -75,6 +85,16 @@ const CreateRequestPage = () => {
             </Card>
             ))}
         </Row>
+        <Modal show={show} onHide={() => setShow(false)}>
+            <Modal.Header closeButton>
+            <Modal.Title>Delete Confirmation</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>Are you sure you want to delete this plant?</Modal.Body>
+            <Modal.Footer>
+            <Button variant="secondary" onClick={() => setShow(false)}>Cancel</Button>
+            <Button variant="danger">Delete</Button>
+            </Modal.Footer>
+      </Modal>
     </div>
 
         </>
