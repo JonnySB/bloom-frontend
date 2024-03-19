@@ -29,37 +29,48 @@ const Homepage = () => {
 
     return (
         <>
-        <NavbarComponent userDetails={userData}  refeshUserData={refreshUserData}  />
-            <div className='homepage-main-div'>
-                <h1>BLOOM</h1>
-                <div>
-          
-                    <div role='feed'>
-                        {helpRequestsWithUsers.map((helpRequest, index) => (
-                            (index % 3 === 0) && <Row key={index}>
-                                {helpRequestsWithUsers.slice(index, index + 3).map((helpRequest, i) => (
-                                    <Col key={i} xs={12} md={4}>
-                                        <HelpRequest
-                                            className="help-request-component"
-                                            key={helpRequest.id}
-                                            id={helpRequest.id}
-                                            title={helpRequest.title}
-                                            date={helpRequest.date}
-                                            first_name={helpRequest.first_name}
-                                            last_name={helpRequest.last_name}
-                                            avatar_url_string={helpRequest.avatar_url_string}
-                                            showButtonView={true}
-                                        />
-                                    </Col>
-                                ))}
-                            </Row>
-                        ))}
-                    </div>
-                </div>
-            </div>
+            <NavbarComponent userDetails={userData}  refeshUserData={refreshUserData}  />
+            <HelpRequest  helpRequestsWithUsers={helpRequestsWithUsers}/>
             <Footer />
         </>
     );
 }
 
 export default Homepage;
+
+
+
+// return (
+//     <>
+//     <NavbarComponent userDetails={userData}  refeshUserData={refreshUserData}  />
+//         <div className='homepage-main-div'>
+//             <h1>BLOOM</h1>
+//             <div>
+      
+//                 <div role='feed'>
+//                     {helpRequestsWithUsers.map((helpRequest, index) => (
+//                         (index % 3 === 0) && <Row key={index}>
+//                             {helpRequestsWithUsers.slice(index, index + 3).map((helpRequest, i) => (
+//                                 <Col key={i} xs={12} md={4}>
+//                                     <HelpRequest
+//                                         className="help-request-component"
+//                                         key={helpRequest.id}
+//                                         id={helpRequest.id}
+//                                         title={helpRequest.title}
+//                                         date={helpRequest.date}
+//                                         first_name={helpRequest.first_name}
+//                                         last_name={helpRequest.last_name}
+//                                         avatar_url_string={helpRequest.avatar_url_string}
+//                                         showButtonView={true}
+//                                     />
+//                                 </Col>
+//                             ))}
+//                         </Row>
+//                     ))}
+//                 </div>
+//             </div>
+//         </div>
+//         <Footer />
+//     </>
+// );
+// }
