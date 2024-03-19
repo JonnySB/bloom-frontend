@@ -5,7 +5,7 @@ import NavbarComponent from '../../components/Navbar/NavbarComponent'
 import ManageHelpRequestsNavBar from '../../components/ManageHelpRequestsNavBar/ManageHelpRequestsNavBar'
 import { useUser } from '../../context/UserContext.jsx';
 import {Card, CloseButton, Row, Button, Modal  } from 'react-bootstrap'
-
+import "./CreateRequestPage.css"
 
 
 
@@ -57,17 +57,18 @@ const CreateRequestPage = () => {
         setCardToDelete(plantId);
         setShow(true);
       };
-      console.log(userData)
     return (
         <>
+  
              <NavbarComponent userDetails={userData}  refeshUserData={refreshUserData}  />
             <h1>Create help request page</h1>
             <ManageHelpRequestsNavBar />
+        <div className='createRequestContainer'>
             <div className='crequestRequestBar'>
                 Hello {userData?.username} see your requests below you can also create make a new request
                 <CreateHelpRequestForm />
             </div>
-            <div className="helpRequestContainer">
+        <div className="helpRequestContainer">
         <Row xs={1} md={5} className="helpRequestInsideContainer">
             {myRequest?.map((item, index) => (
             <Card className='helpRequestCard' key={index}>
@@ -85,6 +86,7 @@ const CreateRequestPage = () => {
             </Card>
             ))}
         </Row>
+        </div>
         <Modal show={show} onHide={() => setShow(false)}>
             <Modal.Header closeButton>
             <Modal.Title>Delete Confirmation</Modal.Title>
@@ -97,7 +99,7 @@ const CreateRequestPage = () => {
       </Modal>
     </div>
 
-        </>
+    </>
     )
 }
 
