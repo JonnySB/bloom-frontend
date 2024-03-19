@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import {Card, Row, Button, Modal, Image  } from 'react-bootstrap'
 import './HelpRequest.css'
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import CreateOfferForm from '../../components/CreateOfferForm/CreateOfferForm';
 
 const HelpRequest = ({ helpRequestsWithUsers }) => {
