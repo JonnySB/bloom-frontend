@@ -56,7 +56,7 @@ export const Profile = () => {
                 <UserNavbar userDetails={userData} refeshUserData={refreshUserData}/>
                 <Container className='Items'>
                     <PlantCards myPlants={userPlants} userDetails={my_item} refeshUserData={refreshUserData}/>
-                    <RequiredOffers userOffers={userOffers} />
+                    <RequiredOffers userOffers={userOffers} userDetails={my_item} />
                 </Container>
             </div>
             <Footer />

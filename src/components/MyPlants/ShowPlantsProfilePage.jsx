@@ -32,13 +32,15 @@ const PlantCards = ({myPlants, refreshPlants, userDetails}) => {
     <>
      <Container className="title">
        <h1>Plants owned</h1>
+       {userDetails?.user_id == userId || userDetails == userId ? 
        <Link to="/myplants" className="link-button">Expand</Link>
+       : ""}
       </Container>
       <Row xs={1} md={4} className="plantcard">
         {myPlants?.slice(0, 4).reverse().map((plant, index) => (
           <Col key={index}>
             <Card>
-              {userDetails?.user_id == userId || userDetails == userId? 
+              {userDetails?.user_id == userId || userDetails == userId ? 
               <Card.Header>Featured
               <CloseButton onClick={() => confirmDelete(plant.plant_id)} />
               </Card.Header>

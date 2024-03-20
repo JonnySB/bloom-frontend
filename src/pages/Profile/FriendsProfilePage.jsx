@@ -46,7 +46,7 @@ export const FriendsProfilePage = () => {
             <div className="profile-container"> 
                 <Container className='Items'>
                     <PlantCards myPlants={userPlants} userDetails={item} refeshUserData={refreshUserData}/>
-                    <RequiredOffers userOffers={userOffers} />
+                    <RequiredOffers userOffers={userOffers} userDetails={item} />
                 </Container>
             </div>
             <Footer />
