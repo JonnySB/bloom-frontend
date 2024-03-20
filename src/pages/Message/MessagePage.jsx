@@ -22,10 +22,9 @@ export const MessagePage = () => {
     const [newUserName, setNewUserName] = useState()
     const [myRoomIdentifier, setMyRoomIdentifier] = useState()
     const { userData, refreshUserData } = useUser();
-
     // help_offer_user_id passed from StartChatButton
     const location = useLocation();
-    const help_offer_user_id = location.state?.help_offer_user_id;
+
 
     let idToWhoWeAreSendingTheMessage;
     if (location.state?.help_offer_user_id) {
