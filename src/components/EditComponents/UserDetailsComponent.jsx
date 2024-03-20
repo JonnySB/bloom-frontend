@@ -119,7 +119,7 @@ function UserNavbar({ userDetails, refeshUserData }) {
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
                         <Navbar.Collapse id="basic-navbar-nav">
                             <Nav className="mr-auto">
-                                <Button variant="primary" onClick={handleShow}>Edit Profile</Button>
+                                <Button variant="primary" className="edit-profile-button" onClick={handleShow}>Edit Profile</Button>
                             </Nav>
                         </Navbar.Collapse>
                     </Navbar>
