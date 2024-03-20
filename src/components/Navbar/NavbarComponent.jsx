@@ -4,7 +4,7 @@ import "./NavbarComponent.css";
 import CreateHelpRequestForm from "../CreateRequestForm/CreateHelpRequestForm";
 // import {messageIcon} from "../../assets/messageIcon"
 import { useNavigate, useLocation } from "react-router-dom";
-import logo from "../../assets/Bloom_logo.png";
+import logo from "../../assets/bloom-logo.png";
 
 
 const NavbarComponent = ({ userDetails }) => {

@@ -6,7 +6,7 @@ import MyOffersTable from "../../../components/ManageRequestsTables/MyOffersTabl
 import NavbarComponent from "../../../components/Navbar/NavbarComponent"
 import Footer from "../../../components/Footer/Footer"
 import { useUser } from '../../../context/UserContext.jsx'
-import logo from "../../../assets/Bloom_logo.png"
+import logo from "../../../assets/bloom-logo.png"
 
 const MyOffersPage = () => {
     const [myOffers, setMyOffers] = useState(null);
