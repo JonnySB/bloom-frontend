@@ -38,9 +38,6 @@ export const MyPlants = () => {
             <NavbarComponent userDetails={userData}  refeshUserData={refreshUserData}  />
             <MyPlantsBannerComponent />
             <div className="my-plants-container">
-                <div className="back-to-profile">
-                    <span><a href="/profile">← Back to Profile Page</a></span>
-                </div>
                 <div className="plant-cards-container">
                     <div className="add-plants-button">{!isLoading && <AddPlant myPlants={userPlants}  refreshPlants={fetchPlants}/>}</div>
                     <PlantCards  myPlants={userPlants} refreshPlants={fetchPlants} />

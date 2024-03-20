@@ -3,6 +3,7 @@ import { CloseButton, Button, Modal, Form, Card } from 'react-bootstrap';
 import { updatePlantsQuantity, assignPlant } from '../../services/userPlants';
 import { createNewPlant, fetchPlantsByName } from '../../services/plants';
 import './AddPlantsStyle.css';
+import { useNavigate } from "react-router-dom";
 
 function useDebounce(value, delay) {
     const [debouncedValue, setDebouncedValue] = useState(value);
@@ -30,6 +31,7 @@ const AddPlant = ({ refreshPlants, myPlants }) => {
     const [selectedPlant, setSelectedPlant] = useState("");
     const debouncedSearchTerm = useDebounce(plantName, 500);
     const [fetchSuggestions, setFetchSuggestions] = useState(true);
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (fetchSuggestions && debouncedSearchTerm) {
@@ -66,6 +68,9 @@ const AddPlant = ({ refreshPlants, myPlants }) => {
             console.error('Error updating or assigning plant:', error);
         }
     };
+    const handleProfileNavigate = () => {
+        navigate(`/Profile`, { state: { userId } });
+    }
 
     const handleShow = () => {
         setShow(true);
@@ -93,10 +98,12 @@ const AddPlant = ({ refreshPlants, myPlants }) => {
     };
 
     return (
-        <>
-            <Button variant="primary" onClick={handleShow}>
-                Add a Plant
-            </Button>
+        <>     
+          <div className="back-to-profile">
+                <span><a href="/Profile">← Back to Profile Page</a></span>
+            </div>
+            <Button variant="primary"   onClick={handleProfileNavigate}> ← Back to Profile Page</Button>
+            <Button variant="primary" onClick={handleShow}>Add a Plant </Button>
             <Modal show={show}>
                 <Modal.Header>
                     <Modal.Title>Add a new plant to your collection</Modal.Title>

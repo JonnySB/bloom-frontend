@@ -9,7 +9,7 @@ import logo from "../../assets/bloom-logo.png";
 
 const NavbarComponent = ({ userDetails }) => {
     const navigate = useNavigate();
-    const id = window.localStorage.getItem("user_id")
+    const [userId, setUserId] = useState(window.localStorage.getItem("user_id"));
     const location = useLocation();
     const token = window.localStorage.getItem("token")
 
@@ -23,16 +23,16 @@ const NavbarComponent = ({ userDetails }) => {
         navigate("/")
     }
     const profilePage = () => {
-        if (id) {
-            navigate(`/Profile`, { state: { id } });
+        if (userId) {
+            navigate(`/Profile`, { state: { userId } });
         } else {
             navigate('/login')
         }
 
     };
 
-    const requestManagement = (id) => {
-        if (id) {
+    const requestManagement = (userId) => {
+        if (userId) {
             navigate(`/request_management/received_offers`);
         } else {
             navigate('/login')
@@ -40,15 +40,15 @@ const NavbarComponent = ({ userDetails }) => {
 
     };
 
-    const myplants = (id) => {
-        if (id) {
+    const myplants = (userId) => {
+        if (userId) {
             navigate("/myplants");
         } else {
             navigate('/login')
         }
     }
-    const messages = (id) => {
-        if (id) {
+    const messages = (userId) => {
+        if (userId) {
             navigate(`/messages`);
         } else {
             navigate('/login')
@@ -56,7 +56,7 @@ const NavbarComponent = ({ userDetails }) => {
     };
 
     const logout = () => {
-        if (id) {
+        if (userId) {
             window.localStorage.removeItem("token");
             window.localStorage.removeItem("user_id");
             navigate("/");

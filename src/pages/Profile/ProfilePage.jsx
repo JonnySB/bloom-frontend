@@ -22,8 +22,8 @@ export const Profile = () => {
     let my_item;
     if (location.state?.item) {
         my_item = location.state.item;
-    } else if (location.state?.id) {
-        my_item = location.state.id;
+    } else if (location.state?.userId) {
+        my_item = location.state.userId;
     } else {
         my_item = undefined;
     }
