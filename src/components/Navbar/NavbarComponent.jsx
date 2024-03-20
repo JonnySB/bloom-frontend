@@ -81,7 +81,7 @@ const NavbarComponent = ({ userDetails }) => {
                                     {userDetails?.username}
                                 </div>
                                 &nbsp;  &nbsp;  &nbsp;
-                                <div className={`profile-icon-container ${location.pathname === '/profile' ? 'active-nav-item' : ''}`} onClick={profilePage}>
+                                <div className={`profile-icon-container ${location.pathname === '/Profile' ? 'active-nav-item' : ''}`} onClick={profilePage}>
                                     <img variant="top" src={userDetails?.avatar_url_string == "" ? "https://res.cloudinary.com/dououppib/image/upload/v1709830638/PLANTS/placeholder_ry6d8v.webp" : userDetails?.avatar_url_string} className='profileAvatar' />
                                 </div>
                                 &nbsp;  &nbsp;  &nbsp;

@@ -6,8 +6,8 @@ import "./HomePageBannerStyle.css";
 const myPicture = [
   {
     src: "https://res.cloudinary.com/dououppib/image/upload/v1710948847/PLANTS/qfc04selufgbpe9pat0s.avif",
-    label: "Spring is here!!",
-    description: "Find someone to take care of your plants while you are on vacation!"
+    label: "Your plants collection 🌱",
+    description: "We love to see you collecting plants"
   },
 ];
 
