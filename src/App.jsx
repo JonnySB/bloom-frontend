@@ -25,8 +25,8 @@ const router = createBrowserRouter([
         element: <Profile />,
     }, 
     {
-    path: "/Profile/user/<userId>",
-    element: <Profile />,
+        path: "/Profile/user/<userId>",
+        element: <Profile />,
     },
     {
         path: "/request_management/received_offers",
