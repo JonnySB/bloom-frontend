@@ -27,7 +27,7 @@ const PlantCards = ({myPlants, refreshPlants, userDetails}) => {
       }
     }
   };
-  console.log(userDetails)
+
   return (
     <>
      <Container className="title">
@@ -38,7 +38,7 @@ const PlantCards = ({myPlants, refreshPlants, userDetails}) => {
         {myPlants?.slice(0, 4).reverse().map((plant, index) => (
           <Col key={index}>
             <Card>
-              {userDetails?.user_id == userId ? 
+              {userDetails?.user_id == userId || userDetails == userId? 
               <Card.Header>Featured
               <CloseButton onClick={() => confirmDelete(plant.plant_id)} />
               </Card.Header>

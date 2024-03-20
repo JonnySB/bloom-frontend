@@ -11,19 +11,19 @@ const NavbarComponent = ({  userDetails }) => {
     const id = window.localStorage.getItem("user_id")
     const location = useLocation();
     const token = window.localStorage.getItem("token")
-
+   
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const openModal = () => {
         setIsModalOpen(true);
     };
-
+    
     const home = () => {
         navigate("/")
     }
     const profilePage = () => {
         if (id) {
-            navigate(`/profile`);
+            navigate(`/Profile`, { state: { id } });
         } else {
             navigate('/login')
         }

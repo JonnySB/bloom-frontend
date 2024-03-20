@@ -18,8 +18,15 @@ export const Profile = () => {
     const [token, setToken] = useState(window.localStorage.getItem("token"));
     const { userData, refreshUserData } = useUser();
     const location = useLocation();
-    const item = location.state?.item; 
-   
+    
+    let my_item;
+    if (location.state?.item) {
+        my_item = location.state.item;
+    } else if (location.state?.id) {
+        my_item = location.state.id;
+    } else {
+        my_item = undefined;
+    }
 
     useEffect(() => {
         const fetchData = async () => {
@@ -48,7 +55,7 @@ export const Profile = () => {
             <div className="profile-container"> 
                 <UserNavbar userDetails={userData} refeshUserData={refreshUserData}/>
                 <Container className='Items'>
-                    <PlantCards myPlants={userPlants} userDetails={item} refeshUserData={refreshUserData}/>
+                    <PlantCards myPlants={userPlants} userDetails={my_item} refeshUserData={refreshUserData}/>
                     <RequiredOffers userOffers={userOffers} />
                 </Container>
             </div>
