@@ -1,6 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import {Card, Col, Row, CloseButton, Pagination, Button, Modal  } from 'react-bootstrap'
-import "./ShowPlants.css";
 import "./PlantCards.css"
 import { deletePlantsFromUser } from '../../services/userPlants';
 import { useState } from 'react';
@@ -41,11 +40,11 @@ const PlantCards = ({ myPlants, refreshPlants }) => {
 
   return (
     <>
-      <Row xs={1} md={4} className="plantcard">
+      <Row xs={1} md={4} className="plantCard">
         {currentPlants?.map((plant, index) => (
           <Col key={index}>
             <Card>
-              <Card.Header>Featured
+              <Card.Header className="plantCardHeader">Featured
                 <CloseButton onClick={() => confirmDelete(plant.plant_id)} />
               </Card.Header>
               <Card.Body style={{ minHeight: "10rem" }}>

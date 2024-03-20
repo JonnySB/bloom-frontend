@@ -31,6 +31,7 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
-    align-items: center; /* This ensures that the buttons are aligned in the center vertically if your div has a height larger than the buttons */
-    padding: 10px; /* Optional: Adds some padding inside the div */
+    align-items: center; 
+    padding: 10px; 
+    margin-bottom: 15px;
 }
