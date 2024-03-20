@@ -6,6 +6,7 @@ import ReceivedOffersTable from "../../../components/ReceivedOffersTable/Receive
 import NavbarComponent from "../../../components/Navbar/NavbarComponent";
 import Footer from "../../../components/Footer/Footer";
 import { useUser } from '../../../context/UserContext.jsx';
+import logo from "../../../assets/Bloom_logo.png";
 
 const ReceivedOffersPage = () => {
     const [receivedOffers, setReceivedOffers] = useState(null);
@@ -29,18 +30,26 @@ const ReceivedOffersPage = () => {
 
     return (
         <div className="page-container">
-            <NavbarComponent userDetails={userData}  refeshUserData={refreshUserData}  />
-            <h1>Received Offers</h1>
-            <div className="content-width">
-                <ManageHelpRequestsNavBar />
-                <div>
-                    {receivedOffers != null && (
-                        <ReceivedOffersTable
-                            receivedOffers={receivedOffers}
-                            triggerReload={triggerReload}
-                            setTriggerReload={setTriggerReload}
-                        />
-                    )}
+            <NavbarComponent userDetails={userData} refeshUserData={refreshUserData} />
+            <div className="content-container">
+                <div className="logo-container">
+                    <img alt='logo' style={{ width: 500 }} src={String(logo)} />
+                </div>
+                <div className="content-width">
+                    <ManageHelpRequestsNavBar
+                        requestsActive={false}
+                        receivedOffersActive={true}
+                        helpOffersActive={false}
+                    />
+                    <div>
+                        {receivedOffers != null && (
+                            <ReceivedOffersTable
+                                receivedOffers={receivedOffers}
+                                triggerReload={triggerReload}
+                                setTriggerReload={setTriggerReload}
+                            />
+                        )}
+                    </div>
                 </div>
             </div>
             <Footer />

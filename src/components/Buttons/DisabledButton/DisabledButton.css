@@ -1,0 +1,9 @@
+.color-disabled {
+    background: grey !important;
+    border: grey;
+}
+
+.btn-fill {
+    min-width: 100% !important;
+    min-height: 50px !important;
+}

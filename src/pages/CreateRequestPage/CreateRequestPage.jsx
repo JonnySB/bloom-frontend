@@ -5,7 +5,9 @@ import { getAllRequestsByOneUser } from '../../services/HelpRequests'
 import NavbarComponent from '../../components/Navbar/NavbarComponent'
 import ManageHelpRequestsNavBar from '../../components/ManageHelpRequestsNavBar/ManageHelpRequestsNavBar'
 import { useUser } from '../../context/UserContext.jsx';
-import {Card, Col, Row, Button, Modal, Container, Image  } from 'react-bootstrap'
+import { Card, Col, Row, Button, Modal, Container, Image } from 'react-bootstrap'
+import logo from "../../assets/Bloom_logo.png";
+import "./CreateRequestPage.css"
 
 const CreateRequestPage = () => {
     const { userData, refreshUserData } = useUser();
@@ -30,13 +32,13 @@ const CreateRequestPage = () => {
     const formatPrice = (price) => {
         return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'GBP' }).format(price);
     };
-    
+
     const handleMessageSize = (message) => {
-        if (!message) return ""; 
+        if (!message) return "";
         const words = message.split(" ");
         const fullSize = words.length;
         const maxWordsToShow = 8;
-    
+
         if (fullSize > maxWordsToShow) {
             return (
                 <>
@@ -52,32 +54,41 @@ const CreateRequestPage = () => {
     console.log(myRequest)
 
     return (
-        <>
-             <NavbarComponent userDetails={userData}  refeshUserData={refreshUserData}  />
-            <h1>Create help request page</h1>
-            <ManageHelpRequestsNavBar />
-            <div><CreateHelpRequestForm /></div>
-            <div className="helpRequestContainer">
-        <Row xs={1} md={5} className="helpRequestInsideContainer">
-            {myRequest?.map((item, index) => (
-            <Card className='helpRequestCard' key={index}>
-                 <Card.Header className="helpRequestHeader">
-             
-                </Card.Header>
-                <Card.Img variant="top" src="https://res.cloudinary.com/dououppib/image/upload/v1709825357/PLANTS/Cover_zohttr.png" />
-                <Card.Body className="helpRequestBody">
-                <Card.Title className="helpRequestTitle">{item?.title}</Card.Title>
-                <Card.Text className="helpRequestMessage">{handleMessageSize(item?.message)}</Card.Text>
-                <Card.Text className="helpRequestDate"> From : {item?.start_date} to {item?.end_date}</Card.Text>
-                <Card.Text className="helpRequestPrice">Price offered {formatPrice(item?.maxprice)}</Card.Text>
-                <Button className="helpRequestButton" onClick={() => handleShow(item)}>Edit details</Button>
-                </Card.Body>
-            </Card>
-            ))}
-        </Row>
-    </div>
+        <div className="page-container">
+            <NavbarComponent userDetails={userData} refeshUserData={refreshUserData} />
+            <div className="content-container">
+                <div className="logo-container">
+                    <img alt='logo' style={{ width: 500 }} src={String(logo)} />
+                </div>
+                <div className="content-width">
+                    <ManageHelpRequestsNavBar
+                        requestsActive={true}
+                        receivedOffersActive={false}
+                        helpOffersActive={false}
+                    />
+                    <div><CreateHelpRequestForm /></div>
+                    <div className="helpRequestContainer">
+                        <Row xs={1} md={5} className="helpRequestInsideContainer">
+                            {myRequest?.map((item, index) => (
+                                <Card className='helpRequestCard' key={index}>
+                                    <Card.Header className="helpRequestHeader">
 
-        </>
+                                    </Card.Header>
+                                    <Card.Img variant="top" src="https://res.cloudinary.com/dououppib/image/upload/v1709825357/PLANTS/Cover_zohttr.png" />
+                                    <Card.Body className="helpRequestBody">
+                                        <Card.Title className="helpRequestTitle">{item?.title}</Card.Title>
+                                        <Card.Text className="helpRequestMessage">{handleMessageSize(item?.message)}</Card.Text>
+                                        <Card.Text className="helpRequestDate"> From : {item?.start_date} to {item?.end_date}</Card.Text>
+                                        <Card.Text className="helpRequestPrice">Price offered {formatPrice(item?.maxprice)}</Card.Text>
+                                        <Button className="helpRequestButton" onClick={() => handleShow(item)}>Edit details</Button>
+                                    </Card.Body>
+                                </Card>
+                            ))}
+                        </Row>
+                    </div>
+                </div>
+            </div>
+        </div>
     )
 }
 
