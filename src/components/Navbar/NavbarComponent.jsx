@@ -6,7 +6,7 @@ import CreateHelpRequestForm from "../CreateRequestForm/CreateHelpRequestForm";
 import { useNavigate, useLocation } from "react-router-dom";
 
 
-const NavbarComponent = ({  userDetails }) => {
+const NavbarComponent = ({  userDetails, userId }) => {
     const navigate = useNavigate();
     const id = window.localStorage.getItem("user_id")
     const location = useLocation();
@@ -21,10 +21,9 @@ const NavbarComponent = ({  userDetails }) => {
     const home = () => {
         navigate("/")
     }
-
     const profilePage = () => {
         if (id) {
-            navigate(`/profile`);
+            navigate(`/profile/${userId}`);
         } else {
             navigate('/login')
         }
