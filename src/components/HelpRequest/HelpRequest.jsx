@@ -13,7 +13,9 @@ const HelpRequest = ({ helpRequestsWithUsers }) => {
     const [user_id, setuserID] = useState(window.localStorage.getItem("user_id"));
 
     const handleProfileNavigate = (item) => {
-        if(user_id == item.user_id) {
+         if (user_id == null) {
+            navigate(`/login`);
+         } else if (user_id == item.user_id) {
             navigate(`/Profile`, { state: { item } });
         } else {
             navigate(`/Profile/user/${item.user_id}`, { state: { item } });
