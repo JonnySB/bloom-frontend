@@ -7,7 +7,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./pages/MyPlants/MyPlants.css"
 import { Profile } from "./pages/Profile/ProfilePage"; 
 import { FriendsProfilePage } from "./pages/Profile/FriendsProfilePage.jsx";
-import { Index } from "./pages/Index/Index";
 import ReceivedOffersPage from "./pages/ManageHelpRequestPages/ReceivedOffersPage/ReceivedOffersPage";
 import './App.css'
 import Homepage from './pages/Home/Homepage';
