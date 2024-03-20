@@ -17,7 +17,7 @@ const RequiredOffersCard = ({ userOffers, userDetails }) => {
             <Container className="title">
                 <h1>Requests for help</h1>
                 {userDetails?.user_id == userId || userDetails == userId ? 
-                <Link to="/create_request" className="link-button">Expand</Link>
+                <Link to="/create_request" className="link-button">See all your requests</Link>
                 : ""}
             </Container>
             <Row xs={1} md={5} className="requestcard"> 

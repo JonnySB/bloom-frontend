@@ -33,22 +33,23 @@ const PlantCards = ({myPlants, refreshPlants, userDetails}) => {
      <Container className="title">
        <h1>Plants owned</h1>
        {userDetails?.user_id == userId || userDetails == userId ? 
-       <Link to="/myplants" className="link-button">Expand</Link>
+       <Link to="/myplants" className="link-button">See all your plants</Link>
        : ""}
       </Container>
-      <Row xs={1} md={4} className="plantcard">
-        {myPlants?.slice(0, 4).reverse().map((plant, index) => (
+      <Row xs={1} md={5} className="plantcard">
+        {myPlants?.slice(0, 5).reverse().map((plant, index) => (
           <Col key={index}>
             <Card>
               {userDetails?.user_id == userId || userDetails == userId ? 
-              <Card.Header>Featured
+              <Card.Header >
+                {plant.common_name} 
               <CloseButton onClick={() => confirmDelete(plant.plant_id)} />
               </Card.Header>
               : ""}
               <Card.Body style={{ minHeight: "10rem" }}>
                 <Card.Img variant="top" src={plant.photo} />
                 <Card.Title>
-                  {plant.common_name} (<em>{plant.latin_name}</em>)
+                {plant?.latin_name}
                 </Card.Title>
                 <Card.Text className="waterFrequency"> 
                   Watering Frequency: Approximately {plant.watering_frequency === 1 ? "once a week" : `${plant.watering_frequency} times a week`} 

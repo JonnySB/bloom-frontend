@@ -3,6 +3,7 @@ import { CloseButton, Button, Modal, Form, Card } from 'react-bootstrap';
 import { updatePlantsQuantity, assignPlant } from '../../services/userPlants';
 import { createNewPlant, fetchPlantsByName } from '../../services/plants';
 import './AddPlantsStyle.css';
+import { useNavigate } from "react-router-dom";
 
 function useDebounce(value, delay) {
     const [debouncedValue, setDebouncedValue] = useState(value);
@@ -30,6 +31,7 @@ const AddPlant = ({ refreshPlants, myPlants }) => {
     const [selectedPlant, setSelectedPlant] = useState("");
     const debouncedSearchTerm = useDebounce(plantName, 500);
     const [fetchSuggestions, setFetchSuggestions] = useState(true);
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (fetchSuggestions && debouncedSearchTerm) {
@@ -66,6 +68,9 @@ const AddPlant = ({ refreshPlants, myPlants }) => {
             console.error('Error updating or assigning plant:', error);
         }
     };
+    const handleProfileNavigate = () => {
+        navigate(`/Profile`, { state: { userId } });
+    }
 
     const handleShow = () => {
         setShow(true);
@@ -93,57 +98,58 @@ const AddPlant = ({ refreshPlants, myPlants }) => {
     };
 
     return (
-        <>
-            <Button variant="primary" onClick={handleShow}>
-                Add a Plant
-            </Button>
-            <Modal show={show}>
-                <Modal.Header>
-                    <Modal.Title>Add a new plant to your collection</Modal.Title>
-                    <CloseButton onClick={() => setShow(false)} />
-                </Modal.Header>
-                <Modal.Body>
-                    <Form id="addingPlants" onSubmit={handleSubmit}>
-                        <Form.Group className="mb-3" controlId="searchByNameInput">
-                            <Form.Label>Search by name</Form.Label>
-                            <Form.Control type="text" placeholder="Example: Coconut..." value={plantName} onChange={onTypeChageForPlant} />
-                            <div className="autocomplete-suggestions">
-                                {suggestions.map((suggestion, index) => (
-                                    <div className="suggestion-item" key={index} onClick={() => selectSuggestion(suggestion)}>
-                                        {suggestion.common_name || suggestion.latin_name}
-                                    </div>
-                                ))}
-                            </div>
-                            {plantImage.length > 0  ? (
-                                <div className='myPlantCardTwo'>
-                                    <Card.Title>See plant picture below</Card.Title>
-                                    <Card.Img variant="top" src={plantImage} />
+        <>   
+        <div className="navBarMyPlantsPage">
+            <Button className='back-to-profile-button'  onClick={handleProfileNavigate}> ← Back to Profile Page</Button>
+            <Button className='add-plants-button'  onClick={handleShow}>Add a Plant</Button>
+        </div>
+        <Modal show={show}>
+            <Modal.Header>
+                <Modal.Title>Add a new plant to your collection</Modal.Title>
+                <CloseButton onClick={() => setShow(false)} />
+            </Modal.Header>
+            <Modal.Body>
+                <Form id="addingPlants" onSubmit={handleSubmit}>
+                    <Form.Group className="mb-3" controlId="searchByNameInput">
+                        <Form.Label>Search by name</Form.Label>
+                        <Form.Control type="text" placeholder="Example: Coconut..." value={plantName} onChange={onTypeChageForPlant} />
+                        <div className="autocomplete-suggestions">
+                            {suggestions.map((suggestion, index) => (
+                                <div className="suggestion-item" key={index} onClick={() => selectSuggestion(suggestion)}>
+                                    {suggestion.common_name || suggestion.latin_name}
                                 </div>
-                                
-                            ) : ""}
-                        </Form.Group>
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-                            <Form.Label>Enter quantity</Form.Label>
-                            <Form.Control type="text" placeholder="How many of these plants do you own?" onChange={onQuantityChange} />
-                        </Form.Group>
-                        <Form.Label>How often do you water this plant per week</Form.Label>
-                        <Form.Select aria-label="Default select example" onChange={waterQuantityChange}>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
-                            <option value="3">More than 3 times</option>
-                        </Form.Select>
-                    </Form>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={() => setShow(false)}>
-                        Close
-                    </Button>
-                    <Button variant="primary" type="submit" form="addingPlants" onClick={() => setShow(false)}>
-                        Save Changes
-                    </Button>
-                </Modal.Footer>
-            </Modal>
+                            ))}
+                        </div>
+                        {plantImage.length > 0  ? (
+                            <div className='myPlantCardTwo'>
+                                <Card.Title>See plant picture below</Card.Title>
+                                <Card.Img variant="top" src={plantImage} />
+                            </div>
+                            
+                        ) : ""}
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+                        <Form.Label>Enter quantity</Form.Label>
+                        <Form.Control type="text" placeholder="How many of these plants do you own?" onChange={onQuantityChange} />
+                    </Form.Group>
+                    <Form.Label>How often do you water this plant per week</Form.Label>
+                    <Form.Select aria-label="Default select example" onChange={waterQuantityChange}>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                        <option value="3">More than 3 times</option>
+                    </Form.Select>
+                </Form>
+            </Modal.Body>
+            <Modal.Footer>
+                <Button variant="secondary" onClick={() => setShow(false)}>
+                    Close
+                </Button>
+                <Button variant="primary" type="submit" form="addingPlants" onClick={() => setShow(false)}>
+                    Save Changes
+                </Button>
+            </Modal.Footer>
+        </Modal>
         </>
     );
 };

@@ -34,20 +34,15 @@ export const MyPlants = () => {
     
 
     return (
-        <div>
+        <>
             <NavbarComponent userDetails={userData}  refeshUserData={refreshUserData}  />
             <MyPlantsBannerComponent />
-            <div className="my-plants-container">
-                <div className="back-to-profile">
-                    <span><a href="/profile">← Back to Profile Page</a></span>
+                <div className='MyPlantsContainer'>
+                {!isLoading && <AddPlant myPlants={userPlants}  refreshPlants={fetchPlants}/>}
+                <PlantCards  myPlants={userPlants} refreshPlants={fetchPlants} />
                 </div>
-                <div className="plant-cards-container">
-                    <div className="add-plants-button">{!isLoading && <AddPlant myPlants={userPlants}  refreshPlants={fetchPlants}/>}</div>
-                    <PlantCards  myPlants={userPlants} refreshPlants={fetchPlants} />
-                </div>
-            </div>
             <Footer />
-        </div>
+        </>
     );
 };
 

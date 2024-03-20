@@ -1,6 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import {Card, Col, Row, CloseButton, Pagination, Button, Modal  } from 'react-bootstrap'
-import "./ShowPlants.css";
 import "./PlantCards.css"
 import { deletePlantsFromUser } from '../../services/userPlants';
 import { useState } from 'react';
@@ -10,7 +9,7 @@ const PlantCards = ({ myPlants, refreshPlants }) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [show, setShow] = useState(false);
   const [plantToDelete, setPlantToDelete] = useState(null);
-  const itemsPerPage = 8;
+  const itemsPerPage = 10;
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = Math.ceil(myPlants.length / itemsPerPage);
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -41,17 +40,18 @@ const PlantCards = ({ myPlants, refreshPlants }) => {
 
   return (
     <>
-      <Row xs={1} md={4} className="plantcard">
+      <Row xs={1} md={5} className="plantCard">
         {currentPlants?.map((plant, index) => (
           <Col key={index}>
             <Card>
-              <Card.Header>Featured
+              <Card.Header className="plantCardHeader">
+                {plant.common_name} 
                 <CloseButton onClick={() => confirmDelete(plant.plant_id)} />
               </Card.Header>
               <Card.Body style={{ minHeight: "10rem" }}>
                 <Card.Img variant="top" src={plant.photo} />
                 <Card.Title>
-                  {plant.common_name} (<em>{plant.latin_name}</em>)
+                  {plant.latin_name} 
                 </Card.Title>
                 <Card.Text className="waterFrequency"> 
                   Watering Frequency: Approximately {plant.watering_frequency === 1 ? "once a week" : `${plant.watering_frequency} times a week`} 
