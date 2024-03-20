@@ -1,7 +1,7 @@
-import { useNavigate, Link } from "react-router-dom";
-import {Card, Col, Row, Button, Modal, Container, Image  } from 'react-bootstrap'
+import { useNavigate } from "react-router-dom";
+import {Card, Row, Button, Modal, Image  } from 'react-bootstrap'
 import './HelpRequest.css'
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import CreateOfferForm from '../../components/CreateOfferForm/CreateOfferForm';
 
 const HelpRequest = ({ helpRequestsWithUsers }) => {
@@ -10,8 +10,6 @@ const HelpRequest = ({ helpRequestsWithUsers }) => {
     const [requestId, setRequestId] = useState("")
     const handleClose = () => setShow(false);
     const navigate = useNavigate();
-
-
 
     const handleProfileNavigate = (e) => {
         navigate('/Profile')

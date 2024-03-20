@@ -123,3 +123,34 @@ export const getAllRequestsByOneUser = async (userId, token) => {
         console.error("API Error", error)
     }
 }
+
+export const deleteHelpRequestFromUser = async (user_id, request_id, token) => {
+    const requestData = {
+      user_id: user_id,
+      request_id: Number(request_id),
+    };
+  
+    try {
+      const response = await fetch(`${BACKEND_URL}/help_request/user/delete`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(requestData),
+      });
+  
+      if (!response.ok) {
+        throw new Error(`Status: ${response.status}`);
+      }
+  
+      const data = await response.json();
+  
+  
+      return "Update successful:", data;
+    } catch (error) {
+      console.error("Error updating quantity:", error);
+    }
+  };
+  
+
