@@ -1,0 +1,9 @@
+.custom-card-title.card-title {
+    color: black;
+    font-size: 30px;
+    background-color: white;
+  }
+
+.custom-card-text.card-text {
+    color: black;
+}
