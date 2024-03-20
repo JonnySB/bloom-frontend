@@ -6,8 +6,8 @@ import "./HomePageBannerStyle.css";
 const myPicture = [
   {
     src: "https://res.cloudinary.com/dououppib/image/upload/v1710928246/PLANTS/ff5uvfmzwconwahvivr9.avif",
-    label: "Enjoy 30% off on Winter Products",
-    description: "Summer Collection has already arrived."
+    label: "Spring is here!!",
+    description: "Find someone to take care of your plants while you are on vacation!"
   },
 ];
 
@@ -20,13 +20,16 @@ function SingleBannerComponent() {
 
   return (
     <div className='singleBannerComponent'>
-    <CardLayout>
-      {pictures.map((picture, index) => (
-        <CardTwo key={index} imageSrc={picture.src}>
-           <LabelRight>{picture.label}</LabelRight>
-        </CardTwo>
-      ))}
-    </CardLayout>
+      <CardLayout>
+        {pictures.map((picture, index) => (
+          <CardTwo key={index} imageSrc={picture.src}>
+            <LabelRight>
+              <LabelTitle>{picture.label}</LabelTitle>
+              <LabelDescription>{picture.description}</LabelDescription>
+            </LabelRight>
+          </CardTwo>
+        ))}
+      </CardLayout>
     </div>
   );
 }
@@ -52,19 +55,31 @@ const CardTwo = styled.div`
 
 const LabelRight = styled.div`
   position: absolute;
-  top: 0px; /* Adjust the value as needed */
-  right: 300px; /* Adjust the value as needed */
-  height: 110%;
-  width: 400px;
-  background-color: rgba(222, 190, 72, 0.5); /* Semi-transparent background */
+  top: 0;
+  right: 300px; 
+  height: 110%; 
+  width: 400px; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(222, 190, 72, 0.7);
   color: #fff;
   padding: 10px;
   border-radius: 5px;
   font-weight: bold;
-  /* Add any other styles for your label here */
+  text-align: center;
 `;
 
+const LabelTitle = styled.h1`
+  margin: 0;
+  color: white;
+  font-size: 1.5em; /* Adjust font size as needed */
+`;
 
+const LabelDescription = styled.p`
+  font-size: 1em; /* Adjust font size as needed */
+`;
 
 export default SingleBannerComponent;
 
