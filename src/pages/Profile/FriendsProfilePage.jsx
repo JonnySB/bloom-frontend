@@ -20,7 +20,6 @@ export const FriendsProfilePage = () => {
     const item = location.state?.item; 
     const { userData, refreshUserData } = useUser();
    
-    console.log(item)
     useEffect(() => {
         const fetchData = async () => {
             try {

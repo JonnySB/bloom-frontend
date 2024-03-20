@@ -10,9 +10,14 @@ const HelpRequest = ({ helpRequestsWithUsers }) => {
     const [requestId, setRequestId] = useState("")
     const handleClose = () => setShow(false);
     const navigate = useNavigate();
+    const [user_id, setuserID] = useState(window.localStorage.getItem("user_id"));
 
     const handleProfileNavigate = (item) => {
+        if(user_id == item.user_id) {
+            navigate(`/Profile`);
+        } else {
         navigate(`/Profile/user/${item.user_id}`, { state: { item } });
+        }
     }
     const formatPrice = (price) => {
         return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'GBP' }).format(price);
