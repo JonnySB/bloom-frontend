@@ -1,6 +1,6 @@
 import Table from 'react-bootstrap/Table';
-import RescindButton from '../Buttons/RescindButton/RescindButton'
-import "./MyOffersTable.css"
+import RescindButton from '../../Buttons/RescindButton/RescindButton'
+import "../ManageRequestTables.css"
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell } from '@fortawesome/free-solid-svg-icons';

@@ -1,12 +1,52 @@
 .crequestRequestBar {
-    background-color: aquamarine;
     display: flex;
+    flex-direction: column;
     margin-top: 10px;
     margin-bottom: 10px;
+    justify-items: center;
+    background: #F7F4F4;
+    padding: 30px;
+    border-radius: 15px;
 }
 
-.createRequestContainer {
-    margin: auto;
-    background-color: aqua;
-    max-width: 1600px;
+.page-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.content-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.content-width {
+    width: 80%;
+}
+
+.logo-container {
+    margin-right: 70px;
+    margin-top: 20px
+}
+
+.helpRequestContainer {
+    margin-top: 20px;
+    width: 100%;
+}
+
+.helpRequestInsideContainer {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.helpRequestCard {
+    padding: 0;
+    margin-left: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    position: relative;
 }

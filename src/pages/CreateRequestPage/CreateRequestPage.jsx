@@ -6,6 +6,7 @@ import ManageHelpRequestsNavBar from '../../components/ManageHelpRequestsNavBar/
 import { useUser } from '../../context/UserContext.jsx';
 import { Card, CloseButton, Row, Button, Modal } from 'react-bootstrap'
 import "./CreateRequestPage.css"
+import logo from "../../assets/Bloom_logo.png"
 
 
 
@@ -75,17 +76,25 @@ const CreateRequestPage = () => {
 
     console.log(myRequest)
     return (
-        <>
+        <div className="page-container">
             <NavbarComponent userDetails={userData} refeshUserData={refreshUserData} />
-            <h1>Create help request page</h1>
-            <ManageHelpRequestsNavBar />
-            <div className='createRequestContainer'>
+            <div className='content-container'>
+                <div className="logo-container">
+                    <img alt='logo' style={{ width: 500 }} src={String(logo)} />
+                </div>
+                <div className="content-width">
+                    <ManageHelpRequestsNavBar
+                        requestsActive={true}
+                        receivedOffersActive={false}
+                        helpOffersActive={false}
+                    />
+                </div>
                 <div className='crequestRequestBar'>
-                    Hello {userData?.username} see your requests below you can also create make a new request
+                    <p>Hello <strong>{userData?.username}</strong> see your requests below you can also create make a new request:  </p>
                     <CreateHelpRequestForm />
                 </div>
                 <div className="helpRequestContainer">
-                    <Row xs={1} md={5} className="helpRequestInsideContainer">
+                    <Row xs={1} md={4} className="helpRequestInsideContainer">
                         {myRequest?.map((item, index) => (
                             <Card className='helpRequestCard' key={index}>
                                 <Card.Header className="helpRequestHeader">
@@ -115,7 +124,7 @@ const CreateRequestPage = () => {
                 </Modal>
             </div>
 
-        </>
+        </div>
     )
 }
 

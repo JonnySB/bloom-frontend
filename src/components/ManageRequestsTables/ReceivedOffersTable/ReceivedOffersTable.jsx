@@ -1,9 +1,9 @@
 import Table from 'react-bootstrap/Table';
-import AcceptButton from '../Buttons/AcceptButton/AcceptButton'
-import DisabledButton from '../Buttons/DisabledButton/DisabledButton'
-import RejectButton from '../Buttons/RejectButton/RejectButton'
-import StartChatButton from '../Buttons/StartChatButton/StartChatButton'
-import "./ReceivedOffersTable.css"
+import AcceptButton from '../../Buttons/AcceptButton/AcceptButton'
+import DisabledButton from '../../Buttons/DisabledButton/DisabledButton'
+import RejectButton from '../../Buttons/RejectButton/RejectButton'
+import StartChatButton from '../../Buttons/StartChatButton/StartChatButton'
+import "../ManageRequestTables.css"
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell } from '@fortawesome/free-solid-svg-icons';
