@@ -10,9 +10,16 @@ const HelpRequest = ({ helpRequestsWithUsers }) => {
     const [requestId, setRequestId] = useState("")
     const handleClose = () => setShow(false);
     const navigate = useNavigate();
+    const [user_id, setuserID] = useState(window.localStorage.getItem("user_id"));
 
-    const handleProfileNavigate = (e) => {
-        navigate('/Profile')
+    const handleProfileNavigate = (item) => {
+         if (user_id == null) {
+            navigate(`/login`);
+         } else if (user_id == item.user_id) {
+            navigate(`/Profile`, { state: { item } });
+        } else {
+            navigate(`/Profile/user/${item.user_id}`, { state: { item } });
+        }
     }
     const formatPrice = (price) => {
         return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'GBP' }).format(price);
@@ -50,7 +57,7 @@ const HelpRequest = ({ helpRequestsWithUsers }) => {
             {helpRequestsWithUsers?.map((item, index) => (
             <Card className='helpRequestCard' key={index}>
                  <Card.Header className="helpRequestHeader">
-                 <Image className="helpRequestImage" src={item?.avatar_url_string == "" ? "https://res.cloudinary.com/dououppib/image/upload/v1709830638/PLANTS/placeholder_ry6d8v.webp" : item?.avatar_url_string} roundedCircle style={{ width: '30px', height: '30px' }} onClick={handleProfileNavigate}/>
+                 <Image className="helpRequestImage" src={item?.avatar_url_string == "" ? "https://res.cloudinary.com/dououppib/image/upload/v1709830638/PLANTS/placeholder_ry6d8v.webp" : item?.avatar_url_string} roundedCircle style={{ width: '30px', height: '30px' }} onClick={() => handleProfileNavigate(item)} />
                  <Card.Text>{item?.first_name} {item?.last_name}</Card.Text>
               </Card.Header>
                 <Card.Img variant="top" src={item?.plant_photo == "" ? "https://res.cloudinary.com/dououppib/image/upload/v1709825357/PLANTS/Cover_zohttr.png" : item.plant_photo} />

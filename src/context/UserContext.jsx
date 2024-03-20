@@ -10,7 +10,6 @@ export const UserProvider = ({ children }) => {
   const refreshUserData = async () => {
     const user_id = window.localStorage.getItem("user_id");
     if (!user_id) {
-      console.log("User ID not found");
       return;
     }
 
