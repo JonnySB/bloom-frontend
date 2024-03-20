@@ -66,7 +66,7 @@
 @media (min-width: 600px) and (max-width: 1199px) {
     .helpRequestCard {
         /* Adjusts to 2 cards per row, tweak margin as needed */
-        flex: 0 0 calc(50% - 100px); 
+        flex: 0 0 calc(50% - 50px); 
         margin: 15px;
     }
 }
@@ -75,7 +75,7 @@
 @media (min-width: 1200px) {
     .helpRequestCard {
         /* 3 cards per row, adjust margins as needed */
-        flex: 0 0 calc(33.333% - 100px); 
+        flex: 0 0 calc(33.333% - 50px); 
         margin: 15px;
     }
 }
@@ -84,7 +84,7 @@
 @media (min-width: 1400px) {
     .helpRequestCard {
         /* 4 cards per row, adjust margins as needed */
-        flex: 0 0 calc(25% - 100px);
+        flex: 0 0 calc(25% - 50px);
         margin: 15px;
     }
 }
