@@ -9,7 +9,7 @@ import NavbarComponent from '../../components/Navbar/NavbarComponent.jsx';
 import "./ProfilePageStyle.css"
 import Footer from "../../components/Footer/Footer.jsx"
 import { useUser } from '../../context/UserContext.jsx';
-
+import { useLocation } from "react-router-dom";
 
 export const Profile = () => {
     const [userPlants, setUserPlants] = useState(null)
@@ -17,6 +17,8 @@ export const Profile = () => {
     const [user_id, setuserID] = useState(window.localStorage.getItem("user_id"));
     const [token, setToken] = useState(window.localStorage.getItem("token"));
     const { userData, refreshUserData } = useUser();
+    const location = useLocation();
+    const item = location.state?.item; 
    
 
     useEffect(() => {
@@ -46,7 +48,7 @@ export const Profile = () => {
             <div className="profile-container"> 
                 <UserNavbar userDetails={userData} refeshUserData={refreshUserData}/>
                 <Container className='Items'>
-                    <PlantCards myPlants={userPlants} refeshUserData={refreshUserData}/>
+                    <PlantCards myPlants={userPlants} userDetails={item} refeshUserData={refreshUserData}/>
                     <RequiredOffers userOffers={userOffers} />
                 </Container>
             </div>

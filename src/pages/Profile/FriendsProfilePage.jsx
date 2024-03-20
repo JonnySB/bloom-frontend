@@ -38,8 +38,6 @@ export const FriendsProfilePage = () => {
         fetchData()
     }, [])
 
-    
-
 
     return (
         <>
@@ -47,7 +45,7 @@ export const FriendsProfilePage = () => {
             <UserNavbarFriendsDetails userDetails={item}/>
             <div className="profile-container"> 
                 <Container className='Items'>
-                    <PlantCards myPlants={userPlants} refeshUserData={refreshUserData}/>
+                    <PlantCards myPlants={userPlants} userDetails={item} refeshUserData={refreshUserData}/>
                     <RequiredOffers userOffers={userOffers} />
                 </Container>
             </div>

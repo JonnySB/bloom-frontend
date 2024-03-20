@@ -14,9 +14,9 @@ const HelpRequest = ({ helpRequestsWithUsers }) => {
 
     const handleProfileNavigate = (item) => {
         if(user_id == item.user_id) {
-            navigate(`/Profile`);
+            navigate(`/Profile`, { state: { item } });
         } else {
-        navigate(`/Profile/user/${item.user_id}`, { state: { item } });
+            navigate(`/Profile/user/${item.user_id}`, { state: { item } });
         }
     }
     const formatPrice = (price) => {

@@ -5,7 +5,7 @@ import "./ShowPlants.css"
 import { useState } from 'react';
 
 
-const PlantCards = ({myPlants, refreshPlants}) => {
+const PlantCards = ({myPlants, refreshPlants, userDetails}) => {
   const [userId, setUserId] = useState(window.localStorage.getItem("user_id"));
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [show, setShow] = useState(false);
@@ -27,6 +27,7 @@ const PlantCards = ({myPlants, refreshPlants}) => {
       }
     }
   };
+  console.log(userDetails)
   return (
     <>
      <Container className="title">
@@ -37,9 +38,11 @@ const PlantCards = ({myPlants, refreshPlants}) => {
         {myPlants?.slice(0, 4).reverse().map((plant, index) => (
           <Col key={index}>
             <Card>
-              <Card.Header>Featuredd
-                <CloseButton onClick={() => confirmDelete(plant.plant_id)} />
+              {userDetails?.user_id == userId ? 
+              <Card.Header>Featured
+              <CloseButton onClick={() => confirmDelete(plant.plant_id)} />
               </Card.Header>
+              : ""}
               <Card.Body style={{ minHeight: "10rem" }}>
                 <Card.Img variant="top" src={plant.photo} />
                 <Card.Title>
@@ -69,6 +72,7 @@ const PlantCards = ({myPlants, refreshPlants}) => {
     </>
   );
 };
+
 
 export default PlantCards;
 
