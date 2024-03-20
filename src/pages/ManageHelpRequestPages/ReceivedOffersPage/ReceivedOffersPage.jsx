@@ -6,7 +6,7 @@ import ReceivedOffersTable from "../../../components/ManageRequestsTables/Receiv
 import NavbarComponent from "../../../components/Navbar/NavbarComponent";
 import Footer from "../../../components/Footer/Footer";
 import { useUser } from '../../../context/UserContext.jsx';
-import logo from "../../../assets/Bloom_logo.png";
+import logo from "../../../assets/bloom-logo.png";
 
 const ReceivedOffersPage = () => {
     const [receivedOffers, setReceivedOffers] = useState(null);

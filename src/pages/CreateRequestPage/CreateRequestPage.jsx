@@ -6,7 +6,7 @@ import ManageHelpRequestsNavBar from '../../components/ManageHelpRequestsNavBar/
 import { useUser } from '../../context/UserContext.jsx';
 import { Card, CloseButton, Row, Button, Modal } from 'react-bootstrap'
 import "./CreateRequestPage.css"
-import logo from "../../assets/Bloom_logo.png"
+import logo from "../../assets/bloom-logo.png"
 
 
 
