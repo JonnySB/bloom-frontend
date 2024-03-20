@@ -5,13 +5,13 @@ import "./HomePageBannerStyle.css";
 
 const myPicture = [
   {
-    src: "https://res.cloudinary.com/dououppib/image/upload/v1710928246/PLANTS/ff5uvfmzwconwahvivr9.avif",
-    label: "Spring is here!!",
-    description: "Find someone to take care of your plants while you are on vacation!"
+    src: "https://res.cloudinary.com/dououppib/image/upload/v1710948847/PLANTS/qfc04selufgbpe9pat0s.avif",
+    label: "Your plants collection 🌱",
+    description: "We love to see you collecting plants"
   },
 ];
 
-function SingleBannerComponent() {
+function MyPlantsBannerComponent() {
   const [pictures, setPictures] = useState([]);
 
   useEffect(() => {
@@ -93,5 +93,5 @@ const LabelDescription = styled.p`
   font-size: 1em; 
 `;
 
-export default SingleBannerComponent;
+export default MyPlantsBannerComponent;
 

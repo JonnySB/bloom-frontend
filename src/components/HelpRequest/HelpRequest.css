@@ -22,6 +22,7 @@
 .helpRequestBody {
     background-color: white;
     display: flex;
+    height: 300px;
 }
 
 .helpRequestHeader {
