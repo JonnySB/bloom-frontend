@@ -74,7 +74,7 @@
     display: flex; /* Enables flexbox properties */
     align-items: center; /* Centers the content vertically */
     justify-content: center; /* Centers the content horizontally */
-    height: 320px; /* Fixed height, adjust based on your design needs */
+    height: 300px; /* Fixed height, adjust based on your design needs */
     
 }
 

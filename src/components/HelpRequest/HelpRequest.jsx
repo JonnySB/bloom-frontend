@@ -34,14 +34,14 @@ const HelpRequest = ({ helpRequestsWithUsers }) => {
         if (!message) return ""; 
         const words = message.split(" ");
         const fullSize = words.length;
-        const maxWordsToShow = 8;
+        const maxWordsToShow = 5;
     
         if (fullSize > maxWordsToShow) {
             return (
                 <>
                     {words.slice(0, maxWordsToShow).join(" ")}
                     <br />
-                    <strong>(See full message below)</strong>
+                    <strong>(Click see full details for more info)</strong>
                 </>
             );
         } else {
