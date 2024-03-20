@@ -68,17 +68,17 @@ const LabelRight = styled.div`
   padding: 10px;
   border-radius: 5px;
   font-weight: bold;
-  text-align: center;
+
 `;
 
 const LabelTitle = styled.h1`
   margin: 0;
   color: white;
-  font-size: 1.5em; /* Adjust font size as needed */
+  font-size: 1.8em; 
 `;
 
 const LabelDescription = styled.p`
-  font-size: 1em; /* Adjust font size as needed */
+  font-size: 1em; 
 `;
 
 export default SingleBannerComponent;
