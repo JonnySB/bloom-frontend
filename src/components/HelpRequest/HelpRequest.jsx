@@ -12,8 +12,7 @@ const HelpRequest = ({ helpRequestsWithUsers }) => {
     const navigate = useNavigate();
 
     const handleProfileNavigate = (item) => {
-        console.log(item)
-        // navigate(`/Profile/user/${item.userId}`, { state: { item } });
+        navigate(`/Profile/user/${item.user_id}`, { state: { item } });
     }
     const formatPrice = (price) => {
         return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'GBP' }).format(price);

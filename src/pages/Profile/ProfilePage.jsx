@@ -1,5 +1,5 @@
 import Container from 'react-bootstrap/Container';
-import UserNavbar from '../../components/EditComponents.jsx/UserDetailsComponent';
+import UserNavbar from '../../components/EditComponents/UserDetailsComponent.jsx';
 import React, { useState, useEffect } from "react";
 import { getUserPlants } from "../../services/userPlants.js"
 import { getAllRequestsByOneUser } from "../../services/RequestedOffersService.js"
