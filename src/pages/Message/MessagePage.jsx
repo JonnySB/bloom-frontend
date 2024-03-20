@@ -28,14 +28,15 @@ export const MessagePage = () => {
     const help_offer_user_id = location.state?.help_offer_user_id;
 
     let idToWhoWeAreSendingTheMessage;
-    if (location.state?.item) {
+    if (location.state?.help_offer_user_id) {
       idToWhoWeAreSendingTheMessage = location.state?.help_offer_user_id;
     } else if (location.state?.id) {
       idToWhoWeAreSendingTheMessage = location.state.id;
     } else {
       idToWhoWeAreSendingTheMessage = undefined;
     }
-    console.log(idToWhoWeAreSendingTheMessage)
+   
+
     useEffect(() => {
       const fetchUserDetails = async () => {
         try {
@@ -51,8 +52,8 @@ export const MessagePage = () => {
           const allMessages = await getAllMessagesByUserId(user_id, token);
           setMessages(allMessages);
 
-          if (help_offer_user_id) {
-            const helpOfferDetails = await getUserInformationById(help_offer_user_id);
+          if (idToWhoWeAreSendingTheMessage) {
+            const helpOfferDetails = await getUserInformationById(idToWhoWeAreSendingTheMessage);
             setReceiverDetails(helpOfferDetails);
           }
         } catch (error) {
@@ -62,7 +63,7 @@ export const MessagePage = () => {
 
       fetchUserDetails();
       fetchMessagesAndDetails();
-    }, [user_id, help_offer_user_id, token]);
+    }, [user_id, idToWhoWeAreSendingTheMessage, token]);
 
     function getRoomIdentifier(userId1, userId2) {
       return [userId1, userId2].sort((a, b) => a - b).join('_');
