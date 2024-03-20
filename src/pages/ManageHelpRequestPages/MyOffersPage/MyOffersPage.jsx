@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from "react";
-import "./MyOffersPage.css";
+import React, { useState, useEffect } from "react"
+import "../ManageHelpRequestPages.css";
 import { getOutgoingHelpOffersByUserId } from '../../../services/helpOffers'
-import ManageHelpRequestsNavBar from "../../../components/ManageHelpRequestsNavBar/ManageHelpRequestsNavBar";
-import MyOffersTable from "../../../components/MyOffersTable/MyOffersTable";
-import NavbarComponent from "../../../components/Navbar/NavbarComponent";
-import Footer from "../../../components/Footer/Footer";
-import { useUser } from '../../../context/UserContext.jsx';
+import ManageHelpRequestsNavBar from "../../../components/ManageHelpRequestsNavBar/ManageHelpRequestsNavBar"
+import MyOffersTable from "../../../components/ManageRequestsTables/MyOffersTable/MyOffersTable.jsx"
+import NavbarComponent from "../../../components/Navbar/NavbarComponent"
+import Footer from "../../../components/Footer/Footer"
+import { useUser } from '../../../context/UserContext.jsx'
+import logo from "../../../assets/Bloom_logo.png"
 
 const MyOffersPage = () => {
     const [myOffers, setMyOffers] = useState(null);
@@ -29,19 +30,27 @@ const MyOffersPage = () => {
 
     return (
         <div className="page-container">
-              <NavbarComponent userDetails={userData}  refeshUserData={refreshUserData}  />
-            <h1>My Offers</h1>
-            <div>
-                <ManageHelpRequestsNavBar />
-            </div>
-            <div>
-                {myOffers != null && (
-                    <MyOffersTable
-                        myOffers={myOffers}
-                        triggerReload={triggerReload}
-                        setTriggerReload={setTriggerReload}
+            <NavbarComponent userDetails={userData} refeshUserData={refreshUserData} />
+            <div className="content-container">
+                <div className="logo-container">
+                    <img alt='logo' style={{ width: 500 }} src={String(logo)} />
+                </div>
+                <div className="content-width">
+                    <ManageHelpRequestsNavBar
+                        requestsActive={false}
+                        receivedOffersActive={false}
+                        helpOffersActive={true}
                     />
-                )}
+                </div>
+                <div>
+                    {myOffers != null && (
+                        <MyOffersTable
+                            myOffers={myOffers}
+                            triggerReload={triggerReload}
+                            setTriggerReload={setTriggerReload}
+                        />
+                    )}
+                </div>
             </div>
             <Footer />
         </div>

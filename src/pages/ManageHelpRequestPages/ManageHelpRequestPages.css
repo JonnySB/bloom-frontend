@@ -1,0 +1,19 @@
+.page-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.content-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.content-width {
+    width: 80%;
+}
+
+.logo-container {
+    margin-right: 70px;
+    margin-top: 20px
+}

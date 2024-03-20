@@ -26,7 +26,7 @@ export const createHelpOffer = async (
       `${BACKEND_URL}/help_offers/${helpRequestId}`,
       requestOptions,
     );
-    console.log(response)
+    console.log(response);
     if (!response.ok) {
       throw new Error(
         `Failed to create help offer for help request with ID ${helpRequestId}`,
@@ -150,7 +150,7 @@ export const rescindHelpOffer = async (help_offer_id, token) => {
       },
     };
     const response = await fetch(
-      `${BACKEND_URL}/help_offers/recind_offer/${help_offer_id}`,
+      `${BACKEND_URL}/help_offers/rescind_offer/${help_offer_id}`,
       requestOptions,
     );
     if (!response.ok) {
@@ -163,3 +163,4 @@ export const rescindHelpOffer = async (help_offer_id, token) => {
     return false;
   }
 };
+

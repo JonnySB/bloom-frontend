@@ -1,12 +1,27 @@
+.nav-bar-container {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
 .spacing {
     text-align: center !important;
-    justify-content: space-evenly;
+    justify-content: space-around;
 }
 
-.btn-color {
-    background: #2E9C45 !important;
+.btn-format {
+    font-weight: 700;
+    font-size: 1.5rem;
 }
 
-.btn-color:hover {
-    background: #033021 !important;
+.btn-format-active {
+    background: #CEFAD0 !important;
+    color: black !important;
+}
+
+.btn-format-inactive {
+    background: #BDBDBD !important;
+}
+
+.btn-format-inactive:hover {
+    background: #696969 !important;
 }
