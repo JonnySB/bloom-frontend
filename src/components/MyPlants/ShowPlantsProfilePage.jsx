@@ -33,7 +33,7 @@ const PlantCards = ({myPlants, refreshPlants, userDetails}) => {
      <Container className="title">
        <h1>Plants owned</h1>
        {userDetails?.user_id == userId || userDetails == userId ? 
-       <Link to="/myplants" className="link-button">Expand</Link>
+       <Link to="/myplants" className="link-button">See all your plants</Link>
        : ""}
       </Container>
       <Row xs={1} md={5} className="plantcard">

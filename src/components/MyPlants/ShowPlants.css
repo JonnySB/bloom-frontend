@@ -2,15 +2,15 @@
     display: flex; /* Enables Flexbox layout */
     justify-content: space-between; /* Aligns children to each end */
     align-items: center; /* Centers items vertically */
-    padding: 0 15px 20px 10px; /* Adds some padding on the sides */
+    margin-top: 20px;
+    background-color: #f8f9fa;
 
 }
 
 .title.container h1 {
     font-size: 30px;
-    margin: 0;
-}
 
+}
 
 .title.container a {
     font-size: 20px;

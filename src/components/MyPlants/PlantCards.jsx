@@ -9,7 +9,7 @@ const PlantCards = ({ myPlants, refreshPlants }) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [show, setShow] = useState(false);
   const [plantToDelete, setPlantToDelete] = useState(null);
-  const itemsPerPage = 8;
+  const itemsPerPage = 10;
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = Math.ceil(myPlants.length / itemsPerPage);
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -40,7 +40,7 @@ const PlantCards = ({ myPlants, refreshPlants }) => {
 
   return (
     <>
-      <Row xs={1} md={4} className="plantCard">
+      <Row xs={1} md={5} className="plantCard">
         {currentPlants?.map((plant, index) => (
           <Col key={index}>
             <Card>
