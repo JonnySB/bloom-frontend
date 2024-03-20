@@ -1,41 +1,8 @@
 
 
-.back-to-profile {
-    margin-top: 20px;
-    margin-left: 20px;
-}
+/* from here below */
 
-.back-to-profile a {
-    text-decoration: none;
-    color: #2e9c45
-}
-
-h1 {
-    text-align: center;
-    font-size: 48px;
-    margin-bottom: 100px;
-    margin-top: 50px;   
-    color: #2e9c45;
-}
-
-.plant-cards-container {
-    max-width: 70rem;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.add-plants-button {
-    display: flex;
-    justify-content: flex-end;
-    margin-right: 1.5rem;
-}
-
-.add-plants-button button {
-    background-color: #2e9c45;
-    border-color: #2e9c45;
-    color: white;
-}
-
-.add-plants-button button:hover {
-    background-color: green;
+.MyPlantsContainer {
+    max-width: 1400px; 
+    margin: auto;
 }

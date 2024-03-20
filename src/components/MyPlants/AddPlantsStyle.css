@@ -35,3 +35,24 @@
     padding: 10px; 
     margin-bottom: 15px;
 }
+
+.add-plants-button {
+    background-color: #2e9c45;
+    border-color: #2e9c45;
+    color: white;
+    padding-left: 35px;
+    padding-right: 35px;
+}
+.add-plants-button:hover {
+    background-color: green;
+}
+
+.back-to-profile-button {
+    background-color: #2e9c45;
+    border-color: #2e9c45;
+    color: white;
+
+}
+.back-to-profile-button:hover {
+    background-color: green;
+}

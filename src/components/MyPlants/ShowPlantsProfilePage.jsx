@@ -27,7 +27,7 @@ const PlantCards = ({myPlants, refreshPlants, userDetails}) => {
       }
     }
   };
-  console.log(myPlants)
+
   return (
     <>
      <Container className="title">

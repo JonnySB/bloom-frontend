@@ -44,13 +44,14 @@ const PlantCards = ({ myPlants, refreshPlants }) => {
         {currentPlants?.map((plant, index) => (
           <Col key={index}>
             <Card>
-              <Card.Header className="plantCardHeader">Featured
+              <Card.Header className="plantCardHeader">
+                {plant.common_name} 
                 <CloseButton onClick={() => confirmDelete(plant.plant_id)} />
               </Card.Header>
               <Card.Body style={{ minHeight: "10rem" }}>
                 <Card.Img variant="top" src={plant.photo} />
                 <Card.Title>
-                  {plant.common_name} (<em>{plant.latin_name}</em>)
+                  {plant.latin_name} 
                 </Card.Title>
                 <Card.Text className="waterFrequency"> 
                   Watering Frequency: Approximately {plant.watering_frequency === 1 ? "once a week" : `${plant.watering_frequency} times a week`} 

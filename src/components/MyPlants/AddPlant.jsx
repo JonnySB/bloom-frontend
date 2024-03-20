@@ -100,8 +100,8 @@ const AddPlant = ({ refreshPlants, myPlants }) => {
     return (
         <>   
         <div className="navBarMyPlantsPage">
-            <Button variant="primary"   onClick={handleProfileNavigate}> ← Back to Profile Page</Button>
-            <Button variant="primary" onClick={handleShow}>Add a Plant </Button>
+            <Button className='back-to-profile-button'  onClick={handleProfileNavigate}> ← Back to Profile Page</Button>
+            <Button className='add-plants-button'  onClick={handleShow}>Add a Plant</Button>
         </div>
         <Modal show={show}>
             <Modal.Header>
