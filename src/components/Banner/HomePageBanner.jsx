@@ -22,7 +22,7 @@ function SingleBannerComponent() {
     <div className='singleBannerComponent'>
       <CardLayout>
         {pictures.map((picture, index) => (
-          <CardTwo key={index} imageSrc={picture.src}>
+          <CardTwo key={index} src={picture.src}>
             <LabelRight>
               <LabelTitle>{picture.label}</LabelTitle>
               <LabelDescription>{picture.description}</LabelDescription>
@@ -41,7 +41,7 @@ const CardLayout = styled.div`
 
 
 const CardTwo = styled.div`
-  background: ${({ imageSrc }) => `url(${imageSrc})`} center center / cover;
+  background: ${({ src }) => `url(${src})`} center center / cover;
   height: 500px;
   border-radius: 7px;
   position: relative; /* This makes it a positioning context for absolute children */

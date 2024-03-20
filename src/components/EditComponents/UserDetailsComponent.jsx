@@ -1,6 +1,6 @@
 import { Container, Nav, Navbar, Card, ListGroup, Modal, Button, Form } from 'react-bootstrap';
 import "./UserDetails.css"
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { editUsersInformation, editUserAvatar } from '../../services/users';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCamera } from '@fortawesome/free-solid-svg-icons'; 
