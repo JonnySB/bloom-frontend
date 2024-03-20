@@ -65,7 +65,7 @@ const HelpRequest = ({ helpRequestsWithUsers }) => {
                 <Card.Title className="helpRequestTitle">{item?.title}</Card.Title>
                 <Card.Text className="helpRequestMessage">{handleMessageSize(item?.message)}</Card.Text>
                 <Card.Text className="helpRequestDate"> From : {item?.start_date} to {item?.end_date}</Card.Text>
-                <Card.Text className="helpRequestPrice">Price offered {formatPrice(item?.maxprice)}</Card.Text>
+                <Card.Text className="helpRequestPrice">Price offered: {formatPrice(item?.maxprice)}</Card.Text>
                 <Button className="helpRequestButton" onClick={() => handleShow(item)}>See full details and make an offer</Button>
                 </Card.Body>
             </Card>
