@@ -1,8 +1,13 @@
 import { Container, Nav, Navbar, Card, ListGroup, Button } from 'react-bootstrap';
 import "./UserDetails.css"
-
+import { useNavigate } from "react-router-dom";
 
 function UserNavbarFriendsDetails({ userDetails }) {
+    const navigate = useNavigate();
+    const handleSendInformation = (id) => {
+        navigate(`/messages`, { state: { id } });
+    }
+
     return (
         <>
             <Container className='user-details'>
@@ -25,7 +30,7 @@ function UserNavbarFriendsDetails({ userDetails }) {
                     </div>
                     <Navbar expand="lg" className="bg-body-tertiary">
                         <Nav className="mr-auto">
-                            <Button variant="primary">Send Message</Button>
+                            <Button variant="primary"onClick={() => handleSendInformation(userDetails.user_id)}>Send Message</Button>
                         </Nav>
                     </Navbar>
                 </div>

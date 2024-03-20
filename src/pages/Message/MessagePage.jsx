@@ -27,6 +27,15 @@ export const MessagePage = () => {
     const location = useLocation();
     const help_offer_user_id = location.state?.help_offer_user_id;
 
+    let idToWhoWeAreSendingTheMessage;
+    if (location.state?.item) {
+      idToWhoWeAreSendingTheMessage = location.state?.help_offer_user_id;
+    } else if (location.state?.id) {
+      idToWhoWeAreSendingTheMessage = location.state.id;
+    } else {
+      idToWhoWeAreSendingTheMessage = undefined;
+    }
+    console.log(idToWhoWeAreSendingTheMessage)
     useEffect(() => {
       const fetchUserDetails = async () => {
         try {
