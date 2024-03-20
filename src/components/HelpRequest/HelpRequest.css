@@ -28,11 +28,9 @@
 .helpRequestHeader {
     background-color: #cefad0;
     display: flex;
-    padding-bottom: 0px;
-    height: 45px;
+    height: 50px;
 }
 .helpRequestHeader p{
-    padding-left: 15px;
     font-weight: 800;
     max-height: 3rem; 
 }
@@ -43,6 +41,11 @@
 .helpRequestButton {
     background-color: #2E9C45;
     margin: 0 auto 15px auto; 
+    border-color:  #2E9C45;
+}
+.helpRequestButton:hover {
+    background-color: green;
+ 
 }
 
 .helpRequestModalBody {
@@ -50,4 +53,38 @@
 }
 .helpRequestModalfooter {
     justify-content: center;
+}
+
+.helpRequestImage {
+    width: 40px !important;
+    height: 40px !important;
+    padding: 0px;
+    margin: 0px;
+}
+
+/* Medium screens (>=1200px) */
+@media (min-width: 600px) and (max-width: 1199px) {
+    .helpRequestCard {
+        /* Adjusts to 2 cards per row, tweak margin as needed */
+        flex: 0 0 calc(50% - 100px); 
+        margin: 15px;
+    }
+}
+
+/* Medium screens (>=1200px) */
+@media (min-width: 1200px) {
+    .helpRequestCard {
+        /* 3 cards per row, adjust margins as needed */
+        flex: 0 0 calc(33.333% - 100px); 
+        margin: 15px;
+    }
+}
+
+/* Larger screens (>=1400px) */
+@media (min-width: 1400px) {
+    .helpRequestCard {
+        /* 4 cards per row, adjust margins as needed */
+        flex: 0 0 calc(25% - 100px);
+        margin: 15px;
+    }
 }
