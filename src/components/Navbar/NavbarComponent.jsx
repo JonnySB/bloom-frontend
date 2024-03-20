@@ -70,6 +70,8 @@ const NavbarComponent = ({  userDetails }) => {
         <Navbar expand="lg" className="bg-body-tertiary sticky-top">
             <Container fluid>
                 <Navbar.Brand style={{ cursor: 'pointer' }} onClick={home}>BLOOM</Navbar.Brand>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="ms-auto nav-spacing">
                     {token && (
                         <>
@@ -130,6 +132,7 @@ const NavbarComponent = ({  userDetails }) => {
                         </>
                     )}
                 </Nav>
+                </Navbar.Collapse>
             </Container>
         </Navbar>
     );
