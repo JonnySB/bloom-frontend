@@ -53,6 +53,8 @@ const CardTwo = styled.div`
   padding: 20px;
 `;
 
+
+
 const LabelRight = styled.div`
   position: absolute;
   top: 0;
@@ -68,7 +70,16 @@ const LabelRight = styled.div`
   padding: 10px;
   border-radius: 5px;
   font-weight: bold;
+  text-align: center;
 
+  @media (max-width: 768px) {
+    top: auto;
+    right: auto;
+    bottom: 0;
+    left: 0;
+    width: 100%; /* Make it span the full width of the card */
+    height: auto; /* Let the height be determined by content */
+  }
 `;
 
 const LabelTitle = styled.h1`
