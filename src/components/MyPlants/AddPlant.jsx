@@ -52,12 +52,17 @@ const AddPlant = ({ refreshPlants, myPlants }) => {
 
         try {
             const newPlantResponse = await createNewPlant(selectedPlant, waterQuantity, token);
+            let effectiveWaterQuantity = waterQuantity;
+            if (effectiveWaterQuantity === "0" || effectiveWaterQuantity === "" || effectiveWaterQuantity === 0) {
+                effectiveWaterQuantity = 1;
+            }
+            console.log(waterQuantity)
             if (newPlantResponse.message === "Plant inserted in the database successfully" || newPlantResponse.message === "Plant already exists in the database.") {
                 const doesUserHasThisPlant = myPlants?.some(p => p.plant_id === newPlantResponse.plant_id)
                 if (doesUserHasThisPlant) {
                     await updatePlantsQuantity(userId, newPlantResponse.plant_id, quantity, token);
                 } else {
-                    await assignPlant(userId, newPlantResponse.plant_id, waterQuantity, token);
+                    await assignPlant(userId, newPlantResponse.plant_id, effectiveWaterQuantity, token);
                 }
             } else {
                 console.error('Unexpected response:', newPlantResponse.message);
@@ -68,6 +73,8 @@ const AddPlant = ({ refreshPlants, myPlants }) => {
             console.error('Error updating or assigning plant:', error);
         }
     };
+
+    
     const handleProfileNavigate = () => {
         navigate(`/Profile`, { state: { userId } });
     }
@@ -82,7 +89,11 @@ const AddPlant = ({ refreshPlants, myPlants }) => {
     };
 
     const onQuantityChange = (e) => {
-        setQuantity(Number(e.target.value));
+        if (e.target.value === "") {
+            setQuantity("1");
+        } else {
+            setQuantity(e.target.value);
+        }
     };
 
     const selectSuggestion = (suggestion) => {

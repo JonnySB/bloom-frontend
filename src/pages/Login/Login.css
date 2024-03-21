@@ -1,12 +1,11 @@
 .login-container {
   background-color: #033021; 
   border-radius: 20px; 
-  padding: 50px;
+  padding: 20px 40px 40px 40px;
   max-width: 500px;
   margin: auto;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
 }
-
 
 .login-form {
   display: flex;
@@ -14,9 +13,9 @@
   align-items: center;
 }
 
-body, .app-container {
-  background-color: #FFF2D1;
-  min-height: 100vh; 
+.app-container {
+  text-align: center; /* Centers content horizontally */
+  /* Ensure there's no default padding/margin that could offset your content */
 }
 
 .white-text {
@@ -30,5 +29,47 @@ body, .app-container {
 .white-line {
   border-top: 1px solid #ffffff; 
   width: 100%;
+}
+
+.mainLogo {
+  display: inline-block; /* Allows for centering in the parent */
+  width: 100%; /* Takes full width to allow image to be responsive */
+  margin-top: 20px; /* Adjust as needed for space above the logo */
+  margin-bottom: 50px;
+}
+
+.mainLogo img {
+  max-width: 30%; /* Ensures the image is responsive and doesn't overflow */
+  height: auto; /* Keeps the aspect ratio of the image */
+  display: block; /* Stops any inline spacing issues */
+  margin: 0 auto; /* Centers the image within .mainLogo */
+}
+
+.ItemsToNavigate {
+  margin-bottom: 10px;
+}
+
+.itemstoNavigateButton {
+  background-color: transparent;
+  border: none;
+  color: #A9A9A9; /* Default color to grey */
+  padding: 0;
+  margin-right: 10px;
+  font-size: 1.5rem;
+  text-decoration: none;
+  box-shadow: none;
+  outline: none;
+  transition: color 0.3s; /* Smooth transition for color change */
+}
+
+/* Active state styles */
+.itemstoNavigateButton.active-nav-item {
+  color: #2E9C45; /* Active state color to green */
+  text-decoration: underline;
+}
+
+.itemstoNavigateButton:hover {
+  text-decoration: underline; /* Underline on hover for a typical link appearance */
+  color: #033021; /* Darker color on hover, adjust as needed */
 }
 
