@@ -22,15 +22,16 @@
 }
 
 .message-card {
-
+    flex: 1; /* This will make it fill the height of its flex container parent */
     display: flex;
     flex-direction: column;
   
 }
 
 .message-card .card-body {
+    flex-grow: 1; /* Grow to use available space */
     overflow-y: auto; /* Enables scrolling */
-    max-height: 68vh; /* Maximum height relative to the viewport height */
+    height: 68vh; /* SIZE OF THE PAGE */
     justify-content:unset
 }
 
