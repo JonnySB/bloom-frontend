@@ -107,8 +107,16 @@ export const Signup = () => {
                     <img alt='logo' src={String(logo)} />
             </div>
             <div className="ItemsToNavigate">
-                <button type="button" className={`itemstoNavigateButton ${location.pathname === '/login' ? 'active-nav-item' : ''}`} onClick={loginPage}>Login</button>
-                <button type="button" className={`itemstoNavigateButton ${location.pathname === '/login' ? 'active-nav-item' : ''}`} onClick={signupPage}>Create an account</button>
+                    <button type="button" 
+                            className={`itemstoNavigateButton ${location.pathname === '/login' ? 'active-nav-item' : ''}`} 
+                            onClick={loginPage}>
+                        Login
+                    </button>
+                    <button type="button" 
+                            className={`itemstoNavigateButton ${location.pathname === '/signup' ? 'active-nav-item' : ''}`} 
+                            onClick={signupPage}>
+                        Create an account
+                    </button>
             </div>
             <Container className="d-flex align-items-center justify-content-center">
             <div className="signup-container">

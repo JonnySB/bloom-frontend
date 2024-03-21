@@ -50,32 +50,26 @@
 }
 
 .itemstoNavigateButton {
-  background-color: transparent; /* Remove button background */
-  border: none; /* Remove border */
-  color: #2E9C45; /* Set text color, use your color scheme */
-  padding: 0; /* Remove padding */
-  margin-right: 10px; /* Space between the buttons */
-  font-size: 1.5rem; /* Match the font size to your design */
-  text-decoration: none; /* No underline */
-  box-shadow: none; /* Remove box shadow if any */
-  outline: none; /* Remove outline on focus */
+  background-color: transparent;
+  border: none;
+  color: #A9A9A9; /* Default color to grey */
+  padding: 0;
+  margin-right: 10px;
+  font-size: 1.5rem;
+  text-decoration: none;
+  box-shadow: none;
+  outline: none;
+  transition: color 0.3s; /* Smooth transition for color change */
 }
 
+/* Active state styles */
+.itemstoNavigateButton.active-nav-item {
+  color: #2E9C45; /* Active state color to green */
+  text-decoration: underline;
+}
 
 .itemstoNavigateButton:hover {
   text-decoration: underline; /* Underline on hover for a typical link appearance */
   color: #033021; /* Darker color on hover, adjust as needed */
 }
 
-.active-nav-item {
-  font-weight: bold; /* Make the active navigation item bold */
-  color: #033021; /* Active item color, adjust as needed */
-  text-decoration: underline; /* Underline the active navigation item */
-}
-
-
-.itemstoNavigateButton:after {
-  content: "/";
-  margin-left: 10px;
-  color: currentColor; /* Inherits the color from the button */
-}
