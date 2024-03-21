@@ -5,14 +5,13 @@
 }
 
 .page-container {
-    height: 56vh;
+    height: 50vh;
 }
 
 .table-container {
     background: #f7f4f4;
     border: 3px solid #CEFAD0;
     border-radius: 10px;
-    z-index: 10000;
     padding: 5px;
     padding-bottom: 0px;
 }
