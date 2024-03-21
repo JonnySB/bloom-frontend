@@ -6,7 +6,8 @@ import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import passwordValidator from "password-validator";
 import "./SignupPage.css"
-
+import NavbarComponent from '../../components/Navbar/NavbarComponent.jsx';
+import logo from "../../assets/bloom-logo.png";
 
 export const Signup = () => {
         const [first_name, setFirst_name] = useState("");
@@ -88,14 +89,21 @@ export const Signup = () => {
 
         return (
         
-        <>    
+        <>   
+                <NavbarComponent  />
+                
             <div className="app-container"> 
+            <div className="mainLogo">
+                    <img alt='logo' src={String(logo)} />
+            </div>
         
-            <Container className="d-flex align-items-center justify-content-center" style={{ minHeight: '100vh' }}>
+            <Container className="d-flex align-items-center justify-content-center">
             <div className="signup-container">
         
             <Form className="signup-form" onSubmit={handleSubmit}>
-                <h1 className="white-text">Create Account</h1>
+                        <h4 className="white-text">I do not have an account</h4>
+                        <h6 className="white-text">Please fill out the bewlo information to start with us</h6>
+                        <hr className="white-line" />
                 <Form.Group className="mb-3" controlId="firstName">
                     <Form.Control type="text" placeholder="First name" value={first_name} onChange={handleFirstNameChange} />
                 </Form.Group>

@@ -19,10 +19,6 @@
     align-items: center;
 }
 
-body, .app-container {
-    background-color: #FFF2D1;
-    min-height: 100vh; 
-}
 
 .white-text {
     color: white; 
