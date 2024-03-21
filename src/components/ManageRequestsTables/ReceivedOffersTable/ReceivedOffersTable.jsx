@@ -10,7 +10,7 @@ import { faBell } from '@fortawesome/free-solid-svg-icons';
 import { faCalendarCheck } from '@fortawesome/free-solid-svg-icons';
 
 const ReceivedOffersTable = ({ receivedOffers, triggerReload, setTriggerReload }) => {
-    const itemsPerPage = 10;
+    const itemsPerPage = 5;
     const [currentPage, setCurrentPage] = useState(1);
     const totalPages = Math.ceil(receivedOffers.length / itemsPerPage);
     const indexOfLastItem = currentPage * itemsPerPage;
