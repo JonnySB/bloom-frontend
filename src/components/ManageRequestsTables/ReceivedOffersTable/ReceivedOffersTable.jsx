@@ -4,17 +4,18 @@ import DisabledButton from '../../Buttons/DisabledButton/DisabledButton'
 import RejectButton from '../../Buttons/RejectButton/RejectButton'
 import StartChatButton from '../../Buttons/StartChatButton/StartChatButton'
 import "../ManageRequestTables.css"
-
+import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell } from '@fortawesome/free-solid-svg-icons';
 import { faCalendarCheck } from '@fortawesome/free-solid-svg-icons';
 
 const ReceivedOffersTable = ({ receivedOffers, triggerReload, setTriggerReload }) => {
     const itemsPerPage = 10;
-    // const totalPages = Math.ceil(myPlants.length / itemsPerPage);
-    // const indexOfLastItem = currentPage * itemsPerPage;
-    // const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    // const currentPlants = myPlants.slice(indexOfFirstItem, indexOfLastItem);
+    const [currentPage, setCurrentPage] = useState(1);
+    const totalPages = Math.ceil(receivedOffers.length / itemsPerPage);
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = receivedOffers.slice(indexOfFirstItem, indexOfLastItem);
 
     const convertDate = (startDateString, endDateString) => {
         const startDate = new Date(startDateString);
@@ -48,7 +49,7 @@ const ReceivedOffersTable = ({ receivedOffers, triggerReload, setTriggerReload }
                         </tr>
                     </thead>
                     <tbody>
-                        {receivedOffers?.sort().reverse().map((help_offer, index) => {
+                        {currentItems?.sort().reverse().map((help_offer, index) => {
                             return (
                                 <>
                                     {(help_offer.help_offer_status == "accepted" || help_offer.help_offer_status == "pending") && (
@@ -102,6 +103,17 @@ const ReceivedOffersTable = ({ receivedOffers, triggerReload, setTriggerReload }
                         })}
                     </tbody>
                 </Table>
+                <Pagination>
+              <Pagination.First onClick={() => handlePageChange(1)} />
+              <Pagination.Prev onClick={() => handlePageChange(Math.max(1, currentPage - 1))} />
+              {Array.from({ length: totalPages }, (_, i) => (
+                <Pagination.Item key={i + 1} active={i + 1 === currentPage} onClick={() => handlePageChange(i + 1)}>
+                  {i + 1}
+                </Pagination.Item>
+              ))}
+              <Pagination.Next onClick={() => handlePageChange(Math.min(totalPages, currentPage + 1))} />
+              <Pagination.Last onClick={() => handlePageChange(totalPages)} />
+            </Pagination>
            
             </div >
         </div>
@@ -113,14 +125,3 @@ export default ReceivedOffersTable;
 
 
 
-{/* <Pagination>
-<Pagination.First onClick={() => handlePageChange(1)} />
-<Pagination.Prev onClick={() => handlePageChange(Math.max(1, currentPage - 1))} />
-{Array.from({ length: totalPages }, (_, i) => (
-    <Pagination.Item key={i + 1} active={i + 1 === currentPage} onClick={() => handlePageChange(i + 1)}>
-    {i + 1}
-    </Pagination.Item>
-))}
-<Pagination.Next onClick={() => handlePageChange(Math.min(totalPages, currentPage + 1))} />
-<Pagination.Last onClick={() => handlePageChange(totalPages)} />
-</Pagination> */}
