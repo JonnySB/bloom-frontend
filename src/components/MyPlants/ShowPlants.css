@@ -90,33 +90,44 @@
 
  
 
+
 @media (min-width: 1350px) {
     .plantcard .col {
-      flex: 0 0 calc(20% - 10px); 
-      max-width: calc(20% - 10px); 
+      flex: 0 0 calc(20% - 10px);
+      max-width: calc(20% - 10px);
     }
   }
   
-  @media (max-width: 1349px) {
-    .plantcard {
-      display: flex;
-      flex-wrap: wrap;
-    }
-  
+
+  @media (min-width: 1080px) and (max-width: 1349px) {
     .plantcard .col {
-      flex: 0 0 calc(25% - 10px); 
+      flex: 0 0 calc(25% - 10px);
       max-width: calc(25% - 10px);
     }
-    
   
-    .plantcard .col:nth-child(5) {
-      flex: 0 0 100%; 
-      max-width: 24%;
+    .plantcard .col:nth-child(5), .plantcard .col:nth-child(6) {
+      flex: 0 0 50%; 
+      max-width: 50%;
     }
-    
+  }
   
-    .plantcard .col:nth-child(5) > .card {
-      margin-left: auto;
-      margin-right: auto;
+
+  @media (min-width: 850px) and (max-width: 1079px) {
+    .plantcard .col {
+      flex: 0 0 50%;
+      max-width: 50%;
+    }
+
+    .plantcard .col:last-child:nth-child(odd) {
+      flex: 0 0 100%;
+      max-width: 100%;
+    }
+  }
+  
+
+  @media (max-width: 849px) {
+    .plantcard .col {
+      flex: 0 0 100%;
+      max-width: 100%;
     }
   }
