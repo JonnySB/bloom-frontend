@@ -1,21 +1,19 @@
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { login } from "../../services/authentication";
-import Col from 'react-bootstrap/Col';
-import Form from 'react-bootstrap/Form';
-import Row from 'react-bootstrap/Row';
-import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
+import { Col, Form , Row, Button, Container} from 'react-bootstrap';
 import "./Login.css"
-import Nav from 'react-bootstrap/Nav';
 import NavbarComponent from '../../components/Navbar/NavbarComponent.jsx';
 import logo from "../../assets/bloom-logo.png";
+
+
 
 export const Login = () => {
     const [username_email, setUsername_email] = useState("");
     const [password, setPassword] = useState("");
     const [loginError, setError] = useState()
     const navigate = useNavigate();
+    const location = useLocation();
     
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -30,6 +28,17 @@ export const Login = () => {
         navigate("/login");
         }
     };
+    
+
+    const loginPage = () => {
+        navigate(`/login`);
+        
+    }
+
+    const signupPage = () => {
+        navigate(`/signup`);
+        
+    }
 
     const handleUsernameEmailChange = (event) => {
         setUsername_email(event.target.value);
@@ -46,7 +55,10 @@ export const Login = () => {
             <div className="mainLogo">
                     <img alt='logo' src={String(logo)} />
             </div>
-            Login / Create an account
+            <div className="ItemsToNavigate">
+                <button type="button" className={`itemstoNavigateButton ${location.pathname === '/login' ? 'item-nav-item' : ''}`} onClick={loginPage}>Login</button>
+                <button type="button" className={`itemstoNavigateButton ${location.pathname === '/login' ? 'item-nav-item' : ''}`} onClick={signupPage}>Create an account</button>
+            </div>
             <Container className="d-flex align-items-center justify-content-center">
                 <div className="login-container">
                     <Form className="Login d-flex flex-column align-items-center" onSubmit={handleSubmit}>
@@ -64,7 +76,7 @@ export const Login = () => {
                                 <Form.Control type="password" placeholder="Password" value={password} onChange={handlePasswordChange} />
                             </Col>
                         </Form.Group>
-                        <Button variant="success" type="submit">Login</Button>
+                        <Button variant="success" type="submit">Sign in</Button>
                         {loginError && <div>{loginError}</div>}
                     </Form>
                   

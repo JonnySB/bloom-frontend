@@ -1,7 +1,7 @@
 .login-container {
   background-color: #033021; 
   border-radius: 20px; 
-  padding: 50px;
+  padding: 20px 40px 40px 40px;
   max-width: 500px;
   margin: auto;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
@@ -43,4 +43,39 @@
   height: auto; /* Keeps the aspect ratio of the image */
   display: block; /* Stops any inline spacing issues */
   margin: 0 auto; /* Centers the image within .mainLogo */
+}
+
+.ItemsToNavigate {
+  margin-bottom: 10px;
+}
+
+.itemstoNavigateButton {
+  background-color: transparent; /* Remove button background */
+  border: none; /* Remove border */
+  color: #2E9C45; /* Set text color, use your color scheme */
+  padding: 0; /* Remove padding */
+  margin-right: 10px; /* Space between the buttons */
+  font-size: 1.5rem; /* Match the font size to your design */
+  text-decoration: none; /* No underline */
+  box-shadow: none; /* Remove box shadow if any */
+  outline: none; /* Remove outline on focus */
+}
+
+
+.itemstoNavigateButton:hover {
+  text-decoration: underline; /* Underline on hover for a typical link appearance */
+  color: #033021; /* Darker color on hover, adjust as needed */
+}
+
+.active-nav-item {
+  font-weight: bold; /* Make the active navigation item bold */
+  color: #033021; /* Active item color, adjust as needed */
+  text-decoration: underline; /* Underline the active navigation item */
+}
+
+
+.itemstoNavigateButton:after {
+  content: "/";
+  margin-left: 10px;
+  color: currentColor; /* Inherits the color from the button */
 }
