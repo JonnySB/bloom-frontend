@@ -14,6 +14,8 @@ import HelpRequestDetailPage from './pages/HelpRequestDetails/HelpRequestDetails
 import CreateRequestPage from './pages/CreateRequestPage/CreateRequestPage';
 import { UserProvider } from './context/UserContext.jsx';
 import MyOffersPage from "./pages/ManageHelpRequestPages/MyOffersPage/MyOffersPage";
+import CreateHelpRequestForm from "./components/CreateRequestForm/CreateHelpRequestForm.jsx";
+
 
 const router = createBrowserRouter([
     {
@@ -65,9 +67,13 @@ const router = createBrowserRouter([
 
 function App() {
 
+
     return (
         <>
             <UserProvider>
+            <div style={{ visibility: 'hidden', position: 'absolute' }}>
+                    <CreateHelpRequestForm />
+                </div>
                 <RouterProvider router={router} />
             </UserProvider>
         </>

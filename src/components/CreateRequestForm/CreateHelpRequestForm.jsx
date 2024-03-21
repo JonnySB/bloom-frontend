@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {Button, Form, Image, Modal} from 'react-bootstrap';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { createHelpRequest } from '../../services/HelpRequests';
 import { useUser } from '../../context/UserContext.jsx';
-
+import eventEmitter from '../../context/EventEmitter.js';
 
 const CreateHelpRequestForm = () => {
     const [show, setShow] = useState(false);
@@ -55,12 +55,23 @@ const CreateHelpRequestForm = () => {
         }
     }
 
+    useEffect(() => {
+        const toggleModal = (value) => setShow(value);
+    
+        eventEmitter.on('toggleModal', toggleModal);
+        return () => {
+            eventEmitter.off('toggleModal', toggleModal);
+        };
+    }, []);
+
+
     return (
         <>
-            <Button variant="primary" onClick={handleShow}>
+            <Button variant="primary" onClick={() => setShow(true)}>
                 Make Request
             </Button>
-            <Modal show={show} onHide={handleClose}>
+            {show && (
+            <Modal show={show} onHide={() => setShow(false)}>
                 <Modal.Header closeButton>
                     <Image src={userData?.avatar_url_string == "" ? "https://res.cloudinary.com/dououppib/image/upload/v1709830638/PLANTS/placeholder_ry6d8v.webp" : userData?.avatar_url_string} roundedCircle style={{ width: '30px', height: '30px' }} />
                     <Modal.Title>Make a help request</Modal.Title>
@@ -118,6 +129,7 @@ const CreateHelpRequestForm = () => {
                     </Button>
                 </Modal.Footer>
             </Modal>
+              )}
         </>
     )
 }
