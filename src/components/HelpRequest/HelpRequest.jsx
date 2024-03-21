@@ -77,7 +77,14 @@ const HelpRequest = ({ helpRequestsWithUsers }) => {
                 <Modal.Title>{fullItem.title}</Modal.Title>
             </Modal.Header>
             <Modal.Body className="helpRequestModalBody">{fullItem.message}</Modal.Body>
-            <Modal.Footer className="helpRequestModalfooter">Starting date : {fullItem.start_date} to {fullItem.end_date} {formatPrice(fullItem.maxprice)}</Modal.Footer>
+            <Modal.Footer className="helpRequestModalfooter">
+                <div>
+                    <p>Starting date: {fullItem.start_date} to {fullItem.end_date}</p>
+                </div>
+                <div>
+                    <p className="price">{formatPrice(fullItem.maxprice)}</p>
+                </div>
+            </Modal.Footer>
             <CreateOfferForm id={requestId} onSubmitSuccess={() => {handleClose()}} />
             <Button variant="secondary" onClick={handleClose}>Cancel</Button>
         </Modal>

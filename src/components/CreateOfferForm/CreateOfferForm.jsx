@@ -5,6 +5,7 @@ import Modal from 'react-bootstrap/Modal';
 import 'react-datepicker/dist/react-datepicker.css';
 import { createHelpOffer } from '../../services/helpOffers';
 import { useNavigate } from 'react-router-dom';
+import "./CreateOfferFormStyle.css"
 
 const CreateOfferForm = ({id, onSubmitSuccess}) => {
     const [show, setShow] = useState(false);
@@ -46,7 +47,7 @@ const CreateOfferForm = ({id, onSubmitSuccess}) => {
     return (
         <>
             {token && (
-                <Button variant="primary" onClick={handleShow}>Make offer</Button>
+                <Button variant="primary" className="makeOfferButton" onClick={handleShow}>Make offer</Button>
             )}
     
             <Modal show={show} onHide={handleClose}>

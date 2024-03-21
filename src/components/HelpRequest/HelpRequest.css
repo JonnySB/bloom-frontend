@@ -51,9 +51,21 @@
 
 .helpRequestModalBody {
     height: 400px;
+    background-color: white;
 }
+
 .helpRequestModalfooter {
-    justify-content: center;
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center items horizontally */
+    justify-content: center; /* Center items vertically (if needed) */
+    text-align: center; /* Ensure text is centered within each block */
+    padding: 0px;
+}
+
+.helpRequestModalfooter .price {
+    font-weight: bold; /* Make the price bolder */
+    font-size: 1.2em; /* Make the price larger than the date */
 }
 
 .helpRequestImage {
