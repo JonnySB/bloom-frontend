@@ -100,7 +100,7 @@ function UserNavbar({ userDetails, refeshUserData }) {
                             </Form>
                             <Modal.Footer>
                                 <Button variant="secondary" onClick={() => setShowButtonPicture(false)}>Close</Button>
-                                <Button variant="primary" type="submit" form="userAvatar" onClick={() => setShowButtonPicture(false)}>Save Changes</Button>
+                                <Button variant="primary" type="submit" className='saveChangesButton' form="userAvatar" onClick={() => setShowButtonPicture(false)}>Save Changes</Button>
                             </Modal.Footer>
                         </Modal>
                         <ListGroup className="list-group-flush">

@@ -169,6 +169,17 @@
     border-color: #6c757d; /* Border color to match */
 }
 
+.saveChangesButton {
+    background-color: #2E9C45 !important;
+    border-color: #2E9C45 !important;
+}
+
+
+.saveChangesButton:hover {
+    background-color: green !important;
+ 
+}
+
 
 .navbar-container .navbar {
     padding: 0.5rem 1rem; /* Reduced padding for a slimmer navbar */
