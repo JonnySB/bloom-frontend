@@ -74,7 +74,7 @@ const CreateRequestPage = () => {
         setShow(true);
     };
 
-    console.log(myRequest)
+  
     return (
         <div className="page-container">
             <NavbarComponent userDetails={userData} refeshUserData={refreshUserData} />
