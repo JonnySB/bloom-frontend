@@ -5,6 +5,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { createHelpRequest } from '../../services/HelpRequests';
 import { useUser } from '../../context/UserContext.jsx';
 import eventEmitter from '../../context/EventEmitter.js';
+import "./CreateHelpRequestForm.css"
 
 const CreateHelpRequestForm = () => {
     const [show, setShow] = useState(false);
@@ -67,7 +68,7 @@ const CreateHelpRequestForm = () => {
 
     return (
         <>
-            <Button variant="primary" onClick={() => setShow(true)}>
+            <Button variant="primary" className='submitRequestButton' onClick={() => setShow(true)}>
                 Make Request
             </Button>
             {show && (
@@ -124,7 +125,7 @@ const CreateHelpRequestForm = () => {
             </Form>
             </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="primary" onClick={handleSubmitRequest}>
+                    <Button variant="primary" className="submitRequestButton" onClick={handleSubmitRequest}>
                         Submit Request
                     </Button>
                 </Modal.Footer>
