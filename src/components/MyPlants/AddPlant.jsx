@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { CloseButton, Button, Modal, Form, Card } from 'react-bootstrap';
+import { CloseButton, Button, Modal, Form, Card, Container } from 'react-bootstrap';
 import { updatePlantsQuantity, assignPlant } from '../../services/userPlants';
 import { createNewPlant, fetchPlantsByName } from '../../services/plants';
 import './AddPlantsStyle.css';
@@ -98,11 +98,13 @@ const AddPlant = ({ refreshPlants, myPlants }) => {
     };
 
     return (
-        <>   
+        <> 
+        <Container>
         <div className="navBarMyPlantsPage">
             <Button className='back-to-profile-button'  onClick={handleProfileNavigate}> ← Back to Profile Page</Button>
             <Button className='add-plants-button'  onClick={handleShow}>Add a Plant</Button>
         </div>
+        </Container>
         <Modal show={show}>
             <Modal.Header>
                 <Modal.Title>Add a new plant to your collection</Modal.Title>

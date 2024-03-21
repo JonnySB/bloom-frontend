@@ -26,7 +26,7 @@ function UserNavbarFriendsDetails({ userDetails }) {
                 </div>
                 <div className="navbar-container">
                     <div className='potted-image'>
-                        <img src='https://res.cloudinary.com/dououppib/image/upload/v1709758337/PLANTS/pb_yxwurp.png'></img>
+         
                     </div>
                     <Navbar expand="lg" className="bg-body-tertiary">
                         <Nav className="mr-auto">
