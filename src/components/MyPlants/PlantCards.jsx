@@ -9,7 +9,7 @@ const PlantCards = ({ myPlants, refreshPlants }) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [show, setShow] = useState(false);
   const [plantToDelete, setPlantToDelete] = useState(null);
-  const itemsPerPage = 10;
+  const itemsPerPage = 5;
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = Math.ceil(myPlants.length / itemsPerPage);
   const indexOfLastItem = currentPage * itemsPerPage;

@@ -1,4 +1,4 @@
-import Table from 'react-bootstrap/Table';
+import {Table, Pagination } from 'react-bootstrap';
 import AcceptButton from '../../Buttons/AcceptButton/AcceptButton'
 import DisabledButton from '../../Buttons/DisabledButton/DisabledButton'
 import RejectButton from '../../Buttons/RejectButton/RejectButton'
@@ -10,6 +10,11 @@ import { faBell } from '@fortawesome/free-solid-svg-icons';
 import { faCalendarCheck } from '@fortawesome/free-solid-svg-icons';
 
 const ReceivedOffersTable = ({ receivedOffers, triggerReload, setTriggerReload }) => {
+    const itemsPerPage = 10;
+    // const totalPages = Math.ceil(myPlants.length / itemsPerPage);
+    // const indexOfLastItem = currentPage * itemsPerPage;
+    // const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    // const currentPlants = myPlants.slice(indexOfFirstItem, indexOfLastItem);
 
     const convertDate = (startDateString, endDateString) => {
         const startDate = new Date(startDateString);
@@ -21,6 +26,9 @@ const ReceivedOffersTable = ({ receivedOffers, triggerReload, setTriggerReload }
 
         return formattedDateRange
     }
+    const handlePageChange = (pageNumber) => {
+        setCurrentPage(pageNumber);
+      };
 
     return (
         <div className='page-container'>
@@ -94,6 +102,7 @@ const ReceivedOffersTable = ({ receivedOffers, triggerReload, setTriggerReload }
                         })}
                     </tbody>
                 </Table>
+           
             </div >
         </div>
     );
@@ -102,3 +111,16 @@ const ReceivedOffersTable = ({ receivedOffers, triggerReload, setTriggerReload }
 export default ReceivedOffersTable;
 
 
+
+
+{/* <Pagination>
+<Pagination.First onClick={() => handlePageChange(1)} />
+<Pagination.Prev onClick={() => handlePageChange(Math.max(1, currentPage - 1))} />
+{Array.from({ length: totalPages }, (_, i) => (
+    <Pagination.Item key={i + 1} active={i + 1 === currentPage} onClick={() => handlePageChange(i + 1)}>
+    {i + 1}
+    </Pagination.Item>
+))}
+<Pagination.Next onClick={() => handlePageChange(Math.min(totalPages, currentPage + 1))} />
+<Pagination.Last onClick={() => handlePageChange(totalPages)} />
+</Pagination> */}
