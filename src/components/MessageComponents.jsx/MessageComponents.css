@@ -11,18 +11,18 @@
 .message-container {
     display: flex; /* Make it a flex container */
     flex-direction: column; /* Align children vertically */
-    
 }
 
 .message {
     flex: 1; /* This will make it fill the height of its flex container parent */
     display: flex;
     flex-direction: column;
+    
   
 }
 
 .message-card {
-    flex-grow: 1; /* Grow to use available space */
+    flex: 1; /* This will make it fill the height of its flex container parent */
     display: flex;
     flex-direction: column;
   
@@ -30,9 +30,9 @@
 
 .message-card .card-body {
     flex-grow: 1; /* Grow to use available space */
-    overflow-y: auto; /* Scroll only when needed */
-    height: 78vh; /* SIZE OF THE PAGE */
-    overflow-y: auto; /* Enable vertical scroll */
+    overflow-y: auto; /* Enables scrolling */
+    height: 68vh; /* SIZE OF THE PAGE */
+    justify-content:unset
 }
 
 .input-group {

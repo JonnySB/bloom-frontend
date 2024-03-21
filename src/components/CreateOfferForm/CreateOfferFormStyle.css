@@ -1,0 +1,10 @@
+.makeOfferButton {
+    background-color: #2E9C45;
+    border-color: #2E9C45;
+}
+
+
+.makeOfferButton:hover {
+    background-color: green;
+ 
+}

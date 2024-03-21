@@ -4,10 +4,10 @@ import { getAllRequestsByOneUser, deleteHelpRequestFromUser } from '../../servic
 import NavbarComponent from '../../components/Navbar/NavbarComponent'
 import ManageHelpRequestsNavBar from '../../components/ManageHelpRequestsNavBar/ManageHelpRequestsNavBar'
 import { useUser } from '../../context/UserContext.jsx';
-import { Card, CloseButton, Row, Button, Modal } from 'react-bootstrap'
+import { Card, CloseButton, Row, Button, Modal, Container } from 'react-bootstrap'
 import "./CreateRequestPage.css"
 import logo from "../../assets/bloom-logo.png"
-
+import Footer from "../../components/Footer/Footer.jsx"
 
 
 const CreateRequestPage = () => {
@@ -74,7 +74,7 @@ const CreateRequestPage = () => {
         setShow(true);
     };
 
-    console.log(myRequest)
+  
     return (
         <div className="page-container">
             <NavbarComponent userDetails={userData} refeshUserData={refreshUserData} />
@@ -90,11 +90,12 @@ const CreateRequestPage = () => {
                     />
                 </div>
                 <div className='crequestRequestBar'>
-                    <p>Hello <strong>{userData?.username}</strong> see your requests below you can also create make a new request:  </p>
+                    <p>Hello <strong>{userData?.username}</strong> see your requests below you can also make a new request:  </p>
                     <CreateHelpRequestForm />
                 </div>
+                <Container>
                 <div className="helpRequestContainer">
-                    <Row xs={1} md={4} className="helpRequestInsideContainer">
+                    <Row xs={1} md={5} className="plantcard">
                         {myRequest?.map((item, index) => (
                             <Card className='helpRequestCard' key={index}>
                                 <Card.Header className="helpRequestHeader">
@@ -112,6 +113,7 @@ const CreateRequestPage = () => {
                         ))}
                     </Row>
                 </div>
+                </Container>
                 <Modal show={show} onHide={() => setShow(false)}>
                     <Modal.Header closeButton>
                         <Modal.Title>Delete Confirmation</Modal.Title>
@@ -123,8 +125,9 @@ const CreateRequestPage = () => {
                     </Modal.Footer>
                 </Modal>
             </div>
-
+            <Footer />
         </div>
+            
     )
 }
 

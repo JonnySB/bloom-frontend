@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Container, Card, Form, Button } from 'react-bootstrap';
 import "./MessageComponents.css";
 import { getMessagesById, sendMessage } from "../../services/messages";
@@ -12,6 +12,7 @@ function MessageContainer({ messageManager, userDetails, receiverDetails, newRec
   const [user_id, setuserID] = useState(window.localStorage.getItem("user_id"));
   const [roomInfo, setRoomInfo] = useState("");
   const [prevRoomIdentifier, setPrevRoomIdentifier] = useState(null);
+  const messagesEndRef = useRef(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -70,7 +71,9 @@ function MessageContainer({ messageManager, userDetails, receiverDetails, newRec
   };
 }, [myRoomIdentifier, socket]);
 
-
+useEffect(() => {
+  messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+}, [messages]);
 
   const handleSendMessage = async (e) => {
     e.preventDefault();
@@ -116,6 +119,7 @@ function MessageContainer({ messageManager, userDetails, receiverDetails, newRec
             ) : (
               messages.map((msg, index) => renderMessage(msg, index)
               ))}
+               <div ref={messagesEndRef} />
           </Card.Body>
         </Card>
         <Form onSubmit={handleSendMessage}>

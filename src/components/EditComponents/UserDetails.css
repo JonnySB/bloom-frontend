@@ -5,6 +5,7 @@
     gap: 20px; /* Optional: Adds some space between the card and navbar */
     max-width: 1390px;
     padding-top: 30px;
+    position: relative;
 }
 
 .profileEdit {
@@ -57,12 +58,18 @@
 }
 
 .potted-image {
+    display: flex; /* Use flex to center content, if needed */
     justify-content: center;
+    align-items: center; /* Center vertically, if there's any content */
+    background: url('https://res.cloudinary.com/dououppib/image/upload/v1709758337/PLANTS/pb_yxwurp.png') center/cover no-repeat;
+    width: 100%; /* Full width */
+    height: 350px; /* Height is automatic */
 }
 
 .potted-image img {
     object-fit: cover;
     aspect-ratio: 4 / 3;
+
 }
 
 .navbar-container {
@@ -162,11 +169,23 @@
     border-color: #6c757d; /* Border color to match */
 }
 
+.saveChangesButton {
+    background-color: #2E9C45 !important;
+    border-color: #2E9C45 !important;
+}
+
+
+.saveChangesButton:hover {
+    background-color: green !important;
+ 
+}
+
 
 .navbar-container .navbar {
     padding: 0.5rem 1rem; /* Reduced padding for a slimmer navbar */
     background-color: #ffffff; /* Light background for the navbar */
     box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* Subtle shadow for depth */
+    position: relative;
 }
 
 /* Navbar Brand and Items Styling */
@@ -193,4 +212,45 @@
 }
 .edit-profile-button:hover {
     background-color: green;
+}
+
+
+@media (max-width: 1199px) {
+    .user-details {
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+    }
+
+    .potted-image {
+        order: 1;
+        width: 100%;
+        position: relative; 
+        z-index: 0; 
+    }
+
+
+    .image-container {
+        order: 2;
+        z-index: 2; 
+        position: absolute;
+        top: -50%; 
+        left: 50%; 
+        transform: translate(-50%, -50%); 
+        margin-top: -84px; 
+        width: 168px; 
+        height: 168px; 
+    }
+
+    .navbar-container {
+        order: 3;
+        width: 100%;
+        z-index: 1; 
+    }
+
+    .profileEdit {
+        order: 4;
+        width: 100%;
+        margin-top: 20px; 
+    }
 }

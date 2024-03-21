@@ -1,5 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import {Card, Col, Row, CloseButton, Pagination, Button, Modal  } from 'react-bootstrap'
+import {Card, Col, Row, CloseButton, Pagination, Button, Modal, Container  } from 'react-bootstrap'
 import "./PlantCards.css"
 import { deletePlantsFromUser } from '../../services/userPlants';
 import { useState } from 'react';
@@ -40,7 +40,8 @@ const PlantCards = ({ myPlants, refreshPlants }) => {
 
   return (
     <>
-      <Row xs={1} md={5} className="plantCard">
+    <Container>
+      <Row xs={1} md={5} className="plantcard">
         {currentPlants?.map((plant, index) => (
           <Col key={index}>
             <Card>
@@ -64,6 +65,7 @@ const PlantCards = ({ myPlants, refreshPlants }) => {
           </Col>
         ))}
       </Row>
+      </Container>
       <Pagination>
           <Pagination.First onClick={() => handlePageChange(1)} />
           <Pagination.Prev onClick={() => handlePageChange(Math.max(1, currentPage - 1))} />

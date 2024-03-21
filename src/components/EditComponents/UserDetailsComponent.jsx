@@ -100,7 +100,7 @@ function UserNavbar({ userDetails, refeshUserData }) {
                             </Form>
                             <Modal.Footer>
                                 <Button variant="secondary" onClick={() => setShowButtonPicture(false)}>Close</Button>
-                                <Button variant="primary" type="submit" form="userAvatar" onClick={() => setShowButtonPicture(false)}>Save Changes</Button>
+                                <Button variant="primary" type="submit" className='saveChangesButton' form="userAvatar" onClick={() => setShowButtonPicture(false)}>Save Changes</Button>
                             </Modal.Footer>
                         </Modal>
                         <ListGroup className="list-group-flush">
@@ -113,15 +113,12 @@ function UserNavbar({ userDetails, refeshUserData }) {
                 </div>
                 <div className="navbar-container">
                     <div className='potted-image'>
-                        <img src='https://res.cloudinary.com/dououppib/image/upload/v1709758337/PLANTS/pb_yxwurp.png'></img>
+                    
                     </div>
                     <Navbar expand="lg" className="bg-body-tertiary">
-                        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                        <Navbar.Collapse id="basic-navbar-nav">
                             <Nav className="mr-auto">
                                 <Button variant="primary" className="edit-profile-button" onClick={handleShow}>Edit Profile</Button>
                             </Nav>
-                        </Navbar.Collapse>
                     </Navbar>
                 </div>
             </Container>

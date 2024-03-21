@@ -1,13 +1,19 @@
-import Table from 'react-bootstrap/Table';
+import {Table, Pagination } from 'react-bootstrap';
 import RescindButton from '../../Buttons/RescindButton/RescindButton'
 import "../ManageRequestTables.css"
-
+import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell } from '@fortawesome/free-solid-svg-icons';
 import { faCalendarCheck } from '@fortawesome/free-solid-svg-icons';
 
 const MyOffersTable = ({ myOffers, triggerReload, setTriggerReload }) => {
-
+    const itemsPerPage = 5;
+    const [currentPage, setCurrentPage] = useState(1);
+    const totalPages = Math.ceil(myOffers.length / itemsPerPage);
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = myOffers.slice(indexOfFirstItem, indexOfLastItem);
+    
     const convertDate = (startDateString, endDateString) => {
         const startDate = new Date(startDateString);
         const endDate = new Date(endDateString);
@@ -18,63 +24,74 @@ const MyOffersTable = ({ myOffers, triggerReload, setTriggerReload }) => {
 
         return formattedDateRange
     }
+    const handlePageChange = (pageNumber) => {
+        setCurrentPage(pageNumber);
+      };
+      
+    
 
-    return (
+      return (
         <div className='page-container'>
-            <div className='table-container'>
-                <Table>
-                    <thead>
-                        <tr>
-                            <th>Status</th>
-                            <th className='r-title'>Request Title</th>
-                            <th>Date Range</th>
-                            <th>Price Offered</th>
-                            <th>User</th>
-                            <th>Message Sent</th>
-                            <th>Rescind Offer</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {myOffers?.sort().reverse().map((help_offer) => {
-                            return (
-                                <>
-                                    {
-                                        help_offer.help_offer_status != "recinded" && (
-                                            <tr key={help_offer.help_offer_id}>
-                                                <td>{help_offer.help_offer_status == "accepted" ? <FontAwesomeIcon icon={faCalendarCheck} /> : <FontAwesomeIcon icon={faBell} />}</td>
-                                                <td>{help_offer.help_request_name}</td>
-                                                <td>{convertDate(help_offer.help_request_start_date, help_offer.help_request_end_date)}</td>
-                                                <td>£{help_offer.help_offer_bid}</td>
-                                                <td>
-                                                    <div className="user-details-container">
-                                                        <div className={"user-icon-container"}>
-                                                            <img src={help_offer.help_offer_receive_url_string == "" ? "https://res.cloudinary.com/dououppib/image/upload/v1709830638/PLANTS/placeholder_ry6d8v.webp" : help_offer.help_offer_avatar_url_string} className='profileAvatar' />
-                                                        </div>
-                                                        <div className="user-text-align">
-                                                            {help_offer.help_receive_username}
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>{help_offer.help_offer_message}</td>
-                                                <td className="btn-styling" style={{ border: "0" }}>
-                                                    <RescindButton
-                                                        help_offer_id={help_offer.help_offer_id}
-                                                        triggerReload={triggerReload}
-                                                        setTriggerReload={setTriggerReload}
-
-                                                    />
-                                                </td>
-                                            </tr>
-                                        )
-                                    }
-                                </>
-                            )
-                        })}
-                    </tbody>
-                </Table>
-            </div>
+          <div className='table-container'>
+            <Table>
+              <thead>
+                <tr>
+                  <th>Status</th>
+                  <th className='r-title'>Request Title</th>
+                  <th>Date Range</th>
+                  <th>Price Offered</th>
+                  <th>User</th>
+                  <th>Message Sent</th>
+                  <th>Rescind Offer</th>
+                </tr>
+              </thead>
+              <tbody>
+                {currentItems?.sort().reverse().map((help_offer) => {
+                  return help_offer.help_offer_status !== "recinded" && (
+                    <tr key={help_offer.help_offer_id}>
+                      <td>{help_offer.help_offer_status === "accepted" ? <FontAwesomeIcon icon={faCalendarCheck} /> : <FontAwesomeIcon icon={faBell} />}</td>
+                      <td>{help_offer.help_request_name}</td>
+                      <td>{convertDate(help_offer.help_request_start_date, help_offer.help_request_end_date)}</td>
+                      <td>£{help_offer.help_offer_bid}</td>
+                      <td>
+                        <div className="user-details-container">
+                          <div className={"user-icon-container"}>
+                            <img src={help_offer.help_offer_receive_url_string === "" ? "https://res.cloudinary.com/dououppib/image/upload/v1709830638/PLANTS/placeholder_ry6d8v.webp" : help_offer.help_offer_avatar_url_string} className='profileAvatar' />
+                          </div>
+                          <div className="user-text-align">
+                            {help_offer.help_receive_username}
+                          </div>
+                        </div>
+                      </td>
+                      <td>{help_offer.help_offer_message}</td>
+                      <td className="btn-styling" style={{ border: "0" }}>
+                        <RescindButton
+                          help_offer_id={help_offer.help_offer_id}
+                          triggerReload={triggerReload}
+                          setTriggerReload={setTriggerReload}
+                        />
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </Table>
+            <Pagination>
+              <Pagination.First onClick={() => handlePageChange(1)} />
+              <Pagination.Prev onClick={() => handlePageChange(Math.max(1, currentPage - 1))} />
+              {Array.from({ length: totalPages }, (_, i) => (
+                <Pagination.Item key={i + 1} active={i + 1 === currentPage} onClick={() => handlePageChange(i + 1)}>
+                  {i + 1}
+                </Pagination.Item>
+              ))}
+              <Pagination.Next onClick={() => handlePageChange(Math.min(totalPages, currentPage + 1))} />
+              <Pagination.Last onClick={() => handlePageChange(totalPages)} />
+            </Pagination>
+          </div>
         </div>
-    );
+      );
 }
 
 export default MyOffersTable;
+
+

@@ -10,6 +10,7 @@ import { getAllMessagesByUserId } from "../../services/messages";
 import io from "socket.io-client";
 const socket = io("http://localhost:5001");
 import { useUser } from '../../context/UserContext.jsx';
+import Footer from "../../components/Footer/Footer";
 
 export const MessagePage = () => {
     const [selectedMessageId, setSelectedMessageId] = useState(null);
@@ -93,6 +94,7 @@ export const MessagePage = () => {
             <ChatListComponent onChatSelect={handleChatSelect} allMessages={messages} receiverDetails={receiverDetails} userDetails={userDetails} />
             {selectedMessageId && <MessageContainer messageManager={selectedMessageId} myRoomIdentifier={myRoomIdentifier} newUserName={newUserName} newRecipientId={receiptID}  userDetails={userDetails}  receiverDetails={receiverDetails} />}
       </Container>
+      <Footer />
       </>
     )
 }
