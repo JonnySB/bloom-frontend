@@ -27,6 +27,7 @@
     margin: 20px 0 20px 0;
     
 }
+
 .card-body {
     padding: 0;
     display: flex;
@@ -85,4 +86,37 @@
     justify-content: space-between; /* Space between items, pushing the close button to the right */
     align-items: center; /* Vertically align items in the middle */
     background-color: #cefad0;
+  }
+
+ 
+
+@media (min-width: 1350px) {
+    .plantcard .col {
+      flex: 0 0 calc(20% - 10px); 
+      max-width: calc(20% - 10px); 
+    }
+  }
+  
+  @media (max-width: 1349px) {
+    .plantcard {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  
+    .plantcard .col {
+      flex: 0 0 calc(25% - 10px); 
+      max-width: calc(25% - 10px);
+    }
+    
+  
+    .plantcard .col:nth-child(5) {
+      flex: 0 0 100%; 
+      max-width: 24%;
+    }
+    
+  
+    .plantcard .col:nth-child(5) > .card {
+      margin-left: auto;
+      margin-right: auto;
+    }
   }
