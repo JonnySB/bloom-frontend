@@ -23,13 +23,11 @@ export const Login = () => {
         window.localStorage.setItem("user_id", response.user_id)
         navigate("/");
         } catch (err) {
-        console.error(err);
-        setError(err.cause)
+        setError(err.message)
         navigate("/login");
         }
     };
     
-
     const loginPage = () => {
         navigate(`/login`);
         
@@ -73,19 +71,22 @@ export const Login = () => {
                         <h4 className="white-text">I already have an account</h4>
                         <h6 className="white-text">Sign in with your email/username and password</h6>
                         <hr className="white-line" />
+                        {loginError && <div className="wrongCredentials">
+                            <p>Wrong credentials</p>
+                            <p>{loginError}</p>
+                        </div> }
                         <Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
                             <Col sm="12"> 
-                                <Form.Control type="text" placeholder="Email or username" value={username_email} onChange={handleUsernameEmailChange} />
+                                <Form.Control required type="text"  placeholder="Email or username" value={username_email} onChange={handleUsernameEmailChange} />
                             </Col>
                         </Form.Group>
     
                         <Form.Group as={Row} className="mb-3 justify-content-center" controlId="formPlaintextPassword">
                             <Col sm="12">
-                                <Form.Control type="password" placeholder="Password" value={password} onChange={handlePasswordChange} />
+                                <Form.Control required type="password" placeholder="Password" value={password} onChange={handlePasswordChange} />
                             </Col>
                         </Form.Group>
                         <Button variant="success" type="submit">Sign in</Button>
-                        {loginError && <div>{loginError}</div>}
                     </Form>
                   
                 </div>
@@ -96,8 +97,3 @@ export const Login = () => {
         );
     };
 
-
-    // <hr className="white-line" />
-    // <div className="green-text text-center font-weight-bold">
-    // <Nav.Link href="/signup" className="nav-link">Create Account</Nav.Link>
-    // </div>

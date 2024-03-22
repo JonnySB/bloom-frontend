@@ -125,31 +125,31 @@ export const Signup = () => {
                         <h6 className="white-text">Please fill out the bewlo information to start with us</h6>
                         <hr className="white-line" />
                 <Form.Group className="mb-3" controlId="firstName">
-                    <Form.Control type="text" placeholder="First name" value={first_name} onChange={handleFirstNameChange} />
+                    <Form.Control required type="text" placeholder="First name" value={first_name} onChange={handleFirstNameChange} />
                 </Form.Group>
     
                 <Form.Group className="mb-3" controlId="lastName">
-                    <Form.Control type="text" placeholder="Last name" value={last_name} onChange={handleLastNameChange} />
+                    <Form.Control   required type="text" placeholder="Last name" value={last_name} onChange={handleLastNameChange} />
                 </Form.Group>
     
                 <Form.Group className="mb-3" controlId="username">
-                    <Form.Control type="text" placeholder="Username" value={username} onChange={handleUsernameChange} />
+                    <Form.Control   required  type="text" placeholder="Username" value={username} onChange={handleUsernameChange} />
                 </Form.Group>
     
                 <Form.Group className="mb-3" controlId="email">
-                    <Form.Control type="email" placeholder="Email" value={email} onChange={handleEmailChange} />
+                    <Form.Control   required type="email" placeholder="Email" value={email} onChange={handleEmailChange} />
                 </Form.Group>
     
                 <Form.Group className="mb-3" controlId="password">
-                    <Form.Control type="password" placeholder="Password" value={password} onChange={handlePasswordChange} />
+                    <Form.Control   required type="password" placeholder="Password" value={password} onChange={handlePasswordChange} />
                 </Form.Group>
     
                 <Form.Group className="mb-3" controlId="confirmPassword">
-                    <Form.Control type="password" placeholder="Confirm password" value={password_confirm} onChange={handlePasswordConfirmChange} />
+                    <Form.Control   required type="password" placeholder="Confirm password" value={password_confirm} onChange={handlePasswordConfirmChange} />
                 </Form.Group>
     
                 <Form.Group className="mb-3" controlId="address">
-                    <Form.Control type="text" placeholder="Home address" value={address} onChange={handleAddressChange} />
+                    <Form.Control   required type="text" placeholder="Home address" value={address} onChange={handleAddressChange} />
                 </Form.Group>
     
                 <Button variant="success" type="submit">Sign Up</Button>
