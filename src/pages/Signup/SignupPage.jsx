@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState , useEffect} from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { signup } from "../../services/authentication";
 import Form from 'react-bootstrap/Form';
@@ -17,27 +17,40 @@ export const Signup = () => {
         const [password, setPassword] = useState("");
         const [passwordIsValid, setPasswordIsValid] = useState(true);
         const [password_confirm, setPassword_confirm] = useState("");
+        const [doesPasswordsMatch, setDoesPasswordMatch] = useState(false)
         const [address, setAddress] = useState("");
         const location = useLocation();
-    
-        const [signUpError, setError] = useState();
+        const [emailError, setEmailError] = useState();
+        const [userNameError, setuserNameError] = useState()
         const navigate = useNavigate();
+
+        useEffect(() => {
+            if (password && password_confirm) {
+                setDoesPasswordMatch(password === password_confirm);
+            }
+        }, [password, password_confirm]); 
     
         const handleSubmit = async (event) => {
         event.preventDefault();
+        if (!doesPasswordsMatch) {
+            console.log("Passwords do not match.");
+            return; // Prevent form submission if passwords don't match
+        }
         try {
             await signup(first_name, last_name, username, email, password, password_confirm, address)
+        
             console.log("redirecting...:");
             navigate("/login");
-            
-    
-        } catch (err) {
-            console.error(err);
-            setError(err.cause)
-            navigate("/signup");
-        }
+        } 
+        catch (err) {
+                if (err.message == "Bad request - user not created. This username has already been taken.") {
+                    setuserNameError(err.message)
+                } else if (err.message == "Bad request - user not created. This email has already been taken.") {
+                    setEmailError(err.message)
+                }
+            }
         };
-    
+
         const handleFirstNameChange = (event) => {
             setFirst_name(event.target.value);
         };
@@ -57,31 +70,32 @@ export const Signup = () => {
         const validatePassword = (password) => {
             const schema = new passwordValidator();
             schema
-              .is()
-              .min(8) // Minimum length 8
-              .is()
-              .max(100) // Maximum length 100
-              .has()
-              .uppercase() // Must have uppercase letters
-              .has()
-              .lowercase() // Must have lowercase letters
-              .has()
-              .digits() // Must have digits
-              .has()
-              .symbols(); // Must have symbols
-            const isValidPassword = schema.validate(password);
+              .is().min(8) // Minimum length 8
+              .is().max(100) // Maximum length 100
+              .has().uppercase() // Must have uppercase letters
+              .has().lowercase() // Must have lowercase letters
+              .has().digits() // Must have digits
+              .has().symbols(); // Must have symbols
+   
+            const isValidPassword = schema.validate(password, { details: true });
             setPasswordIsValid(isValidPassword);
         };
 
         const handlePasswordChange = (event) => {
-            const newPassword = event.target.value
-            setPassword(newPassword);
-            validatePassword(newPassword)
+            setPassword(event.target.value);
         };
 
         const handlePasswordConfirmChange = (event) => {
-            setPassword_confirm(event.target.value);
+            let confirm_password = event.target.value
+            validatePassword(confirm_password)
+            setPassword_confirm(confirm_password);
         };
+
+        const handlePasswordMatch = () => {
+            if (password === password_confirm) {
+                setDoesPasswordMatch(true)
+            }
+        }
 
         const handleAddressChange = (event) => {
             setAddress(event.target.value);
@@ -97,9 +111,7 @@ export const Signup = () => {
             
         }
     
-
-        return (
-        
+        return (      
         <>   
             <NavbarComponent  />
             <div className="app-container"> 
@@ -118,6 +130,7 @@ export const Signup = () => {
                         Create an account
                     </button>
             </div>
+            <div className="pageSize">
             <Container className="d-flex align-items-center justify-content-center">
             <div className="signup-container">
             <Form className="signup-form" onSubmit={handleSubmit}>
@@ -125,50 +138,48 @@ export const Signup = () => {
                         <h6 className="white-text">Please fill out the bewlo information to start with us</h6>
                         <hr className="white-line" />
                 <Form.Group className="mb-3" controlId="firstName">
-                    <Form.Control type="text" placeholder="First name" value={first_name} onChange={handleFirstNameChange} />
+                    <Form.Control required type="text" placeholder="First name" value={first_name} onChange={handleFirstNameChange} />
                 </Form.Group>
     
                 <Form.Group className="mb-3" controlId="lastName">
-                    <Form.Control type="text" placeholder="Last name" value={last_name} onChange={handleLastNameChange} />
+                    <Form.Control   required type="text" placeholder="Last name" value={last_name} onChange={handleLastNameChange} />
                 </Form.Group>
     
                 <Form.Group className="mb-3" controlId="username">
-                    <Form.Control type="text" placeholder="Username" value={username} onChange={handleUsernameChange} />
+                    <Form.Control   required  type="text" placeholder="Username" value={username} onChange={handleUsernameChange} />
                 </Form.Group>
-    
+                    {userNameError && <div className="emailError">{userNameError.slice(32)}</div>}
                 <Form.Group className="mb-3" controlId="email">
-                    <Form.Control type="email" placeholder="Email" value={email} onChange={handleEmailChange} />
+                    <Form.Control   required type="email" placeholder="Email" value={email} onChange={handleEmailChange} />
                 </Form.Group>
-    
+                    {emailError && <div className="emailError">{emailError.slice(32)}</div>}
                 <Form.Group className="mb-3" controlId="password">
-                    <Form.Control type="password" placeholder="Password" value={password} onChange={handlePasswordChange} />
+                    <Form.Control   required type="password" placeholder="Password" value={password} onChange={handlePasswordChange} />
                 </Form.Group>
     
                 <Form.Group className="mb-3" controlId="confirmPassword">
-                    <Form.Control type="password" placeholder="Confirm password" value={password_confirm} onChange={handlePasswordConfirmChange} />
+                    <Form.Control   required type="password" placeholder="Confirm password" value={password_confirm} onChange={handlePasswordConfirmChange} />
                 </Form.Group>
     
                 <Form.Group className="mb-3" controlId="address">
-                    <Form.Control type="text" placeholder="Home address" value={address} onChange={handleAddressChange} />
+                    <Form.Control   required type="text" placeholder="Home address" value={address} onChange={handleAddressChange} />
                 </Form.Group>
     
-                <Button variant="success" type="submit">Sign Up</Button>
-                {signUpError && <div>{signUpError}</div>}
-                {!passwordIsValid && (
-                  <p className="font-medium text-xs text-red-600 dark:text-green-500">
-                    Password must have:
-                    <br />
-                    - 8 characters minimum
-                    <br />
-                    - at least one capital letter <br />
-                    - at least one number
-                    <br />- at least one special character
-                  </p>
-                )}
+                <Button variant="success" type="submit" onClick={handlePasswordMatch}>Sign Up</Button>
+                {passwordIsValid && passwordIsValid.length > 0 && (
+                        <div className="signUpFormErros">
+                            {passwordIsValid.map((item, index) => (
+                                <div key={index}>{item.message.replace("The string", "Password")}</div>
+                            ))}
+                            {!doesPasswordsMatch && password && password_confirm && (
+                                <div>Passwords do not match.</div>
+                            )}
+                        </div>
+                    )}
             </Form>
             </div>
-        
         </Container>
+        </div>
         </div>
         </>
         );

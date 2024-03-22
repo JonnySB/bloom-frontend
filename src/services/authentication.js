@@ -14,40 +14,37 @@ export const login = async (username_email, password) => {
     headers: {
       "Content-Type": "application/json",
     },
+
     body: JSON.stringify(payload),
   };
 
   // Get's tokens with above login details.
-  const response = await fetch(`${BACKEND_URL}/token`, requestOptions);
+  const response = await fetch(`${BACKEND_URL}/token`, requestOptions); 
   // Returns token if response is 201 otherwise throws an error. 201 means succesful request that led to creation of a resource (In this case a "token")
   // docs: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/201
   if (response.status === 201) {
     let data = await response.json();
-    return data;
-  } else {
+    return data; 
+  } else if (response.status == 401) {
+    throw new Error(
+      `User name or password does not match`,
+    );
+  }  else {
     throw new Error(
       `Received status ${response.status} when logging in. Expected 201`,
     );
   }
 };
 
-export const signup = async (
-  first_name,
-  last_name,
-  username,
-  email,
-  password,
-  password_confirm,
-  address,
-) => {
+export const signup = async (first_name, last_name, username, email, password, password_confirm, address) => {
   const payload = {
-    first_name: first_name,
-    last_name: last_name,
-    username: username,
-    email: email,
-    password: password,
-    password_confirm: password_confirm,
-    address: address,
+    first_name,
+    last_name,
+    username,
+    email,
+    password,
+    password_confirm,
+    address,
   };
 
   const requestOptions = {
@@ -60,13 +57,13 @@ export const signup = async (
 
   let response = await fetch(`${BACKEND_URL}/user/signup`, requestOptions);
 
-  // docs: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/201
-  if (response.status === 201) {
-    return;
+  if (response.ok) {
+    const data = await response.json();
+    return data; 
   } else {
-    throw new Error(
-      `Received status ${response.status} when signing up. Expected 201`,
-    );
+    const errorData = await response.json();
+ 
+    throw new Error(errorData.message || `Received status ${response.status} when signing up.`);
   }
 };
 
