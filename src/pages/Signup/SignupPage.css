@@ -23,3 +23,12 @@
 .white-text {
     color: white; 
 }
+.signUpFormErros {
+    background-color: white;
+    width: 100%;
+    height: 150px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    border: 1px solid #dd3c10;
+    background-color: #ffebe8;
+}

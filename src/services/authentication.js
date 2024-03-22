@@ -64,7 +64,8 @@ export const signup = async (
   };
 
   let response = await fetch(`${BACKEND_URL}/user/signup`, requestOptions);
-
+  console.log(response.message)
+  console.log(response)
   // docs: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/201
   if (response.status === 201) {
     return;

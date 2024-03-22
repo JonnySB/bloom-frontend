@@ -75,6 +75,7 @@ export const Signup = () => {
 
         const handlePasswordChange = (event) => {
             const newPassword = event.target.value
+            console.log(event.target.value)
             setPassword(newPassword);
             validatePassword(newPassword)
         };
@@ -96,7 +97,6 @@ export const Signup = () => {
             navigate(`/signup`);
             
         }
-    
 
         return (
         
@@ -153,6 +153,7 @@ export const Signup = () => {
                 </Form.Group>
     
                 <Button variant="success" type="submit">Sign Up</Button>
+                <div className="signUpFormErros">
                 {signUpError && <div>{signUpError}</div>}
                 {!passwordIsValid && (
                   <p className="font-medium text-xs text-red-600 dark:text-green-500">
@@ -165,6 +166,7 @@ export const Signup = () => {
                     <br />- at least one special character
                   </p>
                 )}
+                </div>
             </Form>
             </div>
         
