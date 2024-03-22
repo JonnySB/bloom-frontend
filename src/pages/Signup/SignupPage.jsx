@@ -152,7 +152,7 @@ export const Signup = () => {
                 <Button variant="success" type="submit">Sign Up</Button>
                 {passwordIsValid && passwordIsValid.length > 0 && <div className="signUpFormErros">
                 {passwordIsValid.map((item, index) => (
-                    <div key={index}>{item.message}</div>
+                    <div key={index}>{item.message.replace("The string", "Password")}</div>
                 ))}
                 </div>}
             </Form>
