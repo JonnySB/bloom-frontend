@@ -114,6 +114,7 @@ export const Signup = () => {
                         Create an account
                     </button>
             </div>
+            <div className="pageSize">
             <Container className="d-flex align-items-center justify-content-center">
             <div className="signup-container">
             <Form className="signup-form" onSubmit={handleSubmit}>
@@ -158,6 +159,7 @@ export const Signup = () => {
             </div>
         
         </Container>
+        </div>
         </div>
         </>
         );

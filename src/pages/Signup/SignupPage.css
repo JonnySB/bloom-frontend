@@ -52,3 +52,7 @@
     border: 1px solid #dd3c10;
     background-color: #ffebe8;
 }
+
+.pageSize {
+    height: 800px;
+}
