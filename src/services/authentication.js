@@ -36,23 +36,15 @@ export const login = async (username_email, password) => {
   }
 };
 
-export const signup = async (
-  first_name,
-  last_name,
-  username,
-  email,
-  password,
-  password_confirm,
-  address,
-) => {
+export const signup = async (first_name, last_name, username, email, password, password_confirm, address) => {
   const payload = {
-    first_name: first_name,
-    last_name: last_name,
-    username: username,
-    email: email,
-    password: password,
-    password_confirm: password_confirm,
-    address: address,
+    first_name,
+    last_name,
+    username,
+    email,
+    password,
+    password_confirm,
+    address,
   };
 
   const requestOptions = {
@@ -64,15 +56,14 @@ export const signup = async (
   };
 
   let response = await fetch(`${BACKEND_URL}/user/signup`, requestOptions);
-  console.log(response.message)
-  console.log(response)
-  // docs: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/201
-  if (response.status === 201) {
-    return;
+
+  if (response.ok) {
+    const data = await response.json();
+    return data; 
   } else {
-    throw new Error(
-      `Received status ${response.status} when signing up. Expected 201`,
-    );
+    const errorData = await response.json();
+    console.log(errorData)
+    throw new Error(errorData.message || `Received status ${response.status} when signing up.`);
   }
 };
 

@@ -19,8 +19,8 @@ export const Signup = () => {
         const [password_confirm, setPassword_confirm] = useState("");
         const [address, setAddress] = useState("");
         const location = useLocation();
-    
-        const [signUpError, setError] = useState();
+        const [emailError, setEmailError] = useState();
+        const [userNameError, setuserNameError] = useState()
         const navigate = useNavigate();
     
         const handleSubmit = async (event) => {
@@ -29,13 +29,15 @@ export const Signup = () => {
             await signup(first_name, last_name, username, email, password, password_confirm, address)
             console.log("redirecting...:");
             navigate("/login");
-            
     
-        } catch (err) {
-            console.error(err);
-            setError(err.cause)
-            navigate("/signup");
-        }
+        } 
+        catch (err) {
+                if (err.message == "Bad request - user not created. This username has already been taken.") {
+                    setuserNameError(err.message)
+                } else if (err.message == "Bad request - user not created. This email has already been taken.") {
+                    setEmailError(err.message)
+                }
+            }
         };
     
         const handleFirstNameChange = (event) => {
@@ -92,6 +94,7 @@ export const Signup = () => {
             navigate(`/signup`);
             
         }
+
         return (      
         <>   
             <NavbarComponent  />
@@ -128,11 +131,11 @@ export const Signup = () => {
                 <Form.Group className="mb-3" controlId="username">
                     <Form.Control   required  type="text" placeholder="Username" value={username} onChange={handleUsernameChange} />
                 </Form.Group>
-    
+                    {userNameError && <div className="emailError">{userNameError.slice(32)}</div>}
                 <Form.Group className="mb-3" controlId="email">
                     <Form.Control   required type="email" placeholder="Email" value={email} onChange={handleEmailChange} />
                 </Form.Group>
-    
+                    {emailError && <div className="emailError">{emailError.slice(32)}</div>}
                 <Form.Group className="mb-3" controlId="password">
                     <Form.Control   required type="password" placeholder="Password" value={password} onChange={handlePasswordChange} />
                 </Form.Group>

@@ -32,3 +32,23 @@
     border: 1px solid #dd3c10;
     background-color: #ffebe8;
 }
+
+.emailError {
+    background-color: white;
+    width: 80%;
+    height: 50px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    border: 1px solid #dd3c10;
+    background-color: #ffebe8;
+}
+
+.usernameError {
+    background-color: white;
+    width: 80%;
+    height: 50px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    border: 1px solid #dd3c10;
+    background-color: #ffebe8;
+}
