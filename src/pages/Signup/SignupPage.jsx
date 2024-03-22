@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState , useEffect} from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { signup } from "../../services/authentication";
 import Form from 'react-bootstrap/Form';
@@ -17,19 +17,30 @@ export const Signup = () => {
         const [password, setPassword] = useState("");
         const [passwordIsValid, setPasswordIsValid] = useState(true);
         const [password_confirm, setPassword_confirm] = useState("");
+        const [doesPasswordsMatch, setDoesPasswordMatch] = useState(false)
         const [address, setAddress] = useState("");
         const location = useLocation();
         const [emailError, setEmailError] = useState();
         const [userNameError, setuserNameError] = useState()
         const navigate = useNavigate();
+
+        useEffect(() => {
+            if (password && password_confirm) {
+                setDoesPasswordMatch(password === password_confirm);
+            }
+        }, [password, password_confirm]); 
     
         const handleSubmit = async (event) => {
         event.preventDefault();
+        if (!doesPasswordsMatch) {
+            console.log("Passwords do not match.");
+            return; // Prevent form submission if passwords don't match
+        }
         try {
             await signup(first_name, last_name, username, email, password, password_confirm, address)
+        
             console.log("redirecting...:");
             navigate("/login");
-    
         } 
         catch (err) {
                 if (err.message == "Bad request - user not created. This username has already been taken.") {
@@ -39,7 +50,7 @@ export const Signup = () => {
                 }
             }
         };
-    
+
         const handleFirstNameChange = (event) => {
             setFirst_name(event.target.value);
         };
@@ -72,14 +83,19 @@ export const Signup = () => {
 
         const handlePasswordChange = (event) => {
             setPassword(event.target.value);
-   
         };
 
         const handlePasswordConfirmChange = (event) => {
             let confirm_password = event.target.value
             validatePassword(confirm_password)
-            setPassword_confirm(event.target.value);
+            setPassword_confirm(confirm_password);
         };
+
+        const handlePasswordMatch = () => {
+            if (password === password_confirm) {
+                setDoesPasswordMatch(true)
+            }
+        }
 
         const handleAddressChange = (event) => {
             setAddress(event.target.value);
@@ -94,7 +110,7 @@ export const Signup = () => {
             navigate(`/signup`);
             
         }
-
+    
         return (      
         <>   
             <NavbarComponent  />
@@ -149,15 +165,19 @@ export const Signup = () => {
                     <Form.Control   required type="text" placeholder="Home address" value={address} onChange={handleAddressChange} />
                 </Form.Group>
     
-                <Button variant="success" type="submit">Sign Up</Button>
-                {passwordIsValid && passwordIsValid.length > 0 && <div className="signUpFormErros">
-                {passwordIsValid.map((item, index) => (
-                    <div key={index}>{item.message.replace("The string", "Password")}</div>
-                ))}
-                </div>}
+                <Button variant="success" type="submit" onClick={handlePasswordMatch}>Sign Up</Button>
+                {passwordIsValid && passwordIsValid.length > 0 && (
+                        <div className="signUpFormErros">
+                            {passwordIsValid.map((item, index) => (
+                                <div key={index}>{item.message.replace("The string", "Password")}</div>
+                            ))}
+                            {!doesPasswordsMatch && password && password_confirm && (
+                                <div>Passwords do not match.</div>
+                            )}
+                        </div>
+                    )}
             </Form>
             </div>
-        
         </Container>
         </div>
         </div>

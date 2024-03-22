@@ -62,7 +62,7 @@ export const signup = async (first_name, last_name, username, email, password, p
     return data; 
   } else {
     const errorData = await response.json();
-    console.log(errorData)
+ 
     throw new Error(errorData.message || `Received status ${response.status} when signing up.`);
   }
 };
