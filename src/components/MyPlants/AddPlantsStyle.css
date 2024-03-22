@@ -56,3 +56,11 @@
 .back-to-profile-button:hover {
     background-color: green;
 }
+.buttonSaveAddPlant {
+    background-color: #2e9c45;
+    border-color: #2e9c45 !important;
+}
+
+.buttonSaveAddPlant:hover {
+    background-color: green;
+}

@@ -158,7 +158,7 @@ const AddPlant = ({ refreshPlants, myPlants }) => {
                 <Button variant="secondary" onClick={() => setShow(false)}>
                     Close
                 </Button>
-                <Button variant="primary" type="submit" form="addingPlants" onClick={() => setShow(false)}>
+                <Button variant="primary" className="buttonSaveAddPlant" type="submit" form="addingPlants" onClick={() => setShow(false)}>
                     Save Changes
                 </Button>
             </Modal.Footer>
