@@ -135,7 +135,7 @@ export const Signup = () => {
             <div className="signup-container">
             <Form className="signup-form" onSubmit={handleSubmit}>
                         <h4 className="white-text">I do not have an account</h4>
-                        <h6 className="white-text">Please fill out the bewlo information to start with us</h6>
+                        <h6 className="white-text">Please fill out the below information to start with us</h6>
                         <hr className="white-line" />
                 <Form.Group className="mb-3" controlId="firstName">
                     <Form.Control required type="text" placeholder="First name" value={first_name} onChange={handleFirstNameChange} />
