@@ -57,30 +57,25 @@ export const Signup = () => {
         const validatePassword = (password) => {
             const schema = new passwordValidator();
             schema
-              .is()
-              .min(8) // Minimum length 8
-              .is()
-              .max(100) // Maximum length 100
-              .has()
-              .uppercase() // Must have uppercase letters
-              .has()
-              .lowercase() // Must have lowercase letters
-              .has()
-              .digits() // Must have digits
-              .has()
-              .symbols(); // Must have symbols
-            const isValidPassword = schema.validate(password);
+              .is().min(8) // Minimum length 8
+              .is().max(100) // Maximum length 100
+              .has().uppercase() // Must have uppercase letters
+              .has().lowercase() // Must have lowercase letters
+              .has().digits() // Must have digits
+              .has().symbols(); // Must have symbols
+   
+            const isValidPassword = schema.validate(password, { details: true });
             setPasswordIsValid(isValidPassword);
         };
 
         const handlePasswordChange = (event) => {
-            const newPassword = event.target.value
-            console.log(event.target.value)
-            setPassword(newPassword);
-            validatePassword(newPassword)
+            setPassword(event.target.value);
+   
         };
 
         const handlePasswordConfirmChange = (event) => {
+            let confirm_password = event.target.value
+            validatePassword(confirm_password)
             setPassword_confirm(event.target.value);
         };
 
@@ -97,9 +92,7 @@ export const Signup = () => {
             navigate(`/signup`);
             
         }
-
-        return (
-        
+        return (      
         <>   
             <NavbarComponent  />
             <div className="app-container"> 
@@ -153,20 +146,11 @@ export const Signup = () => {
                 </Form.Group>
     
                 <Button variant="success" type="submit">Sign Up</Button>
-                <div className="signUpFormErros">
-                {signUpError && <div>{signUpError}</div>}
-                {!passwordIsValid && (
-                  <p className="font-medium text-xs text-red-600 dark:text-green-500">
-                    Password must have:
-                    <br />
-                    - 8 characters minimum
-                    <br />
-                    - at least one capital letter <br />
-                    - at least one number
-                    <br />- at least one special character
-                  </p>
-                )}
-                </div>
+                {passwordIsValid && passwordIsValid.length > 0 && <div className="signUpFormErros">
+                {passwordIsValid.map((item, index) => (
+                    <div key={index}>{item.message}</div>
+                ))}
+                </div>}
             </Form>
             </div>
         
