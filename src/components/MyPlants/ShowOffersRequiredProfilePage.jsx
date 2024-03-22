@@ -1,12 +1,16 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Card, Col, Row, Container, CloseButton } from "react-bootstrap";
+import { Card, Modal, Row, Container, CloseButton, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./ShowPlants.css"
 import { useState } from 'react';
-
+import { deleteHelpRequestFromUser } from '../../services/HelpRequests'
 
 const RequiredOffersCard = ({ userOffers, userDetails }) => {
     const [userId, setUserId] = useState(window.localStorage.getItem("user_id"));
+    const token = window.localStorage.getItem("token")
+    const [cardToDelete, setCardToDelete] = useState(null);
+    const [show, setShow] = useState(false);
+    const [deleted, setDeleted] = useState(false);
 
     const formatPrice = (price) => {
         return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'GDP' }).format(price);
@@ -36,6 +40,19 @@ const RequiredOffersCard = ({ userOffers, userDetails }) => {
         setShow(true);
     };
 
+    const handleDelete = async () => {
+        if (cardToDelete) {
+            try {
+                await deleteHelpRequestFromUser(userId, cardToDelete, token);
+                setShow(false);
+                setDeleted(true);
+                location.reload();
+            } catch (err) {
+                console.error('Error deleting the plant:', err);
+            }
+        }
+    };
+
     return (
         <>
             <Container className="title">
@@ -44,9 +61,8 @@ const RequiredOffersCard = ({ userOffers, userDetails }) => {
                 <Link to="/create_request" className="link-button">See all requests</Link>
                 : ""}
             </Container>
-            <div className="helpRequestContainer">
-                    <Row xs={1} md={5} className="plantcard">
-                        {userOffers?.map((item, index) => (
+                    <Row xs={1} md={4} className="plantcard">
+                        {userOffers?.slice(0, 4).reverse().map((item, index)=> (
                             <Card className='helpRequestCard' key={index}>
                                 <Card.Header className="helpRequestHeader">
                                     <CloseButton onClick={() => confirmDelete(item.id)} />
@@ -62,7 +78,17 @@ const RequiredOffersCard = ({ userOffers, userDetails }) => {
                             </Card>
                         ))}
                     </Row>
-             </div>
+                    <Modal show={show} onHide={() => setShow(false)}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Delete Confirmation</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>Are you sure you want to delete this plant?</Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={() => setShow(false)}>Cancel</Button>
+                        <Button variant="danger" onClick={handleDelete}>Delete</Button>
+                    </Modal.Footer>
+                </Modal>
+      
         </>
     );
 };
