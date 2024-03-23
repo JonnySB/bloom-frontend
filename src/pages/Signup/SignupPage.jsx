@@ -82,12 +82,13 @@ export const Signup = () => {
         };
 
         const handlePasswordChange = (event) => {
-            setPassword(event.target.value);
+            let pw = event.target.value;
+            setPassword(pw);
+            validatePassword(pw);
         };
 
         const handlePasswordConfirmChange = (event) => {
             let confirm_password = event.target.value
-            validatePassword(confirm_password)
             setPassword_confirm(confirm_password);
         };
 
